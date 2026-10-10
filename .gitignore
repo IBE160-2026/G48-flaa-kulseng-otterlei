@@ -59,3 +59,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Kursmateriell fra faglærer (lokal referanse, deles ikke i repoet)
+/Sensorveiledning*.pdf
