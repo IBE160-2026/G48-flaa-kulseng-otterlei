@@ -4,7 +4,7 @@
 Team: Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei
 Vanskelighetsgrad (fra emnets idéliste): 🟠 Middels
 
-_Versjon 2 (2026-10-10): oppdatert etter faglærers tilbakemelding i `tilbakemelding-product-brief.md`. Se `endringer-product-brief.md` for hva som er endret og hvorfor._
+_Versjon 2 (2026-10-10): oppdatert etter [faglærers tilbakemelding](../../docs/tilbakemeldinger/tilbakemelding-product-brief.md). Se [endringer i product brief](../../docs/endringer/endringer-product-brief.md) for hva som er endret og hvorfor._
 
 ## Executive Summary
 
