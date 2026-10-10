@@ -25,7 +25,7 @@ Repoet vurderes ved fristen, og sporene av prosessen teller like mye som appen. 
 
 - **Aldri commit eller push direkte til `main`.** Start hver oppgave med `git switch main` og `git pull`, og lag en ny branch: `<type>/<kort-beskrivelse>`, f.eks. `docs/prd`, `feature/gap-analyse`, `fix/pdf-innlesing`.
 - Lag små commits med beskrivende meldinger på norsk.
-- Push branchen og lag en pull request med `gh pr create`. Beskriv hva som er endret, hvorfor, og hva gruppa bør sjekke.
+- Push branchen og lag en pull request med `gh pr create`. Følg malen i `.github/pull_request_template.md` (Hva, Hvorfor, Hva bør sjekkes, Sjekkliste), og ta alltid med sjekklisten uendret — GitHub legger den ikke inn automatisk når beskrivelsen sendes fra kommandolinjen. Ikke kryss av punkter på vegne av gruppa.
 - **Ikke flett pull requests selv.** Gruppa ser over og fletter inn i `main`. Gjør det bare hvis du uttrykkelig blir bedt om det.
 - Gi brukeren lenken til pull requesten når du er ferdig.
 

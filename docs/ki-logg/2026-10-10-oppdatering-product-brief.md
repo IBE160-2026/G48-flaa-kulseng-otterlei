@@ -5,7 +5,7 @@
 | **Dato** | 2026-10-10 |
 | **Hvem** | Haakon Remen Otterlei |
 | **Verktøy** | Claude Code (Claude Opus 5.5) |
-| **Commits / PR** | `eee64f2`, `5b9f3e1` (revert), `d984277`, samt pull request #1 (`docs/omstrukturer-dokumentasjon`) og #2 (`docs/claude-md`) |
+| **Commits / PR** | `eee64f2`, `5b9f3e1` (revert), `d984277`, samt pull request #1 (`docs/omstrukturer-dokumentasjon`) og #2 (`docs/claude-md`), og branchen `docs/pr-mal` |
 
 ## Mål
 
@@ -21,6 +21,7 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 6. «Forklar hva du mener med "flytte dokumentene ut av rotmappen".» — deretter «okey gjør det».
 7. «Okey så jeg gir deg en oppgave. Du lager i branches og vi sjekker og pusher til main dersom vi liker det.»
 8. «Vi har hver Claude for oss selv, hvordan husker du samtaler for hver av oss?» — deretter «ja lag en claude.md».
+9. «Skriv innlegg i KI-loggen — dette gjør du automatisk, sant?» — deretter «er dette lurt?» om en sjekkliste i pull requestene, og «okey».
 
 ## Hva KI gjorde
 
@@ -30,6 +31,7 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 - Leste sensorveiledningen for del 1 og foreslo tiltak: KI-logg, branches og pull requests, og ryddigere mappestruktur.
 - Flyttet dokumentene ut av rotmappen og opprettet denne loggen.
 - Forklarte at Claude-hukommelsen er lokal for hver person, og lagde `CLAUDE.md` med felles regler som alle gruppemedlemmenes Claude leser automatisk.
+- Lagde en mal for pull requests (`.github/pull_request_template.md`) med sjekkliste for KI-logg, README og tester, og la inn i `CLAUDE.md` at Claude alltid skal ta med sjekklisten.
 
 ## Våre vurderinger og korrigeringer
 
@@ -39,6 +41,7 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 - **Sensorveiledningen** holdes utenfor repoet med `.gitignore`, siden den er kursmateriell.
 - **Arbeidsdeling med KI:** Vi avtalte at Claude lager branches og pull requests, mens gruppa selv ser over og fletter inn i `main`.
 - **Felles regler:** Siden hver av oss har sin egen Claude, ville vi at reglene skulle ligge i repoet (`CLAUDE.md`) i stedet for i hver enkelts lokale Claude-hukommelse.
+- **Sjekkliste i pull requests:** Vi spurte om det var lurt før vi sa ja. KI-ens vurdering var at det koster lite og gir en fast rutine, men at avkrysning uten faktisk kontroll er verdiløst, og at listen må være kort. Vi valgte fire punkter. Claude skal ikke krysse av på vegne av gruppa.
 
 ## Resultat
 
@@ -46,5 +49,6 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 - Endringsforklaringen ligger i `docs/endringer/endringer-product-brief.md`.
 - README beskriver mappestrukturen og lenker til alle dokumentene.
 - `CLAUDE.md` inneholder felles regler for arbeidsflyt, KI-logg, mappestruktur og personvern.
+- Pull requests har en mal med sjekkliste.
 
 **Gjenstår:** gå gjennom eksempelparene og suksesskriteriene i gruppa, lage selve eksempelfilene, og gå videre til PRD med BMAD.
