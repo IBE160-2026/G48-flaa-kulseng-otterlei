@@ -22,6 +22,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 │   ├── ki-logg/                   Logg over KI-økter: prompts, vurderinger og korrigeringer
 │   └── tilbakemeldinger/          Tilbakemeldinger fra faglærer
 ├── .claude/                       Claude Code-skills
+├── .github/                       Mal for pull requests med sjekkliste
 ├── CLAUDE.md                      Felles instruksjoner til Claude Code for hele gruppa
 └── README.md
 ```
@@ -38,7 +39,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 ## Arbeidsflyt
 
-Endringer gjøres på egne branches og flettes inn i `main` via pull requests. Hver KI-økt som fører til endringer i repoet, dokumenteres i [KI-loggen](docs/ki-logg/README.md).
+Endringer gjøres på egne branches og flettes inn i `main` via pull requests. Hver pull request har en sjekkliste (KI-logg, README, tester) som den som ser over, krysser av. Hver KI-økt som fører til endringer i repoet, dokumenteres i [KI-loggen](docs/ki-logg/README.md).
 
 Alle i gruppa bruker hver sin Claude Code. [`CLAUDE.md`](CLAUDE.md) inneholder de felles reglene som alle Claude-økter leser automatisk, slik at arbeidsflyten blir lik uansett hvem som jobber. Kjør `git pull` på `main` for å få siste versjon.
 
