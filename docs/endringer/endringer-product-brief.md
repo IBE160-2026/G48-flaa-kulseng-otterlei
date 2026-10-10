@@ -3,11 +3,11 @@
 | | |
 |---|---|
 | **Gruppe** | G48 – Gutta krutt |
-| **Dokument** | `product-brief.md` (versjon 1: commit `681c297`) |
-| **Tilbakemelding** | `tilbakemelding-product-brief.md` (commit `f7d871b`) |
+| **Dokument** | [`product-brief.md`](../../_bmad-output/planning-artifacts/product-brief.md) (versjon 1: commit `681c297`) |
+| **Tilbakemelding** | [`tilbakemelding-product-brief.md`](../tilbakemeldinger/tilbakemelding-product-brief.md) (commit `f7d871b`) |
 | **Dato** | 2026-10-10 |
 
-Dette dokumentet forklarer hva som er endret i product brief etter faglærers tilbakemelding, og hvorfor. Den forrige versjonen kan ses i git-historikken (`git show 681c297:product-brief.md`).
+Dette dokumentet forklarer hva som er endret i product brief etter faglærers tilbakemelding, og hvorfor. Den forrige versjonen kan ses i git-historikken (`git show 681c297:product-brief.md` — briefen lå i rotmappen i versjon 1).
 
 ## Kort oppsummert
 
@@ -104,4 +104,4 @@ Disse punktene fra tilbakemeldingen hører hjemme i senere steg og er bare forbe
 - **Velge LLM-leverandør og bibliotek** for PDF-lesing/-eksport, kryptering og innlogging — gjøres i arkitekturdokumentet.
 - **Lage `.env.example`** og beskrive oppsett og testmodus i README — gjøres når koden starter.
 - **Skissere skjermbilder** for gap-analysen og valget mellom utkast og forslag — gjøres i UX-steget.
-- **Plassering av briefen:** Briefen er beholdt i rotmappen (for å bevare historikken på samme sti) og lenket fra README, i stedet for å flyttes til `_bmad-output/`.
+- ~~**Plassering av briefen:** Briefen er beholdt i rotmappen og lenket fra README, i stedet for å flyttes til `_bmad-output/`.~~ _Oppdatert 2026-10-10:_ Briefen er nå flyttet til `_bmad-output/planning-artifacts/`, der BMAD også legger PRD og arkitektur, og øvrige dokumenter er flyttet til `docs/`. Se [KI-loggen for 2026-10-10](../ki-logg/2026-10-10-oppdatering-product-brief.md).
