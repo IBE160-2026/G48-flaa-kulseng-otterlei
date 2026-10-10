@@ -5,7 +5,7 @@
 | **Dato** | 2026-10-10 |
 | **Hvem** | Haakon Remen Otterlei |
 | **Verktøy** | Claude Code (Claude Opus 5.5) |
-| **Commits / PR** | `eee64f2`, `5b9f3e1` (revert), `d984277`, samt branchen `docs/omstrukturer-dokumentasjon` |
+| **Commits / PR** | `eee64f2`, `5b9f3e1` (revert), `d984277`, samt pull request #1 (`docs/omstrukturer-dokumentasjon`) og #2 (`docs/claude-md`) |
 
 ## Mål
 
@@ -19,6 +19,8 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 4. «Jeg vil at du skal oppdatere product-brief etter tilbakemeldingene. Vil faglærer at vi oppdaterer product-brief eller lager en ny versjon men fortsatt beholder den gamle?»
 5. «Jeg har en PDF-fil som inneholder sensorveiledningen … kan du se over den så du vet hva kriteriene er for innleveringen og hva sensor ser etter?»
 6. «Forklar hva du mener med "flytte dokumentene ut av rotmappen".» — deretter «okey gjør det».
+7. «Okey så jeg gir deg en oppgave. Du lager i branches og vi sjekker og pusher til main dersom vi liker det.»
+8. «Vi har hver Claude for oss selv, hvordan husker du samtaler for hver av oss?» — deretter «ja lag en claude.md».
 
 ## Hva KI gjorde
 
@@ -27,6 +29,7 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 - La til lenker til planleggingsdokumentene i README.
 - Leste sensorveiledningen for del 1 og foreslo tiltak: KI-logg, branches og pull requests, og ryddigere mappestruktur.
 - Flyttet dokumentene ut av rotmappen og opprettet denne loggen.
+- Forklarte at Claude-hukommelsen er lokal for hver person, og lagde `CLAUDE.md` med felles regler som alle gruppemedlemmenes Claude leser automatisk.
 
 ## Våre vurderinger og korrigeringer
 
@@ -34,11 +37,14 @@ Innarbeide faglærers tilbakemelding (`docs/tilbakemeldinger/tilbakemelding-prod
 - **Innhold KI har foreslått som vi må bekrefte i gruppa:** de tre eksempelparene med fasit, de ti suksesskriteriene, og at tone er låst til «formell/uformell». Dette er KI sine forslag og er ikke diskutert i gruppa ennå.
 - **Arbeidsflyt:** De første endringene ble committet rett på `main`. Etter å ha lest sensorveiledningen bestemte vi at videre arbeid skal gå via branches og pull requests.
 - **Sensorveiledningen** holdes utenfor repoet med `.gitignore`, siden den er kursmateriell.
+- **Arbeidsdeling med KI:** Vi avtalte at Claude lager branches og pull requests, mens gruppa selv ser over og fletter inn i `main`.
+- **Felles regler:** Siden hver av oss har sin egen Claude, ville vi at reglene skulle ligge i repoet (`CLAUDE.md`) i stedet for i hver enkelts lokale Claude-hukommelse.
 
 ## Resultat
 
 - Product brief versjon 2 ligger i `_bmad-output/planning-artifacts/product-brief.md`.
 - Endringsforklaringen ligger i `docs/endringer/endringer-product-brief.md`.
 - README beskriver mappestrukturen og lenker til alle dokumentene.
+- `CLAUDE.md` inneholder felles regler for arbeidsflyt, KI-logg, mappestruktur og personvern.
 
 **Gjenstår:** gå gjennom eksempelparene og suksesskriteriene i gruppa, lage selve eksempelfilene, og gå videre til PRD med BMAD.
