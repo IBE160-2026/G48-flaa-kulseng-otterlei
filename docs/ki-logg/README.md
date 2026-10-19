@@ -7,6 +7,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | Dato | Innlegg | Hvem |
 |---|---|---|
 | 2026-10-10 | [Oppdatering av product brief etter tilbakemelding](2026-10-10-oppdatering-product-brief.md) | Haakon |
+| 2026-10-19 | [Utkast til PRD med bmad-prd](2026-10-19-utkast-prd.md) | Haakon |
 
 ## Slik skriver du et innlegg
 
