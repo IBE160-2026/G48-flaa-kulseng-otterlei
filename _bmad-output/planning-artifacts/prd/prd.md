@@ -10,7 +10,7 @@ updated: 2026-10-19
 **Gutta krutt (G48)** — IBE160 Programmering med KI, Høgskolen i Molde, høst 2026
 Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei
 
-_Utkast 1 (2026-10-19), skrevet av Claude Code i rask modus etter gruppas svar. Punkter merket `[ASSUMPTION]` er Claudes antagelser som gruppa må bekrefte eller rette. Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
+_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19). Claudes antagelser ble bekreftet av gruppa i gjennomgangen av pull request #4 og er samlet i §12. Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
 
 ## 0. Om dokumentet
 
@@ -100,7 +100,7 @@ Brukeren kan laste opp én CV som PDF eller TXT. Realiserer UJ-1.
 
 **Konsekvenser (testbare):**
 - PDF- og TXT-filer godtas. Andre filtyper avvises med en melding om hvilke typer som er lov.
-- Filer over 5 MB avvises med en forståelig melding. `[ASSUMPTION: grense på 5 MB]`
+- Filer over 5 MB avvises med en forståelig melding.
 - For alle tre eksempel-CV-ene, også to-kolonne-CV-en C, inneholder CV-teksten alle kvalifikasjonene fasiten lister opp.
 - En PDF uten tekst (f.eks. et innskannet bilde) gir en melding om at teksten ikke kunne leses, ikke en tom analyse.
 - En ny opplasting erstatter brukerens forrige CV og sletter forrige resultat.
@@ -109,7 +109,7 @@ Brukeren kan laste opp én CV som PDF eller TXT. Realiserer UJ-1.
 
 #### FR-2: Se og rette CV-teksten
 
-Brukeren kan se CV-teksten appen har hentet ut, og rette den før analysen. `[ASSUMPTION: et enkelt tekstfelt; lagt til som tiltak mot risikoen for feil innlesing av PDF-er med kolonner]`
+Brukeren kan se CV-teksten appen har hentet ut, og rette den i et enkelt tekstfelt før analysen. Dette er et tiltak mot feil innlesing av PDF-er med kolonner.
 
 **Konsekvenser (testbare):**
 - CV-teksten vises etter opplasting.
@@ -120,8 +120,8 @@ Brukeren kan se CV-teksten appen har hentet ut, og rette den før analysen. `[AS
 Brukeren kan lime inn teksten fra en stillingsannonse.
 
 **Konsekvenser (testbare):**
-- Et tomt felt eller en tekst under 100 tegn gir en melding, ikke et KI-kall. `[ASSUMPTION: 100 tegn]`
-- En tekst over 15 000 tegn avvises med en melding. `[ASSUMPTION: 15 000 tegn, for å holde KI-kostnaden nede]`
+- Et tomt felt eller en tekst under 100 tegn gir en melding, ikke et KI-kall.
+- En tekst over 15 000 tegn avvises med en melding, for å holde KI-kostnaden nede.
 
 **Utenfor:** Henting av annonser fra Finn.no, LinkedIn eller andre nettsteder.
 
@@ -130,12 +130,12 @@ Brukeren kan lime inn teksten fra en stillingsannonse.
 Brukeren kan velge språk (norsk/engelsk), tone (formell/uformell), svarform («fullt utkast»/«kun forslag») og eventuelt skrive inn ønskede nøkkelord. Realiserer UJ-1 og UJ-2.
 
 **Konsekvenser (testbare):**
-- Alle valg har en forhåndsvalgt verdi: norsk, formell, fullt utkast. `[ASSUMPTION]`
-- Ønskede nøkkelord tas med i ATS-nøkkelordanalysen (FR-19). `[ASSUMPTION: briefen sier at brukeren kan angi nøkkelord, men ikke hva de brukes til]`
+- Alle valg har en forhåndsvalgt verdi: norsk, formell, fullt utkast.
+- Ønskede nøkkelord tas med i ATS-nøkkelordanalysen (FR-19).
 
 ### 4.2 Gap-analyse (P2)
 
-**Beskrivelse:** Når brukeren trykker «Analyser», sammenligner appen CV-teksten med stillingsannonsen. Resultatet er en liste over krav, der hvert krav er markert «matcher» eller «mangler», med en kort begrunnelse som viser til CV-teksten. Realiserer UJ-1. Gap-analysen og ATS-nøkkelordanalysen kjøres når brukeren trykker «Analyser». Søknadsbrev og CV-forbedringsforslag lages når brukeren ber om dem. `[ASSUMPTION: egne knapper gjør at P6–P8 kan legges til uavhengig av hverandre, og at KI-kostnaden holdes nede]`
+**Beskrivelse:** Når brukeren trykker «Analyser», sammenligner appen CV-teksten med stillingsannonsen. Resultatet er en liste over krav, der hvert krav er markert «matcher» eller «mangler», med en kort begrunnelse som viser til CV-teksten. Realiserer UJ-1. Gap-analysen og ATS-nøkkelordanalysen kjøres når brukeren trykker «Analyser». Søknadsbrev og CV-forbedringsforslag lages når brukeren ber om dem. Egne knapper gjør at P6–P8 kan legges til uavhengig av hverandre, og holder KI-kostnaden nede.
 
 #### FR-5: Kjøre gap-analyse
 
@@ -144,11 +144,11 @@ Brukeren kan få en gap-analyse av CV-teksten mot stillingsannonsen. Realiserer 
 **Konsekvenser (testbare):**
 - For hvert eksempelpar viser gap-analysen alle krav fasiten markerer som manglende, og markerer ingen av fasitens matchende krav som manglende. For par A: «SQL» og «førerkort klasse B» mangler, mens «Python» og «Git» matcher.
 - Hvert krav som matcher, har en begrunnelse som viser hvor i CV-teksten det står.
-- Gap-analysen skrives på språket brukeren har valgt. `[ASSUMPTION]`
+- Gap-analysen skrives på språket brukeren har valgt.
 
 ### 4.3 Søknadsbrev og brevforslag (P3)
 
-**Beskrivelse:** Brukeren ber om hjelp til søknaden og får et søknadsbrev eller brevforslag, avhengig av svarform. Alt som står der, skal kunne spores til CV-teksten. Krav som mangler i gap-analysen, kan nevnes som noe søkeren vil lære, men aldri som noe søkeren kan. `[ASSUMPTION]` Realiserer UJ-1 og UJ-2.
+**Beskrivelse:** Brukeren ber om hjelp til søknaden og får et søknadsbrev eller brevforslag, avhengig av svarform. Alt som står der, skal kunne spores til CV-teksten. Krav som mangler i gap-analysen, kan nevnes som noe søkeren vil lære, men aldri som noe søkeren kan. Realiserer UJ-1 og UJ-2.
 
 #### FR-6: Få søknadsbrev (fullt utkast)
 
@@ -193,7 +193,7 @@ I testmodus kan brukeren velge eksempelpar A, B eller C med én knapp. Da fylles
 
 **Konsekvenser (testbare):**
 - For hvert eksempelpar gir testmodus gap-analyse, søknadsbrev eller brevforslag, CV-forbedringsforslag og ATS-nøkkelordanalyse.
-- Det finnes lagrede svar for alle kombinasjoner av innstillinger (språk × tone × svarform) for hvert eksempelpar. De lagres ved å kjøre eksempelparene én gang i KI-modus med et skript. `[ASSUMPTION: se åpent spørsmål 3]`
+- Det finnes lagrede svar for alle kombinasjoner av innstillinger (språk × tone × svarform) for hvert eksempelpar. De lagres ved å kjøre eksempelparene én gang i KI-modus med et skript.
 
 #### FR-11: Egen CV i testmodus
 
@@ -216,7 +216,7 @@ En besøkende kan registrere seg med e-post og passord.
 
 **Konsekvenser (testbare):**
 - En e-post som allerede er registrert, gir en melding og ingen ny konto.
-- Passord under 8 tegn avvises. `[ASSUMPTION: minimum 8 tegn, ingen andre regler]`
+- Passord under 8 tegn avvises. Det er ingen andre passordregler.
 - Passord lagres bare som hash med en anerkjent algoritme for passord, aldri i klartekst.
 
 #### FR-13: Logge inn og ut
@@ -269,7 +269,7 @@ Brukeren kan få CV-forbedringsforslag basert på CV-teksten og stillingsannonse
 
 **Konsekvenser (testbare):**
 - Hvert forslag viser til en bestemt del av CV-teksten.
-- Forslagene inneholder ingen oppdiktede påstander. Krav som mangler, kan nevnes som et spørsmål («Har du erfaring med X? I så fall bør det stå i CV-en»), ikke som noe brukeren skal skrive inn. `[ASSUMPTION]`
+- Forslagene inneholder ingen oppdiktede påstander. Krav som mangler, kan nevnes som et spørsmål («Har du erfaring med X? I så fall bør det stå i CV-en»), ikke som noe brukeren skal skrive inn.
 
 ### 4.7 ATS-nøkkelordanalyse (P7)
 
@@ -282,7 +282,7 @@ Appen finner nøkkelordene i stillingsannonsen og tar med brukerens ønskede nø
 **Konsekvenser (testbare):**
 - For hvert eksempelpar finner appen alle nøkkelordene i fasiten.
 - Samme stillingsannonse gir alltid de samme nøkkelordene.
-- `[ASSUMPTION: nøkkelordene finnes i kode, f.eks. med en ordliste over vanlige ferdigheter, og ikke av språkmodellen – se åpent spørsmål 2]`
+- Nøkkelordene finnes i kode, ikke av språkmodellen. Hvordan det gjøres, avgjøres i arkitekturen (åpent spørsmål 2).
 
 #### FR-20: Beregne nøkkelordmatch i kode
 
@@ -320,7 +320,7 @@ Brukeren kan laste ned søknadsbrevet eller brevforslagene som Markdown eller PD
 - Den eksporterte filen inneholder hele teksten.
 - Æ, ø og å vises riktig i begge formatene.
 
-**Utenfor:** DOC/DOCX og eksport av gap-analysen. `[ASSUMPTION: bare søknadsbrev og brevforslag eksporteres]`
+**Utenfor:** DOC/DOCX og eksport av gap-analysen. Bare søknadsbrev og brevforslag eksporteres.
 
 ## 5. Ikke-funksjonelle krav
 
@@ -332,13 +332,13 @@ Brukeren kan laste ned søknadsbrevet eller brevforslagene som Markdown eller PD
 
 **NFR-4 Personvern og språkmodell.** Bare CV-teksten, stillingsannonsen og innstillingene sendes til språkmodellen, aldri e-post eller passord. Appen forteller brukeren at CV-teksten sendes til en ekstern KI-tjeneste. Valget av leverandør begrunnes i arkitekturen, blant annet ut fra hvordan leverandøren behandler data. Repoet inneholder bare oppdiktede CV-er og personer.
 
-**NFR-5 Feil fra KI-tjenesten.** Hvis språkmodellen ikke svarer, bruker for lang tid, sier nei på grunn av forbruksgrensen eller gir et svar appen ikke kan lese, får brukeren en forståelig melding og kan prøve igjen. Appen krasjer ikke, og CV og innstillinger beholdes. `[ASSUMPTION: tidsgrense på 60 sekunder per kall]`
+**NFR-5 Feil fra KI-tjenesten.** Hvis språkmodellen ikke svarer, bruker for lang tid, sier nei på grunn av forbruksgrensen eller gir et svar appen ikke kan lese, får brukeren en forståelig melding og kan prøve igjen. Appen krasjer ikke, og CV og innstillinger beholdes. Tidsgrensen er 60 sekunder per kall.
 
 **NFR-6 Tilbakemelding underveis.** Mens appen venter på språkmodellen, ser brukeren at noe skjer. Knappen kan ikke trykkes på nytt før svaret er kommet, så dobbeltklikk ikke gir to kall.
 
-**NFR-7 Tilgjengelighet.** Grunnleggende universell utforming: alle skjemafelt har etiketter, alt kan brukes med tastaturet, kontrasten er lesbar, og bilder har alternativtekst. Siden virker på skjermer fra mobilbredde (360 px) til PC. `[ASSUMPTION: målet er WCAG 2.1 AA der det er rimelig, men det revideres ikke formelt]`
+**NFR-7 Tilgjengelighet.** Grunnleggende universell utforming: alle skjemafelt har etiketter, alt kan brukes med tastaturet, kontrasten er lesbar, og bilder har alternativtekst. Siden virker på skjermer fra mobilbredde (360 px) til PC. Målet er WCAG 2.1 AA der det er rimelig, uten formell revisjon.
 
-**NFR-8 Grensesnittspråk.** Menyer, knapper og meldinger er på norsk. Språkvalget (FR-4) gjelder bare det KI skriver. `[ASSUMPTION]`
+**NFR-8 Grensesnittspråk.** Menyer, knapper og meldinger er på norsk. Språkvalget (FR-4) gjelder bare det KI skriver.
 
 **NFR-9 Kostnad.** Gruppa setter en forbruksgrense hos KI-leverandøren. Når grensen er nådd, behandles det som en feil etter NFR-5.
 
@@ -346,7 +346,7 @@ Brukeren kan laste ned søknadsbrevet eller brevforslagene som Markdown eller PD
 
 ## 6. Skjermbilder
 
-Et utgangspunkt for UX-skissene. `[ASSUMPTION: alt sammen er et forslag som skal prøves ut i UX-steget]`
+Et utgangspunkt for UX-skissene. Inndelingen skal prøves ut i UX-steget.
 
 1. **Registrer / logg inn**
 2. **Ny analyse:** opplasting av CV, CV-teksten, stillingsannonsen, innstillingene og knappen «Analyser». I testmodus også knappene «Prøv med eksempel A / B / C».
@@ -422,14 +422,13 @@ Eksempelparene A, B og C er beskrevet i [briefen](../product-brief.md#eksempelda
 ## 11. Åpne spørsmål
 
 1. **Hvilken KI-leverandør og modell?** Avgjøres i arkitekturen ut fra norsk språkkvalitet, kostnad og databehandling (NFR-4).
-2. **Hvordan finnes nøkkelordene i stillingsannonsen (FR-19)?** Hvis språkmodellen finner dem, er resultatet ikke helt det samme hver gang. Hvis koden finner dem, trengs en ordliste. Avgjøres i arkitekturen.
-3. **Lagrede svar for alle kombinasjoner av innstillinger (FR-10)?** Med 2 språk × 2 toner × 2 svarformer blir det 8 brev per eksempelpar, til sammen 24. Det er overkommelig med et skript, men alternativet er at hvert eksempelpar har faste innstillinger i testmodus.
-4. **Hvilket bibliotek for PDF-innlesing?** Må testes mot eksempel-CV C (to kolonner) tidlig i arkitekturen, før resten bygges på det.
-5. **Hvordan skal brevet se ut i PDF-eksporten?** Holder enkel tekst, eller trengs et brevoppsett med dato og avsender?
+2. **Hvordan finner koden nøkkelordene i stillingsannonsen (FR-19)?** Det er bestemt at koden skal gjøre det, ikke språkmodellen, men ikke hvordan. Én mulighet er en ordliste over vanlige ferdigheter, verktøy og sertifikater. Avgjøres i arkitekturen.
+3. **Hvilket bibliotek for PDF-innlesing?** Må testes mot eksempel-CV C (to kolonner) tidlig i arkitekturen, før resten bygges på det.
+4. **Hvordan skal brevet se ut i PDF-eksporten?** Holder enkel tekst, eller trengs et brevoppsett med dato og avsender?
 
-## 12. Antagelser
+## 12. Antagelser bekreftet av gruppa
 
-Alle `[ASSUMPTION]` i dokumentet, samlet så gruppa kan bekrefte eller rette dem:
+Claude foreslo disse punktene i første utkast, uten at gruppa hadde bestemt dem. Gruppa gikk gjennom dem i pull request #4 (2026-10-19) og bekreftet alle uten endringer.
 
 - §4.1 FR-1: Maks filstørrelse 5 MB.
 - §4.1 FR-2: Brukeren kan se og rette CV-teksten (tiltak mot feil innlesing av PDF med kolonner).
