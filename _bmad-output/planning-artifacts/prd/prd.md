@@ -84,7 +84,7 @@ Etter søknadsfristen vil Emma ikke lenger ha CV-en liggende i appen. Hun går t
 - **Testmodus** — appen bruker lagrede svar i stedet for ekte kall til språkmodellen.
 - **Lagret svar** — et KI-svar som er hentet på forhånd og lagret i repoet for bruk i testmodus.
 - **Eksempelpar** — en oppdiktet CV og en oppdiktet stillingsannonse (A, B eller C) med fasit.
-- **Fasit** — forventet resultat for et eksempelpar: krav som matcher og mangler, nøkkelord og en sjekkliste for søknadsbrevet.
+- **Fasit** — forventet resultat for et eksempelpar: krav som matcher og mangler, nøkkelord og en sjekkliste for søknadsbrevet, med 3–5 floskler brevet ikke skal bruke.
 
 ## 4. Funksjoner
 
@@ -157,6 +157,8 @@ Brukeren kan få et sammenhengende søknadsbrev når svarformen er «fullt utkas
 **Konsekvenser (testbare):**
 - Brevet er skrevet på valgt språk og i valgt tone.
 - Brevet er tilpasset stillingsannonsen: det nevner stillingen og minst to krav som matcher.
+- Hvert avsnitt i brevet viser til noe konkret fra CV-teksten eller stillingsannonsen, ikke bare generelle påstander om søkeren.
+- Brevet bruker ingen av flosklene som står i sjekklisten i fasiten.
 
 #### FR-7: Få brevforslag (kun forslag)
 
@@ -365,7 +367,7 @@ Et utgangspunkt for UX-skissene. Inndelingen skal prøves ut i UX-steget.
 
 ### 8.1 Med i v1
 
-Målet er at alle åtte funksjonene kommer med. De bygges i denne rekkefølgen, og hver funksjon skal være ferdig og stabil før neste startes.
+Målet er at alle åtte funksjonene kommer med. Prioriteten sier hva som er viktigst og hva som kuttes sist hvis tiden blir knapp. Den er ikke nødvendigvis rekkefølgen funksjonene bygges i. Byggerekkefølgen bestemmes i epics og stories. Der kan for eksempel en enkel innlogging (P5) komme tidlig, siden tilgangskontroll og kryptering er vanskelig å legge på i etterkant. Kjerneflyten (P1–P5) skal være ferdig og stabil før P6–P8 startes.
 
 | Prioritet | Funksjon | Krav |
 |---|---|---|
@@ -403,7 +405,7 @@ Kriteriene er hentet fra briefen og koblet til kravene. Hvert kriterium skal bli
 - **SM-2 Innlesing av CV:** For alle tre eksempel-CV-ene inneholder CV-teksten alle kvalifikasjonene fasiten lister opp. Validerer FR-1.
 - **SM-3 Gap-analyse:** For hvert eksempelpar stemmer krav som matcher og mangler med fasiten. Validerer FR-5.
 - **SM-4 Ingen oppdiktede påstander:** Søknadsbrev, brevforslag og CV-forbedringsforslag for hvert eksempelpar består sjekklisten i fasiten. Validerer FR-8, FR-18, FR-21.
-- **SM-5 Brukervalg respekteres:** «Fullt utkast» gir et sammenhengende brev, mens «kun forslag» gir en punktliste. Valgt språk og tone gjenspeiles. Validerer FR-4, FR-6, FR-7.
+- **SM-5 Brukervalg respekteres:** «Fullt utkast» gir et sammenhengende brev, mens «kun forslag» gir en punktliste. Valgt språk og tone gjenspeiles. Søknadsbrevet bruker ingen av flosklene i sjekklisten. Validerer FR-4, FR-6, FR-7.
 - **SM-6 ATS-nøkkelordanalyse:** Enhetstestene for alle tre eksempelparene består, og samme input gir samme resultat. Validerer FR-19, FR-20.
 - **SM-7 Eksport:** Eksportert Markdown og PDF inneholder hele brevet med riktige æ, ø og å. Validerer FR-22, FR-23.
 - **SM-8 Tilgangskontroll og kryptering:** Testbruker 1 får ikke tilgang til dataene til testbruker 2, og ingen dokumenter er lesbare i klartekst i databasen. Validerer FR-14, FR-15.
@@ -417,7 +419,7 @@ Kriteriene er hentet fra briefen og koblet til kravene. Hvert kriterium skal bli
 
 ## 10. Eksempeldata med fasit
 
-Eksempelparene A, B og C er beskrevet i [briefen](../product-brief.md#eksempeldata-med-fasit). Fasiten for hvert par skal ligge i en egen testdata-mappe sammen med eksempelfilene: krav som matcher og mangler, nøkkelord og sjekklisten for søknadsbrevet. Både de automatiske testene, testmodusen og den manuelle sjekken av KI-svarene (SM-4) bruker disse filene. Eksempeldataene bør lages før kodingen av P2 starter, siden testene og de lagrede svarene avhenger av dem.
+Eksempelparene A, B og C er beskrevet i [briefen](../product-brief.md#eksempeldata-med-fasit). Fasiten for hvert par skal ligge i en egen testdata-mappe sammen med eksempelfilene: krav som matcher og mangler, nøkkelord og sjekklisten for søknadsbrevet, med 3–5 floskler brevet ikke skal bruke (f.eks. «Jeg er en engasjert og løsningsorientert person»). Både de automatiske testene, testmodusen og den manuelle sjekken av KI-svarene (SM-4) bruker disse filene. Eksempeldataene bør lages før kodingen av P2 starter, siden testene og de lagrede svarene avhenger av dem.
 
 ## 11. Åpne spørsmål
 
