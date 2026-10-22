@@ -1,8 +1,8 @@
 ---
 title: "PRD: AI CV & Job Application Assistant"
-status: draft
+status: final
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-22
 ---
 
 # PRD: AI CV & Job Application Assistant
@@ -10,7 +10,7 @@ updated: 2026-10-19
 **Gutta krutt (G48)** — IBE160 Programmering med KI, Høgskolen i Molde, høst 2026
 Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei
 
-_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19). Claudes antagelser ble bekreftet av gruppa i gjennomgangen av pull request #4 og er samlet i §12. Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
+_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19) og gjennomgått av hele gruppa i pull request #4. Claudes antagelser ble bekreftet av gruppa og er samlet i §12. Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
 
 ## 0. Om dokumentet
 
@@ -84,7 +84,9 @@ Etter søknadsfristen vil Emma ikke lenger ha CV-en liggende i appen. Hun går t
 - **Testmodus** — appen bruker lagrede svar i stedet for ekte kall til språkmodellen.
 - **Lagret svar** — et KI-svar som er hentet på forhånd og lagret i repoet for bruk i testmodus.
 - **Eksempelpar** — en oppdiktet CV og en oppdiktet stillingsannonse (A, B eller C) med fasit.
-- **Fasit** — forventet resultat for et eksempelpar: krav som matcher og mangler, nøkkelord og en sjekkliste for søknadsbrevet, med 3–5 floskler brevet ikke skal bruke.
+- **Fasit** — forventet resultat for et eksempelpar: krav som matcher og mangler, nøkkelord og en sjekkliste for søknadsbrevet (kjennetegn på riktig språk og tone, og 3–5 floskler brevet ikke skal bruke).
+- **Dokumenter** — samlebetegnelse for brukerens CV, CV-tekst, stillingsannonse og resultat.
+- **KI-tjenesten** — den eksterne språkmodelltjenesten appen bruker i KI-modus. Leverandøren velges i arkitekturen.
 
 ## 4. Funksjoner
 
@@ -135,7 +137,7 @@ Brukeren kan velge språk (norsk/engelsk), tone (formell/uformell), svarform («
 
 ### 4.2 Gap-analyse (P2)
 
-**Beskrivelse:** Når brukeren trykker «Analyser», sammenligner appen CV-teksten med stillingsannonsen. Resultatet er en liste over krav, der hvert krav er markert «matcher» eller «mangler», med en kort begrunnelse som viser til CV-teksten. Realiserer UJ-1. Gap-analysen og ATS-nøkkelordanalysen kjøres når brukeren trykker «Analyser». Søknadsbrev og CV-forbedringsforslag lages når brukeren ber om dem. Egne knapper gjør at P6–P8 kan legges til uavhengig av hverandre, og holder KI-kostnaden nede.
+**Beskrivelse:** Når brukeren trykker «Analyser», sammenligner appen CV-teksten med stillingsannonsen. Resultatet er en liste over krav, der hvert krav er markert «matcher» eller «mangler», med en kort begrunnelse som viser til CV-teksten. Realiserer UJ-1. Gap-analysen og ATS-nøkkelordanalysen kjøres når brukeren trykker «Analyser». Søknadsbrev og CV-forbedringsforslag lages når brukeren ber om dem. Egne knapper gjør at CV-forbedringsforslagene (P6) kan bygges uavhengig av resten, og holder KI-kostnaden nede.
 
 #### FR-5: Kjøre gap-analyse
 
@@ -155,7 +157,7 @@ Brukeren kan få en gap-analyse av CV-teksten mot stillingsannonsen. Realiserer 
 Brukeren kan få et sammenhengende søknadsbrev når svarformen er «fullt utkast». Realiserer UJ-1.
 
 **Konsekvenser (testbare):**
-- Brevet er skrevet på valgt språk og i valgt tone.
+- Brevet er skrevet på valgt språk og i valgt tone. Det sjekkes manuelt etter sjekklisten i fasiten.
 - Brevet er tilpasset stillingsannonsen: det nevner stillingen og minst to krav som matcher.
 - Hvert avsnitt i brevet viser til noe konkret fra CV-teksten eller stillingsannonsen, ikke bare generelle påstander om søkeren.
 - Brevet bruker ingen av flosklene som står i sjekklisten i fasiten.
@@ -239,7 +241,7 @@ En bruker kan bare se og endre sine egne data.
 
 #### FR-15: Kryptert lagring
 
-CV, CV-tekst, stillingsannonse og resultat lagres kryptert i databasen.
+Dokumentene lagres kryptert i databasen.
 
 **Konsekvenser (testbare):**
 - Når databasen leses direkte, er ingen av disse lesbare i klartekst.
@@ -247,11 +249,11 @@ CV, CV-tekst, stillingsannonse og resultat lagres kryptert i databasen.
 
 #### FR-16: Slette dokumenter
 
-Brukeren kan slette CV-en og resultatet sitt. Realiserer UJ-4.
+Brukeren kan slette dokumentene sine. Realiserer UJ-4.
 
 **Konsekvenser (testbare):**
 - Brukeren må bekrefte før noe slettes.
-- Etter sletting finnes ingen CV, CV-tekst, stillingsannonse eller resultat for brukeren i databasen.
+- Etter sletting finnes ingen av brukerens dokumenter i databasen.
 
 #### FR-17: Slette konto
 
@@ -326,7 +328,7 @@ Brukeren kan laste ned søknadsbrevet eller brevforslagene som Markdown eller PD
 
 ## 5. Ikke-funksjonelle krav
 
-**NFR-1 Kjørbar for sensor.** Appen kan startes lokalt ved å følge README, uten gruppas API-nøkkel, betalte kontoer eller tjenester gruppa driver. Det skal ta under 15 minutter. Repoet har en `.env.example` med alle miljøvariabler og uten ekte verdier.
+**NFR-1 Kjørbar for sensor.** Appen kan startes lokalt ved å følge README, uten gruppas API-nøkkel, betalte kontoer eller tjenester gruppa driver. Det skal ta under 15 minutter. README forklarer hvordan appen kjøres både i testmodus og i KI-modus med egen API-nøkkel. Repoet har en `.env.example` med alle miljøvariabler og uten ekte verdier.
 
 **NFR-2 Automatiske tester.** Testene kjøres med én kommando som står i README. De kjører i testmodus, uten nettverk og uten API-nøkkel. De dekker minst nøkkelordmatchen (FR-20), innlesing av CV (FR-1), tilgangskontroll (FR-14), kryptering (FR-15) og sletting (FR-16, FR-17).
 
@@ -367,7 +369,7 @@ Et utgangspunkt for UX-skissene. Inndelingen skal prøves ut i UX-steget.
 
 ### 8.1 Med i v1
 
-Alle åtte funksjonene skal med. Prioriteten sier hva som er viktigst. Den er ikke nødvendigvis rekkefølgen funksjonene bygges i. Byggerekkefølgen bestemmes i epics og stories. Der kan for eksempel en enkel innlogging (P5) komme tidlig, siden tilgangskontroll og kryptering er vanskelig å legge på i etterkant. Kjerneflyten (P1–P5) skal være ferdig og stabil før P6–P8 startes.
+Prioriteten sier hva som er viktigst. Den er ikke nødvendigvis rekkefølgen funksjonene bygges i. Byggerekkefølgen bestemmes i epics og stories. Der kan for eksempel en enkel innlogging (P5) komme tidlig, siden tilgangskontroll og kryptering er vanskelig å legge på i etterkant. Kjerneflyten (P1–P5) skal være ferdig og stabil før P6–P8 startes.
 
 | Prioritet | Funksjon | Krav |
 |---|---|---|
@@ -380,7 +382,7 @@ Alle åtte funksjonene skal med. Prioriteten sier hva som er viktigst. Den er ik
 | P7 | ATS-nøkkelordanalyse | FR-19 – FR-21 |
 | P8 | Eksport og kopiering | FR-22 – FR-23 |
 
-P1–P5 er kjerneflyten. NFR-1 – NFR-10 gjelder for alle funksjonene.
+NFR-1 – NFR-10 gjelder for alle funksjonene.
 
 **Alle funksjonene skal med:** Fristen er ca. 16.–23. november 2026. Gruppa har bestemt at alle åtte funksjonene (P1–P8) skal være med i v1, og planlegger ikke å kutte noen av dem, fordi gruppa mener det er god nok tid til å fullføre alle.
 
@@ -419,7 +421,7 @@ Kriteriene er hentet fra briefen og koblet til kravene. Hvert kriterium skal bli
 
 ## 10. Eksempeldata med fasit
 
-Eksempelparene A, B og C er beskrevet i [briefen](../product-brief.md#eksempeldata-med-fasit). Fasiten for hvert par skal ligge i en egen testdata-mappe sammen med eksempelfilene: krav som matcher og mangler, nøkkelord og sjekklisten for søknadsbrevet, med 3–5 floskler brevet ikke skal bruke (f.eks. «Jeg er en engasjert og løsningsorientert person»). Både de automatiske testene, testmodusen og den manuelle sjekken av KI-svarene (SM-4) bruker disse filene. Eksempeldataene bør lages før kodingen av P2 starter, siden testene og de lagrede svarene avhenger av dem.
+Eksempelparene A, B og C er beskrevet i [briefen](../product-brief.md#eksempeldata-med-fasit). Fasiten for hvert par skal ligge i en egen testdata-mappe sammen med eksempelfilene: krav som matcher og mangler, nøkkelord og sjekklisten for søknadsbrevet, med kjennetegn på riktig språk og tone og 3–5 floskler brevet ikke skal bruke (f.eks. «Jeg er en engasjert og løsningsorientert person»). Både de automatiske testene, testmodusen og den manuelle sjekken av KI-svarene (SM-4) bruker disse filene. Eksempeldataene bør lages før kodingen av P2 starter, siden testene og de lagrede svarene avhenger av dem.
 
 ## 11. Åpne spørsmål
 
