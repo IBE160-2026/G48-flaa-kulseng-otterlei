@@ -82,8 +82,6 @@ Finne ut hva som er neste steg i prosessen, og lage PRD-en basert på product br
 **Det vi avviste:**
 - **Sjekkpunktet for å kutte funksjoner.** KI hadde foreslått å kutte P8, P7 og P6 hvis kjerneflyten ikke var ferdig etter uke 3. Vi godtok det først, men endret mening og fjernet det: «Vi må få med alle punkta.» Begrunnelse: «Vi føler vi har god nok tid til å fullføre.»
 
-**Å starte på nytt:** Haakon vurderte å slette branchen og begynne PRD-en på nytt. KI frarådet det, fordi committene da ikke kommer inn i `main` og ikke vises i historikken sensor ser på. Vi valgte å rette PRD-en i stedet.
-
 **Småfeilene** KI rettet selv, hadde vi ingen innvendinger mot.
 
 ## Resultat
