@@ -367,7 +367,7 @@ Et utgangspunkt for UX-skissene. Inndelingen skal prøves ut i UX-steget.
 
 ### 8.1 Med i v1
 
-Målet er at alle åtte funksjonene kommer med. Prioriteten sier hva som er viktigst og hva som kuttes sist hvis tiden blir knapp. Den er ikke nødvendigvis rekkefølgen funksjonene bygges i. Byggerekkefølgen bestemmes i epics og stories. Der kan for eksempel en enkel innlogging (P5) komme tidlig, siden tilgangskontroll og kryptering er vanskelig å legge på i etterkant. Kjerneflyten (P1–P5) skal være ferdig og stabil før P6–P8 startes.
+Alle åtte funksjonene skal med. Prioriteten sier hva som er viktigst. Den er ikke nødvendigvis rekkefølgen funksjonene bygges i. Byggerekkefølgen bestemmes i epics og stories. Der kan for eksempel en enkel innlogging (P5) komme tidlig, siden tilgangskontroll og kryptering er vanskelig å legge på i etterkant. Kjerneflyten (P1–P5) skal være ferdig og stabil før P6–P8 startes.
 
 | Prioritet | Funksjon | Krav |
 |---|---|---|
@@ -382,7 +382,7 @@ Målet er at alle åtte funksjonene kommer med. Prioriteten sier hva som er vikt
 
 P1–P5 er kjerneflyten. NFR-1 – NFR-10 gjelder for alle funksjonene.
 
-**Sjekkpunkt:** Fristen er om 4–5 uker (ca. 16.–23. november 2026). Hvis kjerneflyten (P1–P5) ikke er ferdig ved slutten av uke 3 (ca. 8. november), kutter gruppa bakfra: først P8, så P7, så P6. Kuttet begrunnes i `docs/endringer/`, og denne PRD-en oppdateres.
+**Alle funksjonene skal med:** Fristen er ca. 16.–23. november 2026. Gruppa har bestemt at alle åtte funksjonene (P1–P8) skal være med i v1, og planlegger ikke å kutte noen av dem.
 
 ### 8.2 Utenfor v1
 
