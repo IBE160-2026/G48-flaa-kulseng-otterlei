@@ -382,7 +382,7 @@ Alle åtte funksjonene skal med. Prioriteten sier hva som er viktigst. Den er ik
 
 P1–P5 er kjerneflyten. NFR-1 – NFR-10 gjelder for alle funksjonene.
 
-**Alle funksjonene skal med:** Fristen er ca. 16.–23. november 2026. Gruppa har bestemt at alle åtte funksjonene (P1–P8) skal være med i v1, og planlegger ikke å kutte noen av dem.
+**Alle funksjonene skal med:** Fristen er ca. 16.–23. november 2026. Gruppa har bestemt at alle åtte funksjonene (P1–P8) skal være med i v1, og planlegger ikke å kutte noen av dem, fordi gruppa mener det er god nok tid til å fullføre alle.
 
 ### 8.2 Utenfor v1
 
