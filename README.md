@@ -17,6 +17,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 ├── _bmad/                         BMAD-rammeverket (planleggingsverktøy)
 ├── _bmad-output/
 │   └── planning-artifacts/        Planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics)
+│       └── prd/                   PRD med addendum og beslutningslogg
 ├── docs/
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
 │   ├── ki-logg/                   Logg over KI-økter: prompts, vurderinger og korrigeringer
@@ -30,6 +31,9 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 ## Planleggingsdokumenter
 
 - [Product brief](_bmad-output/planning-artifacts/product-brief.md) — produktbeskrivelse (versjon 2)
+- [PRD](_bmad-output/planning-artifacts/prd/prd.md) — nummererte krav (FR og NFR), brukerreiser og prioritering
+  - [Addendum](_bmad-output/planning-artifacts/prd/addendum.md) — notater til arkitektur og UX
+  - [Beslutningslogg](_bmad-output/planning-artifacts/prd/.memlog.md) — beslutningene bak PRD-en, med begrunnelse
 
 ## Prosessdokumentasjon
 
