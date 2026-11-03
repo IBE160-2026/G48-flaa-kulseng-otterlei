@@ -23,6 +23,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 │   ├── ki-logg/                   Logg over KI-økter: prompts, vurderinger og korrigeringer
 │   └── tilbakemeldinger/          Tilbakemeldinger fra faglærer
 ├── .claude/                       Claude Code-skills
+├── .logs/                         Sesjonslogger fra Claude Code, én mappe per gruppemedlem
 ├── .github/                       Mal for pull requests med sjekkliste
 ├── CLAUDE.md                      Felles instruksjoner til Claude Code for hele gruppa
 └── README.md
