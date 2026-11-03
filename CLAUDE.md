@@ -6,7 +6,7 @@ Felles instruksjoner for Claude Code i G48-prosjektet. Alle tre i gruppa bruker 
 
 - **Emne:** IBE160 Programmering med KI, Høgskolen i Molde, høst 2026. Gruppe G48 «Gutta krutt»: Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei.
 - **App:** AI CV & Job Application Assistant — se `_bmad-output/planning-artifacts/product-brief.md`.
-- **Status:** Planlegging (product brief er ferdig i versjon 2; PRD, arkitektur og stories gjenstår). Ingen kode ennå.
+- **Status:** Planlegging. Product brief (versjon 2) og PRD er ferdige; arkitektur, UX, epics og stories gjenstår. Ingen kode ennå. Fristen er 15. desember 2026.
 - **Språk:** Skriv dokumentasjon, commit-meldinger og pull requests på norsk bokmål. Svar brukeren på norsk.
 
 Les `README.md` og `docs/ki-logg/README.md` før du gjør endringer, så du kjenner strukturen og hva som er gjort.
