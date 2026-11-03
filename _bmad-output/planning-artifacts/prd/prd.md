@@ -2,7 +2,7 @@
 title: "PRD: AI CV & Job Application Assistant"
 status: final
 created: 2026-10-19
-updated: 2026-10-22
+updated: 2026-11-03
 ---
 
 # PRD: AI CV & Job Application Assistant
@@ -10,7 +10,7 @@ updated: 2026-10-22
 **Gutta krutt (G48)** — IBE160 Programmering med KI, Høgskolen i Molde, høst 2026
 Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei
 
-_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19) og gjennomgått av hele gruppa i pull request #4. Claudes antagelser ble bekreftet av gruppa og er samlet i §12. Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
+_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19) og gjennomgått av hele gruppa i pull request #4. Claudes antagelser ble bekreftet av gruppa og er samlet i §12. Oppdatert etter en ny gjennomgang i gruppa 2026-11-03 (ny frist, lagrede svar, brevoppsett i PDF). Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
 
 ## 0. Om dokumentet
 
@@ -197,7 +197,8 @@ I testmodus kan brukeren velge eksempelpar A, B eller C med én knapp. Da fylles
 
 **Konsekvenser (testbare):**
 - For hvert eksempelpar gir testmodus gap-analyse, søknadsbrev eller brevforslag, CV-forbedringsforslag og ATS-nøkkelordanalyse.
-- Det finnes lagrede svar for alle kombinasjoner av innstillinger (språk × tone × svarform) for hvert eksempelpar. De lagres ved å kjøre eksempelparene én gang i KI-modus med et skript.
+- Det finnes lagrede svar for alle kombinasjoner av innstillinger for hvert eksempelpar. Søknadsbrev og brevforslag avhenger av språk, tone og svarform (8 kombinasjoner per par). Gap-analysen, CV-forbedringsforslagene og KI-forklaringen i ATS-nøkkelordanalysen avhenger bare av språket (2 av hver per par). Til sammen blir det 42 lagrede svar for de tre parene.
+- De lagrede svarene lages ved å kjøre eksempelparene én gang i KI-modus med et skript, og lages på nytt med samme skript når promptene endres.
 
 #### FR-11: Egen CV i testmodus
 
@@ -244,7 +245,7 @@ En bruker kan bare se og endre sine egne data.
 Dokumentene lagres kryptert i databasen.
 
 **Konsekvenser (testbare):**
-- Når databasen leses direkte, er ingen av disse lesbare i klartekst.
+- Når databasen leses direkte, er ingen av dokumentene (CV, CV-tekst, stillingsannonse og resultat) lesbare i klartekst.
 - Krypteringsnøkkelen settes med en miljøvariabel og ligger aldri i repoet.
 
 #### FR-16: Slette dokumenter
@@ -323,6 +324,9 @@ Brukeren kan laste ned søknadsbrevet eller brevforslagene som Markdown eller PD
 **Konsekvenser (testbare):**
 - Den eksporterte filen inneholder hele teksten.
 - Æ, ø og å vises riktig i begge formatene.
+- PDF-en av søknadsbrevet har et brevoppsett med dato og avsender øverst. Datoen er eksportdatoen, skrevet på valgt språk.
+- Avsenderen er navnet brukeren skriver inn før PDF-eksporten, eventuelt med e-post og telefon. Opplysningene brukes bare i PDF-en. De lagres ikke og sendes ikke til KI-tjenesten.
+- Brevforslag eksporteres som en vanlig punktliste uten brevoppsett.
 
 **Utenfor:** DOC/DOCX og eksport av gap-analysen. Bare søknadsbrev og brevforslag eksporteres.
 
@@ -384,7 +388,7 @@ Prioriteten sier hva som er viktigst. Den er ikke nødvendigvis rekkefølgen fun
 
 NFR-1 – NFR-10 gjelder for alle funksjonene.
 
-**Alle funksjonene skal med:** Fristen er ca. 16.–23. november 2026. Gruppa har bestemt at alle åtte funksjonene (P1–P8) skal være med i v1, og planlegger ikke å kutte noen av dem, fordi gruppa mener det er god nok tid til å fullføre alle.
+**Alle funksjonene skal med:** Fristen er 15. desember 2026. Gruppa har bestemt at alle åtte funksjonene (P1–P8) skal være med i v1, og planlegger ikke å kutte noen av dem, fordi gruppa mener det er god nok tid til å fullføre alle.
 
 ### 8.2 Utenfor v1
 
@@ -409,7 +413,7 @@ Kriteriene er hentet fra briefen og koblet til kravene. Hvert kriterium skal bli
 - **SM-4 Ingen oppdiktede påstander:** Søknadsbrev, brevforslag og CV-forbedringsforslag for hvert eksempelpar består sjekklisten i fasiten. Validerer FR-8, FR-18, FR-21.
 - **SM-5 Brukervalg respekteres:** «Fullt utkast» gir et sammenhengende brev, mens «kun forslag» gir en punktliste. Valgt språk og tone gjenspeiles. Søknadsbrevet bruker ingen av flosklene i sjekklisten. Validerer FR-4, FR-6, FR-7.
 - **SM-6 ATS-nøkkelordanalyse:** Enhetstestene for alle tre eksempelparene består, og samme input gir samme resultat. Validerer FR-19, FR-20.
-- **SM-7 Eksport:** Eksportert Markdown og PDF inneholder hele brevet med riktige æ, ø og å. Validerer FR-22, FR-23.
+- **SM-7 Eksport:** Eksportert Markdown og PDF inneholder hele brevet med riktige æ, ø og å, og PDF-en av søknadsbrevet har dato og avsender. Validerer FR-22, FR-23.
 - **SM-8 Tilgangskontroll og kryptering:** Testbruker 1 får ikke tilgang til dataene til testbruker 2, og ingen dokumenter er lesbare i klartekst i databasen. Validerer FR-14, FR-15.
 - **SM-9 Sletting:** Etter sletting av dokumenter eller konto er dataene borte fra databasen. Validerer FR-16, FR-17.
 - **SM-10 Kjørbar for sensor:** Appen startes etter README uten gruppas API-nøkkel, og testmodus kjører SM-1. Validerer FR-9 – FR-11, NFR-1.
@@ -428,7 +432,6 @@ Eksempelparene A, B og C er beskrevet i [briefen](../product-brief.md#eksempelda
 1. **Hvilken KI-leverandør og modell?** Avgjøres i arkitekturen ut fra norsk språkkvalitet, kostnad og databehandling (NFR-4).
 2. **Hvordan finner koden nøkkelordene i stillingsannonsen (FR-19)?** Det er bestemt at koden skal gjøre det, ikke språkmodellen, men ikke hvordan. Én mulighet er en ordliste over vanlige ferdigheter, verktøy og sertifikater. Avgjøres i arkitekturen.
 3. **Hvilket bibliotek for PDF-innlesing?** Må testes mot eksempel-CV C (to kolonner) tidlig i arkitekturen, før resten bygges på det.
-4. **Hvordan skal brevet se ut i PDF-eksporten?** Holder enkel tekst, eller trengs et brevoppsett med dato og avsender?
 
 ## 12. Antagelser bekreftet av gruppa
 
@@ -450,3 +453,11 @@ Claude foreslo disse punktene i første utkast, uten at gruppa hadde bestemt dem
 - §5 NFR-7: WCAG 2.1 AA som mål der det er rimelig.
 - §5 NFR-8: Grensesnittet er bare på norsk.
 - §6: Inndelingen i fire skjermbilder.
+
+### Forslag fra gjennomgangen 2026-11-03
+
+Gruppa bestemte at PDF-eksporten skal ha brevoppsett med dato og avsender, og ba Claude anbefale hvordan de lagrede svarene skal dekkes. Disse detaljene var Claudes forslag. Alle tre i gruppa godkjente dem uten endringer i pull request #5 (2026-11-03):
+
+- §4.4 FR-10: Søknadsbrev og brevforslag lagres for alle 8 kombinasjoner, mens gap-analyse, CV-forbedringsforslag og KI-forklaring bare lagres per språk. Til sammen 42 lagrede svar.
+- §4.8 FR-23: Avsenderen skrives inn av brukeren før PDF-eksporten og lagres ikke. Datoen er eksportdatoen.
+- §4.8 FR-23: Brevforslag får ikke brevoppsett, siden de er en punktliste og ikke et brev.
