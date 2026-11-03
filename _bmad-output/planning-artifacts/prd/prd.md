@@ -454,9 +454,9 @@ Claude foreslo disse punktene i første utkast, uten at gruppa hadde bestemt dem
 - §5 NFR-8: Grensesnittet er bare på norsk.
 - §6: Inndelingen i fire skjermbilder.
 
-### Nye forslag fra gjennomgangen 2026-11-03 (må bekreftes av gruppa)
+### Forslag fra gjennomgangen 2026-11-03
 
-Gruppa bestemte at PDF-eksporten skal ha brevoppsett med dato og avsender, og ba Claude anbefale hvordan de lagrede svarene skal dekkes. Disse detaljene er Claudes forslag:
+Gruppa bestemte at PDF-eksporten skal ha brevoppsett med dato og avsender, og ba Claude anbefale hvordan de lagrede svarene skal dekkes. Disse detaljene var Claudes forslag. Alle tre i gruppa godkjente dem uten endringer i pull request #5 (2026-11-03):
 
 - §4.4 FR-10: Søknadsbrev og brevforslag lagres for alle 8 kombinasjoner, mens gap-analyse, CV-forbedringsforslag og KI-forklaring bare lagres per språk. Til sammen 42 lagrede svar.
 - §4.8 FR-23: Avsenderen skrives inn av brukeren før PDF-eksporten og lagres ikke. Datoen er eksportdatoen.

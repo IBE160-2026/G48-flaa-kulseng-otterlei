@@ -5,7 +5,7 @@
 | **Dato** | 2026-11-03 |
 | **Hvem** | Haakon Remen Otterlei (gjennomgangen ble gjort av hele gruppa) |
 | **Verktøy** | Claude Code (Claude Opus 5.5) |
-| **Commits / PR** | `5b1397a`, `eda72f8` og commiten med dette innlegget, branch `docs/prd-gjennomgang` |
+| **Commits / PR** | `5b1397a`, `eda72f8`, commiten med dette innlegget og rettingen etter godkjenningen, pull request #5 (`docs/prd-gjennomgang`) |
 
 ## Mål
 
@@ -34,6 +34,7 @@ Gå gjennom PRD-en en gang til før vi starter på arkitekturen, og rette det so
 - **Lagrede svar:** Vi ba KI om en anbefaling. Forslaget er ført inn i PRD-en og merket som «må bekreftes» i §12.
 - **Brevoppsett:** Vi bestemte at PDF-eksporten skal ha brevoppsett med dato og avsender. Hvordan avsenderen legges inn, er KI-ens forslag og må bekreftes.
 - **FR-15:** Vi ba KI omformulere kravet slik den mente var best.
+- **Godkjenning:** Alle tre gikk hver for seg gjennom endringene i PR #5 og godkjente KI-ens forslag uten endringer. Henrik og Ole kommenterte i PR-en («sett over, ser bra ut» og «Ser bra ut»).
 
 ## Resultat
 
@@ -41,7 +42,6 @@ Gå gjennom PRD-en en gang til før vi starter på arkitekturen, og rette det so
 - `CLAUDE.md` har riktig status og frist.
 
 **Gjenstår:**
-- Gruppa må bekrefte de nye forslagene i PRD-ens §12 i pull requesten.
-- Arkitektur (`bmad-architecture`), som skal svare på åpne spørsmål 1–3.
+- Arkitektur (`bmad-architecture`), som skal svare på åpne spørsmål 1–3. En annen i gruppa tar den.
 - UX-skisser (`bmad-ux`).
 - Eksempel-CV-er og annonser med fasit.
