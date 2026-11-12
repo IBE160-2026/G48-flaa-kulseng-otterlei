@@ -9,6 +9,8 @@
 
 Dette dokumentet fordeler ansvaret for resten av prosjektet mellom de tre i gruppa og setter opp en ukeplan fram til fristen. Forslaget bygger på [product brief](../_bmad-output/planning-artifacts/product-brief.md), [PRD-en](../_bmad-output/planning-artifacts/prd/prd.md), [tilbakemeldingen på PRD-en](../_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) og sensorveiledningen for del 1. Gruppa går gjennom og retter det i pull requesten før det tas i bruk. Når planen endres underveis, oppdateres dette dokumentet.
 
+**Endret 2026-11-12:** Henrik laget arkitekturen, som her var lagt til Ole. Ole tar i stedet ansvaret for KI-laget (`ki/`) når kodingen starter. Ole og Henrik avtalte det i pull request #13. Haakon har ikke vurdert endringen ennå (issue #7).
+
 ## 1. Status 12. november
 
 **Ferdig:** Product brief (versjon 2) og PRD med 23 FR, 10 NFR og 10 suksesskriterier. KI-logg, beslutningslogg, mal for pull requests og `CLAUDE.md` med felles regler.
@@ -26,18 +28,18 @@ Dette dokumentet fordeler ansvaret for resten av prosjektet mellom de tre i grup
 
 Hver person eier et område av appen, med både planlegging, kode og tester. Å eie et område betyr å ha ansvaret for at det blir ferdig, ikke å gjøre alt alene.
 
-### Ole A. Flaa — arkitektur og KI-laget
+### Ole A. Flaa — KI-laget
 
 | Fase | Oppgaver | Krav |
 |---|---|---|
-| Planlegging | Arkitektur med `bmad-architecture`: teknologivalg, datamodell, KI-leverandør (åpent spørsmål 1) og formatet på KI-svarene | §11, addendum |
-| Kode | Felles grensesnitt for KI-modus og testmodus, prompts, gap-analyse, søknadsbrev og brevforslag, CV-forbedringsforslag, KI-forklaring i ATS-analysen | FR-5 – FR-11, FR-18, FR-21, NFR-5, NFR-9 |
+| Kode | KI-laget (`ki/`, arkitekturen AD-3 – AD-6): felles grensesnitt for KI-modus og testmodus, prompts, gap-analyse, søknadsbrev og brevforslag, CV-forbedringsforslag, KI-forklaring i ATS-analysen | FR-5 – FR-11, FR-18, FR-21, NFR-5, NFR-9 |
 | Test | Skript som lager de 42 lagrede svarene, og evalueringskjøring i KI-modus mot fasiten | FR-10, SM-3, SM-4 |
 
-### Henrik O. Kulseng — UX og frontend
+### Henrik O. Kulseng — arkitektur, UX og frontend
 
 | Fase | Oppgaver | Krav |
 |---|---|---|
+| Planlegging | Arkitektur med `bmad-architecture` (gjort, PR #13): teknologivalg, datamodell, KI-leverandør (åpent spørsmål 1) og formatet på KI-svarene | §11, addendum |
 | Planlegging | UX med `bmad-ux`: skisser av de fire skjermbildene, særlig gap-analysen og valget mellom «fullt utkast» og «kun forslag» | §6, addendum |
 | Kode | Alle sidene, registrering og innlogging i grensesnittet, testmodus-banner, tilbakemelding mens KI jobber, eksport og kopiering, tilgjengelighet | FR-4, FR-12, FR-13, FR-22, FR-23, NFR-6 – NFR-8 |
 | Test | Ende-til-ende-tester av kjerneflyten | SM-1, SM-7 |

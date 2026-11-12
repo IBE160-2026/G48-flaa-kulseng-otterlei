@@ -29,6 +29,10 @@ __pycache__/
 .ipynb_checkpoints/
 pip-wheel-metadata/
 
+# Django: lokal database (inneholder krypterte personopplysninger)
+db.sqlite3
+db.sqlite3-journal
+
 # Tests / coverage
 coverage/
 htmlcov/
