@@ -19,3 +19,19 @@ Henrik ville gjøre ferdig arkitekturen og UX-en, så planleggingen er klar for 
 
 ### Åpne punkter
 - Issue #24: gruppa må bekrefte Claudes egne tillegg i AD-22.
+
+## 2026-11-12 kl. 17:03 — Henrik Kulseng
+
+### Oppgave
+Rette arkitekturen etter Oles og Haakons gjennomgang av PR #25.
+
+### Plan
+- Ført inn rettelsene de ba om under «Må rettes», og Haakons forslag om en grense for brevteksten.
+
+### Resultat
+- `96e82d7`: `finn_eksempelpar(cv_tekst)` i AD-6 og AD-22 (Oles forslag), «– » fjernes før punktene deles ved eksport, NFR-11 i `scope`, `binds`, AD-6 og §6, `BREV_MAKS` i AD-15, §8 punkt 6 og beslutningsloggen.
+- KI-logginnlegget har fått PR #25, alle commits og gruppas vurderinger.
+- `closes #24` lagt til i PR-beskrivelsen.
+
+### Åpne punkter
+Ingen nye. Issue #24 lukkes når PR #25 flettes.
