@@ -1,0 +1,52 @@
+{
+  "par": "B",
+  "sprak": "nb",
+  "fakta_i_cv": [
+    "Studerer bachelor i økonomi og administrasjon ved Høgskolen i Fjordvik (2025–2028, andre år)",
+    "Emner: regnskap og skatt, bedriftsøkonomi, finansregnskap, Excel for økonomer",
+    "Studiespesialisering med økonomifag fra Nordmøre videregående skole (2022–2025)",
+    "Butikkmedarbeider i 40 % stilling hos Nærbutikken Solsiden siden 2023",
+    "Har kasse, kasseoppgjør og telling av kontanter ved stenging",
+    "Bestiller varer og har ansvar for meieridisken",
+    "Lærer opp nye deltidsansatte",
+    "Kasserer i Økonomistudentenes forening siden 2025",
+    "Fører regnskapet for foreningen i Excel og legger det fram på årsmøtet",
+    "Betaler regninger og holder oversikt over medlemskontingenten",
+    "Kan Excel: pivottabeller, HVIS, FINN.RAD og diagrammer",
+    "Kan Word og PowerPoint",
+    "Norsk morsmål og god engelsk",
+    "Bor i Kristiansund"
+  ],
+  "krav_matcher": [
+    { "krav": "Excel", "alias": [] },
+    { "krav": "Regnskapsforståelse", "alias": ["regnskap"] }
+  ],
+  "krav_mangler": [
+    { "krav": "Tripletex", "alias": ["regnskapsprogram", "regnskapssystem"] }
+  ],
+  "nokkelord": {
+    "i_annonsen": ["Excel", "regnskap", "Tripletex"],
+    "funnet": ["Excel", "regnskap"],
+    "mangler": ["Tripletex"],
+    "andel": 0.667
+  },
+  "floskler": [
+    "engasjert og løsningsorientert",
+    "jeg brenner for",
+    "nøyaktig og strukturert",
+    "jeg er en person som",
+    "jeg liker utfordringer"
+  ],
+  "sprak_og_tone": {
+    "sprak": "nb",
+    "tone": "uformell",
+    "kjennetegn": [
+      "Skrevet på norsk bokmål",
+      "Uformell, men høflig: korte setninger og et personlig språk, uten slang",
+      "Nevner stillingen som regnskapsassistent hos Bjørk Regnskap AS",
+      "Trekker fram vervet som kasserer og regnskapsemnene som bevis på regnskapsforståelse",
+      "Trekker fram Excel-kunnskapene, gjerne pivottabeller eller FINN.RAD",
+      "Påstår ikke at søkeren har brukt Tripletex eller et annet regnskapsprogram"
+    ]
+  }
+}
