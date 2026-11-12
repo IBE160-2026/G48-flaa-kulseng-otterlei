@@ -40,4 +40,4 @@
 
 - Konfliktene i KI-loggtabellen er løst på #12, #13, #14 og #15. #12, #13 og #14 er siden flettet av gruppa.
 - Haakons vurderinger av UX-en står i en kommentar på PR #15.
-- **Gjenstår:** Henrik fører inn gruppas vurderinger i KI-logginnlegget for UX og fjerner «utkast». Ole godkjenner #15.
+- #15 ble flettet av gruppa samme dag. Konflikten det ga i tabellen på denne branchen, er løst på samme måte.
