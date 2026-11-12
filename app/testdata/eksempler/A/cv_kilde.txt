@@ -19,9 +19,9 @@ Sommer 2023  Butikkmedarbeider, Romsdal Sport og Fritid
            - Kassearbeid, varemottak og kundeveiledning
 
 PROSJEKTER
-2025       Værvarsel-app i Python (gruppeprosjekt, tre personer)
+2026–2027  Bachelorprosjekt: værvarsel-app i Python (tre personer, pågår)
            - Henter værdata fra et åpent API og viser varselet i terminalen
-           - Brukte Git og GitHub med egne brancher og pull requests
+           - Bruker Git og GitHub med egne brancher og pull requests
 2024       Budsjettverktøy i Python (eget prosjekt)
            - Leser kontoutskrifter fra CSV-filer og lager diagram med matplotlib
 

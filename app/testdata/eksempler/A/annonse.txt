@@ -1,6 +1,6 @@
 Sommerjobb som junior utvikler – Kystdata AS, Ålesund
 
-Kystdata AS lager programvare for fiskeri- og havbruksnæringen langs kysten. Til sommeren 2027 søker vi to studenter som vil jobbe sammen med utviklerteamet vårt i åtte uker.
+Kystdata AS lager programvare for fiskeri- og havbruksnæringen langs kysten. Til sommeren 2027 søker vi to studenter eller nyutdannede som vil jobbe sammen med utviklerteamet vårt i åtte uker.
 
 Arbeidsoppgaver:
 - Videreutvikle interne verktøy skrevet i Python
