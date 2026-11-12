@@ -6,7 +6,7 @@
 | **Dokument** | [`prd.md`](../../_bmad-output/planning-artifacts/prd/prd.md) (versjonen faglærer vurderte: commit `07a17f3`) |
 | **Tilbakemelding** | [`tilbakemelding-prd.md`](../../_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) (commit `9217294`) |
 | **Dato** | 2026-11-12 |
-| **Status** | Endringene må bekreftes av gruppa i pull requesten |
+| **Status** | Godkjent av alle tre i gruppa uten endringer i pull request #14 (2026-11-12) |
 
 Dette dokumentet forklarer hva som er endret i PRD-en etter faglærers tilbakemelding 2026-11-12, og hvorfor. Den forrige versjonen kan ses med `git show 07a17f3:_bmad-output/planning-artifacts/prd/prd.md`. Beslutningene står også i [beslutningsloggen](../../_bmad-output/planning-artifacts/prd/.memlog.md).
 
@@ -76,6 +76,6 @@ Faglærer pekte på fem forbedringer (4.1–4.5), der tre måtte avklares før U
 
 ## Hva som gjenstår
 
-- **Gruppa må bekrefte** alle endringene i pull requesten, også det Haakon valgte i økten.
+- **Eksempelparene med fasit** skal lages innen 18. november (Haakon), sammen med eksempelannonsen med innebygd instruksjon.
 - **Refleksjonsspørsmålene** i tilbakemeldingens §7 er ikke besvart i PRD-en. De passer bedre i refleksjonsrapporten.
 - **Arkitekturen (PR #13)** bør sjekkes mot PRD-en når begge er flettet. Den bygger allerede på de samme forslagene (AD-4 – AD-8, AD-15).

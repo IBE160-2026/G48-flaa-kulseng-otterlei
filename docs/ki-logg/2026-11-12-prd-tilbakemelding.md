@@ -5,7 +5,7 @@
 | **Dato** | 2026-11-12 |
 | **Hvem** | Haakon Remen Otterlei |
 | **Verktøy** | Claude Code (Claude Opus 5.5), `bmad-prd` (oppdatering) |
-| **Commits / PR** | Branch `docs/prd-tilbakemelding`, se pull requesten |
+| **Commits / PR** | `0437a8d`, `978c882`, `153773e`, commiten med godkjenningen, pull request #14 (`docs/prd-tilbakemelding`) |
 
 ## Mål
 
@@ -44,8 +44,8 @@ I tillegg svarte Haakon på fire spørsmål i en dialog med faste svaralternativ
 - **Resultat (4.3):** Haakon valgte tre deler, med tone og svarform valgt ved brevet (Claudes anbefaling).
 - **Nøkkelord i testmodus (issue #9):** Haakon valgte at egne nøkkelord tas med i matchen, med en merknad på den lagrede forklaringen (Claudes anbefaling).
 - **Fasit (4.4):** Haakon tar ansvaret og lager den innen 18. november.
-- **4.1, 4.4 og 4.5 for øvrig:** Dette er Claudes forslag, og de er ikke vurdert av gruppa ennå. De er merket i PRD-ens §12.
-- Valgene over ble gjort av Haakon i økten. Henrik og Ole må se over og bekrefte dem i pull requesten. _Gruppa fyller inn her hva som ble godkjent, rettet eller avvist._
+- **4.1, 4.4 og 4.5 for øvrig:** Dette er Claudes forslag, og de er merket i PRD-ens §12.
+- **Godkjenning:** Henrik og Ole gikk gjennom endringene i PR #14 og kommenterte «ser bra ut disse endringene» og «Ser bra ut». Haakon godkjente også Claudes forslag i økten. Alle endringene ble godkjent uten rettelser.
 
 ## Resultat
 
@@ -53,7 +53,6 @@ I tillegg svarte Haakon på fire spørsmål i en dialog med faste svaralternativ
 - Nytt dokument: [docs/endringer/endringer-prd.md](../endringer/endringer-prd.md).
 
 **Gjenstår:**
-- Gruppa bekrefter endringene i pull requesten.
 - Eksempelpar A–C med fasit innen 18. november (Haakon), pluss eksempelannonsen med innebygd instruksjon.
 - Refleksjonsspørsmålene i tilbakemeldingens §7 besvares i refleksjonsrapporten.
 - Arkitekturen (PR #13) sjekkes mot PRD-en når begge er flettet.

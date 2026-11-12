@@ -500,7 +500,7 @@ Gruppa bestemte at PDF-eksporten skal ha brevoppsett med dato og avsender, og ba
 
 ### Endringer etter faglærers tilbakemelding 2026-11-12
 
-Endringene er forklart i [docs/endringer/endringer-prd.md](../../../docs/endringer/endringer-prd.md). **Alle punktene må bekreftes av gruppa i pull requesten.**
+Endringene er forklart i [docs/endringer/endringer-prd.md](../../../docs/endringer/endringer-prd.md). Alle tre i gruppa godkjente punktene under uten endringer i pull request #14 (2026-11-12).
 
 Valgt av Haakon i økten, etter forslag fra Claude:
 
