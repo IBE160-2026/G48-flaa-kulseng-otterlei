@@ -64,3 +64,23 @@ Lage arkitekturen for appen etter PRD-en: velge teknologi med begrunnelse, svare
 - Noen i gruppa lager API-konto i Claude Console og setter forbruksgrense.
 - Eksempelparene med fasit lages, og pdfplumber testes mot CV C.
 - UX (`bmad-ux`), deretter epics og stories.
+
+## Oppfølging etter gjennomgang i PR #13 (2026-11-12)
+
+**Prompts:**
+- «fikk dette som kommentar på arkitekturen, hvordan fikser vi dette?» Henrik limte inn Oles kommentar.
+- «hva betyr KI-laget, og hva gjør PR #12?»
+- «ja, Ole tar KI-laget, og opprett issuene nå»
+
+**Hva KI gjorde:**
+- Fant ut at PR #14 (PRD rettet etter faglærers tilbakemelding) allerede var flettet. Oles punkt om å oppdatere PRD-en og bestemme kuttrekkefølgen var dermed løst.
+- Flettet `main` inn i `docs/arkitektur`. Den eneste konflikten var tabellen i `docs/ki-logg/README.md`, og begge radene ble beholdt.
+- Satt `status` i arkitekturen tilbake til `draft` og oppdaterte åpne punkter: PRD-punktet er løst, og fristen for eksempeldataene er lagt inn.
+- Oppdaterte `docs/arbeidsfordeling.md`. Henrik har arkitektur, UX og frontend, og Ole har KI-laget.
+- Opprettet issue #16 (API-konto), #17 (pytest-django) og #18 (bekrefte [Forslag]) med etiketten `agent`, slik Ole foreslo.
+
+**Gruppas vurderinger:**
+- Ole og Henrik er enige i [Forslag]-punktene SQLite, resultat i tre deler, 30 000 tegn, eksempelpar D og pip. Haakon har ikke svart.
+- Av de avanserte delene Ole nevnte, valgte Henrik å merke bare **hash-testen** som mulig kutt. Låsen mot dobbeltklikk og eksempelpar D beholdes.
+- Henrik godtok Oles forslag om at Ole tar KI-laget (`ki/`).
+- Henrik ba om at issuene ble opprettet nå, selv om PR #12 (åpne punkter som issues) ikke er flettet.
