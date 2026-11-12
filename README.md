@@ -39,7 +39,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
   - [Addendum](_bmad-output/planning-artifacts/prd/addendum.md) — notater til arkitektur og UX
   - [Beslutningslogg](_bmad-output/planning-artifacts/prd/.memlog.md) — beslutningene bak PRD-en, med begrunnelse
   - [Tilbakemelding på PRD](_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) — faglærers vurdering
-- [Arkitektur](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/ARCHITECTURE-SPINE.md) — teknologivalg med begrunnelse, regler (AD-1 – AD-21) og mappestruktur
+- [Arkitektur](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/ARCHITECTURE-SPINE.md) — teknologivalg med begrunnelse, regler (AD-1 – AD-22) og mappestruktur
   - [Beslutningslogg](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/.memlog.md) — hvem som bestemte hva, og når
   - [KI-gjennomganger](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/reviews/) — tre uavhengige kontroller av utkastet
   - [Teknologioversikt fra faglærer](_bmad-output/planning-artifacts/architecture/technology.md) — referanse
