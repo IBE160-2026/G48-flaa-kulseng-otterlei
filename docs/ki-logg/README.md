@@ -11,6 +11,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-11-03 | [Ny gjennomgang av PRD før arkitekturen](2026-11-03-gjennomgang-prd.md) | Haakon (gjennomgang: hele gruppa) |
 | 2026-11-12 | [Forslag til arbeidsfordeling og fremdriftsplan](2026-11-12-arbeidsfordeling.md) | Ole |
 | 2026-11-03 – 2026-11-12 | [Arkitektur med bmad-architecture](2026-11-12-arkitektur.md) | Henrik |
+| 2026-11-12 | [PRD rettet etter faglærers tilbakemelding](2026-11-12-prd-tilbakemelding.md) | Haakon |
 
 ## Slik skriver du et innlegg
 
