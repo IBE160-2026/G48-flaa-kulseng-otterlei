@@ -8,7 +8,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 **AI CV & Job Application Assistant** hjelper norske studenter med å skreddersy jobbsøknader. Studenten laster opp CV-en sin og limer inn en stillingsannonse, og får en gap-analyse av hva som matcher og mangler, et utkast til søknadsbrev eller konkrete forslag, CV-forbedringer og en ATS-nøkkelordanalyse. Se [product brief](_bmad-output/planning-artifacts/product-brief.md) for full beskrivelse.
 
-> Appen er under planlegging. Installasjon, oppstart, konfigurasjon og testing beskrives her når koden er på plass.
+> Appen er under planlegging. Arkitekturen er bestemt: en Django-app i mappa `app/` som kjøres lokalt med SQLite, og som bruker Claude API (eller lagrede svar i testmodus uten API-nøkkel). Installasjon, oppstart, konfigurasjon og testing beskrives her når koden er på plass.
 
 ## Mappestruktur
 
@@ -17,9 +17,11 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 ├── _bmad/                         BMAD-rammeverket (planleggingsverktøy)
 ├── _bmad-output/
 │   └── planning-artifacts/        Planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics)
-│       ├── prd/                   PRD med addendum og beslutningslogg
+│       ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
+│       ├── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
 │       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
 ├── docs/
+│   ├── arbeidsfordeling.md        Ansvarsområder og ukeplan fram til fristen
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
 │   ├── ki-logg/                   Logg over KI-økter: prompts, vurderinger og korrigeringer
 │   └── tilbakemeldinger/          Tilbakemeldinger fra faglærer
@@ -36,6 +38,11 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 - [PRD](_bmad-output/planning-artifacts/prd/prd.md) — nummererte krav (FR og NFR), brukerreiser og prioritering
   - [Addendum](_bmad-output/planning-artifacts/prd/addendum.md) — notater til arkitektur og UX
   - [Beslutningslogg](_bmad-output/planning-artifacts/prd/.memlog.md) — beslutningene bak PRD-en, med begrunnelse
+  - [Tilbakemelding på PRD](_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) — faglærers vurdering
+- [Arkitektur](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/ARCHITECTURE-SPINE.md) — teknologivalg med begrunnelse, regler (AD-1 – AD-21) og mappestruktur
+  - [Beslutningslogg](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/.memlog.md) — hvem som bestemte hva, og når
+  - [KI-gjennomganger](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/reviews/) — tre uavhengige kontroller av utkastet
+  - [Teknologioversikt fra faglærer](_bmad-output/planning-artifacts/architecture/technology.md) — referanse
 - UX (utkast, venter på gjennomgang i gruppa)
   - [DESIGN.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/DESIGN.md) — hvordan appen ser ut: farger, typografi og komponenter
   - [EXPERIENCE.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md) — hvordan appen fungerer: veiviser i fire steg, tilstander, tilgjengelighet og brukerreiser
@@ -43,9 +50,12 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 ## Prosessdokumentasjon
 
+- [Arbeidsfordeling og fremdriftsplan](docs/arbeidsfordeling.md) — hvem som har ansvar for hva, og ukeplan fram til fristen
 - [KI-logg](docs/ki-logg/README.md) — hvordan vi har brukt og styrt KI, økt for økt
 - [Tilbakemelding på product brief](docs/tilbakemeldinger/tilbakemelding-product-brief.md) — faglærers vurdering av versjon 1
 - [Endringer i product brief](docs/endringer/endringer-product-brief.md) — hva som er endret etter tilbakemeldingen, og hvorfor
+- [Tilbakemelding på PRD](_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) — faglærers formative vurdering 2026-11-12
+- [Endringer i PRD](docs/endringer/endringer-prd.md) — hva som er endret etter tilbakemeldingen, og hvorfor
 
 ## Arbeidsflyt
 
