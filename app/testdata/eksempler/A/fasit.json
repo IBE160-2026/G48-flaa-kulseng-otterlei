@@ -28,7 +28,8 @@
   "nokkelord": {
     "i_annonsen": ["Git", "Python", "SQL", "førerkort klasse B"],
     "funnet": ["Git", "Python"],
-    "mangler": ["SQL", "førerkort klasse B"]
+    "mangler": ["SQL", "førerkort klasse B"],
+    "andel": 0.5
   },
   "floskler": [
     "engasjert og løsningsorientert",
