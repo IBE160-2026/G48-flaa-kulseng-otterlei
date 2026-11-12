@@ -20,6 +20,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 │       ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
 │       └── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
 ├── docs/
+│   ├── arbeidsfordeling.md        Ansvarsområder og ukeplan fram til fristen
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
 │   ├── ki-logg/                   Logg over KI-økter: prompts, vurderinger og korrigeringer
 │   └── tilbakemeldinger/          Tilbakemeldinger fra faglærer
@@ -44,6 +45,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 ## Prosessdokumentasjon
 
+- [Arbeidsfordeling og fremdriftsplan](docs/arbeidsfordeling.md) — hvem som har ansvar for hva, og ukeplan fram til fristen
 - [KI-logg](docs/ki-logg/README.md) — hvordan vi har brukt og styrt KI, økt for økt
 - [Tilbakemelding på product brief](docs/tilbakemeldinger/tilbakemelding-product-brief.md) — faglærers vurdering av versjon 1
 - [Endringer i product brief](docs/endringer/endringer-product-brief.md) — hva som er endret etter tilbakemeldingen, og hvorfor
