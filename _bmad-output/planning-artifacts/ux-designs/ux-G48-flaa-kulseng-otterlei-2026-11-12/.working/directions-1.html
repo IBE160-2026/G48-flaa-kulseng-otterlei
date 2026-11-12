@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designretninger 1</title>
+<style>
+/*
+  Fire designretninger for AI CV & Job Application Assistant (G48).
+  Samme skjerm i alle: steg 4 «Analyse» for Emma (eksempelpar A, junior utvikler).
+  Rammer fra Henrik: 2/5 seriøs<->vennlig, 2/5 luftig<->kompakt, 2/5 nøytral<->fargerik. Lys + mørk.
+  Tallene for nøkkelord (7 av 10) er illustrasjon, ikke fasit.
+
+  A «Rolig blå»     lys: bg #FFFFFF surface #F5F7FA text #1B2433 muted #5B6678 border #DDE2EA accent #2F5DA8 ok #2E7D4F miss #A15C00
+                    mørk: bg #0F1520 surface #172030 text #E6EAF0 muted #9AA6B8 border #2A3445 accent #7FA6E8 ok #6CC495 miss #E3A857
+  B «Papir og blekk» lys: bg #FBF8F3 surface #FFFFFF text #2A2621 muted #6B635A border #E6DFD4 accent #2F5D4A ok #2F6B45 miss #9A4B1E
+                    mørk: bg #1A1815 surface #24211D text #EEE8DF muted #A89F94 border #3A352F accent #8CC2A8 ok #86C79C miss #E39B6E
+  C «Mykt kort»     lys: bg #F3F5F6 surface #FFFFFF text #1F2A2E muted #5E6B70 border #E1E6E8 accent #1F7A75 ok #23784A miss #A65F00
+                    mørk: bg #121718 surface #1B2224 text #E4EBEC muted #98A6AA border #2C3639 accent #5CC2BB ok #6CC495 miss #E3A857
+  D «Stram»         lys: bg #FFFFFF surface #FFFFFF text #111111 muted #555555 border #111111 accent #3B3BB3 ok #1F6B3A miss #8A4B00
+                    mørk: bg #0B0B0C surface #0B0B0C text #F2F2F2 muted #A3A3A3 border #F2F2F2 accent #A9A9FF ok #7BD39A miss #F0B060
+*/
+* { box-sizing: border-box; }
+body { margin: 0; padding: 24px 16px 48px; background: #e9e9ec; color: #222; font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+h1.page { font-size: 22px; margin: 0 0 4px; }
+p.lead { margin: 0 0 24px; color: #555; max-width: 70ch; }
+section.dir { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 28px; }
+section.dir > h2 { margin: 0 0 4px; font-size: 20px; }
+section.dir > p { margin: 0 0 16px; color: #555; max-width: 75ch; }
+.pair { display: flex; flex-wrap: wrap; gap: 20px; }
+.frame { width: 360px; max-width: 100%; border-radius: 22px; overflow: hidden; border: 1px solid #c9c9cf; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.cap { font-size: 12px; color: #777; margin: 6px 4px 0; }
+
+/* felles skjelett */
+.app { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 640px; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.logo { font-weight: 700; font-size: 15px; }
+.menu { font-size: 13px; color: var(--muted); }
+.steps { display: flex; gap: 4px; padding: 14px 18px 0; }
+.steps span { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.steps span.done { background: var(--accent); }
+.steps span.now { background: var(--accent); opacity: .5; }
+.steplabel { padding: 6px 18px 0; font-size: 12px; color: var(--muted); }
+.body { padding: 14px 18px 22px; }
+h3 { font-family: var(--hfont); font-weight: var(--hweight); font-size: 22px; margin: 4px 0 4px; letter-spacing: var(--hspace); }
+.sub { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px; margin-bottom: 14px; box-shadow: var(--shadow); }
+.card h4 { margin: 0 0 10px; font-size: 13px; text-transform: var(--labelcase); letter-spacing: var(--labelspace); color: var(--muted); font-weight: 600; }
+.req { display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); }
+.req:first-of-type { border-top: 0; padding-top: 0; }
+.ico { flex: 0 0 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+.ok .ico { background: var(--okbg); color: var(--ok); }
+.miss .ico { background: var(--missbg); color: var(--miss); }
+.req b { display: block; font-size: 14px; }
+.req small { color: var(--muted); font-size: 12px; }
+.tag { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 99px; margin-left: 6px; }
+.ok .tag { color: var(--ok); background: var(--okbg); }
+.miss .tag { color: var(--miss); background: var(--missbg); }
+.meter { height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; margin: 6px 0 8px; }
+.meter i { display: block; height: 100%; width: 70%; background: var(--accent); }
+.kw { display: flex; flex-wrap: wrap; gap: 6px; }
+.kw span { font-size: 12px; padding: 3px 9px; border-radius: var(--chipr); border: 1px solid var(--border); }
+.kw span.m { border-style: dashed; color: var(--miss); }
+.actions { display: flex; gap: 10px; margin-top: 6px; }
+.btn { flex: 1; text-align: center; padding: 12px; border-radius: var(--r); font-weight: 600; font-size: 14px; border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+.btn.primary { background: var(--accent); color: var(--onaccent); border-color: var(--accent); }
+
+/* A — Rolig blå */
+.a { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; --hfont: var(--font); --hweight: 650; --hspace: -0.01em;
+  --bg:#FFFFFF; --surface:#F5F7FA; --text:#1B2433; --muted:#5B6678; --border:#DDE2EA; --accent:#2F5DA8; --onaccent:#fff;
+  --ok:#2E7D4F; --okbg:#E3F2E9; --miss:#A15C00; --missbg:#FBEEDC; --r:8px; --chipr:6px; --shadow:none; --labelcase:none; --labelspace:0; }
+.a .card { background:#fff; }
+.a.dark { --bg:#0F1520; --surface:#172030; --text:#E6EAF0; --muted:#9AA6B8; --border:#2A3445; --accent:#7FA6E8; --onaccent:#0F1520;
+  --ok:#6CC495; --okbg:#173326; --miss:#E3A857; --missbg:#3A2A12; }
+.a.dark .card { background: var(--surface); }
+
+/* B — Papir og blekk */
+.b { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; --hfont: Georgia, "Iowan Old Style", "Times New Roman", serif; --hweight: 400; --hspace: 0;
+  --bg:#FBF8F3; --surface:#FFFFFF; --text:#2A2621; --muted:#6B635A; --border:#E6DFD4; --accent:#2F5D4A; --onaccent:#fff;
+  --ok:#2F6B45; --okbg:#E6F0E8; --miss:#9A4B1E; --missbg:#F6E6DA; --r:4px; --chipr:2px; --shadow:none; --labelcase:uppercase; --labelspace:.08em; }
+.b h3 { font-size: 26px; }
+.b.dark { --bg:#1A1815; --surface:#24211D; --text:#EEE8DF; --muted:#A89F94; --border:#3A352F; --accent:#8CC2A8; --onaccent:#1A1815;
+  --ok:#86C79C; --okbg:#203227; --miss:#E39B6E; --missbg:#3A2619; }
+
+/* C — Mykt kort */
+.c { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; --hfont: var(--font); --hweight: 700; --hspace: -0.015em;
+  --bg:#F3F5F6; --surface:#FFFFFF; --text:#1F2A2E; --muted:#5E6B70; --border:#E1E6E8; --accent:#1F7A75; --onaccent:#fff;
+  --ok:#23784A; --okbg:#E2F3EA; --miss:#A65F00; --missbg:#FCEFD9; --r:14px; --chipr:99px; --shadow:0 1px 3px rgba(20,40,45,.08); --labelcase:none; --labelspace:0; }
+.c .card { border-color: transparent; }
+.c.dark { --bg:#121718; --surface:#1B2224; --text:#E4EBEC; --muted:#98A6AA; --border:#2C3639; --accent:#5CC2BB; --onaccent:#0E1415;
+  --ok:#6CC495; --okbg:#18322A; --miss:#E3A857; --missbg:#3A2B13; --shadow:none; }
+
+/* D — Stram */
+.d { --font: "Helvetica Neue", Helvetica, Arial, sans-serif; --hfont: var(--font); --hweight: 800; --hspace: -0.02em;
+  --bg:#FFFFFF; --surface:#FFFFFF; --text:#111111; --muted:#555555; --border:#111111; --accent:#3B3BB3; --onaccent:#fff;
+  --ok:#1F6B3A; --okbg:transparent; --miss:#8A4B00; --missbg:transparent; --r:0; --chipr:0; --shadow:none; --labelcase:uppercase; --labelspace:.12em; }
+.d .ico { border: 1.5px solid currentColor; border-radius: 0; }
+.d .req { border-top-color: #DDD; }
+.d .top { border-bottom-width: 2px; }
+.d.dark { --bg:#0B0B0C; --surface:#0B0B0C; --text:#F2F2F2; --muted:#A3A3A3; --border:#F2F2F2; --accent:#A9A9FF; --onaccent:#0B0B0C; --ok:#7BD39A; --miss:#F0B060; }
+.d.dark .req { border-top-color: #333; }
+</style>
+</head>
+<body>
+<h1 class="page">Designretninger: steg 4 «Analyse»</h1>
+<p class="lead">Fire forslag til hvordan appen kan se ut, med samme skjerm og samme data i alle: Emmas gap-analyse for jobben som junior utvikler. Hver retning vises i lys og mørk modus i mobilbredde (360 px). Velg én, eller si hva du liker fra flere av dem.</p>
+
+<!-- ============ A ============ -->
+<section class="dir">
+<h2>A — Rolig blå</h2>
+<p>Nøktern og saklig, som en offentlig tjeneste. Hvit bakgrunn, dempet blå som eneste aksentfarge, tynne linjer og ingen skygger. Funnet er grønt og mangler er oransje, og begge har både et symbol og en tekst.</p>
+<div class="pair">
+ <div><div class="frame"><div class="app a">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Lys</p></div>
+ <div><div class="frame"><div class="app a dark">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Mørk</p></div>
+</div>
+</section>
+
+<!-- ============ B ============ -->
+<section class="dir">
+<h2>B — Papir og blekk</h2>
+<p>Varm og litt redaksjonell, som et brev på godt papir. Overskriftene har seriffskrift, bakgrunnen er off-white, aksentfargen er mørk grønn og hjørnene er nesten skarpe. Den passer til at sluttproduktet er et søknadsbrev.</p>
+<div class="pair">
+ <div><div class="frame"><div class="app b">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Lys</p></div>
+ <div><div class="frame"><div class="app b dark">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Mørk</p></div>
+</div>
+</section>
+
+<!-- ============ C ============ -->
+<section class="dir">
+<h2>C — Mykt kort</h2>
+<p>Moderne og vennlig uten å bli leken. Bakgrunnen er lysegrå med hvite kort, hjørnene er runde, skyggene er myke og aksentfargen er blågrønn. Retningen ligger litt nærmere «vennlig» enn de andre.</p>
+<div class="pair">
+ <div><div class="frame"><div class="app c">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Lys</p></div>
+ <div><div class="frame"><div class="app c dark">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Mørk</p></div>
+</div>
+</section>
+
+<!-- ============ D ============ -->
+<section class="dir">
+<h2>D — Stram</h2>
+<p>Minimalistisk og grafisk. Nesten bare svart og hvitt, med kraftige overskrifter, skarpe hjørner og én indigo aksentfarge. Retningen er tydelig og seriøs, men kan virke litt streng.</p>
+<div class="pair">
+ <div><div class="frame"><div class="app d">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Lys</p></div>
+ <div><div class="frame"><div class="app d dark">
+  <div class="top"><span class="logo">Søknadshjelpen</span><span class="menu">Min konto</span></div>
+  <div class="steps"><span class="done"></span><span class="done"></span><span class="done"></span><span class="now"></span><span></span><span></span></div>
+  <div class="steplabel">Steg 4 av 6 · Analyse</div>
+  <div class="body">
+   <h3>Slik matcher CV-en annonsen</h3>
+   <p class="sub">Junior utvikler · 2 av 4 krav dekket</p>
+   <div class="card"><h4>Krav i annonsen</h4>
+    <div class="req ok"><span class="ico">✓</span><div><b>Python<span class="tag">Matcher</span></b><small>«Bachelorprosjekt i Python med Flask»</small></div></div>
+    <div class="req ok"><span class="ico">✓</span><div><b>Git<span class="tag">Matcher</span></b><small>«Versjonskontroll med Git i tre gruppeprosjekter»</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>SQL<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+    <div class="req miss"><span class="ico">!</span><div><b>Førerkort klasse B<span class="tag">Mangler</span></b><small>Står ikke i CV-en</small></div></div>
+   </div>
+   <div class="card"><h4>Nøkkelord</h4><b>7 av 10 funnet</b><div class="meter"><i></i></div>
+    <div class="kw"><span>Python</span><span>Git</span><span>Flask</span><span class="m">SQL</span><span class="m">Docker</span></div></div>
+   <div class="actions"><span class="btn">Tilbake</span><span class="btn primary">Lag søknad →</span></div>
+  </div></div></div><p class="cap">Mørk</p></div>
+</div>
+</section>
+</body>
+</html>
