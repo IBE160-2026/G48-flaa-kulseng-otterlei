@@ -12,7 +12,7 @@ sources:
 
 # Søknadshjelpen: hvordan appen oppfører seg
 
-_Laget med `bmad-ux` i grundig modus 2026-11-12. Henrik tok valgene, og Claude Code skrev dokumentet. Etter første utkast gikk tre KI-reviewere gjennom dokumentene (sjekkliste, tilgjengelighet og motstander, se [valideringsrapporten](validation-report.md)). Henrik endret deretter veiviseren fra seks til fire steg. Alle beslutningene står med begrunnelse i [beslutningsloggen](.memlog.md). Punkter merket **[ANTAKELSE]** er Claudes utfylling og er ikke bekreftet. Gruppa må gå gjennom dem i pull requesten._
+_Laget med `bmad-ux` i grundig modus 2026-11-12. Henrik tok valgene, og Claude Code skrev dokumentet. Etter første utkast gikk tre KI-reviewere gjennom dokumentene (sjekkliste, tilgjengelighet og motstander, se [valideringsrapporten](validation-report.md)). Henrik endret deretter veiviseren fra seks til fire steg. Alle beslutningene står med begrunnelse i [beslutningsloggen](.memlog.md). Claudes utfylling var merket «[ANTAKELSE]» i utkastet. Henrik godtok alle punktene 2026-11-12, og merkene er fjernet._
 
 _AD-nummer viser til [arkitekturen](../../architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/ARCHITECTURE-SPINE.md) (flettet i PR #13). PRD-en er rettet etter faglærers tilbakemelding i PR #14, og UX-en er sjekket mot den versjonen._
 
@@ -101,7 +101,7 @@ Her står hvordan komponentene oppfører seg. Utseendet står i `DESIGN.md` unde
 | **Last ned** | Steg 4 | Ved fullt utkast er det et lite skjema med Navn (påkrevd, `autocomplete="name"`), E-post (valgfri, `autocomplete="email"`) og Telefon (valgfri, `autocomplete="tel"`), teksten «Brukes bare i PDF-en og lagres ikke», og knappene «Last ned PDF» og «Last ned Markdown» (FR-23). Den redigerte teksten sendes med i samme `POST`. Ved kun forslag står bare knappene, og forslagene eksporteres som en punktliste. |
 | **Lag nytt brev** | Steg 4, under nedlasting | Et sammenleggbart `<details>` med «Vil du ha et annet utkast?». Det inneholder Tone, Svarform og [Lag nytt brev]. Det nye brevet erstatter det gamle, og endringer i tekstfeltet går tapt. Det står rett over knappen. |
 | **Start ny søknad** | Steg 4, nederst | Går til en bekreftelse: «Analysen og utkastet slettes. CV-en beholdes.» med [Start ny søknad] og [Avbryt]. Deretter kommer steg 1 med «Vil du bruke cv.pdf?». |
-| **Slett-bekreftelse** | Min konto | «Slett mine dokumenter» og «Slett konto» går til en egen bekreftelsesside, «Er du sikker? Dette kan ikke angres», med en rød knapp og [Avbryt] (FR-16, FR-17). [ANTAKELSE: egen side i stedet for et dialogvindu, så det virker uten JavaScript.] |
+| **Slett-bekreftelse** | Min konto | «Slett mine dokumenter» og «Slett konto» går til en egen bekreftelsesside, «Er du sikker? Dette kan ikke angres», med en rød knapp og [Avbryt] (FR-16, FR-17). Bekreftelsen er en egen side i stedet for et dialogvindu, så den virker uten JavaScript. |
 | **Feiloppsummering** | Alle skjemaer | Når et skjema vises på nytt med feil (AD-20), står det en boks øverst i `main` med overskriften «Noe må rettes» og en lenke til hvert felt med feil. Boksen får fokus når siden lastes. KI-feil vises i samme boks. |
 
 ## State Patterns
@@ -110,7 +110,7 @@ Her står hvordan komponentene oppfører seg. Utseendet står i `DESIGN.md` unde
 |---|---|---|
 | **Venter på KI** | «Analyser», «Lag søknad», «Lag nytt brev», «Vis forslag til CV-en» | Knappen får `aria-disabled="true"` (ikke `disabled`, så den beholder fokus) og viser «Jobber …» med en liten indikator. Nye trykk stoppes i JavaScript. Under knappen står «Dette tar vanligvis 10–30 sekunder». Teksten skrives inn i et `aria-live`-område som finnes på siden fra før (NFR-6, AD-12). |
 | **KI svarte ikke eller ga feil** | Steg 2 → 3, steg 3 → 4, CV-forslag | Siden vises på nytt med feiloppsummeringen: «Vi fikk ikke svar fra KI-tjenesten. CV-en og valgene dine er tatt vare på, så du kan prøve igjen.» Fokus går til oppsummeringen. Ingenting er overskrevet (NFR-5, AD-12, AD-20). |
-| **Forbruksgrensen er nådd** | Samme steder | «KI-tjenesten tar ikke imot flere forespørsler akkurat nå. Prøv igjen senere, eller bruk testmodus.» (NFR-9) [ANTAKELSE: ordlyden] |
+| **Forbruksgrensen er nådd** | Samme steder | «KI-tjenesten tar ikke imot flere forespørsler akkurat nå. Prøv igjen senere, eller bruk testmodus.» (NFR-9) |
 | **En KI-forespørsel kjører allerede** | Samme steder (en annen fane) | «Du har allerede en forespørsel som jobber. Vent til den er ferdig.» (AD-12) |
 | **Forklaringen feilet** | Steg 3 | Gap-analysen og nøkkelordene vises. I stedet for forklaringen står «Forklaringen kunne ikke lages» med [Prøv forklaringen igjen] (AD-8, `ki_status="forklaring_feilet"`). |
 | **Egen CV i testmodus** | Steg 3 | Nøkkelordene vises uten forklaring. Der gap-analysen stod, står: «Testmodus: KI-svar finnes bare for eksempelparene. Legg inn en API-nøkkel for å analysere din egen CV.» med lenke til README (FR-11). «Lag søknad» og «Vis forslag til CV-en» er byttet ut med hovedknappen «Prøv eksempel A». |
@@ -304,5 +304,5 @@ Nøkkelskjermene ligger i `mockups/`. De viser mobilbredde i lys og mørk modus.
 ## Åpne punkter
 
 - **Appnavn:** «Søknadshjelpen» er en plassholder. Gruppa bestemmer navnet.
-- **[ANTAKELSE]-punkter** i dette dokumentet og i `DESIGN.md`: farger for fare og info, typografistørrelser, avstander, egen bekreftelsesside for sletting, og ordlyden ved forbruksgrensen.
+- ~~**[ANTAKELSE]-punkter**~~ **Løst 2026-11-12:** Henrik godtok alle Claudes antakelser: farger for fare og info, typografistørrelser, avstander, egen bekreftelsesside for sletting og ordlyden ved forbruksgrensen. Merkene er fjernet. Ole og Haakon kan si fra i PR #15 hvis de er uenige.
 - **Gruppas godkjenning:** når pull requesten er gjennomgått, legges det inn en linje her om at Ole og Haakon har vurdert valgene, med dato.

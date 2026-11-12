@@ -21,9 +21,9 @@ colors:
   match-bg: '#E2F3EA'
   missing: '#9A5800'
   missing-bg: '#FCEFD9'
-  danger: '#B3261E'        # [ANTAKELSE] ikke valgt i økta
-  on-danger: '#FFFFFF'     # [ANTAKELSE]
-  info-bg: '#E3F1F0'       # [ANTAKELSE] testmodus-banner og personvernmerknad
+  danger: '#B3261E'  # Claudes forslag, godtatt av Henrik 2026-11-12
+  on-danger: '#FFFFFF'
+  info-bg: '#E3F1F0'  # testmodus-banner og personvernmerknad
   # Mørk modus (prefers-color-scheme: dark)
   background-dark: '#121718'
   surface-dark: '#1B2224'
@@ -37,13 +37,13 @@ colors:
   match-bg-dark: '#18322A'
   missing-dark: '#E3A857'
   missing-bg-dark: '#3A2B13'
-  danger-dark: '#F2B8B5'   # [ANTAKELSE]
-  on-danger-dark: '#2A0E0C' # [ANTAKELSE]
-  info-bg-dark: '#16302E'  # [ANTAKELSE]
+  danger-dark: '#F2B8B5'
+  on-danger-dark: '#2A0E0C'
+  info-bg-dark: '#16302E'
 typography:
   # Systemskrift. Ingen fontfiler i repoet.
   # Stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif
-  # Størrelsene er [ANTAKELSE] – ikke diskutert i økta.
+  # Størrelsene er Claudes forslag, godtatt av Henrik 2026-11-12.
   heading:
     fontSize: 24px
     fontWeight: '650'
@@ -79,7 +79,7 @@ rounded:
   DEFAULT: 10px
   full: 9999px
 spacing:
-  # 4-basert skala [ANTAKELSE]
+  # 4-basert skala (Claudes forslag, godtatt av Henrik 2026-11-12)
   '1': 4px
   '2': 8px
   '3': 12px
@@ -180,8 +180,8 @@ Det finnes én aksentfarge og to statusfarger. Resten er nøytralt.
 - **Blågrønn aksent (`#1F7A75` lys / `#5CC2BB` mørk)** er appens farge. Den brukes på hovedknapper, fullførte steg i fremdriftslinjen, lenker, fokusring og ✓-merket når utkastet er klart (steg 4). Den brukes ikke på flater eller til dekor.
 - **Matcher (`#23784A` på `#E2F3EA`)** brukes bare på krav og nøkkelord som finnes i CV-en.
 - **Mangler (`#9A5800` på `#FCEFD9`)** brukes bare på krav og nøkkelord som ikke finnes i CV-en. Fargen er **oransje, ikke rød**. Noe som mangler, er en mulighet, ikke en feil, og rødt er reservert for farlige handlinger.
-- **Fare (`#B3261E`)** [ANTAKELSE] brukes bare på «Slett mine dokumenter» og «Slett konto» og på feilmeldinger i skjemaer.
-- **Infoflate (`#E3F1F0`)** [ANTAKELSE] brukes på testmodus-banneret og personvernmerknaden. Teksten på infoflaten har alltid fargen `{colors.text}`, aldri aksentfargen, fordi blågrønn på infoflate gir for lav kontrast (4,4:1).
+- **Fare (`#B3261E`)** brukes bare på «Slett mine dokumenter» og «Slett konto» og på feilmeldinger i skjemaer.
+- **Infoflate (`#E3F1F0`)** brukes på testmodus-banneret og personvernmerknaden. Teksten på infoflaten har alltid fargen `{colors.text}`, aldri aksentfargen, fordi blågrønn på infoflate gir for lav kontrast (4,4:1).
 - **Nøytrale:** `background` og `surface` (kortene) har nesten samme farge. Det er `border` som skiller dem. `field-border` er en mørkere kant som bare brukes på skjemafelt og sekundærknapper. Den må ha 3:1 mot bakgrunnen (WCAG 1.4.11).
 
 **Mørk modus** følger enheten (`prefers-color-scheme`), og det finnes ingen bryter. Hvert token har en `-dark`-variant.
@@ -213,13 +213,13 @@ Kontrasten er regnet ut med WCAG-formelen for relativ luminans i et lite Python-
 
 Appen bruker **systemskrift**: San Francisco på Apple, Segoe UI på Windows og Roboto på Android. Den ser naturlig ut på hver enhet, laster ingen filer og er lett å lese på norsk med æ, ø og å.
 
-Rollene er `heading` (stegtittel, én per side), `heading-sm` (korttitler), `body`, `small` (begrunnelser og hjelpetekst), `label` (feltetiketter), `tag` («Matcher» og «Mangler») og `letter` (brevteksten). Brevet har ekstra linjeavstand, så det er behagelig å lese gjennom og rette i steg 4. Størrelsene er [ANTAKELSE]. Tokenene er oppgitt i px for lesbarhetens skyld, men skrives i `rem` i CSS (16 px = 1 rem), slik at brukerens egen standard skriftstørrelse følges. Tekst i skjemafelt er aldri mindre enn 16 px, slik at iOS ikke zoomer inn.
+Rollene er `heading` (stegtittel, én per side), `heading-sm` (korttitler), `body`, `small` (begrunnelser og hjelpetekst), `label` (feltetiketter), `tag` («Matcher» og «Mangler») og `letter` (brevteksten). Brevet har ekstra linjeavstand, så det er behagelig å lese gjennom og rette i steg 4. Størrelsene er Claudes forslag, og Henrik godtok dem 2026-11-12. Tokenene er oppgitt i px for lesbarhetens skyld, men skrives i `rem` i CSS (16 px = 1 rem), slik at brukerens egen standard skriftstørrelse følges. Tekst i skjemafelt er aldri mindre enn 16 px, slik at iOS ikke zoomer inn.
 
 ## Layout & Spacing
 
 **Én smal midtkolonne på alle skjermer**, maks `{spacing.content-max}` (720 px). Oppsettet er det samme på mobil og PC. PC-en får bare mer luft rundt kolonnen. Det finnes ingen flerkolonne-oppsett. Sidemargen er `{spacing.gutter-mobile}` (16 px) på mobil og `{spacing.gutter-desktop}` (24 px) fra 600 px og oppover. Siden skal virke fra 360 px uten vannrett rulling (NFR-7).
 
-Avstandene følger en 4-basert skala [ANTAKELSE]. Det er 16 px inni kort, 16 px mellom kort og 24–32 px mellom seksjoner. Siden er luftig, men ikke tom.
+Avstandene følger en 4-basert skala. Det er 16 px inni kort, 16 px mellom kort og 24–32 px mellom seksjoner. Siden er luftig, men ikke tom.
 
 ## Elevation & Depth
 
