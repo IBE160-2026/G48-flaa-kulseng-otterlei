@@ -26,7 +26,7 @@ Alt grensesnittet er på norsk (NFR-8). Språkvalget gjelder bare teksten KI skr
 
 ## Information Architecture
 
-Appen har én veiviser og tre sider rundt den. PRD-en (§6) har skjermbildene «Ny analyse» og «Resultat». Her er de erstattet av veiviseren (se [Avvik fra PRD og arkitektur](#avvik-fra-prd-og-arkitektur)).
+Appen har én veiviser og tre sider rundt den. PRD-en (§6) har skjermbildene «Ny analyse» og «Resultat». Her er de erstattet av veiviseren, og PRD-en er oppdatert (se [Avvik fra PRD og arkitektur](#avvik-fra-prd-og-arkitektur)).
 
 | Side | Nås fra | Formål | Krav |
 |---|---|---|---|
@@ -265,31 +265,25 @@ Arkitekturen merker i tillegg hash-testen av promptene som mulig kutt (AD-6). Li
 
 ## Avvik fra PRD og arkitektur
 
-PRD-en ble rettet i PR #14 etter faglærers tilbakemelding. Den samsvarer nå med UX-en på flere punkter:
+**Løst 2026-11-12:** Alle avvikene er ført inn i PRD-en og arkitekturen (issue #20 og #21). Listen står her som historikk.
 
-- tone og svarform velges ved brevet (FR-4)
-- et nytt brev overskriver bare brevet
-- varselet «KI kan gjøre feil» (NFR-4, §6)
-- CV-forbedringene står ved gap-analysen (§6)
-- det finnes en nødplan (§8.1)
+PRD-en ble rettet i PR #14 etter faglærers tilbakemelding, og samsvarte da med UX-en på flere punkter: tone og svarform ved brevet (FR-4), et nytt brev overskriver bare brevet, varselet «KI kan gjøre feil» (NFR-4, §6), CV-forbedringene ved gap-analysen (§6) og nødplanen (§8.1).
 
-Disse punktene gjenstår. Claude anbefalte å ta dem i en egen pull request etter at gruppa har godkjent UX-en. Det er gruppa som bestemmer.
+**PRD** (se PRD §12, «Endringer etter UX-en 2026-11-12»):
 
-**PRD:**
+1. **§6 Skjermbilder:** veiviser i fire steg i stedet for «Ny analyse» og «Resultat».
+2. **FR-12 Registrere konto:** avkrysning for personvern.
+3. **FR-6 og FR-7:** brevet kan redigeres før kopiering og eksport, men endringene lagres ikke.
+4. **FR-16:** «Start ny søknad» sletter analysen, brevet og CV-forslagene, mens CV-en beholdes.
 
-1. **§6 Skjermbilder:** «Ny analyse» er delt i steg 1 (CV) og steg 2 (Annonse og valg). «Resultat» er delt i steg 3 (Analyse, med valg av tone og svarform og CV-forslag) og steg 4 (Søknad, med brevet, kopiering og eksport).
-2. **FR-12 Registrere konto:** en ny konsekvens er avkrysningen for personvern.
-3. **FR-6 og FR-7:** en ny konsekvens er at brevet kan redigeres før kopiering og eksport, men at endringene ikke lagres.
-4. **«Start ny søknad»:** sletter analysen, brevet og CV-forslagene, mens CV-en beholdes. Det er en ny handling i forhold til §3 og FR-16.
+**Arkitektur** (se AD-22, AD-5, AD-13 og §3):
 
-**Arkitektur:**
-
-1. **URL-er (§3 Konvensjoner):** veiviseren bruker adressene som finnes. Steg 1 er `/cv/`, steg 2 er `/analyse/` (skjemaet), steg 3 er `/resultat/` og steg 4 er `/resultat/brev/`. «Start ny søknad» trenger et nytt `POST`-endepunkt som sletter `Analyse` og sender brukeren til `/cv/`.
-2. **`/resultat/cv-forbedring/`** er et `POST`-endepunkt som sender brukeren tilbake til `/resultat/`.
-3. **Steg 2 skal kunne fylles ut på nytt:** ved tilbake fra steg 3 må `/analyse/` vise annonsen, språket og nøkkelordene fra den lagrede `Analyse`.
-4. **Ved `lagre_cv_tekst` (AD-8)** vises et varsel i steg 1 før en analyse slettes.
-5. **Eksport (`/resultat/brev/eksport/`)** tar imot den redigerte teksten fra skjemaet og bruker den i stedet for `Brev`, uten å lagre den.
-6. **Personvernvarselet i AD-5** gjelder i KI-modus. I testmodus står en egen tekst.
+1. **URL-er:** steg 1 er `/cv/`, steg 2 er `/analyse/`, steg 3 er `/resultat/` og steg 4 er `/resultat/brev/`. «Start ny søknad» er `/ny-soknad/`.
+2. **`/resultat/cv-forbedring/`** sender brukeren tilbake til `/resultat/`.
+3. **Steg 2** fylles ut på nytt fra den lagrede `Analyse`.
+4. **Varsel i steg 1** før `lagre_cv_tekst` sletter en analyse (AD-8).
+5. **Eksporten** bruker den redigerte teksten uten å lagre den.
+6. **Personvernvarselet** har en egen tekst i testmodus (AD-5).
 
 ## Visuelle referanser
 
