@@ -5,7 +5,7 @@
 | **Dato** | 2026-11-12 |
 | **Hvem** | Ole A. Flaa |
 | **Verktøy** | Claude Code (Claude Opus 5.5) |
-| **Commits / PR** | Commiten med dette innlegget, pull request på branchen `docs/arbeidsfordeling` |
+| **Commits / PR** | `93de70f`, `b21c88f` og commiten med denne rettingen, pull request på branchen `docs/arbeidsfordeling` |
 
 ## Mål
 
