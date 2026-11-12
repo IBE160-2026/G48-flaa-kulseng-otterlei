@@ -1,0 +1,51 @@
+{
+  "par": "C",
+  "sprak": "en",
+  "fakta_i_cv": [
+    "Studerer bachelor i logistikk ved Høgskolen i Fjordvik (2024–2027, pågår)",
+    "Emner: logistikkstyring, innkjøp, operasjonsanalyse, bedriftsøkonomi",
+    "Bacheloroppgave om plassering av varer på lageret hos en lokal grossist",
+    "Studiespesialisering fra Kvamsli videregående skole (2021–2024)",
+    "Lagermedarbeider på deltid hos Nordlys Distribusjon AS siden 2023",
+    "Plukk og pakk på lageret",
+    "Sesongarbeider hos Romsdal Hagesenter sommeren 2022, hjalp kunder og fylte på varer",
+    "Kan Excel: pivottabeller og diagrammer",
+    "Kan Word og PowerPoint",
+    "Kan lagerstyring og varetelling",
+    "Har truckførerbevis (T1 og T4)",
+    "Norsk morsmål, flytende engelsk og grunnleggende tysk",
+    "Trener for et guttelag i fotball",
+    "Interessert i friluftsliv"
+  ],
+  "krav_matcher": [
+    { "krav": "Bachelor i logistikk eller økonomi", "alias": ["bachelor's degree", "bachelor"] },
+    { "krav": "Flytende engelsk", "alias": ["fluent English", "English"] }
+  ],
+  "krav_mangler": [
+    { "krav": "SAP", "alias": ["ERP", "ERP system", "ERP-system"] }
+  ],
+  "nokkelord": {
+    "i_annonsen": ["bachelor", "engelsk", "SAP"],
+    "funnet": ["bachelor", "engelsk"],
+    "mangler": ["SAP"],
+    "andel": 0.667
+  },
+  "floskler": [
+    "team player",
+    "I am passionate about",
+    "hard-working and motivated",
+    "think outside the box",
+    "I thrive in a fast-paced environment"
+  ],
+  "sprak_og_tone": {
+    "sprak": "en",
+    "tone": "uformell",
+    "kjennetegn": [
+      "Skrevet på engelsk, selv om CV-en er på norsk",
+      "Uformell, men høflig: personlig og direkte, uten slang",
+      "Nevner graduate-programmet hos Nordhavn Shipping Group",
+      "Kobler bacheloroppgaven og lagerjobben til arbeidsoppgavene i annonsen",
+      "Påstår ikke at søkeren har brukt SAP eller et annet ERP-system"
+    ]
+  }
+}
