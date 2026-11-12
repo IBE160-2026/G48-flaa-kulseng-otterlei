@@ -9,7 +9,7 @@
 - [x] 2026-11-12 [arkitektur](999-2026-11-12-13-16-04-arkitektur.md) — svare Ole i PR #13 med hva som er rettet (løst 2026-11-12; Haakons bekreftelse følges opp i #18 og #7)
 - [ ] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — Ole og Haakon går gjennom UX i PR #15 (valg, [ANTAKELSE]-punkter, kuttrekkefølge); sett deretter status final og poler med bmad-review
 - [ ] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — gruppa bestemmer navnet på appen («Søknadshjelpen» er plassholder)
-- [ ] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — oppdatere PRD med avvikene i EXPERIENCE.md (§6 veiviser, FR-12 avkrysning, FR-4, FR-6/7 varsel og redigering, FR-18, kuttrekkefølge)
+- [ ] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — oppdatere PRD med avvikene i EXPERIENCE.md (gjenstår etter PR #14: §6 veiviser, FR-12 avkrysning, FR-6/7 redigering, «Start ny søknad»)
 - [ ] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — oppdatere arkitekturen: URL-er for veiviseren, endepunkt for «Start ny søknad», eksport av redigert brev, personvernvarsel i testmodus
 - [x] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — PR #13 (arkitektur) bør flettes før PR #15; README, KI-loggtabellen og .logs/henrik-kulseng/issues.md kan gi små konflikter (løst 2026-11-12, PR #13 flettet)
 - [x] 2026-11-12 [ux](998-2026-11-12-15-09-51-ux.md) — arbeidsfordelingen (PR #6) sier at Ole har arkitekturen, men Henrik laget den; avklar i gruppa (løst 2026-11-12: Henrik har arkitektur, UX og frontend, Ole tar KI-laget; Haakon bekrefter i #7)
