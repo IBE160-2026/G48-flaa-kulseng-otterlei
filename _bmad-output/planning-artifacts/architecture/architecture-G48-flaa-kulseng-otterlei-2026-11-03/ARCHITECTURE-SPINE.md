@@ -4,11 +4,11 @@ type: architecture-spine
 purpose: build-substrate
 altitude: feature
 paradigm: 'Lagdelt Django-monolitt (views → tjenester → porter/rene moduler)'
-scope: 'Hele v1 (P1–P8, FR-1 – FR-23, NFR-1 – NFR-10)'
+scope: 'Hele v1 (P1–P8, FR-1 – FR-23, NFR-1 – NFR-11)'
 status: final
 created: '2026-11-03'
 updated: '2026-11-12'
-binds: [FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, FR-7, FR-8, FR-9, FR-10, FR-11, FR-12, FR-13, FR-14, FR-15, FR-16, FR-17, FR-18, FR-19, FR-20, FR-21, FR-22, FR-23, NFR-1, NFR-2, NFR-3, NFR-4, NFR-5, NFR-6, NFR-7, NFR-8, NFR-9, NFR-10]
+binds: [FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, FR-7, FR-8, FR-9, FR-10, FR-11, FR-12, FR-13, FR-14, FR-15, FR-16, FR-17, FR-18, FR-19, FR-20, FR-21, FR-22, FR-23, NFR-1, NFR-2, NFR-3, NFR-4, NFR-5, NFR-6, NFR-7, NFR-8, NFR-9, NFR-10, NFR-11]
 sources:
   - ../../prd/prd.md
   - ../../prd/addendum.md
@@ -175,13 +175,14 @@ flowchart LR
 
 ### AD-6 — Testmodus: eksempelpar, lagrede svar og evaluering
 
-- **Gjelder:** FR-9 – FR-11, NFR-2, faglærers forslag 4.1
+- **Gjelder:** FR-9 – FR-11, NFR-2, NFR-11, faglærers forslag 4.1
 - **Hindrer:** at «Prøv med eksempel A» bommer på sine egne lagrede svar, at skriptet og klienten bruker forskjellige filnavn, og at promptendringer blir ukontrollerte
 - **Regel:**
   - **`ki/eksempelpar.py`** er det eneste stedet som vet hvordan eksempelparene ser ut. Alle andre bruker funksjonene her:
     - `hent_eksempelpar(par)` gir CV-fil, annonse og `Fasit`.
     - `normaliser(tekst)` gjør Unicode NFC, `\r\n` og `\r` til `\n`, fjerner mellomrom på slutten av linjene, slår sammen tre eller flere linjeskift til to, og fjerner mellomrom først og sist.
     - `eksempel_hash(cv_tekst, annonse)` er `sha256(normaliser(cv_tekst) + "\n\x1e\n" + normaliser(annonse))`.
+    - `finn_eksempelpar(cv_tekst) -> par | None` sammenligner `normaliser(cv_tekst)` med referanseteksten til hvert par, og gir paret som er likt, eller `None`. Den brukes i steg 2, der annonsen ikke finnes ennå (AD-22).
     - `svarfil(par, operasjon, **innstillinger)` gir filnavnet i `testdata/eksempler/<par>/svar/`.
   - **Referanseteksten** for et par er alltid `les_cv()` (AD-13) på parets CV-fil og `annonse.txt`. Hashene regnes ut når appen starter, og lagres ikke. «Prøv med eksempel» og `TestmodusKlient` bruker de samme funksjonene. En test sjekker at teksten skjemaet fyller inn, gir treff når den sendes tilbake med `\r\n`.
   - Treffer hashen ikke et par, kaster `TestmodusKlient` unntaket `IkkeITestmodus`.
@@ -370,6 +371,7 @@ erDiagram
     | `CV_FIL_MAKS_BYTE` | 5 MB |
     | `CV_TEKST_MAKS` | 30 000 |
     | `ONSKEDE_NOKKELORD_MAKS` | 20 |
+    | `BREV_MAKS` | 30 000 (redigert brevtekst ved eksport, AD-22) |
 
   - **Tilgjengelighet (NFR-7):**
     - Skjemafelt vises med `<label>`.
@@ -468,11 +470,11 @@ erDiagram
 - **Regel:**
   - Stegene bruker URL-ene i §3: steg 1 er `/cv/`, steg 2 er `/analyse/`, steg 3 er `/resultat/` og steg 4 er `/resultat/brev/`. Veiviseren har ingen tilstand i økten.
   - Hvilket steg brukeren kan nå, leses av radene i databasen (AD-8): ingen CV gir steg 1, CV gir steg 2, `Analyse` gir steg 3 og `Brev` gir steg 4. `analyse.tjenester.siste_steg(bruker)` er det eneste stedet som regner det ut. Åpnes et steg som ikke kan nås ennå, sendes brukeren til det siste steget som kan nås.
-  - `/analyse/` fylles ut med annonsen, språket og de ønskede nøkkelordene fra den lagrede `Analyse` når den finnes. Finnes ingen `Analyse`, og CV-teksten gir treff på et eksempelpar (`eksempel_hash` i AD-6), fylles annonsen til paret inn.
+  - `/analyse/` fylles ut med annonsen, språket og de ønskede nøkkelordene fra den lagrede `Analyse` når den finnes. Finnes ingen `Analyse`, og `ki.eksempelpar.finn_eksempelpar(cv_tekst)` finner et par, fylles annonsen til paret inn. `eksempel_hash` kan ikke brukes her, fordi den trenger annonsen.
   - Steg 1 viser varselet «Dette erstatter analysen og utkastet du har nå.» over «Bruk denne og gå videre» når en `Analyse` finnes, fordi `lagre_cv_tekst` sletter den hvis teksten er endret (AD-8). `dokumenter` ser det gjennom den omvendte relasjonen `cv.analyse` og importerer ikke `analyse` (AD-2). Steg 2 viser det samme varselet over «Analyser».
   - `/resultat/cv-forbedring/` (`POST`) lager CV-forbedringen og sender brukeren tilbake til `/resultat/`.
   - **«Start ny søknad»:** `/ny-soknad/` viser en bekreftelse (`GET`) og kaller `analyse.tjenester.slett_analyse` (`POST`). Kjeden sletter `Brev` og `CVForbedring`, CV-en beholdes, og brukeren sendes til `/cv/`.
-  - Brevet i steg 4 er et redigerbart tekstfelt. Kopieringen og eksporten bruker teksten i feltet (AD-13). Den redigerte teksten lagres aldri, verken i `Brev`, i økten eller i logger (AD-10). Ved fullt utkast deles teksten i avsnitt på tomme linjer, og ved kun forslag i punkter på linjeskift.
+  - Brevet i steg 4 er et redigerbart tekstfelt. Kopieringen og eksporten bruker teksten i feltet (AD-13). Den redigerte teksten lagres aldri, verken i `Brev`, i økten eller i logger (AD-10). Ved fullt utkast deles teksten i avsnitt på tomme linjer. Ved kun forslag deles den i punkter på linjeskift, og «– » foran hvert punkt fjernes først, så PDF-en ikke får doble kulepunkter. Teksten kan være høyst `BREV_MAKS` tegn (AD-15).
 - **Begrunnelse:** UX-en valgte en veiviser i fire steg (EXPERIENCE.md, «Avvik fra PRD og arkitektur»). Når steget leses av databasen, trengs ingen tilstand i økten, og annonsen havner aldri der (AD-10). At den redigerte teksten ikke lagres, holder fast på at bare siste versjon av brevet finnes (AD-8).
 - **Valgt bort:** En egen tilstand for veiviseren i økten (bryter med AD-10), egne URL-er per steg utenom de som fantes, og å lagre den redigerte brevteksten (gir to versjoner av brevet).
 
@@ -576,6 +578,7 @@ flowchart LR
 | NFR-8 Grensesnittspråk | `kjerne/meldinger.py`, `settings.py` | AD-14, AD-15 |
 | NFR-9 Kostnad | Claude Console, `ki/claude_klient.py` | AD-4 |
 | NFR-10 Sporbarhet | docstrings, pull requests | §3 |
+| NFR-11 Evalueringskjøring | `ki/management/commands/lag_lagrede_svar.py`, `docs/evaluering/` | AD-6 |
 
 ## 7. Utsatt
 
@@ -596,3 +599,4 @@ flowchart LR
 3. **Eksempeldata og PDF-test:** Eksempelparene A–C (og D) med fasit må lages før P2, og `pdfplumber` må testes mot CV C (AD-13). Haakon lager eksempelparene med fasit innen 18. november (PRD §10).
 4. ~~**[Forslag]-punktene**~~ **Løst 2026-11-12:** Ole og Henrik ble enige om SQLite (AD-19), resultat i tre deler (AD-8), grensen på 30 000 tegn (AD-15), eksempelpar D (AD-6) og pip i stedet for uv (AD-18) i PR #13, og Haakon er enig. Henrik godtok resten: eierskap (AD-2), dekrypteringsfeil (AD-9), tilgangskontroll (AD-10), PBKDF2 (AD-11), låsen (AD-12), PDF-bibliotekene (AD-13), maks 20 ønskede nøkkelord (AD-15), `TextChoices` (AD-16), pytest (AD-17), feilkontrakten (AD-20) og samarbeidsreglene (AD-21). Merkene er fjernet, og dokumentet er satt til `final`. Ole og Haakon kan si fra i pull requesten hvis de er uenige.
 5. ~~**Avvik fra UX-en**~~ **Løst 2026-11-12:** De seks punktene i EXPERIENCE.md («Avvik fra PRD og arkitektur») er lagt inn i AD-5, AD-13, AD-22 og §3.
+6. ~~**Gjennomgang i PR #25**~~ **Løst 2026-11-12:** Haakon bekreftet punktene fra PR #13. Ole og Haakon godtok Claudes tillegg i AD-22 om `siste_steg()` og `cv.analyse`, og ba om tre rettelser, som er gjort: `finn_eksempelpar` i stedet for `eksempel_hash` i steg 2 (Oles forslag), «– » fjernes før punktene deles ved eksport, og NFR-11 i `scope`, `binds` og §6. Haakons forslag om en grense for den redigerte brevteksten er lagt inn som `BREV_MAKS` (AD-15).
