@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>UX-validering: G48 DESIGN.md og EXPERIENCE.md</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --surface: #ffffff;
+    --border: #e7e5e4;
+    --text: #1c1917;
+    --muted: #78716c;
+
+    --verdict-strong: #16a34a;
+    --verdict-adequate: #65a30d;
+    --verdict-thin: #d97706;
+    --verdict-broken: #dc2626;
+
+    --sev-low: #64748b;
+    --sev-medium: #ca8a04;
+    --sev-high: #ea580c;
+    --sev-critical: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  header.report-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .title h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+  .title .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  .synthesis {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--muted);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    font-size: 15.5px;
+  }
+  .synthesis p { margin: 0 0 10px; }
+  .synthesis p:last-child { margin-bottom: 0; }
+
+  .dimension-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .dim-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .dim-card .dim-name { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .dim-card .dim-verdict { font-size: 14px; font-weight: 600; }
+
+  section.dimension, section.reviewer-section { margin-bottom: 14px; }
+  section.dimension details, section.reviewer-section details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  section summary {
+    padding: 14px 20px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  section summary::-webkit-details-marker { display: none; }
+  section summary::before {
+    content: "▸";
+    display: inline-block;
+    color: var(--muted);
+    transition: transform 0.15s ease;
+  }
+  section details[open] summary::before { transform: rotate(90deg); }
+  section summary h2 {
+    display: inline;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    flex: 1;
+  }
+  .verdict-pill {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: white;
+  }
+  .verdict-strong { background: var(--verdict-strong); }
+  .verdict-adequate { background: var(--verdict-adequate); }
+  .verdict-thin { background: var(--verdict-thin); }
+  .verdict-broken { background: var(--verdict-broken); }
+
+  .dim-body { padding: 4px 20px 18px; }
+  .dim-judgment { color: var(--text); font-size: 14.5px; }
+  .dim-judgment p { margin: 0 0 10px; }
+
+  .findings-list { padding: 0 20px 4px; }
+  article.finding {
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+  }
+  article.finding:first-child { border-top: none; }
+  article.finding header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .badge {
+    font-size: 10.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+  .badge-sev-low { background: rgba(100, 116, 139, 0.12); color: var(--sev-low); }
+  .badge-sev-medium { background: rgba(202, 138, 4, 0.14); color: var(--sev-medium); }
+  .badge-sev-high { background: rgba(234, 88, 12, 0.14); color: var(--sev-high); }
+  .badge-sev-critical { background: rgba(220, 38, 38, 0.14); color: var(--sev-critical); }
+  .finding-title { margin: 0; font-size: 15px; font-weight: 500; flex: 1; min-width: 200px; }
+  .finding-location { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--muted); }
+  .finding-note, .finding-fix { margin-top: 6px; font-size: 14px; }
+  .finding-fix strong { color: var(--muted); font-weight: 500; }
+
+  .reviewer-source {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  .mechanical {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .mechanical h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .mechanical ul { margin: 0; padding-left: 20px; }
+  .mechanical li { margin-bottom: 4px; color: var(--text); }
+
+  footer.report-footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  footer .meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; background: rgba(120,113,108,0.10); padding: 1px 4px; border-radius: 3px; }
+  .reviewer-section .dim-judgment ul { margin: 0 0 10px; padding-left: 20px; }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="report-header">
+      <div class="title">
+        <h1>G48 Søknadshjelpen — valideringsrapport for UX</h1>
+        <div class="subtitle">_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/ (DESIGN.md + EXPERIENCE.md)</div>
+      </div>
+    </header>
+
+    <div class="synthesis">
+      <p><strong>Tilstrekkelig. Kan brukes etter en runde med rettinger.</strong> Paret er ryddig, kildebundet og ærlig om hva som er antakelser. Alle fire brukerreisene har et klimaks, alle FR-er unntatt to rene backend-krav har et sted i grensesnittet, og kontrasttabellen stemmer når den regnes ut på nytt. Svakhetene ligger i skjøtene: fremdriftslinjen er beskrevet ulikt i de to filene, «Start ny søknad» kolliderer med slettevarselet og fremdriftslinjen, tre konflikter med arkitekturen mangler i «Avvik» (tone og svarform mellom steg 3 og 5, ønskede nøkkelord i testmodus, og når en endret annonse sletter analysen), mange komponenter i EXPERIENCE.md mangler et visuelt motstykke i DESIGN.md, og mockupene av nøkkelskjermene er ikke lenket.</p>
+      <p>Tilgjengelighets- og motstandergjennomgangen flytter bildet. Motstanderen løfter «Start ny søknad» til kritisk: veiviseren utleder fremdriften av hvilke rader som finnes, og den modellen passer ikke med AD-8 og AD-10. Det rammer særlig tilbakevendende brukere (UJ-2). Seks steg gir åtte til ni handlinger der PRD-en ga omtrent fire, og «Ser bra ut» lagrer ingenting. <strong>Hovedrisikoen er derfor veiviserens tilstandsmodell og antall steg</strong>, ikke enkeltkomponenter. Tilgjengelighetsgjennomgangen finner at fargene holder, men at <strong>skjermleseroppførselen ved sidelast</strong> ikke er beskrevet: med vanlige POST-er (AD-12, AD-20) blir ventestatus og feil i <code>aria-live</code> vanligvis ikke lest opp, og fokus til <code>h1</code> skjuler at noe gikk galt. Etter sammenslåing av dubletter er det 1 kritisk, 13 høye, 28 middels og 30 lave funn.</p>
+    </div>
+
+    <div class="dimension-summary">
+      <div class="dim-card">
+        <div class="dim-name">1. Flytdekning</div>
+        <div class="dim-verdict" style="color: var(--verdict-adequate)">tilstrekkelig</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">2. Tokens</div>
+        <div class="dim-verdict" style="color: var(--verdict-adequate)">tilstrekkelig</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">3. Komponentdekning</div>
+        <div class="dim-verdict" style="color: var(--verdict-thin)">tynn</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">4. Tilstander</div>
+        <div class="dim-verdict" style="color: var(--verdict-adequate)">tilstrekkelig</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">5. Visuelle referanser</div>
+        <div class="dim-verdict" style="color: var(--verdict-thin)">tynn</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">6. Oppblåsing og overspesifisering</div>
+        <div class="dim-verdict" style="color: var(--verdict-strong)">sterk</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">7. Arvedisiplin</div>
+        <div class="dim-verdict" style="color: var(--verdict-adequate)">tilstrekkelig</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-name">8. Form</div>
+        <div class="dim-verdict" style="color: var(--verdict-adequate)">tilstrekkelig</div>
+      </div>
+    </div>
+
+    <section class="dimension">
+      <details>
+        <summary>
+          <h2>1. Flytdekning</h2>
+          <span class="verdict-pill verdict-adequate">tilstrekkelig</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>UJ-1 – UJ-4 fra PRD §2.3 finnes alle under Key Flows, med samme navn og nummer, nummererte steg og et markert klimaks. UJ-1 har en feilvei.</p>
+            <p>FR-1 – FR-13 og FR-16 – FR-23 har et sted i IA-tabellen eller i Component Patterns. FR-8 dekkes indirekte. FR-14 og FR-15 har ikke noe sted i grensesnittet. NFR-1 og NFR-3 – NFR-9 er dekket. NFR-2 og NFR-10 er ikke relevante for UX.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">«Start ny søknad» stemmer ikke med «Endring som sletter analysen»</h3>
+              <span class="finding-location">EXPERIENCE.md: Component Patterns «Start ny søknad», State Patterns «Endring som sletter analysen», UJ-2 steg 1–2</span>
+            </header>
+            <div class="finding-note">«Start ny søknad» beholder den gamle analysen (AD-8). Når Jonas limer inn en ny annonse, skal han etter State Patterns få slettevarselet, men flyten viser det ikke. Fremdriftslinjen viser steg 4–6 som fullførte lenker til den gamle analysen mens han er i steg 1–3.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bestem hva «Start ny søknad» gjør med den gamle analysen, for eksempel ett varsel ved «Start ny søknad» og låste steg 4–6 etterpå. Oppdater UJ-2 og fremdriftsregelen.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">UJ-2, UJ-3 og UJ-4 har ingen feilvei</h3>
+              <span class="finding-location">EXPERIENCE.md: Key Flows</span>
+            </header>
+            <div class="finding-note">Bare UJ-1 har en feilvei. Det er enklest å skrive for UJ-2 (KI-feil ved «Lag søknad» eller «Vis forslag til CV-en») og UJ-4 («Avbryt» på bekreftelsessiden).</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til én «Avvik:»-linje per reise.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Uklart hvilken hovedknapp steg 4 har med egen CV i testmodus</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns «Egen CV i testmodus», UJ-3 steg 5</span>
+            </header>
+            <div class="finding-note">Tilstanden gjelder «steg 4, 5 og 6», men steg 5 og 6 kan ikke fullføres. Det står ikke om «Lag søknad» vises, er deaktivert eller byttes ut med «Prøv eksempel A».</div>
+            <div class="finding-fix"><strong>Retting:</strong> Si hva hovedknappen i steg 4 er når <code>ki_status="ikke_i_testmodus"</code>, og fjern steg 5 og 6 fra «Hvor» hvis de ikke kan nås.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">UJ-3 og UJ-4 mangler scenelinje</h3>
+              <span class="finding-location">EXPERIENCE.md: Key Flows UJ-3, UJ-4</span>
+            </header>
+            <div class="finding-note">UJ-1 og UJ-2 har en scenelinje (hvem, når, hvilken enhet). UJ-3 fortsetter også etter klimakset.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til en kursiv scenelinje, og flytt FR-11-delen til en egen «Deretter:»- eller «Avvik:»-linje.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">FR-14 og FR-15 har ikke noe sted i grensesnittet</h3>
+              <span class="finding-location">EXPERIENCE.md: IA-tabellen</span>
+            </header>
+            <div class="finding-note">Det står ikke at det er med vilje. FR-8 mangler også i IA-tabellen.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Skriv én setning om at FR-14 og FR-15 er usynlige i grensesnittet (AD-10), og legg FR-8 til i Krav-kolonnen for steg 5.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">UJ-1 steg 5 beskriver nøkkelordbrikkene feil</h3>
+              <span class="finding-location">EXPERIENCE.md: UJ-1 steg 5</span>
+            </header>
+            <div class="finding-note">Emma «åpner ‹Hva betyr dette?›» og ser at «SQL» mangler, men brikkene står utenfor <code>&lt;details&gt;</code> og synes allerede.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Skriv om setningen, så det er forklaringen hun åpner.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details>
+        <summary>
+          <h2>2. Tokens</h2>
+          <span class="verdict-pill verdict-adequate">tilstrekkelig</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>Alle <code>{path.to.token}</code>-henvisninger i frontmatter og prosa løser seg. Alle 17 fargetokener har en <code>-dark</code>-variant. Kontrasttabellen er regnet ut på nytt med WCAG-formelen, og tallene stemmer avrundet til én desimal.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Komponenter i prosaen mangler tokens i <code>components</code></h3>
+              <span class="finding-location">DESIGN.md: frontmatter <code>components</code></span>
+            </header>
+            <div class="finding-note">Topplinje, Nøkkelordmåler (8 px mot 4 px på <code>progress-bar</code>), Brev, merkene «Matcher»/«Mangler», knapp som viser «Jobber …», varsel/feilboks og radioknapp/avkrysning har ikke tokens.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til <code>top-bar</code>, <code>keyword-meter</code>, <code>letter-card</code>, <code>tag-match</code>/<code>tag-missing</code>, <code>button-busy</code>, <code>alert</code> og <code>checkbox-radio</code> med tokenhenvisninger.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">«Les mer» på infoflaten bryter DESIGN.md sin egen regel</h3>
+              <span class="finding-location">DESIGN.md: Colors «Infoflate»; EXPERIENCE.md: Personvernpåminnelse</span>
+            </header>
+            <div class="finding-note">Teksten på infoflaten skal alltid ha <code>{colors.text}</code>, men påminnelsen har en lenke i aksentfarge. Det gir 4,42:1.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Skriv en regel om at lenker på infoflaten har tekstfarge og understrek.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title"><code>typography</code> har ingen <code>fontFamily</code></h3>
+              <span class="finding-location">DESIGN.md: frontmatter <code>typography</code></span>
+            </header>
+            <div class="finding-note">Skriftstakken står bare i en YAML-kommentar og forsvinner når tokenene hentes ut maskinelt.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til <code>fontFamily</code> på rollene, eller et felles <code>body.fontFamily</code>.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title"><code>button-danger</code> mangler <code>minHeight: 44px</code></h3>
+              <span class="finding-location">DESIGN.md: frontmatter <code>components</code></span>
+            </header>
+            <div class="finding-note">Alle trykkflater skal være minst 44 px (EXPERIENCE.md Interaction Primitives).</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg den til.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Kontrasttabellen mangler to par</h3>
+              <span class="finding-location">DESIGN.md: Colors, kontrasttabellen</span>
+            </header>
+            <div class="finding-note">Aksent som lenketekst på kort (4,81 / 7,60, består) og det aktive steget i fremdriftslinjen mangler. Aktivt steg (aksent 50 %) har 2,09:1 mot bakgrunnen og 1,60:1 mot kommende steg i lys modus.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ta med begge parene, og vis det aktive steget med teksten «Steg N av 6» eller med full aksent og en annen form.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details open>
+        <summary>
+          <h2>3. Komponentdekning</h2>
+          <span class="verdict-pill verdict-thin">tynn</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>DESIGN.md Components har 14 komponenter, EXPERIENCE.md Component Patterns har 19. Bare Fremdriftslinje og Ferdig-merke har samme navn i begge filene.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Fremdriftslinjen beskrives ulikt i de to filene</h3>
+              <span class="finding-location">DESIGN.md: Components «Fremdriftslinje»; EXPERIENCE.md: Component Patterns, Accessibility Floor</span>
+            </header>
+            <div class="finding-note">DESIGN.md: seks streker på 4 px med «Steg 4 av 6 · Analyse» under. EXPERIENCE.md: fullførte steg er lenker i en <code>&lt;ol&gt;</code> med <code>aria-current="step"</code> og trykkflater på minst 44 × 44 px. En strek på 4 px uten tekst kan ikke være en slik lenke.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Beskriv i DESIGN.md hvordan klikkbare steg ser ut (for eksempel en <code>&lt;ol&gt;</code> med korte stegnavn over strekene, der hele cellen er trykkflaten), og lag en mockup av det.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Komponentnavnene er ulike i de to filene</h3>
+              <span class="finding-location">DESIGN.md: Components; EXPERIENCE.md: Component Patterns</span>
+            </header>
+            <div class="finding-note">Kravrad ↔ Kravliste, Brev ↔ Brevvisning, Hovedknapp/Sekundærknapp ↔ Tilbake / Neste. Frontmatter-nøklene er engelske og teksten norsk. Bare Fremdriftslinje og Ferdig-merke har samme navn begge steder.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bruk samme navn i begge filene, med frontmatter-nøkkelen i parentes, for eksempel «Kravrad (<code>requirement-match</code> / <code>requirement-missing</code>)».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Mange komponenter i EXPERIENCE.md mangler visuelt motstykke</h3>
+              <span class="finding-location">DESIGN.md: Components</span>
+            </header>
+            <div class="finding-note">CV-opplasting, Bekreft lagret CV, Eksempelknapper, Annonsefelt med teller, Valg, Personvernpåminnelse, Lag nytt brev, Kopier, PDF-avsender, Last ned Markdown, CV-forbedringer, Start ny søknad og Slett-bekreftelse. Det samme gjelder venteknapp, KI-feilmelding, feiloppsummering og bekreftelsesmeldinger.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til korte linjer i DESIGN.md Components. Mange kan vise til en grunnkomponent, for eksempel «Eksempelknapper = Sekundærknapp i rad».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Steg 6 har fem handlinger, men ingen er utpekt som hovedknapp</h3>
+              <span class="finding-location">DESIGN.md: Components, Do's and Don'ts; EXPERIENCE.md: Tilbake / Neste</span>
+            </header>
+            <div class="finding-note">Regelen er én hovedknapp per steg. Det samme gjelder steg 1 med lagret CV («Bruk denne», «Last opp ny» og «Neste»).</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bestem hovedknappen (sannsynligvis «Kopier teksten») og hvordan de andre ser ut, også for steg 1.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Fareknappen er beskrevet på to måter</h3>
+              <span class="finding-location">DESIGN.md: Colors og Components</span>
+            </header>
+            <div class="finding-note">Colors sier at fare brukes på «Slett mine dokumenter» og «Slett konto», mens Components sier at den bare brukes i bekreftelsen.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Velg én regel, for eksempel sekundærknapp på Min konto og fareknapp på bekreftelsessiden.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Fem komponenter står bare i DESIGN.md</h3>
+              <span class="finding-location">EXPERIENCE.md: Component Patterns</span>
+            </header>
+            <div class="finding-note">Topplinje, Testmodus-banner, Kort, Skjemafelt og Fokusring har oppførselen spredt i IA, Testmodus og Accessibility Floor.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til korte rader i Component Patterns med henvisning til der oppførselen står.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details>
+        <summary>
+          <h2>4. Tilstander</h2>
+          <span class="verdict-pill verdict-adequate">tilstrekkelig</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>Venting, KI-feil, forbruksgrense, samtidige forespørsler, feilet forklaring, egen CV i testmodus, filfeil, PDF uten tekst, feil annonselengde, låste steg, innloggingsfeil, utført sletting og «Kopiert!» er dekket. «Ingen tilgang» er ikke relevant fordi URL-ene ikke har ID-er (AD-10), men det står ikke i dokumentet.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Ikke innlogget eller utløpt økt er ikke beskrevet</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns; FR-13</span>
+            </header>
+            <div class="finding-note">FR-13 krever innlogging for sider med brukerdata. Det står ikke hva som skjer, eller hvor brukeren havner etter utlogging.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til en rad: brukeren sendes til Logg inn med en kort melding og kommer tilbake til steget etterpå. Etter utlogging havner hun på Logg inn.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Siden for dekrypteringsfeil mangler</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns; AD-9</span>
+            </header>
+            <div class="finding-note">AD-9 [Forslag] sender brukeren til en side som forklarer at dokumentene ikke kan leses, og tilbyr sletting. UX har ikke den siden.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg den til i State Patterns, med tekst og en knapp til Slett-bekreftelse.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Valideringstilstander mangler for kjente grenser</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns; AD-15</span>
+            </header>
+            <div class="finding-note">CV-tekst over 30 000 tegn (<code>CV_TEKST_MAKS</code>), mer enn 20 ønskede nøkkelord (<code>ONSKEDE_NOKKELORD_MAKS</code>) og personvernavkrysning som ikke er krysset av.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til én rad per grense, med meldingsteksten.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">«Fungerer uten JavaScript» holder ikke for kopiering</h3>
+              <span class="finding-location">EXPERIENCE.md: Interaction Primitives, Kopier</span>
+            </header>
+            <div class="finding-note">Kopieringsknappen (FR-22) trenger JavaScript, og det står ikke hva som skjer uten.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Si at knappen bare vises når JavaScript er på, og at brevet ellers kan markeres og kopieres manuelt.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Annonsetelleren bruker mangler-fargen</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns «Annonsen er for kort eller for lang»; DESIGN.md: Colors</span>
+            </header>
+            <div class="finding-note">Telleren «blir oransje», men DESIGN.md sier at mangler-fargen bare brukes på krav og nøkkelord, og fare-fargen på feil i skjemaer.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bruk <code>{colors.danger}</code> (eller tekstfarge pluss melding) på telleren.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Noen tilstander mangler</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns</span>
+            </header>
+            <div class="finding-note">Min konto uten dokumenter, steg 2 når brukeren kommer tilbake, og venting under opplasting og innlesing av PDF.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til korte rader, eller si at de ikke trengs.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Plasseringen av KI-feil er beskrevet ulikt</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns, Accessibility Floor; AD-20</span>
+            </header>
+            <div class="finding-note">«En melding over knappen» mot «en oppsummering øverst i skjemaet». AD-20 bruker <code>form.add_error(None, …)</code>.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Velg én plassering for slike feil.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details open>
+        <summary>
+          <h2>5. Visuelle referanser</h2>
+          <span class="verdict-pill verdict-thin">tynn</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p><code>.working/</code> har seks filer: <code>directions-1.html</code>, <code>directions-2.html</code> og fire <code>key-<em>.html</code>. <code>imports/</code> er tom, og <code>mockups/</code> og <code>wireframes/</code> finnes ikke. DESIGN.md lenker bare til <code>directions-1/2</code>, og EXPERIENCE.md lenker ikke til noen mockup. At spinene går foran ved konflikt, står én gang i DESIGN.md og i hodet på hver <code>key-</em></code>-fil.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">De fire <code>key-*.html</code>-mockupene er ikke lenket</h3>
+              <span class="finding-location">DESIGN.md: Components; EXPERIENCE.md: Åpne punkter</span>
+            </header>
+            <div class="finding-note">EXPERIENCE.md sier fortsatt at mockupene ikke er laget, og DESIGN.md peker bare på steg 4 i <code>directions-2.html</code>.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Lenk hver mockup der den hører hjemme (Component Patterns og Key Flows), oppdater DESIGN.md og fjern punktet i Åpne punkter.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Mockupen av steg 3 avviker fra spinen</h3>
+              <span class="finding-location"><code>.working/key-steg3-valg.html</code>; EXPERIENCE.md: Valg</span>
+            </header>
+            <div class="finding-note">Etiketten «Språk i brevet» er for snever, fordi språket gjelder all KI-tekst. Rekkefølgen er også ulik (svarform først).</div>
+            <div class="finding-fix"><strong>Retting:</strong> Endre etiketten, skriv rekkefølgen inn i spinen, og ta med begrunnelsen fra mockupen (faglærer ba om at svarformen skulle synes).</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Mockupen av steg 6 mangler KI-varselet</h3>
+              <span class="finding-location"><code>.working/key-steg5-6.html</code>; DESIGN.md: Brev; EXPERIENCE.md: Brevvisning</span>
+            </header>
+            <div class="finding-note">Spinen sier at varselet står over brevet i steg 5 og 6.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bestem om varselet skal stå i steg 6, og rett spinen eller mockupen.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title"><code>imports/</code> er tom</h3>
+              <span class="finding-location"><code>imports/</code></span>
+            </header>
+            <div class="finding-note">Mappen har ingen filer.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Slett mappen, eller skriv at den er tom med vilje.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details>
+        <summary>
+          <h2>6. Oppblåsing og overspesifisering</h2>
+          <span class="verdict-pill verdict-strong">sterk</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>Lengden er riktig for en app med seks steg og tre andre sider. Detaljene (for eksempel 3 sekunder for «Kopiert!» og <code>ki_status</code>) er de som stories trenger.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Testmodus og Personvern gjentar tekst</h3>
+              <span class="finding-location">EXPERIENCE.md: Testmodus, Personvern i grensesnittet</span>
+            </header>
+            <div class="finding-note">FR-11-meldingen og personvernpåminnelsen står to steder.</div>
+            <div class="finding-fix"><strong>Retting:</strong> La seksjonene vise til radene, så teksten bare må endres ett sted.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Historikk i Brand &amp; Style</h3>
+              <span class="finding-location">DESIGN.md: Brand &amp; Style</span>
+            </header>
+            <div class="finding-note">Tre setninger om historikken bak designretningene hører hjemme i <code>.memlog.md</code>.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Kort ned til retningsnavnet og lenken.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details>
+        <summary>
+          <h2>7. Arvedisiplin</h2>
+          <span class="verdict-pill verdict-adequate">tilstrekkelig</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>UJ-ID-ene, FR-ID-ene og personene er hentet ordrett fra PRD-en. AD-8, AD-12 og AD-15 er sitert riktig. «Avvik fra PRD og arkitektur» fanger de største avvikene, men ikke alle.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Tone og svarform mangler lagringssted mellom steg 3 og 5</h3>
+              <span class="finding-location">EXPERIENCE.md: Valg, Lag nytt brev; AD-8</span>
+            </header>
+            <div class="finding-note">AD-8: tone og svarform finnes bare på <code>Brev</code>, som ikke finnes før steg 5. <code>.memlog.md</code> har en «NOTE FOR ARKITEKTUR», men den er ikke med i «Avvik».</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg det til som punkt 5 under Arkitektur, for eksempel «tone og svarform lagres på <code>Analyse</code> som standard for første <code>Brev</code>».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Ønskede nøkkelord i testmodus overser AD-7</h3>
+              <span class="finding-location">EXPERIENCE.md: Testmodus [ÅPENT]; AD-7</span>
+            </header>
+            <div class="finding-note">UX har to alternativer, men AD-7 [Forslag] har et tredje: den lagrede forklaringen vises med teksten «KI-forklaringen gjelder ikke dine egne nøkkelord i testmodus». Konflikten er ikke nevnt.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ta med AD-7-alternativet. Velg ett, eller før punktet opp under «Avvik».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">En endret annonse sletter analysen på et annet tidspunkt enn i arkitekturen</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns «Endring som sletter analysen», Fremdriftslinje; AD-8</span>
+            </header>
+            <div class="finding-note">I UX slettes analysen når CV-en eller annonsen endres. I AD-8 er det bare <code>lagre_cv_tekst</code> som sletter <code>Analyse</code> med en gang. «Avvik» Arkitektur 4 nevner bare CV-en.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bestem regelen for annonsen, og utvid punkt 4 til å gjelde den.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Å lagre annonsen i økten strider mot AD-10</h3>
+              <span class="finding-location">EXPERIENCE.md: Avvik, Arkitektur 1; AD-10</span>
+            </header>
+            <div class="finding-note">AD-10 sier at dokumentinnhold «legges aldri i økten», uansett om det er kryptert.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Vis til AD-10, og vurder heller en utkastrad (for eksempel en <code>Analyse</code> uten KI-felt) eller å sende steg 2 og 3 som ett skjema.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Ordene i grensesnittet er ikke koblet til ordlisten i PRD §3</h3>
+              <span class="finding-location">EXPERIENCE.md: Component Patterns, IA; PRD §3</span>
+            </header>
+            <div class="finding-note">Valg ↔ Innstillinger, CV-forbedringer ↔ CV-forbedringsforslag, Nøkkelordanalyse ↔ ATS-nøkkelordanalyse, Søknad ↔ Søknadsbrev/Brevforslag, Annonse ↔ Stillingsannonse.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Lag en liten tabell «Ord i grensesnittet» ↔ «Ord i PRD §3», og bruk PRD-ordene i komponentnavn og Krav-kolonner.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Personvernlenken ved registrering mangler en side</h3>
+              <span class="finding-location">EXPERIENCE.md: Personvern i grensesnittet, IA</span>
+            </header>
+            <div class="finding-note">Min konto krever innlogging, og IA har ingen offentlig side for forklaringen. Dette er ikke med i «Avvik».</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til en offentlig side «Slik behandler vi dataene» i IA og i arkitekturens URL-liste, eller vis teksten på registreringssiden.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Bekreftelsessiden for sletting trenger nye GET-sider</h3>
+              <span class="finding-location">EXPERIENCE.md: Slett-bekreftelse; arkitektur §3</span>
+            </header>
+            <div class="finding-note">Arkitekturen har bare <code>POST /min-konto/slett-dokumenter/</code> og <code>/min-konto/slett-konto/</code>.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg det til under «Avvik» Arkitektur.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">«Forsiden for besøkende» er ikke definert</h3>
+              <span class="finding-location">EXPERIENCE.md: IA</span>
+            </header>
+            <div class="finding-note">Det står heller ikke hva topplinjen viser før innlogging.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Si at forsiden er Logg inn, eller definer siden.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Kilden til arkitekturen løser seg først når PR #13 er flettet</h3>
+              <span class="finding-location">frontmatter <code>sources</code> i begge filer</span>
+            </header>
+            <div class="finding-note">Bare merknad, ikke et brudd.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ingen nå.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="dimension">
+      <details>
+        <summary>
+          <h2>8. Form</h2>
+          <span class="verdict-pill verdict-adequate">tilstrekkelig</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>Seksjonene i DESIGN.md står i riktig rekkefølge. EXPERIENCE.md har alle de påkrevde seksjonene, også Responsive &amp; Platform og Inspiration &amp; Anti-patterns.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Inspiration &amp; Anti-patterns står etter Key Flows</h3>
+              <span class="finding-location">EXPERIENCE.md</span>
+            </header>
+            <div class="finding-note">I mønstereksemplene står seksjonen før Key Flows.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Flytt den rett etter Responsive &amp; Platform.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Fire egne seksjoner er lagt til</h3>
+              <span class="finding-location">EXPERIENCE.md: Testmodus, Personvern i grensesnittet, Avvik, Åpne punkter</span>
+            </header>
+            <div class="finding-note">Alle har en tydelig funksjon, men Testmodus og Personvern bør vise til andre seksjoner i stedet for å gjenta dem.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ingen, utover det som står under 6.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="reviewer-section">
+      <details>
+        <summary>
+          <h2>Tilgjengelighetsgjennomgang</h2>
+          <span class="reviewer-source">review-tilgjengelighet.md</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>Grunnlaget er godt. Fargene består AA for all vanlig tekst i begge moduser. «Matcher» og «Mangler» bruker symbol og tekst, ikke bare farge. Det finnes et eget token for feltkanter (3:1). Appen bruker ingen dialogvinduer og ingen hover-handlinger, og den fungerer uten JavaScript.</p>
+            <p>Svakhetene ligger i hvordan veiviseren oppfører seg med skjermleser og tastatur, ikke i fargene: fremdriftslinjen har lenker uten navn og trykkflate, ventestatus og KI-feil skal meldes med <code>aria-live</code> rundt en vanlig, synkron <code>POST</code> (AD-12), og en melding som kommer med sideinnlastingen blir som regel ikke lest opp. Lenker skilles fra brødtekst bare med farge (2,87:1 / 1,76:1).</p>
+            <p>Ingen funn er kritiske, fordi ingen stopper en bruker helt. Det meste rettes ved å legge presiseringer inn i Accessibility Floor og noen rader i kontrasttabellen. 2.2.1 gjelder ikke ventetiden på opptil 60 sekunder; det er en ventetid, ikke en tidsgrense.</p>
+            <p>Antall funn: kritisk 0 · høy 5 · middels 12 · lav 12.</p>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">H-1 Fremdriftslinjen har lenker uten navn og trykkflate</h3>
+              <span class="finding-location">DESIGN.md: Fremdriftslinje; EXPERIENCE.md: Fremdriftslinje, Accessibility Floor; WCAG 2.4.4, 4.1.2, 1.3.1, 2.5.3</span>
+            </header>
+            <div class="finding-note">Bare det aktive steget har et navn. En lenke på en strek på 4 px har ikke noe tilgjengelig navn og er ikke 44 × 44 px. Det står ikke hvordan en skjermleser får vite om et steg er fullført eller låst.</div>
+            <div class="finding-fix"><strong>Retting:</strong> <code>&lt;nav aria-label="Fremdrift"&gt;&lt;ol&gt;</code> med ett <code>&lt;li&gt;</code> per steg og stegnavnet som tekst. Fullførte steg er <code>&lt;a&gt;</code> («Steg 2: Annonse (fullført)»), det aktive steget <code>&lt;span aria-current="step"&gt;</code>, låste steg får «(ikke tilgjengelig ennå)». Strekene er <code>aria-hidden</code>. Trykkflaten er minst 44 px høy.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">H-2 Ventestatusen blir ikke lest opp, og fokus kan forsvinne</h3>
+              <span class="finding-location">EXPERIENCE.md: Venter på KI, Accessibility Floor; AD-12; WCAG 4.1.3, 2.4.3</span>
+            </header>
+            <div class="finding-note"><code>aria-live</code> leses bare hvis området finnes før teksten endres. En knapp med fokus som får <code>disabled</code>, mister fokus i flere nettlesere, og verdien sendes ikke med i skjemaet.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Tomt <code>&lt;p role="status"&gt;</code> i malen fra start. <code>skjema.js</code> setter <code>aria-disabled="true"</code> (ikke <code>disabled</code>), stopper dobbel innsending, beholder fokus og skriver «Jobber … Dette tar vanligvis 10–30 sekunder.» i statusområdet.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">H-3 Feil som vises etter ny sidelast, blir ikke lest opp</h3>
+              <span class="finding-location">EXPERIENCE.md: KI svarte ikke, Feil ved innlogging, Accessibility Floor; AD-20; WCAG 3.3.1, 4.1.3, 2.4.3</span>
+            </header>
+            <div class="finding-note">AD-20 rendrer skjemaet på nytt, altså en ny side. <code>aria-live</code> i den nye siden leses vanligvis ikke opp, og fokus går til <code>h1</code>. Skjermleserbrukeren hører stegtittelen og vet ikke at noe gikk galt.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Uten feil går fokus til <code>h1</code>. Med feil går fokus til en feiloppsummering (<code>&lt;div role="alert" tabindex="-1"&gt;</code>) øverst i <code>&lt;main&gt;</code> med lenker til feltene. KI-feil og feil uten felt står i samme oppsummering. Sidetittelen får «Feil: » foran.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">H-4 Lenker skilles fra tekst bare med farge</h3>
+              <span class="finding-location">DESIGN.md: Colors «Blågrønn aksent»; WCAG 1.4.1</span>
+            </header>
+            <div class="finding-note">Aksent mot vanlig tekst er 2,87:1 i lys og 1,76:1 i mørk modus, under 3:1. Gjelder «Les mer», README-lenken, lenken ved registrering, «Min konto» og «Logg ut».</div>
+            <div class="finding-fix"><strong>Retting:</strong> «Lenker i løpende tekst er alltid understreket. Lenker i topplinjen får understrek ved hover og fokus.»</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">H-5 Sidene mangler unik tittel og landemerker</h3>
+              <span class="finding-location">EXPERIENCE.md: IA, Accessibility Floor; WCAG 2.4.2, 1.3.1, 2.4.1</span>
+            </header>
+            <div class="finding-note">Det står ingenting om <code>&lt;title&gt;</code>, <code>header</code>/<code>nav</code>/<code>main</code> eller «Hopp til innhold». Alle steg bruker samme mal, så titlene blir fort like.</div>
+            <div class="finding-fix"><strong>Retting:</strong> <code>&lt;title&gt;</code> er «Steg 4 av 6: Analyse – Søknadshjelpen» («Feil: …» ved feil). <code>base.html</code> får <code>&lt;header&gt;</code>, <code>&lt;main id="innhold"&gt;</code> og en «Hopp til innhold»-lenke som første element.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-1 Aktivt og kommende steg har for lav ikke-tekst-kontrast</h3>
+              <span class="finding-location">DESIGN.md: Fremdriftslinje; WCAG 1.4.11, 1.4.1</span>
+            </header>
+            <div class="finding-note">Aktivt steg (<code>#8FBCBA</code>) har 2,09:1 mot bakgrunnen og 1,60:1 mot kommende steg. Kommende steg i <code>border</code> har 1,30:1. Teksten «Steg 4 av 6» redder forståelsen, men grafikken alene består ikke.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Full aksent og høyere strek (8 px) eller kant på det aktive steget, <code>field-border</code> på kommende steg, og linjen inn i kontrasttabellen.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-2 Lenken i personvernpåminnelsen har for lav kontrast</h3>
+              <span class="finding-location">DESIGN.md: Infoflate; EXPERIENCE.md: Personvernpåminnelse; WCAG 1.4.3</span>
+            </header>
+            <div class="finding-note">Aksent på infoflate er 4,42:1 i lys modus, under 4,5:1. Mørk modus består (6,61:1).</div>
+            <div class="finding-fix"><strong>Retting:</strong> «Lenker på infoflaten har fargen <code>text</code> og understrek» (12,67:1).</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-3 Deaktivert knapp og «Jobber …» har ingen farger</h3>
+              <span class="finding-location">DESIGN.md: Components; EXPERIENCE.md: Venter på KI; WCAG 1.4.3</span>
+            </header>
+            <div class="finding-note">Den deaktiverte knappen bærer statusteksten. Vanlig <code>opacity: .5</code> gir 2,09:1.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til <code>button-primary-busy</code> med samme farger som hovedknappen, <code>cursor: progress</code> og en <code>aria-hidden</code> indikator. Ingen opasitet på teksten.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-4 <code>autocomplete</code> mangler på personopplysningsfelt</h3>
+              <span class="finding-location">EXPERIENCE.md: PDF-avsender, registrering; WCAG 1.3.5</span>
+            </header>
+            <div class="finding-note">E-post, passord, navn og telefon har et formål som kan bestemmes maskinelt.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Angi <code>autocomplete</code> per felt (<code>email</code>, <code>new-password</code>, <code>current-password</code>, <code>name</code>, <code>tel</code>) og <code>off</code> på CV-tekst, annonse og nøkkelord.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-5 Nøkkelord-brikkene skiller funnet og mangler bare visuelt</h3>
+              <span class="finding-location">DESIGN.md: Nøkkelord-brikke; EXPERIENCE.md: Nøkkelordanalyse; WCAG 1.3.1, 1.4.1</span>
+            </header>
+            <div class="finding-note">Stiplet kant og oransje farge høres ikke av skjermleser. Den heltrukne kanten har bare 1,22:1 mot kortet.</div>
+            <div class="finding-fix"><strong>Retting:</strong> To lister med underoverskriftene «Funnet (7)» og «Mangler (3)», eller visuelt skjult tekst «mangler» i hver brikke.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-6 <code>lang="en"</code> gjelder bare brevkortet</h3>
+              <span class="finding-location">EXPERIENCE.md: Accessibility Floor; UJ-2; WCAG 3.1.2</span>
+            </header>
+            <div class="finding-note">Gap-analysen, forklaringen, brevforslagene og CV-forbedringene er også på engelsk, men leses med norsk uttale.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Alle KI-blokker får <code>lang</code> etter språket som ble valgt i steg 3. Merkelappene forblir norske.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-7 Reflow er satt til 360 px, men WCAG krever 320 px</h3>
+              <span class="finding-location">DESIGN.md: Layout; EXPERIENCE.md: Accessibility Floor, Responsive; WCAG 1.4.10</span>
+            </header>
+            <div class="finding-note">To knapper side om side og lange ord fra brukeren kan gi vannrett rulling.</div>
+            <div class="finding-fix"><strong>Retting:</strong> «Virker fra 320 px». Knappene brytes under 360 px med hovedknappen øverst. <code>overflow-wrap: anywhere</code> og <code>white-space: pre-wrap</code> på brev og CV-tekst.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-8 Filopplastingen er ikke beskrevet for tastatur og skjermleser</h3>
+              <span class="finding-location">EXPERIENCE.md: CV-opplasting, Ugyldig fil; WCAG 2.1.1, 3.3.2, 4.1.2</span>
+            </header>
+            <div class="finding-note">Et <code>input</code> skjult med <code>display:none</code> forsvinner fra tastaturet. Kravene (PDF eller TXT, maks 5 MB) står bare i feilmeldingene.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Vanlig <code>&lt;input type="file"&gt;</code> med synlig etikett og hjelpetekst via <code>aria-describedby</code>, visuelt skjult (ikke <code>display:none</code>) ved styling. Fokus til «Sjekk at teksten ble riktig» etter opplasting.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-9 Tegntelleren kan støye eller vises bare med farge</h3>
+              <span class="finding-location">EXPERIENCE.md: Annonsefelt, «Annonsen er for kort»; WCAG 1.4.1, 4.1.3</span>
+            </header>
+            <div class="finding-note">Oransje alene skiller ikke tilstanden, og <code>aria-live</code> leser opp ved hvert tastetrykk. Oransje er dessuten reservert for krav og nøkkelord.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Koble telleren med <code>aria-describedby</code>, ikke <code>aria-live</code>. Legg til tekst («– minst 100 tegn»), annonser bare når grensen krysses, og avklar <code>missing</code> eller <code>danger</code>.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-10 Eksempelknappene heter bare «A», «B» og «C»</h3>
+              <span class="finding-location">EXPERIENCE.md: Eksempelknapper, Testmodus; WCAG 2.4.6, 2.5.3</span>
+            </header>
+            <div class="finding-note">Skjermleseren sier «A, knapp». Det står ikke at et klikk hopper over steg 2.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Synlig tekst «Eksempel A: junior utvikler» og hjelpeteksten «Fyller inn CV og annonse og går til steg 3.»</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-11 Ferdig-steget mangler regler for fokus og animasjon</h3>
+              <span class="finding-location">EXPERIENCE.md: Ferdig-merke, Accessibility Floor; WCAG 1.1.1, 2.3.3</span>
+            </header>
+            <div class="finding-note">✓ leses som «hake» før overskriften, og det står ikke om spinneren stopper ved <code>prefers-reduced-motion</code>.</div>
+            <div class="finding-fix"><strong>Retting:</strong> ✓ er <code>aria-hidden</code>, «Søknaden er klar» er <code>h1</code> og får fokus, og spinneren erstattes av statisk tekst ved redusert bevegelse.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">M-12 Feltkrav står bare i feilmeldingene</h3>
+              <span class="finding-location">EXPERIENCE.md: Feil ved innlogging/registrering, PDF-avsender, Valg; WCAG 3.3.2</span>
+            </header>
+            <div class="finding-note">Passordkravet og nøkkelordreglene (komma, maks 20) vises først ved feil. Påkrevde og valgfrie felt er ikke merket.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Krav som hjelpetekst under etiketten via <code>aria-describedby</code>, «(valgfri)» i etiketten og <code>required</code> på påkrevde felt.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-1 Manuell ▸ i <code>&lt;summary&gt;</code></h3>
+              <span class="finding-location">EXPERIENCE.md: Nøkkelordanalyse; WCAG 1.3.1</span>
+            </header>
+            <div class="finding-note">Skjermleseren leser «svart trekant som peker mot høyre».</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bruk den innebygde markøren eller CSS <code>::before</code>, og skriv «Hva betyr nøkkelordanalysen?».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-2 Ikonene ✓ og ! leses dobbelt</h3>
+              <span class="finding-location">DESIGN.md: Kravrad; WCAG 1.1.1</span>
+            </header>
+            <div class="finding-note">Skjermleseren leser «hake, Python, Matcher».</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ikonene er <code>aria-hidden</code>, kravlisten er en <code>&lt;ul&gt;</code>, og «2 av 4 krav dekket» står i overskriften.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-3 Nøkkelordmåleren er pynt, men det står ikke</h3>
+              <span class="finding-location">DESIGN.md: Nøkkelordmåler; WCAG 1.1.1, 1.4.11</span>
+            </header>
+            <div class="finding-note">Sporet har 1,22:1 mot kortet. Teksten «7 av 10 funnet» bærer informasjonen.</div>
+            <div class="finding-fix"><strong>Retting:</strong> <code>aria-hidden</code> eller <code>&lt;meter&gt;</code>, og <code>field-border</code> på sporet hvis grafikken skal kunne leses.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-4 Kopier-knappen mangler regler uten JavaScript og ved feil</h3>
+              <span class="finding-location">EXPERIENCE.md: Kopier, Interaction Primitives; WCAG 4.1.3</span>
+            </header>
+            <div class="finding-note">Knappen vises uten JavaScript, og det står ikke hva som skjer hvis utklippstavlen er blokkert.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Knappen settes inn av JavaScript, statusområdet finnes fra start, feilmeldingen er «Kunne ikke kopiere. Merk teksten og kopier selv.», og knappen heter «Kopier søknadsbrevet».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-5 Lenke inne i avkrysningsetiketten</h3>
+              <span class="finding-location">EXPERIENCE.md: Personvern i grensesnittet; WCAG 2.5.3, 3.3.2</span>
+            </header>
+            <div class="finding-note">Trykk på lenken kan krysse av, og lenken er vanskelig å treffe på mobil.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg lenken som egen tekst under avkrysningen, koblet med <code>aria-describedby</code>.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-6 Låste steg sender videre uten forklaring</h3>
+              <span class="finding-location">EXPERIENCE.md: Låste steg; WCAG 3.3.1</span>
+            </header>
+            <div class="finding-note">En bruker som følger et bokmerke, får ikke vite hvorfor hun havnet et annet sted.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Vis en melding: «Steg 5 er ikke tilgjengelig ennå. Du er tilbake i steg 3.»</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-7 «10–30 sekunder» passer ikke med 60 sekunder</h3>
+              <span class="finding-location">EXPERIENCE.md: Venter på KI; AD-4</span>
+            </header>
+            <div class="finding-note">Etter 30 sekunder ser det ut som om appen har hengt seg opp.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Oppdater statusområdet etter 30 sekunder: «Det tar litt lenger tid enn vanlig. Vent litt til.»</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-8 Tekststørrelser i px og faste høyder</h3>
+              <span class="finding-location">DESIGN.md: typography, Components; WCAG 1.4.4, 1.4.12</span>
+            </header>
+            <div class="finding-note">px følger ikke brukerens standard skriftstørrelse, og faste høyder kan klippe tekst.</div>
+            <div class="finding-fix"><strong>Retting:</strong> CSS i <code>rem</code>, <code>min-height</code> i stedet for <code>height</code>, og aldri <code>overflow: hidden</code> på tekstbeholdere.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-9 Tvungne farger (Windows høykontrast) er ikke nevnt</h3>
+              <span class="finding-location">DESIGN.md: Colors; WCAG 1.4.11</span>
+            </header>
+            <div class="finding-note">Fremdriftslinjen, måleren og ikonsirklene forsvinner med <code>forced-colors: active</code>.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Kant (<code>1px solid CanvasText</code>) under <code>forced-colors</code>, og fokusring med <code>outline</code>, ikke <code>box-shadow</code>.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-10 Topplinjens lenker og «Logg ut»</h3>
+              <span class="finding-location">DESIGN.md: Topplinje; WCAG 2.5.5 (AAA), 4.1.2</span>
+            </header>
+            <div class="finding-note">Små tekstlenker når ikke 44 px, og «Logg ut» må være en <code>POST</code> i Django 5.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Padding til 44 px høyde, og «Logg ut» som <code>&lt;button&gt;</code> i et skjema, stylet som lenke.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-11 Øktutløp mens brukeren skriver</h3>
+              <span class="finding-location">WCAG 2.2.1</span>
+            </header>
+            <div class="finding-note">Brukeren mister teksten ved innsending hvis økta har gått ut. Djangos standard er to uker, så risikoen er liten.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ikke korte ned <code>SESSION_COOKIE_AGE</code>, og skriv dette i arkitekturen eller i EXPERIENCE.md.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">L-12 Mockupen bruker gammel mangler-farge og mindre tekst</h3>
+              <span class="finding-location"><code>.working/directions-2.html</code>, variant 3</span>
+            </header>
+            <div class="finding-note"><code>--miss:#A65F00</code> (4,34:1) og 12 px tekst, mens DESIGN.md har 14 px.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Merk mockupen som utdatert på disse punktene, eller oppdater den.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <section class="reviewer-section">
+      <details>
+        <summary>
+          <h2>Motstandergjennomgang</h2>
+          <span class="reviewer-source">review-motstander.md</span>
+        </summary>
+        <div class="dim-body">
+          <div class="dim-judgment">
+            <p>UX-en er gjennomarbeidet. Den har tydelige tilstander, en god tilgjengelighetsdel og en ærlig liste over avvik. Den svake delen er veiviserens tilstandsmodell. Seks steg med låste steg, «hvor langt har brukeren kommet» og en annonse som må lagres før analysen, passer dårlig med AD-8, der det bare finnes én <code>Analyse</code> som overskrives, og med AD-10, der dokumentinnhold aldri skal ligge i økten. Det rammer særlig tilbakevendende brukere, som er UJ-2.</p>
+            <p>Veiviseren gjør også flyten lengre enn PRD-ens to skjermbilder, og et av stegene («Ser bra ut») lagrer ingenting. Samtidig legger UX-en til arbeid uten å si hva som kan kuttes, noe faglærer etterlyste i punkt 4.2. Kjernen i kurset er KI-kontroll, og der sier UX-en for mye: «Søknaden er klar» og «Ser bra ut» lover mer enn appen kan stå inne for, og varselet om KI-feil står bare ved brevet.</p>
+            <p>Antall funn: kritisk 1 · høy 6 · middels 7 · lav 6.</p>
+            <p><strong>Hva som holder:</strong></p>
+            <ul>
+              <li>Tilstandene for KI-feil er gode og sporbare til NFR-5, NFR-6, AD-8 og AD-12.</li>
+              <li>Mangler vises i oransje, ikke rødt, med symbol og tekst.</li>
+              <li>Tilgjengelighetsdelen er konkret og testbar, og kontrasten er justert etter sjekk.</li>
+              <li>Avviksseksjonen er ærlig og gjør neste PRD-oppdatering lett.</li>
+              <li>Voice and Tone har gode eksempler og mot-eksempler.</li>
+              <li>Ikke-mål er respektert: ingen chatbot og ingen poengsum.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="findings-list">
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-critical">kritisk</span>
+              <h3 class="finding-title">«Start ny søknad» gir en tilstand modellen ikke kan vise</h3>
+              <span class="finding-location">EXPERIENCE.md: Start ny søknad, Fremdriftslinje, Endring som sletter analysen, Låste steg, Hvor brukeren havner etter innlogging; Avvik arkitektur 3</span>
+            </header>
+            <div class="finding-note">Etter «Start ny søknad» står brukeren i steg 1, men den gamle <code>Analyse</code> og det gamle <code>Brev</code> finnes fortsatt (AD-8). Utledes fremdriften av radene, vises steg 4–6 som fullførte lenker til forrige jobb, og et klikk på «Analyse» viser gap-analysen for feil annonse. Enhver ny annonse utløser «Brevet og forslagene forsvinner». Den vanlige veien for en tilbakevendende bruker (UJ-2) går altså gjennom en advarsel om sletting, og etter innlogging sendes Jonas til steg 6 for den forrige søknaden.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Definer «en søknad i arbeid» i stedet for å utlede fremdriften av radene. Enkleste løsning: «Start ny søknad» sletter <code>Analyse</code> etter en bekreftelse på Ferdig-siden. Da er tilstanden entydig: ingen CV → steg 1, CV uten analyse → steg 1–3, analyse → 4, brev → 5/6. Skriv regelen som en tabell og ta den med i avvikslisten til arkitekturen.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Forslaget om å lagre annonsen i økten bryter AD-10</h3>
+              <span class="finding-location">EXPERIENCE.md: Avvik arkitektur 1, Eksempelknapper</span>
+            </header>
+            <div class="finding-note">AD-10 sier rett ut at dokumentinnhold aldri legges i økten. Økter lagres ukryptert, så forslaget bryter FR-15. <code>/eksempel/A/</code> har samme problem når den hopper til steg 3.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Slå sammen steg 2 og 3 til «Annonse og valg», så annonsen følger samme <code>POST</code> som analysen. Vil gruppa beholde seks steg: skriv at annonsen sendes som skjult felt, og fjern økt-alternativet.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Veiviseren gir mange klikk, og «Ser bra ut» er et tomt steg</h3>
+              <span class="finding-location">EXPERIENCE.md: IA, Tilbake/Neste, UJ-1, UJ-2; Avvik arkitektur 3</span>
+            </header>
+            <div class="finding-note">En ny bruker trenger åtte handlinger og sju sidelastinger fra innlogging til kopiert brev, en tilbakevendende bruker ni. PRD §6 ga omtrent fire. «Ser bra ut» lagrer ingenting, og «Bruk denne» + «Neste» er to klikk for én bekreftelse. Målet «ikke må streve» trekker i motsatt retning.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Slå sammen steg 5 og 6, slå sammen steg 2 og 3, og vis CV-teksten direkte i steg 1. Da blir det fire steg (CV, Annonse og valg, Analyse, Søknad) og omtrent fem handlinger.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">UX-en legger til omfang uten kuttrekkefølge</h3>
+              <span class="finding-location">EXPERIENCE.md og DESIGN.md; faglærers punkt 4.2</span>
+            </header>
+            <div class="finding-note">Seks maler og views, låste steg, bekreftelsesflyt, egen registrering (mot unntaket i AD-2), «Prøv forklaringen igjen», «Lag nytt brev», animasjon og full mørk modus med 15 ekstra tokens. Faglærer etterlyste en kuttplan, og UX-en gjør planen større uten å svare på det. Sensor vil se om gruppa prioriterer.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til seksjonen «Minste versjon og kuttrekkefølge» med <em>må</em>/<em>kan</em> per komponent. Forslag: animasjon → mørk modus → «Prøv forklaringen igjen» → låste steg → CV-forbedringer.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Tone og svarform har ikke noe sted å bo mellom steg 3 og 5</h3>
+              <span class="finding-location">EXPERIENCE.md: Valg, Lag nytt brev; .memlog.md linje 16</span>
+            </header>
+            <div class="finding-note">AD-8 sier at tone og svarform bare finnes på <code>Brev</code>. Henvisningen til AD-8 i «Lag nytt brev» dekker ikke dette. «NOTE FOR ARKITEKTUR» kom aldri inn i avvikslisten. Uten avklaring løser to utviklere det ulikt.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Arkitekturavvik nummer 5: <code>Analyse</code> får <code>tone</code> og <code>svarform</code> som startverdier, og <code>Brev</code> lagrer det som ble brukt. Alternativt flyttes valgene til steg 5.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">Varselet om KI-feil står bare ved brevet, og KI-innhold og kode-innhold ser like ut</h3>
+              <span class="finding-location">EXPERIENCE.md: Brevvisning, Kravliste, Nøkkelordanalyse, CV-forbedringer; DESIGN.md: Brev; AD-5</span>
+            </header>
+            <div class="finding-note">AD-5 krever varselet på alle sider med KI-tekst. Gap-analysen, forklaringen og CV-forbedringene har det ikke, og avviket er ikke listet. I steg 4 står KI sin vurdering og den sikre nøkkelordtellingen side om side i samme visuelle språk, så brukeren ser ikke hva som er påstand og hva som er telling.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Merkelapp «Laget av KI» på KI-kort og «Telt automatisk» på nøkkelordkortet. Vis varselet øverst i steg 4 og ved CV-forbedringene, eller skriv inn avviket fra AD-5 med begrunnelse.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-high">høy</span>
+              <h3 class="finding-title">«Søknaden er klar» og «Ser bra ut» lover for mye</h3>
+              <span class="finding-location">EXPERIENCE.md: Ferdig-merke, Tilbake/Neste, UJ-1 trinn 6–7, Voice and Tone</span>
+            </header>
+            <div class="finding-note">Teksten sier at appen aldri skryter av brevet, men legger «Ser bra ut» i munnen på Emma og gir et stort ✓ med «Søknaden er klar». Det er et KI-utkast som kan inneholde feil. Sensor som ser etter KI-kontroll, vil lese dette som at «les gjennom» er gjort til et klikk.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Bytt «Ser bra ut» med «Ta med brevet» (eller fjern steget) og «Søknaden er klar» med «Utkastet er klart». La Emma rette en setning i UJ-1 trinn 7.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Tilbakeknappen i nettleseren kan sende «Analyser» på nytt</h3>
+              <span class="finding-location">EXPERIENCE.md: Interaction Primitives; AD-10 <code>never_cache</code></span>
+            </header>
+            <div class="finding-note">Er steg 4 svaret på en <code>POST</code>, kan tilbake og frem gi et nytt betalt KI-kall som overskriver analysen. Låsen i AD-12 hjelper bare mot samtidige kall.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Hvert steg er en <code>GET</code>-side, og alle skjemaer bruker Post/Redirect/Get, unntatt når skjemaet vises på nytt med feil (AD-20).</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Endring av språk eller nøkkelord etter analysen er ikke dekket</h3>
+              <span class="finding-location">EXPERIENCE.md: Fremdriftslinje, Endring som sletter analysen</span>
+            </header>
+            <div class="finding-note">Det står ikke om analysen slettes, blir stående med feil språk eller kjøres på nytt når brukeren bytter språk i steg 3. Annonseendring er dessuten feil knyttet til AD-8, som bare nevner CV-tekst.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Endringer i steg 1–3 gjelder først ved nytt «Analyser», med ett varsel der («Dette erstatter analysen og brevet»). Unntak: endret CV-tekst sletter analysen med en gang.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Testmodus: eksempelknappen hopper over CV-teksten, og egen CV er en blindvei</h3>
+              <span class="finding-location">EXPERIENCE.md: Eksempelknapper, Egen CV i testmodus, UJ-3 trinn 2 og 5</span>
+            </header>
+            <div class="finding-note">Sensor ser ikke at to-kolonne-CV-en C leses riktig (FR-2, SM-2). Med egen CV kan steg 5 og 6 aldri nås, og opplastingen sletter demoen (FR-1) uten at reisen sier det.</div>
+            <div class="finding-fix"><strong>Retting:</strong> La eksempelknappen gå til steg 1 med CV-teksten synlig. Ved egen CV i testmodus: «Prøv eksempel A» som hovedknapp. Nevn i UJ-3 at egen CV erstatter eksempelet.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">CV-forbedringer er låst bak brevet</h3>
+              <span class="finding-location">EXPERIENCE.md: CV-forbedringer, UJ-2 trinn 6; PRD §4.2</span>
+            </header>
+            <div class="finding-note">Forbedringene avhenger av analysen, ikke brevet. En student som bare vil forbedre CV-en, må betale for et brev hun ikke trenger, og ved et KI-brudd i steg 5 kommer hun aldri dit.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Flytt «Vis forslag til CV-en» til steg 4 under gap-analysen.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Det er ikke avgjort om brevet kan redigeres før det kopieres</h3>
+              <span class="finding-location">EXPERIENCE.md: Brevvisning, Kopier, PDF-avsender</span>
+            </header>
+            <div class="finding-note">En feil påstand må rettes i et annet program, og PDF-en inneholder feilen. Redigering viser kontroll, men reiser spørsmål om lagring og eksport.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Ta en uttrykkelig beslutning. Forslag for v1: ingen redigering, med teksten «Kopier brevet og tilpass det i ditt eget program», ført i beslutningsloggen.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">«Fungerer uten JavaScript» stemmer ikke for kopiering</h3>
+              <span class="finding-location">EXPERIENCE.md: Interaction Primitives, Kopier</span>
+            </header>
+            <div class="finding-note">Uten JavaScript står det en knapp som ikke gjør noe. Sensor som tester påstanden, finner et brudd.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Knappen legges inn av skriptet, eller påstanden svekkes til «fungerer i hovedsak uten JavaScript».</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-medium">middels</span>
+              <h3 class="finding-title">Engelsk KI-tekst er bare merket på brevkortet</h3>
+              <span class="finding-location">EXPERIENCE.md: Accessibility Floor, UJ-2 trinn 4 og 6</span>
+            </header>
+            <div class="finding-note">Resten av KI-teksten leses med norsk uttale, og blandingen av norske merkelapper og engelsk innhold er ikke beskrevet.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Alle KI-blokker får <code>lang</code> etter <code>Analyse.sprak</code>, og én setning sier at blandingen er tilsiktet (NFR-8).</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Personvernpåminnelsen er feil i testmodus</h3>
+              <span class="finding-location">EXPERIENCE.md: Personvernpåminnelse; AD-5</span>
+            </header>
+            <div class="finding-note">Påminnelsen sier at teksten sendes til KI-tjenesten, men i testmodus sendes ingenting (FR-9).</div>
+            <div class="finding-fix"><strong>Retting:</strong> I testmodus: «Testmodus: ingenting sendes til KI-tjenesten. Appen bruker lagrede svar.»</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Utløpt økt midt i en innsending kan miste annonsen</h3>
+              <span class="finding-location">EXPERIENCE.md: State Patterns</span>
+            </header>
+            <div class="finding-note"><code>login_required</code> på en <code>POST</code> sender til innlogging, og det som var limt inn, forsvinner. To faner på ulike steg kan også vise et utdatert brev.</div>
+            <div class="finding-fix"><strong>Retting:</strong> En linje i State Patterns: «Økten er utløpt – logg inn igjen. Det du limte inn, er ikke lagret.»</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Kildene peker på en fil som ikke finnes på branchen</h3>
+              <span class="finding-location">frontmatter <code>sources</code> i begge filer</span>
+            </header>
+            <div class="finding-note"><code>ARCHITECTURE-SPINE.md</code> ligger i PR #13. Flettes UX-en først, finner sensor ingenting.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Flett arkitekturen før UX-en, eller skriv i pull requesten at UX-en avhenger av PR #13.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Kontrasttabellen dekker ikke alle par</h3>
+              <span class="finding-location">DESIGN.md: Colors, Fremdriftslinje</span>
+            </header>
+            <div class="finding-note">Aktivt steg (aksent 50 %) er ikke sjekket mot 3:1, og lenker på <code>surface</code>, mangler-tekst i brikker og tekst på infoflaten mangler. Det står ikke hvordan det ble sjekket.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Legg til parene og nevn verktøyet. Gi det aktive steget full aksent og skill det med tykkelse eller markør.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Beslutningene er tilskrevet én person</h3>
+              <span class="finding-location">EXPERIENCE.md, DESIGN.md, .memlog.md</span>
+            </header>
+            <div class="finding-note">«Henrik valgte» står gjennom hele dokumentet. Sensor vurderer gruppens prosess, og det finnes ikke spor av at Ole og Haakon har vurdert valgene.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Når PR-en er gjennomgått: en linje i hvert dokument om at gruppa har godtatt eller endret valgene, med dato.</div>
+          </article>
+          <article class="finding">
+            <header>
+              <span class="badge badge-sev-low">lav</span>
+              <h3 class="finding-title">Mockupene som ble bestemt, finnes ikke</h3>
+              <span class="finding-location">EXPERIENCE.md: Åpne punkter; .memlog.md linje 41</span>
+            </header>
+            <div class="finding-note">Loggen sier mockups av steg 1, 3, 4 og 5+6, men motstanderen fant bare steg 4.</div>
+            <div class="finding-fix"><strong>Retting:</strong> Lag mockupene etter at antall steg er avklart, med steg 1 for lagret CV og steg 4 med egen CV i testmodus.</div>
+          </article>
+        </div>
+      </details>
+    </section>
+
+    <div class="mechanical">
+      <h3>Mekaniske merknader</h3>
+      <ul>
+        <li>Tokenhenvisninger: 21 ulike <code>{…}</code>-henvisninger, og alle løser seg. 17 fargetokener, alle med <code>-dark</code>-variant.</li>
+        <li>Kontrast (regnet ut på nytt): tallene i tabellen stemmer. Nye tall: aksent på kort 4,81 / 7,60, mangler-tekst på kort 5,23 / 7,69, fare-tekst på kort 6,13 / 9,45, aktivt steg (50 % aksent) mot bakgrunn 2,09 / 3,03.</li>
+        <li>Personvernavkrysningen har litt ulik ordlyd i <code>.memlog.md</code> og EXPERIENCE.md. Spinen gjelder, men de bør stemme overens.</li>
+        <li>«[ANTAKELSE]-punkter» i Åpne punkter lister seks punkter, men mangler «ordlyden ved forbruksgrensen».</li>
+        <li>DESIGN.md har <code>description</code> i frontmatter, EXPERIENCE.md har det ikke.</li>
+        <li>EXPERIENCE.md har <code>product-brief.md</code> og <code>tilbakemelding-prd.md</code> som kilder, DESIGN.md har det ikke. Det er greit, fordi DESIGN.md ikke bruker dem.</li>
+      </ul>
+    </div>
+
+    <footer class="report-footer">
+      <div class="meta">
+        <span>Rubrikk: review-rubric.md</span>
+        <span>Andre gjennomganger: review-tilgjengelighet.md, review-motstander.md</span>
+        <span>Generert: 2026-11-12</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

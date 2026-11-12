@@ -70,7 +70,7 @@ typography:
     fontWeight: '600'
     lineHeight: '1.3'
   letter:
-    # Brevteksten i steg 5 og 6
+    # Brevteksten i steg 4
     fontSize: 16px
     fontWeight: '400'
     lineHeight: '1.65'
@@ -120,10 +120,28 @@ components:
   focus-ring:
     outline: '2px solid {colors.accent}'
     offset: 2px
-  progress-bar:
-    track: '{colors.border}'
-    done: '{colors.accent}'
-    height: 4px
+  progress-step:
+    bar-upcoming: '{colors.field-border}'
+    bar-done: '{colors.accent}'
+    bar-active: '{colors.accent}'
+    bar-height: 4px
+    bar-height-active: 8px
+    label: '{typography.small}'
+    label-active-weight: '650'
+    minHeight: 44px
+  link:
+    foreground: '{colors.accent}'
+    textDecoration: underline
+    underlineOffset: 3px
+  button-busy:
+    background: '{colors.accent}'
+    foreground: '{colors.on-accent}'
+    cursor: progress
+  ai-label:
+    foreground: '{colors.text-muted}'
+    border: '1px solid {colors.border}'
+    radius: '{rounded.full}'
+    typography: '{typography.tag}'
   requirement-match:
     icon: '✓'
     foreground: '{colors.match}'
@@ -159,7 +177,7 @@ Appen bygges med Django-maler og egen CSS i `static/css/`, uten UI-rammeverk og 
 
 Det finnes én aksentfarge og to statusfarger. Resten er nøytralt.
 
-- **Blågrønn aksent (`#1F7A75` lys / `#5CC2BB` mørk)** er appens farge. Den brukes på hovedknapper, fullførte steg i fremdriftslinjen, lenker, fokusring og ✓-merket på «Ferdig». Den brukes ikke på flater eller til dekor.
+- **Blågrønn aksent (`#1F7A75` lys / `#5CC2BB` mørk)** er appens farge. Den brukes på hovedknapper, fullførte steg i fremdriftslinjen, lenker, fokusring og ✓-merket når utkastet er klart (steg 4). Den brukes ikke på flater eller til dekor.
 - **Matcher (`#23784A` på `#E2F3EA`)** brukes bare på krav og nøkkelord som finnes i CV-en.
 - **Mangler (`#9A5800` på `#FCEFD9`)** brukes bare på krav og nøkkelord som ikke finnes i CV-en. Fargen er **oransje, ikke rød**. Noe som mangler, er en mulighet, ikke en feil, og rødt er reservert for farlige handlinger.
 - **Fare (`#B3261E`)** [ANTAKELSE] brukes bare på «Slett mine dokumenter» og «Slett konto» og på feilmeldinger i skjemaer.
@@ -179,14 +197,23 @@ Det finnes én aksentfarge og to statusfarger. Resten er nøytralt.
 | Mangler-tekst på mangler-flate | 4,9 | 6,5 |
 | Feltkant mot kort | 3,3 | 3,4 |
 | Fare-tekst på bakgrunn | 6,5 | 10,6 |
+| Tekst og lenker på infoflate | 12,7 | 11,6 |
+| Aksent (lenke, fokusring) på bakgrunn | 5,1 | 8,5 |
+| Aksent (lenke, fokusring) på kort | 4,8 | 7,6 |
+| Mangler-tekst i brikke på hvit | 5,6 | 6,5 |
+| Kommende steg i fremdriftslinjen (`field-border`) | 3,5 | 3,8 |
 
-Mangler-fargen ble justert fra `#A65F00` (4,3:1) til `#9A5800`, og `field-border` ble lagt til etter sjekken.
+Kontrasten er regnet ut med WCAG-formelen for relativ luminans i et lite Python-skript, og kontrollert på nytt av tilgjengelighetsreviewen ([review-tilgjengelighet.md](review-tilgjengelighet.md)). Mangler-fargen ble justert fra `#A65F00` (4,3:1) til `#9A5800`, og `field-border` ble lagt til etter første sjekk.
+
+**Lenker er alltid understreket.** Aksentfargen har bare 2,9:1 mot vanlig tekst (1,8:1 i mørk modus), så farge alene kan ikke skille lenker fra teksten (WCAG 1.4.1). På infoflaten har lenker tekstfarge og understrek, aldri aksentfarge.
+
+**Tvungne farger** (`forced-colors: active`): strekene i fremdriftslinjen, nøkkelordmåleren og ikonsirklene får `border: 1px solid CanvasText`, og fokus vises med `outline`, ikke `box-shadow`.
 
 ## Typography
 
 Appen bruker **systemskrift**: San Francisco på Apple, Segoe UI på Windows og Roboto på Android. Den ser naturlig ut på hver enhet, laster ingen filer og er lett å lese på norsk med æ, ø og å.
 
-Rollene er `heading` (stegtittel, én per side), `heading-sm` (korttitler), `body`, `small` (begrunnelser og hjelpetekst), `label` (feltetiketter), `tag` («Matcher» og «Mangler») og `letter` (brevteksten). Brevet har ekstra linjeavstand, så det er behagelig å lese gjennom i steg 5. Størrelsene er [ANTAKELSE]. Brødtekst er aldri mindre enn 16 px på mobil, slik at iOS ikke zoomer inn i skjemafelt.
+Rollene er `heading` (stegtittel, én per side), `heading-sm` (korttitler), `body`, `small` (begrunnelser og hjelpetekst), `label` (feltetiketter), `tag` («Matcher» og «Mangler») og `letter` (brevteksten). Brevet har ekstra linjeavstand, så det er behagelig å lese gjennom og rette i steg 4. Størrelsene er [ANTAKELSE]. Tokenene er oppgitt i px for lesbarhetens skyld, men skrives i `rem` i CSS (16 px = 1 rem), slik at brukerens egen standard skriftstørrelse følges. Tekst i skjemafelt er aldri mindre enn 16 px, slik at iOS ikke zoomer inn.
 
 ## Layout & Spacing
 
@@ -196,7 +223,7 @@ Avstandene følger en 4-basert skala [ANTAKELSE]. Det er 16 px inni kort, 16 px 
 
 ## Elevation & Depth
 
-**Flatt.** Det finnes ingen skygger. Lag skilles med tynne kantlinjer (`{colors.border}`) og den svake fargeforskjellen mellom `background` og `surface`. Det eneste som «løfter seg», er ✓-merket på «Ferdig», og det gjør det med farge og størrelse, ikke med skygge.
+**Flatt.** Det finnes ingen skygger. Lag skilles med tynne kantlinjer (`{colors.border}`) og den svake fargeforskjellen mellom `background` og `surface`. Det eneste som «løfter seg», er ✓-merket når utkastet er klart (steg 4), og det gjør det med farge og størrelse, ikke med skygge.
 
 ## Shapes
 
@@ -208,10 +235,18 @@ Middels runde hjørner gjør appen vennlig uten at den blir leken.
 
 ## Components
 
-- **Topplinje.** Navnet på appen står til venstre. «Min konto» og «Logg ut» står som tekstlenker til høyre, også på mobil. Linjen har `{colors.surface}` med en kantlinje under.
+- **Topplinje.** Navnet på appen står til venstre. «Min konto» (lenke) og «Logg ut» (en knapp som ser ut som en lenke) står til høyre, også på mobil. Begge er understreket og har padding som gir minst 44 px trykkflate. Linjen har `{colors.surface}` med en kantlinje under.
 - **Testmodus-banner.** Det står over topplinjen på alle sider i testmodus (FR-9), med `{colors.info-bg}` og vanlig tekst.
-- **Fremdriftslinje.** Seks streker på 4 px. Fullførte steg er `{colors.accent}`, det aktive steget er aksentfargen med 50 % gjennomsiktighet, og kommende steg er `{colors.border}`. Under strekene står «Steg 4 av 6 · Analyse» i `small`.
-- **Hovedknapp.** Fylt med aksentfargen og minst 44 px høy. Det er én hovedknapp per steg, nederst til høyre ved siden av «Tilbake».
+- **Fremdriftslinje.** Fire like brede celler, én per steg. Hver celle har en strek øverst og stegnavnet under i `small`. Navnet er kort på mobil («CV», «Annonse», «Analyse», «Søknad») og fullt fra 600 px.
+  - Fullførte steg: strek i `{colors.accent}` og navnet som understreket lenke.
+  - Aktivt steg: strek i `{colors.accent}` på 8 px og navnet i halvfet skrift.
+  - Kommende steg: strek i `{colors.field-border}` og navnet i `{colors.text-muted}`.
+  - Hele cellen er trykkflaten og er minst 44 px høy.
+  - Statusen vises med tykkelse og skriftvekt i tillegg til farge, ikke med gjennomsiktighet.
+- **Hovedknapp.** Fylt med aksentfargen og minst 44 px høy. Det er én hovedknapp per steg, nederst til høyre ved siden av «Tilbake». **Mens den venter** («Jobber …») beholder den fargene sine, viser en liten roterende indikator og får markøren `progress`. Den blir ikke dempet, slik at teksten fortsatt er lesbar.
+- **Lenke.** Aksentfarge, alltid understreket, med 3 px avstand til streken.
+- **KI-merke.** En liten pille øverst til høyre i et kort, i `tag`-typografi, dempet tekst og med tynn kant: «Laget av KI» på kort med KI-tekst, og «Telt automatisk» på nøkkelordkortet. Den skal synes uten å konkurrere med innholdet.
+- **KI-varsel.** En linje med ⚠ og `{colors.missing-bg}` som bakgrunn, og teksten i `{colors.text}`. Den står øverst i steg 3 og over brevet i steg 4.
 - **Sekundærknapp.** Hvit med `field-border`.
 - **Fareknapp.** Rød fyll. Den brukes bare i bekreftelsen av sletting.
 - **Kort.** `surface` med 1 px kantlinje og 10 px hjørner, uten skygge. Korttittelen står i `heading-sm` eller `label`.
@@ -220,10 +255,10 @@ Middels runde hjørner gjør appen vennlig uten at den blir leken.
 - **Nøkkelordmåler.** En stolpe på 8 px med andelen funnet i aksentfargen og teksten «7 av 10 funnet» over.
 - **Skjemafelt.** 1 px `field-border`, 6 px hjørner og minst 44 px høyde. Etiketten står over feltet. Feilmeldingen står under feltet i fare-farge, med et ikon.
 - **Fokusring.** 2 px aksentfarge med 2 px avstand, på alt som kan få fokus.
-- **Ferdig-merke.** En sirkel på 64 px i aksentfargen med et hvitt ✓. Den skaleres kort inn (cirka 300 ms) og står stille ved `prefers-reduced-motion`.
-- **Brev.** Står i et kort med `letter`-typografi og en varsellinje over: «KI kan gjøre feil – les gjennom før du sender».
+- **Utkast-merke.** En sirkel på 64 px i aksentfargen med et hvitt ✓, og «Utkastet er klart» i `heading` under. Den skaleres kort inn (cirka 300 ms) og står stille ved `prefers-reduced-motion`.
+- **Brev.** Et redigerbart tekstfelt med `letter`-typografi, `field-border`, 6 px hjørner og høyde som passer brevet (minst 16 linjer). KI-varselet står over feltet.
 
-Nøkkelskjermene vises i [`.working/directions-2.html`](.working/directions-2.html) (steg 4, «3 – C dempet»). Dokumentet her går foran mockupen hvis de er uenige.
+Nøkkelskjermene ligger i [`mockups/`](mockups/): [steg 1](mockups/key-steg1-testmodus.html), [steg 2](mockups/key-steg2-annonse.html), [steg 3](mockups/key-steg3-analyse.html) og [steg 4](mockups/key-steg4-soknad.html). Dokumentet her går foran mockupene hvis de er uenige.
 
 ## Do's and Don'ts
 
@@ -236,3 +271,6 @@ Nøkkelskjermene vises i [`.working/directions-2.html`](.working/directions-2.ht
 | Hold én midtkolonne på maks 720 px | Bruke flerkolonne-oppsett på PC |
 | Bruk systemskrift | Laste skrift eller ikoner fra nettet |
 | Ha én hovedknapp per steg | Ha flere fylte knapper som konkurrerer |
+| Understrek alle lenker | Skille lenker fra tekst bare med farge |
+| Merk det KI har laget («Laget av KI») | La KI-tekst og tellinger fra koden se like sikre ut |
+| Vis status med form og tekst i tillegg til farge | Bruke gjennomsiktighet som eneste statusmarkering |
