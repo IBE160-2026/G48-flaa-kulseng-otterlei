@@ -1,0 +1,31 @@
+Emma Haugen
+Student i informatikk
+E-post: emma.haugen@example.com | Telefon: 123 45 678 | Molde
+
+PROFIL
+Tredjeårsstudent i informatikk som liker å programmere i Python og å løse problemer for folk. Har to års erfaring fra kundeservice ved siden av studiene.
+
+UTDANNING
+2024–2027  Bachelor i informatikk, Høgskolen i Fjordvik (pågår)
+           Relevante emner: programmering i Python, objektorientert programmering, webutvikling, systemutvikling
+2021–2024  Studiespesialisering, Kvamsli videregående skole
+
+ERFARING
+2024–nå    Kundeservicemedarbeider (deltid, 30 %), Fjordlys Telekom AS
+           - Svarer på telefon og chat fra privatkunder, rundt 40 henvendelser per vakt
+           - Hjelper kunder med å feilsøke ruter og nettverk
+           - Lærer opp nye kolleger i kundesystemet
+Sommer 2023  Butikkmedarbeider, Romsdal Sport og Fritid
+           - Kassearbeid, varemottak og kundeveiledning
+
+PROSJEKTER
+2025       Værvarsel-app i Python (gruppeprosjekt, tre personer)
+           - Henter værdata fra et åpent API og viser varselet i terminalen
+           - Brukte Git og GitHub med egne brancher og pull requests
+2024       Budsjettverktøy i Python (eget prosjekt)
+           - Leser kontoutskrifter fra CSV-filer og lager diagram med matplotlib
+
+FERDIGHETER
+Programmering: Python, HTML, CSS
+Verktøy: Git, GitHub, Visual Studio Code
+Språk: norsk (morsmål), engelsk (flytende)
