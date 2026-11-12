@@ -37,4 +37,4 @@ Få et forslag til hvordan de tre i gruppa kan fordele ansvaret, og hvordan vi k
 - Nytt dokument: `docs/arbeidsfordeling.md`.
 - README lenker til dokumentet og viser det i mappestrukturen.
 
-**Gjenstår:** Punkt 2–4 i §5 i dokumentet. Punkt 1, fordelingen, ble bekreftet 2026-11-12.
+**Gjenstår:** Punkt 4 i §5 i dokumentet. Punkt 1 (fordelingen) ble bekreftet 2026-11-12, og punkt 2 og 3 ble løst i PR #14.
