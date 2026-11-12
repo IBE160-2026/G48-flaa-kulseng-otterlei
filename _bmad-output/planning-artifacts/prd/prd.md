@@ -10,7 +10,7 @@ updated: 2026-11-12
 **Gutta krutt (G48)** — IBE160 Programmering med KI, Høgskolen i Molde, høst 2026
 Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei
 
-_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19) og gjennomgått av hele gruppa i pull request #4. Claudes antagelser ble bekreftet av gruppa og er samlet i §12. Oppdatert etter en ny gjennomgang i gruppa 2026-11-03 (ny frist, lagrede svar, brevoppsett i PDF) og etter [faglærers tilbakemelding](tilbakemelding-prd.md) 2026-11-12 (evalueringskjøring, resultat i tre deler, sjekkbar fasit, nødplan for kutt). Endringene er forklart i [docs/endringer/endringer-prd.md](../../../docs/endringer/endringer-prd.md). Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
+_Skrevet av Claude Code i rask modus etter gruppas svar (2026-10-19) og gjennomgått av hele gruppa i pull request #4. Claudes antagelser ble bekreftet av gruppa og er samlet i §12. Oppdatert etter en ny gjennomgang i gruppa 2026-11-03 (ny frist, lagrede svar, brevoppsett i PDF) og etter [faglærers tilbakemelding](tilbakemelding-prd.md) 2026-11-12 (evalueringskjøring, resultat i tre deler, sjekkbar fasit, nødplan for kutt). Skjermbildene (§6) og fire konsekvenser ble rettet etter UX-en 2026-11-12. Endringene er forklart i [docs/endringer/endringer-prd.md](../../../docs/endringer/endringer-prd.md). Beslutningene bak dokumentet står i [beslutningsloggen](.memlog.md)._
 
 ## 0. Om dokumentet
 
@@ -169,6 +169,7 @@ Brukeren kan få et sammenhengende søknadsbrev når svarformen er «fullt utkas
 - Brevet er tilpasset stillingsannonsen: det nevner stillingen og minst to krav som matcher.
 - For hvert eksempelpar inneholder hvert avsnitt i brevet minst ett krav fra stillingsannonsen eller ett punkt fra fasitens liste over fakta i CV-en.
 - Brevet bruker ingen av flosklene som står i sjekklisten i fasiten.
+- Brukeren kan rette brevet i et tekstfelt før kopiering og eksport. Endringene følger med kopieringen og eksporten, men lagres ikke.
 
 #### FR-7: Få brevforslag (kun forslag)
 
@@ -177,6 +178,7 @@ Brukeren kan få en punktliste med brevforslag i stedet for et ferdig brev når 
 **Konsekvenser (testbare):**
 - Resultatet er en punktliste, ikke et sammenhengende brev.
 - For hvert eksempelpar inneholder hvert forslag et krav fra stillingsannonsen eller et punkt fra fasitens liste over fakta i CV-en.
+- Brukeren kan rette brevforslagene før kopiering og eksport. Endringene lagres ikke.
 
 #### FR-8: Ingen oppdiktede påstander
 
@@ -232,6 +234,7 @@ En besøkende kan registrere seg med e-post og passord.
 - En e-post som allerede er registrert, gir en melding og ingen ny konto.
 - Passord under 8 tegn avvises. Det er ingen andre passordregler.
 - Passord lagres bare som hash med en anerkjent algoritme for passord, aldri i klartekst.
+- Kontoen kan ikke lages uten at brukeren krysser av for at hen har lest hvordan appen behandler CV-en (NFR-4).
 
 #### FR-13: Logge inn og ut
 
@@ -264,6 +267,7 @@ Brukeren kan slette dokumentene sine. Realiserer UJ-4.
 **Konsekvenser (testbare):**
 - Brukeren må bekrefte før noe slettes.
 - Etter sletting finnes ingen av brukerens dokumenter i databasen.
+- **«Start ny søknad»** sletter bare resultatet (analysen, brevet og CV-forbedringsforslagene) og beholder CV-en. Også her må brukeren bekrefte først.
 
 #### FR-17: Slette konto
 
@@ -371,12 +375,14 @@ Evalueringen tar også med en egen eksempelannonse med en innebygd instruksjon t
 
 ## 6. Skjermbilder
 
-Et utgangspunkt for UX-skissene. Inndelingen skal prøves ut i UX-steget.
+Inndelingen ble prøvd ut i UX-steget 2026-11-12. «Ny analyse» og «Resultat» ble da en veiviser i fire steg. Detaljene står i [EXPERIENCE.md](../ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md).
 
-1. **Registrer / logg inn**
-2. **Ny analyse:** opplasting av CV, CV-teksten, stillingsannonsen, språk, ønskede nøkkelord og knappen «Analyser». I testmodus også knappene «Prøv med eksempel A / B / C».
-3. **Resultat:** gap-analysen og ATS-nøkkelordanalysen øverst. Under dem valg av tone og svarform med en knapp for søknadsbrev eller brevforslag, og en knapp for CV-forbedringsforslag. Kopier og eksporter ved brevet, og varselet «KI kan gjøre feil – les gjennom før du sender».
-4. **Min konto:** slett dokumenter, slett konto og informasjon om hva som lagres og hva som sendes til KI-tjenesten.
+1. **Registrer / logg inn:** registreringen har en avkrysning for personvern (FR-12).
+2. **Steg 1, CV:** opplasting av CV og CV-teksten, som kan rettes. I testmodus også knappene «Prøv med eksempel A / B / C».
+3. **Steg 2, Annonse og valg:** stillingsannonsen, språk, ønskede nøkkelord og knappen «Analyser».
+4. **Steg 3, Analyse:** gap-analysen og ATS-nøkkelordanalysen, CV-forbedringsforslagene, og valg av tone og svarform med knappen «Lag søknad». Varselet «KI kan gjøre feil – les gjennom før du sender».
+5. **Steg 4, Søknad:** søknadsbrevet eller brevforslagene i et tekstfelt som kan rettes, kopiering og eksport, et nytt brev med annen tone eller svarform, og «Start ny søknad» (FR-16).
+6. **Min konto:** slett dokumenter, slett konto og informasjon om hva som lagres og hva som sendes til KI-tjenesten.
 
 ## 7. Ikke-mål
 
@@ -463,7 +469,7 @@ I tillegg lages en eksempelannonse med en innebygd instruksjon til språkmodelle
 
 ## 11. Åpne spørsmål
 
-Arkitekturen i pull request #13 foreslår svar på alle tre spørsmålene. De står her til arkitekturen er flettet inn i `main`.
+**Løst:** Arkitekturen (pull request #13, flettet 2026-11-12) svarer på alle tre: Claude Opus 5.5 (AD-4), en ordliste i kode (AD-7) og `pdfplumber`, som må testes mot CV C før P2 (AD-13). Spørsmålene står her som historikk.
 
 1. **Hvilken KI-leverandør og modell?** Avgjøres i arkitekturen ut fra norsk språkkvalitet, kostnad og databehandling (NFR-4).
 2. **Hvordan finner koden nøkkelordene i stillingsannonsen (FR-19)?** Det er bestemt at koden skal gjøre det, ikke språkmodellen, men ikke hvordan. Én mulighet er en ordliste over vanlige ferdigheter, verktøy og sertifikater. Avgjøres i arkitekturen.
@@ -488,7 +494,7 @@ Claude foreslo disse punktene i første utkast, uten at gruppa hadde bestemt dem
 - §5 NFR-5: Tidsgrense på 60 sekunder per KI-kall.
 - §5 NFR-7: WCAG 2.1 AA som mål der det er rimelig.
 - §5 NFR-8: Grensesnittet er bare på norsk.
-- §6: Inndelingen i fire skjermbilder.
+- §6: Inndelingen i fire skjermbilder. Erstattet av veiviseren fra UX-en 2026-11-12 (se under).
 
 ### Forslag fra gjennomgangen 2026-11-03
 
@@ -517,3 +523,12 @@ Claudes forslag, bygget på faglærers forslag og arkitekturen i pull request #1
 - FR-2: Endret CV-tekst sletter resultatet (AD-8), og CV-tekst over 30 000 tegn avvises (AD-15).
 - UJ-1: Emma bytter tone på brevet, for å vise at bare brevet byttes ut.
 - FR-2, FR-3, FR-9: Lagt til hvilken brukerreise kravene realiserer (mekanisk funn i tilbakemeldingen).
+
+### Endringer etter UX-en 2026-11-12
+
+UX-en ([EXPERIENCE.md](../ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md), «Avvik fra PRD og arkitektur») avvek fra PRD-en på fire punkter. Henrik valgte dem i UX-økten, og Ole og Haakon godkjente UX-en i pull request #15 (2026-11-12). Punktene er ført inn her:
+
+- §6: Veiviser i fire steg i stedet for skjermbildene «Ny analyse» og «Resultat».
+- FR-12: Avkrysning for personvern ved registrering.
+- FR-6, FR-7: Brevet kan rettes før kopiering og eksport, men endringene lagres ikke.
+- FR-16: «Start ny søknad» sletter resultatet og beholder CV-en.

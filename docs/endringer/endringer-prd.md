@@ -74,8 +74,19 @@ Faglærer pekte på fem forbedringer (4.1–4.5), der tre måtte avklares før U
 - **§12:** Har en ny del som skiller mellom det Haakon valgte i økten og det som er Claudes forslag.
 - **Addendum:** Fast format er nå et krav, og det er lagt til notater om evalueringskjøringen og resultat i tre deler.
 
+## Endringer etter UX-en (2026-11-12)
+
+Dette er ikke en endring etter faglærers tilbakemelding, men står her for å samle endringene i PRD-en. UX-en (pull request #15) gjorde om skjermbildene til en veiviser i fire steg, og det ga fire avvik fra PRD-en. Henrik valgte dem i UX-økten, og Ole og Haakon godkjente dem i pull request #15.
+
+| Før | Etter |
+|---|---|
+| §6: skjermbildene «Ny analyse» og «Resultat» | Veiviser i fire steg: CV, Annonse og valg, Analyse, Søknad |
+| FR-12: e-post og passord | I tillegg en avkrysning for personvern |
+| FR-6, FR-7: brevet vises | Brevet kan rettes før kopiering og eksport, men endringene lagres ikke |
+| FR-16: «Slett mine dokumenter» | I tillegg «Start ny søknad», som sletter resultatet og beholder CV-en |
+
 ## Hva som gjenstår
 
 - **Eksempelparene med fasit** skal lages innen 18. november (Haakon), sammen med eksempelannonsen med innebygd instruksjon.
 - **Refleksjonsspørsmålene** i tilbakemeldingens §7 er ikke besvart i PRD-en. De passer bedre i refleksjonsrapporten.
-- **Arkitekturen (PR #13)** bør sjekkes mot PRD-en når begge er flettet. Den bygger allerede på de samme forslagene (AD-4 – AD-8, AD-15).
+- ~~**Arkitekturen (PR #13)** bør sjekkes mot PRD-en når begge er flettet.~~ **Løst 2026-11-12:** Arkitekturen er sjekket og oppdatert etter UX-en (AD-22), og er satt til `final`.
