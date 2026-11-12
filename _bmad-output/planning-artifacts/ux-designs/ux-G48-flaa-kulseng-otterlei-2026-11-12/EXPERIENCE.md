@@ -225,15 +225,15 @@ _Jonas studerer logistikk og søker et graduate-program med engelsk annonse. Han
 4. **Klimaks:** «Dokumentene dine er slettet.» Neste gang hun logger inn, starter hun i steg 1 uten noen CV.
 5. Senere sletter hun hele kontoen på samme måte. Hun blir logget ut, og e-posten kan registreres på nytt (FR-17).
 
-## Minste versjon og kuttrekkefølge
+## Kutt i grensesnittet
 
-PRD-en har en nødplan (§8.1). Er ikke kjerneflyten P1–P5 ferdig og testet 2. desember, kuttes i denne rekkefølgen:
+Gruppas svar på faglærers punkt 4.2 er nødplanen i PRD-en (§8.1). Er ikke kjerneflyten P1–P5 ferdig og testet 2. desember, kuttes i denne rekkefølgen:
 
 1. brevoppsettet i PDF
 2. CV-forbedringsforslag (P6)
 3. KI-forklaringen i ATS-analysen
 
-Arkitekturen merker i tillegg hash-testen av promptene som mulig kutt (AD-6). Listen under gjelder bare UX-en og kommer i tillegg til nødplanen. _Den er et forslag, og gruppa bekrefter den i pull requesten._
+Arkitekturen merker i tillegg hash-testen av promptene som mulig kutt (AD-6). Listen under er **kutt i grensesnittet**. Den kommer i tillegg til nødplanen og erstatter den ikke. _Den er et forslag, og gruppa bekrefter den i pull requesten._
 
 **Må være med** (kjerneflyten og det kurset vurderer):
 
@@ -299,7 +299,7 @@ Nøkkelskjermene ligger i `mockups/`. De viser mobilbredde i lys og mørk modus.
 - [`mockups/key-steg2-annonse.html`](mockups/key-steg2-annonse.html): steg 2 med personvernpåminnelse og ventetilstand
 - [`mockups/key-steg3-analyse.html`](mockups/key-steg3-analyse.html): steg 3 med KI-merker, CV-forslag og «Lag søknad» med valg av svarform
 - [`mockups/key-steg4-soknad.html`](mockups/key-steg4-soknad.html): steg 4 med «Utkastet er klart», redigerbart brev og nedlasting
-- Designretningene: [runde 1](.working/directions-1.html) og [runde 2](.working/directions-2.html)
+- Designretningene: [runde 1](.working/directions-1.html) og [runde 2](.working/directions-2.html). `.working/` er prosesshistorikk og viser hvordan retningen ble valgt. De første mockupene, med seks steg, er slettet. De finnes i git-historikken (commit `28fb5f0`).
 
 ## Åpne punkter
 
