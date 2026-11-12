@@ -1,7 +1,7 @@
 ---
 name: Søknadshjelpen (plassholder)
 description: Visuell identitet for AI CV & Job Application Assistant. Rolig, ryddig og blågrønn, for norske studenter som skal skreddersy en søknad uten å streve. Egen CSS i Django-maler, uten UI-rammeverk.
-status: draft
+status: final
 updated: 2026-11-12
 sources:
   - ../../prd/prd.md

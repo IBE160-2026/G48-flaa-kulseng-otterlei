@@ -1,6 +1,6 @@
 ---
 name: Søknadshjelpen (plassholder)
-status: draft
+status: final
 updated: 2026-11-12
 sources:
   - ../../product-brief.md
@@ -12,7 +12,7 @@ sources:
 
 # Søknadshjelpen: hvordan appen oppfører seg
 
-_Laget med `bmad-ux` i grundig modus 2026-11-12. Henrik tok valgene, og Claude Code skrev dokumentet. Etter første utkast gikk tre KI-reviewere gjennom dokumentene (sjekkliste, tilgjengelighet og motstander, se [valideringsrapporten](validation-report.md)). Henrik endret deretter veiviseren fra seks til fire steg. Alle beslutningene står med begrunnelse i [beslutningsloggen](.memlog.md). Claudes utfylling var merket «[ANTAKELSE]» i utkastet. Henrik godtok alle punktene 2026-11-12, og merkene er fjernet._
+_Laget med `bmad-ux` i grundig modus 2026-11-12. Henrik tok valgene, og Claude Code skrev dokumentet. Etter første utkast gikk tre KI-reviewere gjennom dokumentene (sjekkliste, tilgjengelighet og motstander, se [valideringsrapporten](validation-report.md)). Henrik endret deretter veiviseren fra seks til fire steg. Ole og Haakon gikk gjennom dokumentene i PR #15 2026-11-12. Vurderingene deres står under Åpne punkter. Alle beslutningene står med begrunnelse i [beslutningsloggen](.memlog.md). Claudes utfylling var merket «[ANTAKELSE]» i utkastet. Henrik godtok alle punktene 2026-11-12, og merkene er fjernet._
 
 _AD-nummer viser til [arkitekturen](../../architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/ARCHITECTURE-SPINE.md) (flettet i PR #13). PRD-en er rettet etter faglærers tilbakemelding i PR #14, og UX-en er sjekket mot den versjonen._
 
@@ -305,4 +305,4 @@ Nøkkelskjermene ligger i `mockups/`. De viser mobilbredde i lys og mørk modus.
 
 - **Appnavn:** «Søknadshjelpen» er en plassholder. Gruppa bestemmer navnet.
 - ~~**[ANTAKELSE]-punkter**~~ **Løst 2026-11-12:** Henrik godtok alle Claudes antakelser: farger for fare og info, typografistørrelser, avstander, egen bekreftelsesside for sletting og ordlyden ved forbruksgrensen. Merkene er fjernet. Ole og Haakon kan si fra i PR #15 hvis de er uenige.
-- **Gruppas godkjenning:** når pull requesten er gjennomgått, legges det inn en linje her om at Ole og Haakon har vurdert valgene, med dato.
+- ~~**Gruppas godkjenning**~~ **Løst 2026-11-12:** Ole og Haakon gikk gjennom PR #15. Ole er enig i fire steg og i at «Start ny søknad» sletter analysen. Haakon er enig i det samme, liker stilen «C dempet», synes «Søknadshjelpen» er greit som navn, og godtar alle antakelsene.
