@@ -37,13 +37,17 @@
 - **Par B:** CV, annonse og fasit godkjent uten endringer. Haakon beholdt `andel` med slingringsmonn i testen, og ba om feltet `tone` i alle fasitene.
 - **Par C:** Haakon spurte om CV-en burde være på norsk eller engelsk, og valgte norsk CV etter Claudes anbefaling, fordi det er det vanlige tilfellet for norske studenter. Han ba om at det doble `sprak`-feltet fjernes fra alle fasitene.
 - **Par D:** Haakon lot Claude velge («gjør det som er best»). Claude valgte samme CV som A, og at `finn_eksempelpar` bare ser på A–C.
-- **Arkitekturen:** Fasitformatet har nå detaljer som ikke står i AD-17. Arkitekturen oppdateres ikke i denne pull requesten, fordi PR #25 endrer samme dokument. Det gjøres etter at #25 er flettet.
+- **Arkitekturen:** Claude foreslo å vente med å oppdatere arkitekturen til PR #25 var flettet, for å unngå konflikter, og Haakon sa ja. #25 ble flettet mens denne pull requesten ble laget, og da førte Claude beslutningene fra økten inn i arkitekturen. Ingen nye valg ble tatt.
 
 ## Resultat
 
 - Eksempelpar A–D med fasit ligger i `app/testdata/eksempler/`, og skriptet ligger i `app/testdata/lag_cv_pdf.py`. Fonten ligger i `app/eksport/fonter/`.
 - README har fått den nye mappen og en oversikt over eksempelparene.
+- Arkitekturen er oppdatert:
+  - AD-6: `finn_eksempelpar` ser bare på A–C
+  - AD-13: resultatet av PDF-prøven
+  - AD-17: fasitformatet
+  - §8 punkt 3 er merket som løst
 - **Gjenstår:**
-  - legge fasitformatet inn i AD-17 og merke punkt 3 i arkitekturens §8 som løst, etter at PR #25 er flettet
   - `ordliste.json` med synonymene parene trenger
   - innlesingen av PDF med kolonner (P1)
