@@ -17,7 +17,8 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 ├── _bmad/                         BMAD-rammeverket (planleggingsverktøy)
 ├── _bmad-output/
 │   └── planning-artifacts/        Planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics)
-│       └── prd/                   PRD med addendum og beslutningslogg
+│       ├── prd/                   PRD med addendum og beslutningslogg
+│       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
 ├── docs/
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
 │   ├── ki-logg/                   Logg over KI-økter: prompts, vurderinger og korrigeringer
@@ -35,6 +36,10 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 - [PRD](_bmad-output/planning-artifacts/prd/prd.md) — nummererte krav (FR og NFR), brukerreiser og prioritering
   - [Addendum](_bmad-output/planning-artifacts/prd/addendum.md) — notater til arkitektur og UX
   - [Beslutningslogg](_bmad-output/planning-artifacts/prd/.memlog.md) — beslutningene bak PRD-en, med begrunnelse
+- UX (utkast, venter på gjennomgang i gruppa)
+  - [DESIGN.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/DESIGN.md) — hvordan appen ser ut: farger, typografi og komponenter
+  - [EXPERIENCE.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md) — hvordan appen fungerer: veiviser i fire steg, tilstander, tilgjengelighet og brukerreiser
+  - [Mockups](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/mockups/) — nøkkelskjermene i HTML
 
 ## Prosessdokumentasjon
 

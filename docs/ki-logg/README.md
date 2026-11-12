@@ -9,6 +9,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-10-10 | [Oppdatering av product brief etter tilbakemelding](2026-10-10-oppdatering-product-brief.md) | Haakon |
 | 2026-10-19 – 2026-10-22 | [PRD med bmad-prd](2026-10-19-utkast-prd.md) | Haakon (gjennomgang: hele gruppa) |
 | 2026-11-03 | [Ny gjennomgang av PRD før arkitekturen](2026-11-03-gjennomgang-prd.md) | Haakon (gjennomgang: hele gruppa) |
+| 2026-11-12 | [UX med bmad-ux](2026-11-12-ux.md) | Henrik |
 
 ## Slik skriver du et innlegg
 
