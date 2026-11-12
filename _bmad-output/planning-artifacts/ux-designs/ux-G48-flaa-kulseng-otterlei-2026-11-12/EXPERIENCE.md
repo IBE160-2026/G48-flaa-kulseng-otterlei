@@ -14,7 +14,7 @@ sources:
 
 _Laget med `bmad-ux` i grundig modus 2026-11-12. Henrik tok valgene, og Claude Code skrev dokumentet. Etter første utkast gikk tre KI-reviewere gjennom dokumentene (sjekkliste, tilgjengelighet og motstander, se [valideringsrapporten](validation-report.md)). Henrik endret deretter veiviseren fra seks til fire steg. Alle beslutningene står med begrunnelse i [beslutningsloggen](.memlog.md). Punkter merket **[ANTAKELSE]** er Claudes utfylling og er ikke bekreftet. Gruppa må gå gjennom dem i pull requesten._
 
-_Arkitekturen som det vises til (AD-nummer), ligger i PR #13. Den bør flettes før denne._
+_AD-nummer viser til [arkitekturen](../../architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/ARCHITECTURE-SPINE.md) (flettet i PR #13). PRD-en er rettet etter faglærers tilbakemelding i PR #14, og UX-en er sjekket mot den versjonen._
 
 ## Foundation
 
@@ -227,9 +227,15 @@ _Jonas studerer logistikk og søker et graduate-program med engelsk annonse. Han
 
 ## Minste versjon og kuttrekkefølge
 
-_Forslag. Gruppa bekrefter i pull requesten, og listen tas inn i PRD-oppdateringen (faglærers tilbakemelding 4.2)._
+PRD-en har en nødplan (§8.1). Er ikke kjerneflyten P1–P5 ferdig og testet 2. desember, kuttes i denne rekkefølgen:
 
-**Må være med** (kjerneflyten P1–P5, og det kurset vurderer):
+1. brevoppsettet i PDF
+2. CV-forbedringsforslag (P6)
+3. KI-forklaringen i ATS-analysen
+
+Arkitekturen merker i tillegg hash-testen av promptene som mulig kutt (AD-6). Listen under gjelder bare UX-en og kommer i tillegg til nødplanen. _Den er et forslag, og gruppa bekrefter den i pull requesten._
+
+**Må være med** (kjerneflyten og det kurset vurderer):
 
 - de fire stegene med lagrede svar i testmodus
 - feiltilstandene for KI
@@ -259,16 +265,22 @@ _Forslag. Gruppa bekrefter i pull requesten, og listen tas inn i PRD-oppdatering
 
 ## Avvik fra PRD og arkitektur
 
-Disse punktene må inn i PRD-en og arkitekturen når de oppdateres. Claude anbefalte å gjøre det i en egen pull request etter at gruppa har godkjent UX-en, sammen med rettingene etter faglærers tilbakemelding. Det er gruppa som bestemmer.
+PRD-en ble rettet i PR #14 etter faglærers tilbakemelding. Den samsvarer nå med UX-en på flere punkter:
+
+- tone og svarform velges ved brevet (FR-4)
+- et nytt brev overskriver bare brevet
+- varselet «KI kan gjøre feil» (NFR-4, §6)
+- CV-forbedringene står ved gap-analysen (§6)
+- det finnes en nødplan (§8.1)
+
+Disse punktene gjenstår. Claude anbefalte å ta dem i en egen pull request etter at gruppa har godkjent UX-en. Det er gruppa som bestemmer.
 
 **PRD:**
 
-1. **§6 Skjermbilder:** «Ny analyse» og «Resultat» er erstattet av en veiviser med fire steg: CV, Annonse og valg, Analyse og Søknad. Registrer/Logg inn og Min konto er som før.
+1. **§6 Skjermbilder:** «Ny analyse» er delt i steg 1 (CV) og steg 2 (Annonse og valg). «Resultat» er delt i steg 3 (Analyse, med valg av tone og svarform og CV-forslag) og steg 4 (Søknad, med brevet, kopiering og eksport).
 2. **FR-12 Registrere konto:** en ny konsekvens er avkrysningen for personvern.
-3. **FR-4 Velge innstillinger:** språk og ønskede nøkkelord velges før analysen, mens svarform og tone velges ved «Lag søknad» (steg 3).
-4. **FR-6 og FR-7:** to nye konsekvenser. Varselet «KI kan gjøre feil – les gjennom før du sender» vises (faglærers 4.5), og brevet kan redigeres før kopiering og eksport, men endringene lagres ikke.
-5. **FR-18:** CV-forslagene vises i steg 3 og trenger ikke et brev.
-6. **§8:** kuttrekkefølgen over (faglærers 4.2).
+3. **FR-6 og FR-7:** en ny konsekvens er at brevet kan redigeres før kopiering og eksport, men at endringene ikke lagres.
+4. **«Start ny søknad»:** sletter analysen, brevet og CV-forslagene, mens CV-en beholdes. Det er en ny handling i forhold til §3 og FR-16.
 
 **Arkitektur:**
 
