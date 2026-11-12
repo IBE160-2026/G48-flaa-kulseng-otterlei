@@ -65,4 +65,14 @@ Skriv bare det som faktisk skjedde. Gruppens vurderinger og begrunnelser skal ko
 
 ## Sesjonslogg
 
-Når en oppgave eller økt avsluttes, før sluttoppsummeringen, bruk `sesjonslogg`-skillen: dokumenter Oppgave + Plan + Resultat + åpne punkter i `.logs/<bruker>/`, og før åpne punkter i `.logs/<bruker>/issues.md`. Skillen committer loggfila lokalt; push gjør du selv. Gruppens egne regler for commit og språk gjelder foran dette.
+Når en oppgave eller økt avsluttes, før sluttoppsummeringen, bruk `sesjonslogg`-skillen: dokumenter Oppgave + Plan + Resultat + åpne punkter i `.logs/<bruker>/`. Skillen committer loggfila lokalt; push gjør du selv. Gruppens egne regler for commit og språk gjelder foran dette.
+
+**Åpne punkter føres som GitHub Issues, ikke i `issues.md`.** Bruk `gh issue` i dette repoet med etiketten `agent`:
+
+- Les åpne punkter med `gh issue list --label agent --state open` før du logger, så du ikke lager duplikater.
+- Lag nye med `gh issue create --label agent`. Skriv i beskrivelsen hvilken sesjonslogg punktet kommer fra.
+- Lukk løste punkter med `gh issue close`, med en kort kommentar om hva som løste dem.
+- Skriv `Issue #N` under «Åpne punkter» i loggfila.
+- Issuene er offentlige: ingen hemmeligheter, personopplysninger eller kursmateriell.
+
+Eldre `issues.md`-filer i `.logs/` beholdes som historikk.
