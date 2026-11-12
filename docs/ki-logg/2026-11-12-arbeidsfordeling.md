@@ -29,10 +29,12 @@ Få et forslag til hvordan de tre i gruppa kan fordele ansvaret, og hvordan vi k
 
 - Ole ba om at forslaget legges inn i repoet som en pull request.
 - Resten av gruppa har ikke vurdert forslaget ennå. Fordelingen, ukeplanen og spørsmålet om kuttrekkefølge er Claudes forslag og tas opp i gjennomgangen av pull requesten. Gruppas vurderinger føres inn her etter gjennomgangen.
+- **Gjennomgangen i PR #6:** Henrik kommenterte «Dette ser smart ut», og Haakon kommenterte «Det ser bra ut, er berre å merge». PR-en ble flettet 2026-11-12.
+- **Endring:** Henrik laget arkitekturen i stedet for Ole, og Ole tar KI-laget. Ole og Henrik avtalte det i PR #13. Haakon sa seg enig i en Claude-økt samme kveld («ja, eg er enig»), og dokumentet ble satt til bekreftet.
 
 ## Resultat
 
 - Nytt dokument: `docs/arbeidsfordeling.md`.
 - README lenker til dokumentet og viser det i mappestrukturen.
 
-**Gjenstår:** Gruppa går gjennom og bekrefter eller endrer forslaget, og avgjør punktene i §5 i dokumentet.
+**Gjenstår:** Punkt 2–4 i §5 i dokumentet. Punkt 1, fordelingen, ble bekreftet 2026-11-12.

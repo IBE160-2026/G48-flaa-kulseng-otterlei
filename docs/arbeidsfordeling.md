@@ -4,12 +4,12 @@
 |---|---|
 | **Gruppe** | G48 – Gutta krutt |
 | **Dato** | 2026-11-12 |
-| **Status** | Forslag fra Claude Code, **ikke bekreftet av gruppa ennå** |
+| **Status** | Forslag fra Claude Code, **bekreftet av gruppa 2026-11-12** (pull request #6 og #13) |
 | **Frist** | 15. desember 2026 |
 
 Dette dokumentet fordeler ansvaret for resten av prosjektet mellom de tre i gruppa og setter opp en ukeplan fram til fristen. Forslaget bygger på [product brief](../_bmad-output/planning-artifacts/product-brief.md), [PRD-en](../_bmad-output/planning-artifacts/prd/prd.md), [tilbakemeldingen på PRD-en](../_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) og sensorveiledningen for del 1. Gruppa går gjennom og retter det i pull requesten før det tas i bruk. Når planen endres underveis, oppdateres dette dokumentet.
 
-**Endret 2026-11-12:** Henrik laget arkitekturen, som her var lagt til Ole. Ole tar i stedet ansvaret for KI-laget (`ki/`) når kodingen starter. Ole og Henrik avtalte det i pull request #13. Haakon har ikke vurdert endringen ennå (issue #7).
+**Endret 2026-11-12:** Henrik laget arkitekturen, som her var lagt til Ole. Ole tar i stedet ansvaret for KI-laget (`ki/`) når kodingen starter. Ole og Henrik avtalte det i pull request #13, og Haakon sa seg enig 2026-11-12.
 
 ## 1. Status 12. november
 
@@ -82,7 +82,7 @@ Hver person eier et område av appen, med både planlegging, kode og tester. Å 
 
 ## 5. Må avgjøres av gruppa
 
-1. Om fordelingen av ansvarsområder passer, eller om noe bør byttes.
+1. ~~Om fordelingen av ansvarsområder passer, eller om noe bør byttes.~~ **Avgjort 2026-11-12:** Fordelingen er bekreftet, med byttet mellom Ole og Henrik over.
 2. Hvordan tilbakemeldingene 4.1–4.3 på PRD-en skal løses.
 3. Om det skal skrives ned en kuttrekkefølge til bruk hvis tiden blir knapp. Gruppa har tidligere bestemt at ingenting skal kuttes. Faglærer har nå pekt på dette for andre gang, og en rekkefølge som bare brukes i nødstilfelle, endrer ikke det målet.
 4. Om `main` skal kreve én godkjenning før fletting (GitHub → Settings → Branches).
