@@ -41,6 +41,8 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 - [KI-logg](docs/ki-logg/README.md) — hvordan vi har brukt og styrt KI, økt for økt
 - [Tilbakemelding på product brief](docs/tilbakemeldinger/tilbakemelding-product-brief.md) — faglærers vurdering av versjon 1
 - [Endringer i product brief](docs/endringer/endringer-product-brief.md) — hva som er endret etter tilbakemeldingen, og hvorfor
+- [Tilbakemelding på PRD](_bmad-output/planning-artifacts/prd/tilbakemelding-prd.md) — faglærers formative vurdering 2026-11-12
+- [Endringer i PRD](docs/endringer/endringer-prd.md) — hva som er endret etter tilbakemeldingen, og hvorfor
 
 ## Arbeidsflyt
 
