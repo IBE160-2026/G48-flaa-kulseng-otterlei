@@ -18,7 +18,8 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 ├── _bmad-output/
 │   └── planning-artifacts/        Planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics)
 │       ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
-│       └── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
+│       ├── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
+│       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
 ├── docs/
 │   ├── arbeidsfordeling.md        Ansvarsområder og ukeplan fram til fristen
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
@@ -42,6 +43,10 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
   - [Beslutningslogg](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/.memlog.md) — hvem som bestemte hva, og når
   - [KI-gjennomganger](_bmad-output/planning-artifacts/architecture/architecture-G48-flaa-kulseng-otterlei-2026-11-03/reviews/) — tre uavhengige kontroller av utkastet
   - [Teknologioversikt fra faglærer](_bmad-output/planning-artifacts/architecture/technology.md) — referanse
+- UX
+  - [DESIGN.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/DESIGN.md) — hvordan appen ser ut: farger, typografi og komponenter
+  - [EXPERIENCE.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md) — hvordan appen fungerer: veiviser i fire steg, tilstander, tilgjengelighet og brukerreiser
+  - [Mockups](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/mockups/) — nøkkelskjermene i HTML
 
 ## Prosessdokumentasjon
 

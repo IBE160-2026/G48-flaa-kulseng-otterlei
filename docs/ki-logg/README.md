@@ -13,6 +13,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-11-03 – 2026-11-12 | [Arkitektur med bmad-architecture](2026-11-12-arkitektur.md) | Henrik |
 | 2026-11-12 | [PRD rettet etter faglærers tilbakemelding](2026-11-12-prd-tilbakemelding.md) | Haakon |
 | 2026-11-12 | [Åpne punkter som GitHub Issues](2026-11-12-apne-punkter-issues.md) | Ole |
+| 2026-11-12 | [UX med bmad-ux](2026-11-12-ux.md) | Henrik |
 | 2026-11-12 | [Konflikter i KI-loggtabellen og gjennomgang av PR #12 og #15](2026-11-12-konflikter-og-gjennomgang.md) | Haakon |
 
 ## Slik skriver du et innlegg
