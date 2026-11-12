@@ -1,5 +1,5 @@
 ---
-name: Søknadshjelpen (plassholder)
+name: Søknadshjelpen
 status: final
 updated: 2026-11-12
 sources:
@@ -303,6 +303,6 @@ Nøkkelskjermene ligger i `mockups/`. De viser mobilbredde i lys og mørk modus.
 
 ## Åpne punkter
 
-- **Appnavn:** «Søknadshjelpen» er en plassholder. Gruppa bestemmer navnet.
+- ~~**Appnavn**~~ **Løst 2026-11-12:** Appen heter «Søknadshjelpen». Haakon foreslo å beholde navnet, og Henrik valgte det (issue #19).
 - ~~**[ANTAKELSE]-punkter**~~ **Løst 2026-11-12:** Henrik godtok alle Claudes antakelser: farger for fare og info, typografistørrelser, avstander, egen bekreftelsesside for sletting og ordlyden ved forbruksgrensen. Merkene er fjernet. Ole og Haakon kan si fra i PR #15 hvis de er uenige.
 - ~~**Gruppas godkjenning**~~ **Løst 2026-11-12:** Ole og Haakon gikk gjennom PR #15. Ole er enig i fire steg og i at «Start ny søknad» sletter analysen. Haakon er enig i det samme, liker stilen «C dempet», synes «Søknadshjelpen» er greit som navn, og godtar alle antakelsene.
