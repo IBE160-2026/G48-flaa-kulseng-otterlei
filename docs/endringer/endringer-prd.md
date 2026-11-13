@@ -85,6 +85,16 @@ Dette er ikke en endring etter faglærers tilbakemelding, men står her for å s
 | FR-6, FR-7: brevet vises | Brevet kan rettes før kopiering og eksport, men endringene lagres ikke |
 | FR-16: «Slett mine dokumenter» | I tillegg «Start ny søknad», som sletter resultatet og beholder CV-en |
 
+## Presisering av NFR-4 (2026-11-13)
+
+Dette er heller ikke en endring etter faglærers tilbakemelding. Eksempelparene (pull request #26) viste at arkitekturen (AD-5) sa at navn og e-post aldri sendes til KI, mens alle CV-ene har navn og kontaktinformasjon øverst, og CV-teksten sendes. NFR-4 er presisert slik at det står det appen faktisk gjør.
+
+| Før | Etter |
+|---|---|
+| NFR-4: «aldri e-post eller passord» | Aldri e-posten og passordet til kontoen. CV-teksten sendes slik den står, også med navn og kontaktinformasjon, og brukeren får vite at det kan fjernes når CV-teksten rettes. |
+
+**Hvorfor:** Henrik heller mot en presisering i stedet for at appen fjerner kontaktinformasjonen selv: CV-en må sendes for at analysen skal fungere, og brukeren laster den opp selv. Ole tok opp avviket i PR #26 med begge alternativene, etter Claudes gjennomgang. Haakon må bekrefte i pull requesten. Den samme presiseringen er gjort i AD-5, i personvernpåminnelsen i steg 2 og i forklaringen i «Min konto» i UX-en.
+
 ## Hva som gjenstår
 
 - **Eksempelparene med fasit** skal lages innen 18. november (Haakon), sammen med eksempelannonsen med innebygd instruksjon.
