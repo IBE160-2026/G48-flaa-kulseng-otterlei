@@ -20,6 +20,9 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 │       ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
 │       ├── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
 │       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
+├── app/                           Django-appen (kommer i Epic 0)
+│   ├── eksport/fonter/            Fonten DejaVu Sans for PDF med æ, ø og å (AD-13)
+│   └── testdata/                  Eksempelpar A–D med fasit (PRD §10) og skriptet som lager CV-PDF-ene
 ├── docs/
 │   ├── arbeidsfordeling.md        Ansvarsområder og ukeplan fram til fristen
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
@@ -47,6 +50,19 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
   - [DESIGN.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/DESIGN.md) — hvordan appen ser ut: farger, typografi og komponenter
   - [EXPERIENCE.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md) — hvordan appen fungerer: veiviser i fire steg, tilstander, tilgjengelighet og brukerreiser
   - [Mockups](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/mockups/) — nøkkelskjermene i HTML
+
+## Eksempeldata med fasit
+
+Fire oppdiktede eksempelpar (CV og stillingsannonse) ligger i [`app/testdata/eksempler/`](app/testdata/eksempler/). De brukes i de automatiske testene, i testmodusen for sensor og i evalueringen av KI-svarene. Hvert par har en `fasit.json` med fakta i CV-en, krav som matcher og mangler, nøkkelord, floskler og forventet språk og tone.
+
+| Par | CV | Annonse | Tester |
+|---|---|---|---|
+| A | Emma, IT-student (PDF) | Junior utvikler (norsk) | Kjerneflyten og at brevet ikke dikter opp SQL eller førerkort |
+| B | Sofie, økonomistudent (TXT) | Regnskapsassistent (norsk) | TXT-opplasting og uformell tone |
+| C | Jonas, logistikkstudent (PDF i to kolonner) | Graduate trainee (engelsk) | Vanskelig PDF-layout og engelsk brev fra norsk CV |
+| D | Samme som A | Annonse A med en gjemt instruksjon til KI-en | At annonsen behandles som data (bare i evalueringen) |
+
+CV-PDF-ene lages fra `cv_kilde.txt` med `python testdata/lag_cv_pdf.py <par>`, kjørt fra `app/` (krever `fpdf2`).
 
 ## Prosessdokumentasjon
 

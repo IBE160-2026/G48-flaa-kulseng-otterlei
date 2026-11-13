@@ -182,7 +182,7 @@ flowchart LR
     - `hent_eksempelpar(par)` gir CV-fil, annonse og `Fasit`.
     - `normaliser(tekst)` gjør Unicode NFC, `\r\n` og `\r` til `\n`, fjerner mellomrom på slutten av linjene, slår sammen tre eller flere linjeskift til to, og fjerner mellomrom først og sist.
     - `eksempel_hash(cv_tekst, annonse)` er `sha256(normaliser(cv_tekst) + "\n\x1e\n" + normaliser(annonse))`.
-    - `finn_eksempelpar(cv_tekst) -> par | None` sammenligner `normaliser(cv_tekst)` med referanseteksten til hvert par, og gir paret som er likt, eller `None`. Den brukes i steg 2, der annonsen ikke finnes ennå (AD-22).
+    - `finn_eksempelpar(cv_tekst) -> par | None` sammenligner `normaliser(cv_tekst)` med referanseteksten til par A, B og C, og gir paret som er likt, eller `None`. Den brukes i steg 2, der annonsen ikke finnes ennå (AD-22). Par D er ikke med, fordi det har samme CV som A og bare brukes i evalueringen.
     - `svarfil(par, operasjon, **innstillinger)` gir filnavnet i `testdata/eksempler/<par>/svar/`.
   - **Referanseteksten** for et par er alltid `les_cv()` (AD-13) på parets CV-fil og `annonse.txt`. Hashene regnes ut når appen starter, og lagres ikke. «Prøv med eksempel» og `TestmodusKlient` bruker de samme funksjonene. En test sjekker at teksten skjemaet fyller inn, gir treff når den sendes tilbake med `\r\n`.
   - Treffer hashen ikke et par, kaster `TestmodusKlient` unntaket `IkkeITestmodus`.
@@ -325,6 +325,7 @@ erDiagram
 - **Begrunnelse:** `pdfplumber` leser tekst med posisjon, og det gir best mulighet for CV-er i to kolonner (eksempel C). `fpdf2` er ren Python, så sensor slipper systembiblioteker (NFR-1). En kontrollør testet at fpdf2s innebygde fonter krasjer på «–», «’» og «•».
 - **Valgt bort:** PyMuPDF (AGPL-lisens), WeasyPrint (krever Pango og andre systembiblioteker, se `technology.md`) og ReportLab (tyngre enn nødvendig).
 - **Krav før P2:** `pdfplumber` må vises å gi alle `fakta_i_cv` fra fasiten for CV A, B og C. Klarer den ikke det, byttes den med `pypdf` (reserve), og denne AD-en oppdateres.
+  - **Prøvd 2026-11-12 (Haakon):** Med standardinnstillinger blander `extract_text()` de to kolonnene i CV C linje for linje. Når den loddrette stripen uten tekst mellom kolonnene finnes først, og hver kolonne leses for seg med `page.crop()`, kommer teksten ut i riktig rekkefølge, og CV A påvirkes ikke. `pdfplumber` beholdes, men `les_cv` må finne kolonnene selv.
 
 ### AD-14 — Konfigurasjon, hemmeligheter og modus
 
@@ -404,7 +405,10 @@ erDiagram
   - Testinnstillingene tvinger `TESTMODUS=true` og lager en egen krypteringsnøkkel.
   - Hver Django-app har sine tester i `<app>/tests/`. Testene for `nokkelord/` bruker ikke databasen.
   - `app/conftest.py` har fiksturen `falsk_ki(svar=None, feil=None)`, som setter overstyringen i `ki.hent_klient()`. Andre måter å bytte ut klienten på er ikke lov.
-  - Fasiten leses bare gjennom `ki.eksempelpar.hent_eksempelpar()`. Pydantic-modellen `Fasit` har feltene `fakta_i_cv`, `krav_matcher`, `krav_mangler`, `nokkelord`, `floskler` og `sprak_og_tone`. Hvert krav kan ha `alias` for andre språk, og grunnformene i `nokkelord` hentes fra `ordliste.json`.
+  - Fasiten leses bare gjennom `ki.eksempelpar.hent_eksempelpar()`. Pydantic-modellen `Fasit` har feltene `par`, `fakta_i_cv`, `krav_matcher`, `krav_mangler`, `nokkelord`, `floskler` og `sprak_og_tone`. Formatet er bestemt av eksempelparene i `testdata/eksempler/` (2026-11-12):
+    - Hvert krav er `{krav, alias: list[str]}`. `alias` er andre ord for kravet, også på andre språk.
+    - `nokkelord` er `{i_annonsen, funnet, mangler, andel}`. Grunnformene hentes fra `ordliste.json`. `andel` er avrundet til tre desimaler, så testen sammenligner med `pytest.approx(..., abs=0.001)`.
+    - `sprak_og_tone` er `{sprak, tone, kjennetegn: list[str]}`. Språket står bare her.
   - Testene skal minst dekke FR-1, FR-14 – FR-17, FR-20, at eksempelparene gir treff (AD-6), og at hashen av promptene stemmer med de lagrede svarene (AD-6).
   - SM-9 testes ved å søke etter e-posten som bytes i databasefilen etter sletting.
 - **Begrunnelse:** Én kommando fungerer uten nettverk og uten nøkkel. pytest er lettere å lese enn Djangos egen testløper.
@@ -535,7 +539,8 @@ app/                         # Django-prosjektet; alle kommandoer kjøres herfra
   eksport/                   # markdown.py, pdf.py, fonter/ (FR-22, FR-23)
   templates/                 # base.html + én mappe per app
   static/                    # css/, js/
-  testdata/eksempler/A|B|C|D/  # CV-fil, annonse.txt, fasit.json, svar/*.json
+  testdata/lag_cv_pdf.py       # lager cv.pdf fra cv_kilde.txt (fpdf2)
+  testdata/eksempler/A|B|C|D/  # CV-fil (cv.pdf og cv_kilde.txt, eller cv.txt), annonse.txt, fasit.json, svar/*.json
 docs/evaluering/             # rapporter fra lag_lagrede_svar (AD-6)
 ```
 
@@ -596,7 +601,7 @@ flowchart LR
 
 1. ~~**PRD-en må oppdateres** etter faglærers tilbakemelding og denne arkitekturen.~~ **Løst:** PR #14 ble flettet 2026-11-12. Den har resultat i tre deler, tone og svarform ved brevet, evalueringskjøring (NFR-11), fast format, varselet om KI-feil, ønskede nøkkelord i testmodus, grensen på 30 000 tegn, og en nødplan med kuttrekkefølge og sjekkpunkt 2. desember (PRD §8.1).
 2. **API-konto:** Kontoen i Claude Console er laget og eies av Ole. Forbruksgrensen settes når det kjøpes kreditt, før Claude-klienten bygges (issue #16).
-3. **Eksempeldata og PDF-test:** Eksempelparene A–C (og D) med fasit må lages før P2, og `pdfplumber` må testes mot CV C (AD-13). Haakon lager eksempelparene med fasit innen 18. november (PRD §10).
+3. ~~**Eksempeldata og PDF-test**~~ **Løst 2026-11-12:** Haakon laget eksempelparene A–D med fasit i `testdata/eksempler/`, og `pdfplumber` er prøvd mot CV C (AD-13). `ordliste.json` gjenstår og lages med nøkkelordanalysen.
 4. ~~**[Forslag]-punktene**~~ **Løst 2026-11-12:** Ole og Henrik ble enige om SQLite (AD-19), resultat i tre deler (AD-8), grensen på 30 000 tegn (AD-15), eksempelpar D (AD-6) og pip i stedet for uv (AD-18) i PR #13, og Haakon er enig. Henrik godtok resten: eierskap (AD-2), dekrypteringsfeil (AD-9), tilgangskontroll (AD-10), PBKDF2 (AD-11), låsen (AD-12), PDF-bibliotekene (AD-13), maks 20 ønskede nøkkelord (AD-15), `TextChoices` (AD-16), pytest (AD-17), feilkontrakten (AD-20) og samarbeidsreglene (AD-21). Merkene er fjernet, og dokumentet er satt til `final`. Ole og Haakon kan si fra i pull requesten hvis de er uenige.
 5. ~~**Avvik fra UX-en**~~ **Løst 2026-11-12:** De seks punktene i EXPERIENCE.md («Avvik fra PRD og arkitektur») er lagt inn i AD-5, AD-13, AD-22 og §3.
 6. ~~**Gjennomgang i PR #25**~~ **Løst 2026-11-12:** Haakon bekreftet punktene fra PR #13. Ole og Haakon godtok Claudes tillegg i AD-22 om `siste_steg()` og `cv.analyse`, og ba om tre rettelser, som er gjort: `finn_eksempelpar` i stedet for `eksempel_hash` i steg 2 (Oles forslag), «– » fjernes før punktene deles ved eksport, og NFR-11 i `scope`, `binds` og §6. Haakons forslag om en grense for den redigerte brevteksten er lagt inn som `BREV_MAKS` (AD-15).
