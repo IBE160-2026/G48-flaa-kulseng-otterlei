@@ -214,8 +214,19 @@ flowchart LR
     - `finn_nokkelord(annonse, onskede: list[str]) -> list[Nokkelord]`
     - `match(cv_tekst, nokkelord) -> Nokkelordresultat`, med `funnet`, `mangler` og `andel`, der `andel` er en `float` fra 0 til 1
   - Nøkkelordene kommer fra `nokkelord/ordliste.json`, der hvert nøkkelord har en grunnform og synonymer, og fra brukerens ønskede nøkkelord.
+    - Formatet er `{"nokkelord": [{"grunnform": str, "synonymer": list[str], "skiller_store_og_sma"?: bool}]}`. Ingen skrivemåte står under to nøkkelord.
+    - Ordlisten har bare konkrete ferdigheter, verktøy, sertifikater, språk og grader. Brede fagord som «database», «logistikk» og «kundeservice» er utelatt, fordi de står i mange annonser uten å være krav, og et treff sier lite. Brukeren kan legge dem til som ønskede nøkkelord.
+    - «førerkort» er et eget, generelt nøkkelord, og klasse B, BE og C er egne nøkkelord.
+  - **Lengste treff vinner i annonsen:** `finn_nokkelord` dropper et treff som ligger inni et lengre treff fra et annet nøkkelord. «Førerkort klasse B» gir derfor bare klasse B, mens «Vi krever førerkort» gir det generelle nøkkelordet.
+  - **I CV-en holder det at skrivemåten finnes:** `match` bruker ikke regelen over. Krever annonsen «førerkort», og CV-en sier «Førerkort klasse B», er førerkort funnet.
   - Skjemaet deler opp ønskede nøkkelord på komma og linjeskift, fjerner tomme og fjerner duplikater uansett store og små bokstaver.
   - Store og små bokstaver ignoreres, og det matches på hele ord. Utdata er sortert, slik at samme inndata alltid gir samme resultat.
+    - **Unntak:** Et nøkkelord med `"skiller_store_og_sma": true` matches med nøyaktig de store og små bokstavene i ordlisten. Det gjelder produktnavn som også er vanlige engelske ord (React, Excel, Word), så «react quickly», «excel at» og «a word of advice» ikke gir treff (FR-20).
+      - Flagget gjelder bare **grunnformen**. Synonymene matches som vanlig, så «regneark» og «microsoft word» gir treff.
+      - Flagget gjelder bare **i annonsen** (`finn_nokkelord`), ikke i `match`. «kan excel» i CV-en regnes som funnet. Et falskt treff i annonsen er verre enn i CV-en, fordi det legger til et krav som ikke finnes.
+    - «Hele ord» betyr `(?<!\w)` før og `(?!\w)` etter skrivemåten, ikke `\b`, så C#, C++, .NET og «Bachelor's» virker.
+    - Mellomrom i en skrivemåte med flere ord matcher `\s+`, så «førerkort klasse B» gir treff også når en PDF har delt linjen.
+    - Sorteringen bruker `key=str.casefold`. Testene mot fasiten sammenligner som mengder.
   - KI får resultatet bare for å forklare det, aldri for å endre det.
   - Ønskede nøkkelord på et eksempelpar i testmodus tas med i matchen. Den lagrede forklaringen vises, men med teksten «KI-forklaringen gjelder ikke dine egne nøkkelord i testmodus».
 - **Begrunnelse:** PRD-en sier at nøkkelordene finnes i kode. En ordliste gjør resultatet testbart mot fasiten (åpent spørsmål 2 i PRD-en).

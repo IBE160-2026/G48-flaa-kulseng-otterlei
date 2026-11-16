@@ -307,7 +307,7 @@ Appen finner nøkkelordene i stillingsannonsen og tar med brukerens ønskede nø
 Appen beregner hvilke nøkkelord som finnes og mangler i CV-teksten, og hvor stor andel som finnes.
 
 **Konsekvenser (testbare):**
-- Store og små bokstaver ignoreres.
+- Store og små bokstaver ignoreres, unntatt for noen få produktnavn i stillingsannonsen som også er vanlige engelske ord, som React, Excel og Word (AD-7). I CV-teksten ignoreres de alltid.
 - Samme CV-tekst og stillingsannonse gir alltid samme resultat.
 - Automatiske enhetstester sjekker resultatet mot fasiten for alle tre eksempelparene.
 

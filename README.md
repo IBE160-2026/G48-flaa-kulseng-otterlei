@@ -22,6 +22,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 │       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
 ├── app/                           Django-appen (kommer i Epic 0)
 │   ├── eksport/fonter/            Fonten DejaVu Sans for PDF med æ, ø og å (AD-13)
+│   ├── nokkelord/ordliste.json    Ordlisten nøkkelordanalysen bruker: ferdigheter, verktøy, sertifikater, språk og grader (AD-7)
 │   └── testdata/                  Eksempelpar A–D med fasit (PRD §10) og skriptet som lager CV-PDF-ene
 ├── docs/
 │   ├── arbeidsfordeling.md        Ansvarsområder og ukeplan fram til fristen
