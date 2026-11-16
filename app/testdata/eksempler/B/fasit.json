@@ -29,23 +29,41 @@
     "mangler": ["Tripletex"],
     "andel": 0.667
   },
-  "floskler": [
-    "engasjert og løsningsorientert",
-    "jeg brenner for",
-    "nøyaktig og strukturert",
-    "jeg er en person som",
-    "jeg liker utfordringer"
-  ],
+  "floskler": {
+    "nb": [
+      "engasjert og løsningsorientert",
+      "jeg brenner for",
+      "nøyaktig og strukturert",
+      "jeg er en person som",
+      "jeg liker utfordringer"
+    ],
+    "en": [
+      "passionate about",
+      "detail-oriented and structured",
+      "I am the kind of person who",
+      "I love a challenge",
+      "team player"
+    ]
+  },
   "sprak_og_tone": {
-    "sprak": "nb",
-    "tone": "uformell",
-    "kjennetegn": [
-      "Skrevet på norsk bokmål",
-      "Uformell, men høflig: korte setninger og et personlig språk, uten slang",
-      "Nevner stillingen som regnskapsassistent hos Bjørk Regnskap AS",
+    "alle": [
       "Trekker fram vervet som kasserer og regnskapsemnene som bevis på regnskapsforståelse",
       "Trekker fram Excel-kunnskapene, gjerne pivottabeller eller FINN.RAD",
       "Påstår ikke at søkeren har brukt Tripletex eller et annet regnskapsprogram"
+    ],
+    "nb": ["Skrevet på norsk bokmål"],
+    "en": ["Skrevet på engelsk"],
+    "formell": ["Formell tone: høflig og saklig, uten muntlige uttrykk"],
+    "uformell": [
+      "Uformell, men høflig: korte setninger og et personlig språk, uten slang"
+    ],
+    "fullt_utkast": [
+      "Et sammenhengende brev med innledning, hoveddel og avslutning (FR-6)",
+      "Nevner stillingen som regnskapsassistent hos Bjørk Regnskap AS"
+    ],
+    "kun_forslag": [
+      "En punktliste, ikke et sammenhengende brev (FR-7)",
+      "Hvert punkt bygger på et krav fra annonsen eller et faktum fra CV-en"
     ]
   }
 }
