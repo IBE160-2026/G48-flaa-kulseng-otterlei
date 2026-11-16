@@ -93,7 +93,7 @@ Dette er heller ikke en endring etter faglærers tilbakemelding. Eksempelparene 
 |---|---|
 | NFR-4: «aldri e-post eller passord» | Aldri e-posten og passordet til kontoen. CV-teksten sendes slik den står, også med navn og kontaktinformasjon, og brukeren får vite at det kan fjernes når CV-teksten rettes. |
 
-**Hvorfor:** Henrik heller mot en presisering i stedet for at appen fjerner kontaktinformasjonen selv: CV-en må sendes for at analysen skal fungere, og brukeren laster den opp selv. Ole tok opp avviket i PR #26 med begge alternativene, etter Claudes gjennomgang. Haakon må bekrefte i pull requesten. Den samme presiseringen er gjort i AD-5, i personvernpåminnelsen i steg 2 og i forklaringen i «Min konto» i UX-en.
+**Hvorfor:** Henrik heller mot en presisering i stedet for at appen fjerner kontaktinformasjonen selv: CV-en må sendes for at analysen skal fungere, og brukeren laster den opp selv. Ole tok opp avviket i PR #26 med begge alternativene, etter Claudes gjennomgang. Haakon sa seg enig i PR #26 (2026-11-16): å fjerne kontaktlinjene pålitelig er vanskelig, fordi de står forskjellige steder i ulike CV-er, og brevet trenger navnet uansett. Den samme presiseringen er gjort i AD-5, i personvernpåminnelsen i steg 2 og i forklaringen i «Min konto» i UX-en.
 
 ## Hva som gjenstår
 

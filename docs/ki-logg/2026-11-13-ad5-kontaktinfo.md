@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Dato** | 2026-11-12 – 2026-11-13 |
+| **Dato** | 2026-11-12 – 2026-11-13, tillegg 2026-11-16 |
 | **Hvem** | Ole A. Flaa |
 | **Verktøy** | Claude Code (Claude Opus 5.5) |
 | **Commits / PR** | `f482982`, `0454187` og commiten med dette innlegget, på branchen `docs/ad5-kontaktinfo` |
@@ -40,10 +40,19 @@
 - **Claudes forslag som gruppa må bekrefte:**
   - Grunnen til å velge bort automatisk fjerning av kontaktinformasjon (står som Claudes vurdering i AD-5).
   - Den nye teksten i personvernpåminnelsen og i «Min konto».
-- Haakon har ikke svart på punkt 2 ennå.
+- Haakon har ikke svart på punkt 2 ennå. (Tillegg 2026-11-16: Haakon svarte i PR #26 at han støtter presiseringen, se under.)
 
 ## Resultat
 
 - AD-5, NFR-4, EXPERIENCE.md og mockupen for steg 2 sier nå det samme om hva som sendes til KI.
 - Kommentarer på PR #26 og #30. PR #30 er flettet.
 - **Gjenstår:** Haakon må bekrefte presiseringen. Fasitformatet per språk og tone (punkt 1 i PR #26) må bestemmes før PR #26 flettes.
+
+## Tillegg 2026-11-16: bekreftelse og fletting
+
+**Prompts:** «Kan du gå gjennom pr#31 og merge den når det ikke er noen konflikter?»
+
+- **Haakons svar:** I PR #26 skrev Haakon at han støtter Henrik og vil presisere AD-5 og NFR-4 til kontoens e-post og navn. Begrunnelsen hans: brukeren laster opp CV-en selv, det er vanskelig å fjerne kontaktlinjene pålitelig fordi de står forskjellige steder i ulike CV-er, og brevet trenger navnet uansett. Teksten om at Haakon måtte bekrefte er derfor rettet i beslutningsloggene og i `docs/endringer/endringer-prd.md`.
+- **Konflikter:** Etter at PR #26 var flettet, hadde branchen konflikter med `main` i `.memlog.md` for arkitekturen og i tabellen i `docs/ki-logg/README.md`. Begge branchene hadde lagt til linjer på samme sted. Claude flettet inn `main` og beholdt alle linjene i datorekkefølge.
+- **Gjennomgang før fletting:** Claude gikk gjennom diffen mot `main` og fant ingen motstrid med endringene fra PR #26. Ole ba Claude flette PR-en.
+
