@@ -211,8 +211,14 @@ flowchart LR
     - `finn_nokkelord(annonse, onskede: list[str]) -> list[Nokkelord]`
     - `match(cv_tekst, nokkelord) -> Nokkelordresultat`, med `funnet`, `mangler` og `andel`, der `andel` er en `float` fra 0 til 1
   - Nøkkelordene kommer fra `nokkelord/ordliste.json`, der hvert nøkkelord har en grunnform og synonymer, og fra brukerens ønskede nøkkelord.
+    - Formatet er `{"nokkelord": [{"grunnform": str, "synonymer": list[str]}]}`. Ingen skrivemåte står under to nøkkelord.
+    - Ordlisten har bare konkrete ferdigheter, verktøy, sertifikater, språk og grader. Brede fagord som «database», «logistikk» og «kundeservice» er utelatt, fordi de står i mange annonser uten å være krav, og et treff sier lite. Brukeren kan legge dem til som ønskede nøkkelord.
+    - «Førerkort» alene er ikke et synonym, fordi det ikke sier hvilken klasse. Klasse B, BE og C er egne nøkkelord.
   - Skjemaet deler opp ønskede nøkkelord på komma og linjeskift, fjerner tomme og fjerner duplikater uansett store og små bokstaver.
   - Store og små bokstaver ignoreres, og det matches på hele ord. Utdata er sortert, slik at samme inndata alltid gir samme resultat.
+    - «Hele ord» betyr `(?<!\w)` før og `(?!\w)` etter skrivemåten, ikke `\b`, så C#, C++, .NET og «Bachelor's» virker.
+    - Mellomrom i en skrivemåte med flere ord matcher `\s+`, så «førerkort klasse B» gir treff også når en PDF har delt linjen.
+    - Sorteringen bruker `key=str.casefold`. Testene mot fasiten sammenligner som mengder.
   - KI får resultatet bare for å forklare det, aldri for å endre det.
   - Ønskede nøkkelord på et eksempelpar i testmodus tas med i matchen. Den lagrede forklaringen vises, men med teksten «KI-forklaringen gjelder ikke dine egne nøkkelord i testmodus».
 - **Begrunnelse:** PRD-en sier at nøkkelordene finnes i kode. En ordliste gjør resultatet testbart mot fasiten (åpent spørsmål 2 i PRD-en).
