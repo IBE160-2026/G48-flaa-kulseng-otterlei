@@ -2,13 +2,15 @@
   "nokkelord": [
     { "grunnform": "Python", "synonymer": [] },
     { "grunnform": "Java", "synonymer": [] },
-    { "grunnform": "JavaScript", "synonymer": ["JS", "TypeScript"] },
-    { "grunnform": "C#", "synonymer": [".NET"] },
+    { "grunnform": "JavaScript", "synonymer": ["JS"] },
+    { "grunnform": "TypeScript", "synonymer": [] },
+    { "grunnform": "C#", "synonymer": [] },
+    { "grunnform": ".NET", "synonymer": ["ASP.NET"] },
     { "grunnform": "C++", "synonymer": [] },
     { "grunnform": "HTML", "synonymer": ["HTML5"] },
     { "grunnform": "CSS", "synonymer": ["CSS3"] },
     { "grunnform": "SQL", "synonymer": ["MySQL", "PostgreSQL", "SQLite", "T-SQL"] },
-    { "grunnform": "React", "synonymer": ["React.js"] },
+    { "grunnform": "React", "synonymer": ["React.js", "ReactJS"], "skiller_store_og_sma": true },
     { "grunnform": "Django", "synonymer": [] },
     { "grunnform": "Git", "synonymer": ["GitHub", "GitLab"] },
     { "grunnform": "Linux", "synonymer": ["Ubuntu"] },
@@ -16,8 +18,8 @@
     { "grunnform": "Azure", "synonymer": ["Microsoft Azure"] },
     { "grunnform": "AWS", "synonymer": ["Amazon Web Services"] },
 
-    { "grunnform": "Excel", "synonymer": ["Microsoft Excel", "regneark"] },
-    { "grunnform": "Word", "synonymer": ["Microsoft Word"] },
+    { "grunnform": "Excel", "synonymer": ["Microsoft Excel", "regneark"], "skiller_store_og_sma": true },
+    { "grunnform": "Word", "synonymer": ["Microsoft Word"], "skiller_store_og_sma": true },
     { "grunnform": "PowerPoint", "synonymer": [] },
     { "grunnform": "Microsoft Office", "synonymer": ["MS Office", "Office 365", "Microsoft 365"] },
     { "grunnform": "Power BI", "synonymer": ["PowerBI"] },
@@ -65,7 +67,7 @@
     { "grunnform": "spansk", "synonymer": ["Spanish"] },
 
     { "grunnform": "bachelor", "synonymer": ["bachelorgrad", "bachelorutdanning", "bachelor's degree", "BSc"] },
-    { "grunnform": "master", "synonymer": ["mastergrad", "masterutdanning", "master's degree", "MSc"] },
+    { "grunnform": "mastergrad", "synonymer": ["masterutdanning", "master's degree", "master i", "MSc"] },
     { "grunnform": "fagbrev", "synonymer": ["svennebrev"] }
   ]
 }

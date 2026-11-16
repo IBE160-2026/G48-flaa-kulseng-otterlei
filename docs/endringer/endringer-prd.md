@@ -95,6 +95,16 @@ Dette er heller ikke en endring etter faglærers tilbakemelding. Eksempelparene 
 
 **Hvorfor:** Henrik heller mot en presisering i stedet for at appen fjerner kontaktinformasjonen selv: CV-en må sendes for at analysen skal fungere, og brukeren laster den opp selv. Ole tok opp avviket i PR #26 med begge alternativene, etter Claudes gjennomgang. Haakon sa seg enig i PR #26 (2026-11-16): å fjerne kontaktlinjene pålitelig er vanskelig, fordi de står forskjellige steder i ulike CV-er, og brevet trenger navnet uansett. Den samme presiseringen er gjort i AD-5, i personvernpåminnelsen i steg 2 og i forklaringen i «Min konto» i UX-en.
 
+## Presisering av FR-20 (2026-11-16)
+
+Dette er heller ikke en endring etter faglærers tilbakemelding. Ole fant i gjennomgangen av ordlisten (pull request #32) at noen nøkkelord gir falske treff fordi store og små bokstaver ignoreres: «react quickly» ga React, og «a word of advice» ga Word. Claude fant det samme for «You will excel at …», som ga Excel.
+
+| Før | Etter |
+|---|---|
+| FR-20: «Store og små bokstaver ignoreres.» | Store og små bokstaver ignoreres, unntatt for noen få produktnavn som også er vanlige engelske ord, som React, Excel og Word (AD-7). |
+
+**Hvorfor:** Alternativet var å fjerne de enkle formene, slik at React bare ga treff på «React.js» og Word bare på «Microsoft Word». Da ville de fleste annonser, som bare skriver «React» og «Excel», ikke gitt treff. Excel er et av de vanligste nøkkelordene for studentjobber og brukes i eksempelpar B. Haakon valgte unntaket etter Claudes anbefaling. Gruppa må godta endringen i pull requesten.
+
 ## Hva som gjenstår
 
 - **Eksempelparene med fasit** skal lages innen 18. november (Haakon), sammen med eksempelannonsen med innebygd instruksjon.
