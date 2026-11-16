@@ -213,7 +213,9 @@ flowchart LR
   - Nøkkelordene kommer fra `nokkelord/ordliste.json`, der hvert nøkkelord har en grunnform og synonymer, og fra brukerens ønskede nøkkelord.
     - Formatet er `{"nokkelord": [{"grunnform": str, "synonymer": list[str]}]}`. Ingen skrivemåte står under to nøkkelord.
     - Ordlisten har bare konkrete ferdigheter, verktøy, sertifikater, språk og grader. Brede fagord som «database», «logistikk» og «kundeservice» er utelatt, fordi de står i mange annonser uten å være krav, og et treff sier lite. Brukeren kan legge dem til som ønskede nøkkelord.
-    - «Førerkort» alene er ikke et synonym, fordi det ikke sier hvilken klasse. Klasse B, BE og C er egne nøkkelord.
+    - «førerkort» er et eget, generelt nøkkelord, og klasse B, BE og C er egne nøkkelord.
+  - **Lengste treff vinner i annonsen:** `finn_nokkelord` dropper et treff som ligger inni et lengre treff fra et annet nøkkelord. «Førerkort klasse B» gir derfor bare klasse B, mens «Vi krever førerkort» gir det generelle nøkkelordet.
+  - **I CV-en holder det at skrivemåten finnes:** `match` bruker ikke regelen over. Krever annonsen «førerkort», og CV-en sier «Førerkort klasse B», er førerkort funnet.
   - Skjemaet deler opp ønskede nøkkelord på komma og linjeskift, fjerner tomme og fjerner duplikater uansett store og små bokstaver.
   - Store og små bokstaver ignoreres, og det matches på hele ord. Utdata er sortert, slik at samme inndata alltid gir samme resultat.
     - «Hele ord» betyr `(?<!\w)` før og `(?!\w)` etter skrivemåten, ikke `\b`, så C#, C++, .NET og «Bachelor's» virker.

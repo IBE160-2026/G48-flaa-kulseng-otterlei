@@ -40,7 +40,8 @@
     { "grunnform": "PowerOffice", "synonymer": ["PowerOffice Go"] },
     { "grunnform": "SAP", "synonymer": ["SAP S/4HANA"] },
 
-    { "grunnform": "førerkort klasse B", "synonymer": ["førerkort kl. B", "førerkort: klasse B", "sertifikat klasse B", "B-sertifikat", "driver's license", "driver's licence", "driving licence"] },
+    { "grunnform": "førerkort", "synonymer": ["driver's license", "driver's licence", "driving licence"] },
+    { "grunnform": "førerkort klasse B", "synonymer": ["førerkort kl. B", "førerkort: klasse B", "sertifikat klasse B", "B-sertifikat"] },
     { "grunnform": "truckførerbevis", "synonymer": ["truckførersertifikat", "forklift license", "forklift licence"] },
     { "grunnform": "førstehjelp", "synonymer": ["førstehjelpskurs", "first aid", "HLR", "hjerte-lunge-redning"] },
     { "grunnform": "HMS", "synonymer": ["HMS-kurs", "HSE"] },
