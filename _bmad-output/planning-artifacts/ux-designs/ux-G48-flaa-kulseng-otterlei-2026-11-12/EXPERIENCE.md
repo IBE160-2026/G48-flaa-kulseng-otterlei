@@ -87,7 +87,7 @@ Her står hvordan komponentene oppfører seg. Utseendet står i `DESIGN.md` unde
 | **Eksempelknapper** | Steg 1, bare i testmodus | «… eller prøv med et eksempel: [A] [B] [C]» står ved opplastingen. Et klikk fyller inn CV-teksten og blir stående i steg 1, slik at sensor ser at teksten er lest riktig, også fra to-kolonne-CV-en C (FR-2, SM-2). Annonsen fylles inn i steg 2. |
 | **Annonsefelt** | Steg 2 | Et stort tekstfelt med en teller, «1 234 / 15 000 tegn» (telleren krever JavaScript). Under 100 eller over 15 000 tegn gir en feilmelding ved feltet og ingen KI-kall (FR-3). Ved tilbake fra steg 3 eller 4 er feltet fylt med annonsen fra analysen. |
 | **Språk og nøkkelord** | Steg 2 | Språket (norsk/engelsk) er radioknapper i en `fieldset` med `legend`, og norsk er forhåndsvalgt (FR-4). Ønskede nøkkelord er et valgfritt tekstfelt med komma mellom ordene og maks 20 ord (AD-15). |
-| **Personvernpåminnelse** | Steg 2, rett over «Analyser» | I KI-modus: «Når du trykker Analyser, sendes CV-teksten og annonsen til KI-tjenesten (Claude fra Anthropic). E-posten din sendes ikke. Les mer om personvern», med lenke til Min konto (NFR-4). I testmodus: «Testmodus: ingenting sendes til KI-tjenesten. Appen bruker lagrede svar.» |
+| **Personvernpåminnelse** | Steg 2, rett over «Analyser» | I KI-modus: «Når du trykker Analyser, sendes CV-teksten og annonsen til KI-tjenesten (Claude fra Anthropic), også navn og kontaktinformasjon som står i CV-teksten. E-posten du logger inn med, sendes ikke. Les mer om personvern», med lenke til Min konto (NFR-4). I testmodus: «Testmodus: ingenting sendes til KI-tjenesten. Appen bruker lagrede svar.» |
 | **Erstatte analysen** | Steg 2, når en analyse finnes | Endringer i annonse, språk eller nøkkelord gjelder først når «Analyser» trykkes. Rett over knappen står da: «Dette erstatter analysen og utkastet du har nå.» Det trengs ingen egen bekreftelse. Unntak: en endret CV-tekst i steg 1 sletter analysen med en gang (AD-8 `lagre_cv_tekst`), og da står det samme varselet over «Bruk denne og gå videre». |
 | **KI-varsel** | Steg 3 øverst, og steg 4 over brevet | «KI kan gjøre feil – les gjennom før du sender.» (AD-5) |
 | **KI-merke** | Alle kort | Kort med innhold fra KI (gap-analysen, forklaringen, CV-forslagene og brevet) har merket «Laget av KI». Nøkkelordkortet har merket «Telt automatisk». Slik ser Emma hva som er en vurdering og hva som er telt. |
@@ -178,7 +178,8 @@ Testmodus er laget for sensor (UJ-3) og for de automatiske testene.
 - **Min konto** forklarer med enkle ord:
   - hva som lagres: siste CV, CV-tekst, annonse og resultat, kryptert
   - hvor lenge det lagres: til du sletter det
-  - hva som sendes til KI-tjenesten: CV-tekst, annonse og valg, aldri e-post eller passord
+  - hva som sendes til KI-tjenesten: CV-tekst, annonse og valg, aldri e-posten og passordet til kontoen
+  - at CV-teksten sendes slik den står, også med navn og kontaktinformasjon, og at du kan fjerne dem når du retter CV-teksten
   - hvem KI-tjenesten er
   - at du kan slette alt når som helst (NFR-4, PRD §4.5)
 
