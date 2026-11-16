@@ -67,7 +67,7 @@
     { "grunnform": "spansk", "synonymer": ["Spanish"] },
 
     { "grunnform": "bachelor", "synonymer": ["bachelorgrad", "bachelorutdanning", "bachelor's degree", "BSc"] },
-    { "grunnform": "mastergrad", "synonymer": ["masterutdanning", "master's degree", "master i", "MSc"] },
+    { "grunnform": "mastergrad", "synonymer": ["masterutdanning", "master's degree", "master i", "Master of Science", "Master of Arts", "MSc"] },
     { "grunnform": "fagbrev", "synonymer": ["svennebrev"] }
   ]
 }

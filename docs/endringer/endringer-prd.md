@@ -101,9 +101,11 @@ Dette er heller ikke en endring etter faglærers tilbakemelding. Ole fant i gjen
 
 | Før | Etter |
 |---|---|
-| FR-20: «Store og små bokstaver ignoreres.» | Store og små bokstaver ignoreres, unntatt for noen få produktnavn som også er vanlige engelske ord, som React, Excel og Word (AD-7). |
+| FR-20: «Store og små bokstaver ignoreres.» | Store og små bokstaver ignoreres, unntatt for noen få produktnavn i stillingsannonsen som også er vanlige engelske ord, som React, Excel og Word (AD-7). I CV-teksten ignoreres de alltid. |
 
 **Hvorfor:** Alternativet var å fjerne de enkle formene, slik at React bare ga treff på «React.js» og Word bare på «Microsoft Word». Da ville de fleste annonser, som bare skriver «React» og «Excel», ikke gitt treff. Excel er et av de vanligste nøkkelordene for studentjobber og brukes i eksempelpar B. Haakon valgte unntaket etter Claudes anbefaling. Gruppa må godta endringen i pull requesten.
+
+**Innsnevret etter Oles andre gjennomgang:** Unntaket gjelder bare i annonsen, og bare grunnformen. Ole viste at «regneark» og «microsoft word» ikke lenger ga treff, og at «excel» skrevet med liten forbokstav i CV-en ble regnet som manglende. Et falskt treff i annonsen er verre enn i CV-en, fordi det legger til et krav som ikke finnes. Ulempen er at «I excel at teamwork» i en engelsk CV gir Excel som funnet, men bare hvis annonsen krever Excel. Haakon valgte dette etter Claudes anbefaling.
 
 ## Hva som gjenstår
 
