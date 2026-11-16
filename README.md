@@ -20,6 +20,8 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 │       ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
 │       ├── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
 │       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
+├── app/                           Django-appen (kommer i Epic 0)
+│   └── nokkelord/ordliste.json    Ordlisten nøkkelordanalysen bruker: ferdigheter, verktøy, sertifikater, språk og grader (AD-7)
 ├── docs/
 │   ├── arbeidsfordeling.md        Ansvarsområder og ukeplan fram til fristen
 │   ├── endringer/                 Forklaring av endringer i planleggingsdokumentene
