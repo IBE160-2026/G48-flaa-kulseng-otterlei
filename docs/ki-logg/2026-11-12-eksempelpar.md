@@ -62,8 +62,10 @@
 |---|---|---|
 | Fasiten hadde bare ett språk og én tone, men `lag_lagrede_svar` lager åtte brevvarianter per par. Det engelske brevet for A ville strøket på «Skrevet på norsk bokmål». | Ole, Henrik enig | `floskler` har nå én liste per språk. `sprak_og_tone` har kjennetegn for `alle`, `nb`, `en`, `formell`, `uformell`, `fullt_utkast` og `kun_forslag`. Svarform var Claudes tillegg til Oles forslag. AD-17 er oppdatert. |
 | Bachelorgraden i par C er ikke fullført, men står som krav som matcher. | Ole, Henrik enig | Kravet har fått en `merknad` om at graden fullføres før programmet starter. |
-| AD-5 sier at navn og e-post aldri sendes til KI, men CV-ene inneholder begge. | Ole | Haakon støtter Henriks forslag (løsning A): presisere AD-5 til kontoens e-post og navn, og det samme i NFR-4. Ole tar det i en egen PR. |
+| AD-5 sier at navn og e-post aldri sendes til KI, men CV-ene inneholder begge. | Ole | Haakon støtter Henriks forslag (løsning A): presisere AD-5 til kontoens e-post og navn, og det samme i NFR-4. Ole hadde allerede gjort det i PR #31. |
 | D er en kopi av A og kan bli utdatert. | Ole, Henrik | En test i Epic 0 skal sjekke at CV-ene er like. Lagt inn i issue #29. D har fått samme formatering som A–C. |
 | PDF-ene ble ikke like byte for byte på Henriks maskin. | Henrik | Påstanden i skriptet og her er rettet. `fonttools` lagt til i issue #29, så versjonene låses i Epic 0. |
 
 **Hva KI burde sett selv:** Claude laget fasitformatet uten å sjekke det mot de åtte variantene i FR-10 og AD-6, og påsto at PDF-ene alltid blir like uten å ha prøvd på en annen maskin. Begge feilene ble fanget i gjennomgangen. Det viser at gjennomgang av KI-arbeid fungerer.
+
+**Godkjenning:** Ole så over rettelsene 2026-11-16 og godkjente fletting («Svarform som tredje dimensjon var et godt tillegg»).
