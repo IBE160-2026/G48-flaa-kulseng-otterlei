@@ -6,7 +6,9 @@ Kjøres fra mappen app/:
 
 Skriptet leser testdata/eksempler/<par>/cv_kilde.txt og skriver
 testdata/eksempler/<par>/cv.pdf. Teksten finnes bare i cv_kilde.txt, så
-PDF-en lages på nytt når CV-en endres.
+PDF-en lages på nytt når CV-en endres. Samme kilde gir samme tekst i PDF-en,
+men filen blir bare lik byte for byte med de samme versjonene av fpdf2 og
+fonttools (fpdf2 bruker fonttools til fonten).
 
 Krever fpdf2 (pip install fpdf2) til app/requirements.txt finnes.
 
@@ -33,7 +35,9 @@ APP_DIR = Path(__file__).resolve().parent.parent
 EKSEMPLER = APP_DIR / "testdata" / "eksempler"
 FONTER = APP_DIR / "eksport" / "fonter"
 
-# Fast dato gjør at samme kilde alltid gir samme PDF, så git ikke ser endringer.
+# Fast dato gjør at samme kilde gir samme PDF på samme maskin, så git ikke ser
+# endringer. Med andre versjoner av fpdf2 eller fonttools kan filen bli litt
+# annerledes, men teksten er den samme (se issue #29).
 FAST_DATO = datetime(2026, 11, 12, tzinfo=timezone.utc)
 
 MARG = 20

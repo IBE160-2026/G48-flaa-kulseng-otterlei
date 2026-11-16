@@ -405,10 +405,11 @@ erDiagram
   - Testinnstillingene tvinger `TESTMODUS=true` og lager en egen krypteringsnøkkel.
   - Hver Django-app har sine tester i `<app>/tests/`. Testene for `nokkelord/` bruker ikke databasen.
   - `app/conftest.py` har fiksturen `falsk_ki(svar=None, feil=None)`, som setter overstyringen i `ki.hent_klient()`. Andre måter å bytte ut klienten på er ikke lov.
-  - Fasiten leses bare gjennom `ki.eksempelpar.hent_eksempelpar()`. Pydantic-modellen `Fasit` har feltene `par`, `fakta_i_cv`, `krav_matcher`, `krav_mangler`, `nokkelord`, `floskler` og `sprak_og_tone`. Formatet er bestemt av eksempelparene i `testdata/eksempler/` (2026-11-12):
-    - Hvert krav er `{krav, alias: list[str]}`. `alias` er andre ord for kravet, også på andre språk.
+  - Fasiten leses bare gjennom `ki.eksempelpar.hent_eksempelpar()`. Pydantic-modellen `Fasit` har feltene `par`, `fakta_i_cv`, `krav_matcher`, `krav_mangler`, `nokkelord`, `floskler` og `sprak_og_tone`. Formatet er bestemt av eksempelparene i `testdata/eksempler/` (2026-11-12, delt opp per variant etter gjennomgangen i PR #26):
+    - Hvert krav er `{krav, alias: list[str], merknad?: str}`. `alias` er andre ord for kravet, også på andre språk. `merknad` forklarer et krav som ikke er opplagt, f.eks. en grad som ikke er fullført ennå (par C).
     - `nokkelord` er `{i_annonsen, funnet, mangler, andel}`. Grunnformene hentes fra `ordliste.json`. `andel` er avrundet til tre desimaler, så testen sammenligner med `pytest.approx(..., abs=0.001)`.
-    - `sprak_og_tone` er `{sprak, tone, kjennetegn: list[str]}`. Språket står bare her.
+    - `floskler` er `{nb: list[str], en: list[str]}`.
+    - `sprak_og_tone` er `{alle, nb, en, formell, uformell, fullt_utkast, kun_forslag}`, hver en `list[str]` med kjennetegn. Et brev sjekkes mot `alle` og de tre listene som hører til språket, tonen og svarformen. Da passer fasiten for alle åtte variantene per par som `lag_lagrede_svar` lager.
   - Testene skal minst dekke FR-1, FR-14 – FR-17, FR-20, at eksempelparene gir treff (AD-6), og at hashen av promptene stemmer med de lagrede svarene (AD-6).
   - SM-9 testes ved å søke etter e-posten som bytes i databasefilen etter sletting.
 - **Begrunnelse:** Én kommando fungerer uten nettverk og uten nøkkel. pytest er lettere å lese enn Djangos egen testløper.
