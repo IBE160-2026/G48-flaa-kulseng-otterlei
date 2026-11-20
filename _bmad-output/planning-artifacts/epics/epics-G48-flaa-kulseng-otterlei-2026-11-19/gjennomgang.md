@@ -1,0 +1,58 @@
+# Gjennomgang av epics og stories
+
+Faglærer anbefaler at et menneske ser over og godkjenner hver story og hvert epic («human in the loop»). Her står hver godkjenning. Storyene i Epic 3–7 ble først skrevet av KI-subagenter, og alle storyene ble kontrollert av tre KI-skrivere mot arkitekturen før gjennomgangen (se [.working/BRIEF.md](.working/BRIEF.md)).
+
+**Slik foregår det:** Claude viser én story med akseptansekriteriene og det som bør sjekkes. Haakon godkjenner eller ber om endringer. Etter siste story i hvert epic gjennomgås epicet som helhet. Haakon har ansvaret for epics og stories, og godkjenner alle.
+
+## Stories
+
+| Story | Dato | Godkjent av | Endringer i gjennomgangen |
+|---|---|---|---|
+| 0.1 Appen starter i testmodus etter README | 2026-11-19 | Haakon | Ingen. Gjennomgått på nytt med alle kriteriene, uten endringer. |
+| 0.2 Testene kjører automatisk på GitHub | 2026-11-19 | Haakon | Ingen |
+| 0.3 Felles sideramme og designtokens | 2026-11-19 | Haakon | Ingen. Claude nevnte at storyen kan deles i sideramme og felles komponenter; Haakon beholdt den samlet. |
+| 0.4 Felles kjerne og KI-grensesnitt | 2026-11-19 | Haakon | Tre endringer etter Claudes forslag: (A) siden for dekrypteringsfeil forklarer bare feilen, og knappen for sletting kommer i story 2.5, fordi sletting ikke finnes i Epic 0. (B) Låsemeldingen er UX-teksten, og AD-12 er rettet. (C) `normaliser()` ligger i `kjerne/tekst.py` og lages her, fordi `dokumenter` ikke får importere `ki`. AD-6 og AD-8 er rettet, og story 2.1 og 2.5 er endret. |
+| 1.1 Registrere konto | 2026-11-19 | Haakon | Tre presiseringer etter Claudes forslag: brukeren sendes til Min konto etter registrering, personvernsiden har URL-en `/personvern/`, og feiltekstene ligger i `kjerne/meldinger.py`. |
+| 1.2 Logge inn og ut | 2026-11-19 | Haakon | To endringer etter Claudes forslag: en fast regel for når økten regnes som utløpt (ugyldig øktkake), med en test, og feiltekstene ligger i `kjerne/meldinger.py`. |
+| 1.3 Min konto med personverninformasjon | 2026-11-19 | Haakon | Tre endringer etter Claudes forslag: hele personvernforklaringen er flyttet til story 1.1, der maldelen lages, fordi brukeren krysser av for den ved registrering. Knappene «Slett konto» og «Slett mine dokumenter» legges inn i story 1.4 og 2.5. Storyen har fått en test. |
+| 1.4 Slette konto | 2026-11-19 | Haakon | To endringer etter Claudes forslag: `GET` viser bekreftelsessiden og `POST` sletter (også for «Slett mine dokumenter» i 2.5, og §3 i arkitekturen er rettet), og meldingen «Kontoen din er slettet.» legges inn etter utloggingen, så den ikke forsvinner med økten. Tillegg 2026-11-20 fra gjennomgangen av 2.5: en test viser at kontoen kan slettes også når CV-en ikke kan dekrypteres. |
+| 2.1 Lese CV-teksten fra PDF og TXT | 2026-11-19 | Haakon | Testen av innlesingen er endret etter Claudes forslag, fordi `fakta_i_cv` er omskrevet og ikke kan søkes etter. Automatisk: ordene i `cv_kilde.txt` kommer i samme rekkefølge (per kolonne for C), og TXT-CV-en B leses uendret. Manuelt: punktene i `fakta_i_cv` sjekkes etter `docs/testplan.md`. |
+| 2.2 Laste opp CV og se teksten | 2026-11-19 | Haakon | To endringer etter Claudes forslag: nye brukere sendes til steg 1 også etter registrering, og viderekoblingen ligger på `/` i `analyse/`, som også brukes av `LOGIN_REDIRECT_URL` og appnavnet i topplinjen. `/` er lagt inn i §3 i arkitekturen. |
+| 2.3 Rette CV-teksten og bruke en lagret CV | 2026-11-20 | Haakon | To endringer etter Claudes forslag: en tom CV-tekst avvises med en melding, og «Last opp ny» sletter ingenting før en ny fil er lastet opp. |
+| 2.4 Prøve med eksempel A, B eller C | 2026-11-20 | Haakon | To endringer etter Claudes forslag: `/eksempel/D/` og ukjente par gir 404, og et eksempel erstatter en CV brukeren har fra før, som ved opplasting, med en test. |
+| 2.5 Slette dokumentene mine | 2026-11-20 | Haakon | To endringer etter Claudes forslag: viewet ligger i `dokumenter/` selv om URL-en begynner med `/min-konto/` (AD-2), og `slett_cv` sletter uten å lese de krypterte feltene, så slettingen virker også når dataene ikke kan dekrypteres. |
+| 3.1 Finne og matche nøkkelord i kode | 2026-11-20 | Haakon | To endringer etter Claudes forslag: en annonse uten nøkkelord gir `andel` 0.0 i stedet for deling på null, og et ønsket nøkkelord som står i ordlisten, kommer bare med én gang. Begge har tester. |
+| 3.2 Lime inn annonsen og velge språk og nøkkelord (steg 2) | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: et gyldig skjema lagres og analyseres først i 3.3, og 3.2 tester valideringen i `forms.py`. Slik blir pull requestene mindre. |
+| 3.3 Kjøre «Analyser» og se nøkkelordanalysen (steg 3) | 2026-11-20 | Haakon | To endringer etter Claudes forslag: en annonse uten nøkkelord gir meldingen «Fant ingen kjente nøkkelord i annonsen. Du kan legge til egne nøkkelord i steg 2.» (ordlyden er Claudes forslag), og `ki_status` er flyttet til story 4.2 og 4.6, fordi Epic 3 ikke kaller KI. |
+| 4.1 Testmodus-klient med lagrede svar | 2026-11-20 | Haakon | To endringer etter Claudes forslag: hashene regnes ut første gang de trengs (`functools.cache`), ikke ved oppstart, og mappen med eksemplene er `settings.EKSEMPLER_DIR`, så testene kan bytte den. AD-6 er rettet. |
+| 4.2 Gap-analyse i steg 3 med lagrede svar | 2026-11-20 | Haakon | To endringer etter Claudes forslag: `KIUgyldigNokkel` har fått en melding (ordlyden er Claudes forslag), og en analyse fra før beholdes uendret når KI feiler. Feltet `ki_status` ble lagt inn her fra gjennomgangen av 3.3. |
+| 4.3 Egen CV i testmodus | 2026-11-20 | Haakon | To endringer etter Claudes forslag: lenken går til README på GitHub, og en test sjekker at overskriften finnes. Det står også at «Prøv eksempel A» erstatter CV-en til brukeren. |
+| 4.4 Claude-klient og prompt for gap-analysen | 2026-11-20 | Haakon | To endringer etter Claudes forslag: regelen for forbruksgrensen fra AD-4 står i storyen med én test per variant, og de tre andre operasjonene kaster `NotImplementedError` til storyene deres lager dem. |
+| 4.5 Lagrede svar og evalueringsrapport for gap-analysen | 2026-11-20 | Haakon | To endringer etter Claudes forslag: rapporten viser også krav i fasiten som ikke står i svaret, og et fasitkrav matches bare mot `krav`-feltet i svaret, ikke mot begrunnelsene. |
+| 4.6 KI-forklaring av nøkkelordanalysen | 2026-11-20 | Haakon | To endringer etter Claudes forslag: påstander i forklaringen sjekkes for hånd ut fra en liste i rapporten, til regelen fra Epic 5 finnes, og det står hva som skjer når «Prøv forklaringen igjen» lykkes eller feiler. `ki_status="forklaring_feilet"` ble lagt inn her fra gjennomgangen av 3.3. |
+| 5.1 Brev og brevforslag i KI-laget | 2026-11-20 | Haakon | To endringer etter Claudes forslag: `analyse/` importerer KI-typene gjennom modulen, så `ki_modeller.Brev` ikke forveksles med Django-modellen `Brev`. `mangler` lages bare av `ki/mangler.py: samle_mangler()` og består av gap-analysens manglende krav og nøkkelordene som mangler. Funksjonen ligger i `ki/` og ikke i `analyse/`, som først foreslått, fordi `lag_lagrede_svar` i `ki/` ikke får importere `analyse`. Story 5.2 og 6.1 er rettet. |
+| 5.2 Lagrede brev og evaluering av brevene | 2026-11-20 | Haakon | Tre endringer etter Claudes forslag: en fast liste med uttrykk skiller «vil lære» fra mulige påstander, og gruppa bekrefter påstandene for hånd (issue #28 lukkes med storyen). Sjekken av om avsnittene bygger på annonsen eller CV-en er manuell. Brevet for par D lages på norsk, formelt og som fullt utkast. |
+| 5.3 Be om søknad i steg 3 og lese den i steg 4 | 2026-11-20 | Haakon | Én rettelse fra 5.1 (`mangler` kommer fra `samle_mangler()`) og ett tillegg etter Claudes forslag: valgene for tone og svarform beholdes når KI feiler. |
+| 5.4 Rette brevet i steg 4 | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: tekstfeltet har en synlig etikett, «Søknadsbrevet» eller «Brevforslagene» (ordlyden er Claudes forslag). Det står også at testene fra 5.3 skrives om. |
+| 5.5 Lage nytt brev med annen tone eller svarform | 2026-11-20 | Haakon | To endringer etter Claudes forslag: en KI-feil fra «Lag nytt brev» viser steg 4 på nytt, ikke steg 3, med et skjult felt for steget skjemaet kom fra. Valgene er forhåndsvalgt fra det nåværende brevet. |
+| 5.6 Start ny søknad | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: en test viser at `GET` ikke sletter noe, som i 1.4 og 2.5. |
+| 5.7 Kjerneflyten fra start til slutt i testmodus | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: forutsetningen at 4.5 og 5.2 er flettet, og en sjekk av at FR-11-meldingen ikke vises i steg 3 og 4. |
+| 6.1 KI-operasjonen for CV-forbedringsforslag med lagrede svar | 2026-11-20 | Haakon | To endringer etter Claudes forslag: regelen fra 5.2 regner en setning som slutter med «?» som et spørsmål, ikke en påstand, og `del_av_cv` siteres ordrett, så rapporten kan sjekke den automatisk. |
+| 6.2 Vise CV-forslagene i steg 3 | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: når det finnes forslag, er knappen en sekundærknapp med teksten «Lag nye forslag» (ordlyden er Claudes forslag). |
+| 7.1 Kopiere teksten | 2026-11-20 | Haakon | To endringer etter Claudes forslag: en pytest-test sjekker oppsettet i steg 4, og selve kopieringen testes for hånd i Chrome og Firefox etter `docs/testplan.md`. Meldingen nevner Cmd+C på Mac, og tekstene ligger i `kjerne/meldinger.py`. |
+| 7.2 Laste ned som Markdown | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: fast `Content-Type` og filnavnene `soknadsbrev.md` og `brevforslag.md`, uten navn eller ID (filnavnene er Claudes forslag). Story 7.3 bruker de samme navnene. |
+| 7.3 Laste ned som PDF | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: tester for en tekst nær `BREV_MAKS` (flere sider) og for en emoji som fonten mangler (ingen krasj). |
+| 7.4 Brevoppsett med dato og avsender i PDF-en | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: avsenderfeltene har grensen `AVSENDER_MAKS` = 100 (ny i AD-15), og e-posten valideres. Verdien er Claudes forslag. |
+
+## Epics
+
+| Epic | Dato | Godkjent av | Merknader |
+|---|---|---|---|
+| 0 Appen kan startes og testes | 2026-11-19 | Haakon | Ingen endringer. Claude nevnte at 0.3 og 0.4 kan deles når de bygges, hvis de blir for store til én pull request. |
+| 1 Konto og innlogging | 2026-11-19 | Haakon | Ingen endringer i epicet. Claude pekte på at story 2.2 også må sende nye brukere til steg 1 etter registrering. Det rettes i 2.2. |
+| 2 CV-en (steg 1) | 2026-11-20 | Haakon | Introen er rettet etter Claudes forslag: koden ligger også i `analyse/`, og knappen heter «Bruk denne og gå videre», ikke «Neste». |
+| 3 Annonse og nøkkelordanalyse (steg 2 og 3) | 2026-11-20 | Haakon | Introen nevner nå også `ki/eksempelpar.py` (`finn_eksempelpar`), etter Claudes forslag. |
+| 4 Gap-analyse med KI | 2026-11-20 | Haakon | Ingen endringer i epicet. Claude pekte på at 4.4–4.6 og Epic 5 trenger issue #16 (API-konto og forbruksgrense). Haakon opplyste at Ole har tatt issuen og lukker den når kreditt er kjøpt og forbruksgrensen er satt. |
+| 5 Søknadsbrev (steg 4) | 2026-11-20 | Haakon | Introen nevner nå `samle_mangler()` i `ki/`, etter Claudes forslag. Claude pekte på at Epic 0–5 er 29 stories før sjekkpunktet 2. desember, og at 4.5 og 5.2 venter på issue #16. |
+| 6 CV-forbedringsforslag (P6) | 2026-11-20 | Haakon | Introen sier nå at det tomme skjelettet `CVForbedring` fra Epic 0 står igjen og forklares hvis epicet kuttes, etter Claudes forslag. |
+| 7 Ta med søknaden ut (P8) | 2026-11-20 | Haakon | Ingen endringer i epicet. |
