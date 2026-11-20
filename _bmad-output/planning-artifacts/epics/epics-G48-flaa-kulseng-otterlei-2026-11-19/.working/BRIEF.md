@@ -1,5 +1,7 @@
 # Brief for skriverne av epic-filene
 
+> **Historisk dokument.** Briefen beskriver planen slik den var 2026-11-19, før Haakon gikk gjennom storyene én og én. Mye er endret etterpå, for eksempel at `normaliser` ligger i `kjerne/tekst.py`, at story 5.3 er delt (36 stories), og at eierne er bestemt. Gjeldende tekst står i [`../epics.md`](../epics.md), og endringene står i [`../gjennomgang.md`](../gjennomgang.md).
+
 _Skrevet av Claude Code 2026-11-19 på oppdrag fra Haakon. Skriverne er KI-agenter som får hver sin gruppe epics. Briefen gir dem det de trenger for å skrive én fil per epic uten å kjenne økten der epicene ble bestemt._
 
 ## Oppgaven
