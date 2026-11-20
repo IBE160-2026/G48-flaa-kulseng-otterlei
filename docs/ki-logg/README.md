@@ -22,6 +22,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-11-19 – 2026-11-20 | [Epics og stories med bmad-create-epics-and-stories](2026-11-19-epics-og-stories.md) | Haakon |
 | 2026-11-20 | [Forhåndssjekk av versjoner og gjennomgang av epics](2026-11-20-forhandssjekk-og-gjennomgang-epics.md) | Henrik |
 | 2026-11-20 | [Utkast til promptene](2026-11-20-prompt-utkast.md) | Ole |
+| 2026-11-20 | [Kreditt og forbruksgrense for API-kontoen](2026-11-20-api-konto.md) | Ole |
 
 ## Slik skriver du et innlegg
 
