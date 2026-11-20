@@ -70,3 +70,19 @@ Dele kravene i PRD-en, arkitekturen og UX-en opp i epics og stories som kan bygg
   - Sprint-planlegging (`bmad-sprint-planning`).
   - Hvem som eier hvilke epics, er ikke bestemt. `epics.md` har bare Claudes forslag.
   - Teksten står nå både i `epics.md` og i `.working/epic-NN.md`. Endres en story, må den endres begge steder.
+
+## Etter gjennomgangen av issue #17 og #29 (2026-11-20)
+
+**Prompts:** «kan du gå gjennom issue 17 og 29 og sjekke om det er noe eg ikkje har fått med meg?» og «ja, legg inn punkt 1–5 og push til PR #35»
+
+Henrik hadde gjort en forhåndssjekk av begge issuene med Claude Code samme dag. Claude sammenlignet funnene med storyene:
+
+- **#17:** Var allerede dekket av story 0.1. Henrik fant at `pytest-django` 4.14.0 virker med Django 6.1.3.
+- **#29:** Fem ting manglet. Haakon ba om å få alle lagt inn:
+  1. `lag_cv_pdf.py` skal kjøre uten ekstra installasjon (0.1).
+  2. `fonttools==4.68.0` låses og står i §4 i arkitekturen.
+  3. PDF-ene blir ikke like byte for byte, fordi zlib avgjør komprimeringen. Kommentaren i skriptet og README rettes i 0.1, og ingen test sammenligner PDF-ene byte for byte.
+  4. Testen i 2.1 sjekker også at `fakta_i_cv` er lik for A og D.
+  5. Kravet før P2 i AD-13 sa «alle `fakta_i_cv`», som ikke kan måles. Det er rettet til testen på ord fra 2.1.
+
+Henrik kom fram til det samme som Haakon bestemte i gjennomgangen av 2.1: test ordene i `cv_kilde.txt`, ikke `fakta_i_cv` ordrett.

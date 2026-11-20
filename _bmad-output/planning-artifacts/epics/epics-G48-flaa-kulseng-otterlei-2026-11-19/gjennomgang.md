@@ -43,6 +43,7 @@ Faglærer anbefaler at et menneske ser over og godkjenner hver story og hvert ep
 | 7.2 Laste ned som Markdown | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: fast `Content-Type` og filnavnene `soknadsbrev.md` og `brevforslag.md`, uten navn eller ID (filnavnene er Claudes forslag). Story 7.3 bruker de samme navnene. |
 | 7.3 Laste ned som PDF | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: tester for en tekst nær `BREV_MAKS` (flere sider) og for en emoji som fonten mangler (ingen krasj). |
 | 7.4 Brevoppsett med dato og avsender i PDF-en | 2026-11-20 | Haakon | Ett tillegg etter Claudes forslag: avsenderfeltene har grensen `AVSENDER_MAKS` = 100 (ny i AD-15), og e-posten valideres. Verdien er Claudes forslag. |
+| 0.1 og 2.1 (tillegg) | 2026-11-20 | Haakon | Etter Henriks forhåndssjekk i issue #29, som Claude gikk gjennom: `fonttools==4.68.0` låses, `lag_cv_pdf.py` skal kjøre uten ekstra installasjon, kommentaren i skriptet og README sier at PDF-ene ikke blir like byte for byte, og ingen test sammenligner dem slik (0.1). Testen i 2.1 sjekker også at `fakta_i_cv` er lik for A og D. Kravet før P2 i AD-13 og §4 i arkitekturen er rettet. |
 
 ## Epics
 

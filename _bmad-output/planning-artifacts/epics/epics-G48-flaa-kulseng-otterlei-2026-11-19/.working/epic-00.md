@@ -8,7 +8,7 @@ Som sensor
 vil jeg starte appen ved å følge README, uten API-nøkkel,
 slik at jeg kan prøve den uten gruppas nøkler eller betalte tjenester.
 
-**Krav:** FR-9, NFR-1, NFR-2, NFR-3. **Styres av:** AD-1, AD-11, AD-14, AD-17, AD-18, AD-19, AD-21. **Issues:** #17, #29.
+**Krav:** FR-9, NFR-1, NFR-2, NFR-3. **Styres av:** AD-1, AD-11, AD-13, AD-14, AD-17, AD-18, AD-19, AD-21. **Issues:** #17, #29.
 
 **Akseptansekriterier:**
 
@@ -19,7 +19,14 @@ slik at jeg kan prøve den uten gruppas nøkler eller betalte tjenester.
 
 **Gitt** at `app/requirements.txt` lages
 **Når** jeg leser den
-**Så** har alle pakkene i arkitekturen §4 låste versjoner, også `fpdf2==2.9.0` og `pdfplumber==0.11.10` (issue #29)
+**Så** har alle pakkene i arkitekturen §4 låste versjoner, også `fpdf2==2.9.0`, `pdfplumber==0.11.10` og `fonttools==4.68.0` (issue #29)
+**Og** `python testdata/lag_cv_pdf.py A` kjører fra `app/` uten å installere noe utover `requirements.txt`
+
+**Gitt** `app/testdata/lag_cv_pdf.py`
+**Når** storyen er ferdig
+**Så** sier kommentarene i skriptet at samme kilde gir samme tekst, men ikke en fil som er lik byte for byte på en annen maskin, fordi komprimeringen avhenger av zlib-versjonen (issue #29, AD-13)
+**Og** README sier at `cv.pdf` ikke skal committes på nytt bare fordi `git status` viser den som endret etter at skriptet er kjørt
+**Og** ingen test sammenligner `cv.pdf` byte for byte
 
 **Gitt** at det ikke finnes noen `app/.env`
 **Når** jeg kjører `python lag_env.py`

@@ -90,7 +90,7 @@ _Laget med `bmad-create-epics-and-stories` 2026-11-19. Claude Code hentet ut kra
 
 - **Oppstart (AD-21):** Det finnes ingen ferdig startmal. Epic 0 lager Django-prosjektet i `app/`, og hele epicet flettes før noen andre epics startes. Det er delt i fire stories og inneholder til sammen: `kontoer.Bruker` og tomme skjeletter av modellene i AD-8 med første migrering, `kjerne/` (kryptering, felttyper, feil, meldinger, grenser, valg, testmodus, lås, `tekst.py` med `normaliser`), `ki/port.py` og `ki/modeller.py`, `templates/base.html`, `static/js/skjema.js`, `conftest.py`, `requirements.txt`, `.env.example`, `lag_env.py` og `.gitignore`-linjene.
 - **Rammeverk og lag (AD-1, AD-2):** Django 6.1.3 som lagdelt monolitt: views → tjenester → modeller og porter. Views kaller bare tjenester og skjemaer. Bare appen som eier en modell, skriver til den. Fast avhengighetsretning mellom appene. `nokkelord/` er ren Python uten Django.
-- **Stack (§4):** Python 3.12+, Django 6.1.3, anthropic 2.8.0, cryptography 50.0.2, pdfplumber 0.11.10, fpdf2 2.9.0, DejaVu Sans 2.37, pydantic 2.14.3, python-dotenv 1.2.4, pytest 9.2.0, pytest-django 4.14.0, pytest-socket 0.8.1, SQLite. Låste versjoner i `app/requirements.txt`.
+- **Stack (§4):** Python 3.12+, Django 6.1.3, anthropic 2.8.0, cryptography 50.0.2, pdfplumber 0.11.10, fpdf2 2.9.0, fonttools 4.68.0, DejaVu Sans 2.37, pydantic 2.14.3, python-dotenv 1.2.4, pytest 9.2.0, pytest-django 4.14.0, pytest-socket 0.8.1, SQLite. Låste versjoner i `app/requirements.txt`.
 - **KI-grensesnitt (AD-3):** `KIKlient` med nøyaktig fire operasjoner (`gap_analyse`, `brev`, `cv_forbedring`, `nokkelord_forklaring`). `ki.hent_klient()` er eneste vei til en klient og kalles gjennom modulen. Feil er underklasser av `KIFeil` (`KITidsavbrudd`, `KIForbruksgrense`, `KIUgyldigNokkel`, `KIUtilgjengelig`, `KIUgyldigSvar`, `IkkeITestmodus`).
 - **Claude-klienten (AD-4):** `messages.parse` mot pydantic-modeller, `effort` og `max_tokens` satt eksplisitt, `timeout=60`, `max_retries=0`, og fast oversetting av svar og feil til `KIFeil`.
 - **Prompter og personvern (AD-5):** Prompter bare som filer i `ki/prompter/`. Systemprompten sier at CV og annonse er data, og at krav i `mangler` aldri skal påstås. Tekstene til brukeren ligger i `kjerne/meldinger.py`.
@@ -122,7 +122,8 @@ _Laget med `bmad-create-epics-and-stories` 2026-11-19. Claude Code hentet ut kra
 **Fra de åpne issuene**
 
 - **#17:** Story 0.1 kjører en test mot Django 6.1 med `pytest-django` 4.14.0. Feiler den, brukes `manage.py test`, og AD-17 oppdateres.
-- **#29:** `requirements.txt` i Epic 0 må ha `fpdf2` 2.9.0 og `pdfplumber` 0.11.10.
+- **#29:** `requirements.txt` i Epic 0 må ha `fpdf2` 2.9.0, `pdfplumber` 0.11.10 og `fonttools` 4.68.0, og `lag_cv_pdf.py` skal kjøre uten ekstra installasjon. PDF-ene blir ikke like byte for byte på tvers av maskiner, så ingen test sammenligner dem slik (Henriks forhåndssjekk 2026-11-20).
+- **#17:** Henrik sjekket 2026-11-20 at `pytest-django` 4.14.0 virker med Django 6.1.3. Testen i story 0.1 kjøres likevel.
 - **#28:** Evalueringen i `lag_lagrede_svar` må skille mellom å nevne og å påstå et krav («Jeg vil gjerne lære SQL» er riktig for par A), og må virke når CV-en er på norsk og brevet på engelsk (par C). Story 5.2 løser det med en fast liste med uttrykk for «vil lære» og manuell bekreftelse av mulige påstander, og issuen lukkes med den storyen.
 - **#16:** API-kontoen finnes og eies av Ole. Forbruksgrensen må settes før Claude-klienten bygges. Dette er en oppgave for gruppa, ikke kode.
 
@@ -292,7 +293,7 @@ Som sensor
 vil jeg starte appen ved å følge README, uten API-nøkkel,
 slik at jeg kan prøve den uten gruppas nøkler eller betalte tjenester.
 
-**Krav:** FR-9, NFR-1, NFR-2, NFR-3. **Styres av:** AD-1, AD-11, AD-14, AD-17, AD-18, AD-19, AD-21. **Issues:** #17, #29.
+**Krav:** FR-9, NFR-1, NFR-2, NFR-3. **Styres av:** AD-1, AD-11, AD-13, AD-14, AD-17, AD-18, AD-19, AD-21. **Issues:** #17, #29.
 
 **Akseptansekriterier:**
 
@@ -303,7 +304,14 @@ slik at jeg kan prøve den uten gruppas nøkler eller betalte tjenester.
 
 **Gitt** at `app/requirements.txt` lages
 **Når** jeg leser den
-**Så** har alle pakkene i arkitekturen §4 låste versjoner, også `fpdf2==2.9.0` og `pdfplumber==0.11.10` (issue #29)
+**Så** har alle pakkene i arkitekturen §4 låste versjoner, også `fpdf2==2.9.0`, `pdfplumber==0.11.10` og `fonttools==4.68.0` (issue #29)
+**Og** `python testdata/lag_cv_pdf.py A` kjører fra `app/` uten å installere noe utover `requirements.txt`
+
+**Gitt** `app/testdata/lag_cv_pdf.py`
+**Når** storyen er ferdig
+**Så** sier kommentarene i skriptet at samme kilde gir samme tekst, men ikke en fil som er lik byte for byte på en annen maskin, fordi komprimeringen avhenger av zlib-versjonen (issue #29, AD-13)
+**Og** README sier at `cv.pdf` ikke skal committes på nytt bare fordi `git status` viser den som endret etter at skriptet er kjørt
+**Og** ingen test sammenligner `cv.pdf` byte for byte
 
 **Gitt** at det ikke finnes noen `app/.env`
 **Når** jeg kjører `python lag_env.py`
@@ -624,7 +632,7 @@ slik at analysen bygger på det som faktisk står i CV-en.
 **Gitt** `fakta_i_cv` i fasiten, som er omskrevet og ikke kopiert fra CV-en
 **Når** CV-ene til A, B og C sjekkes manuelt
 **Så** finnes hvert punkt i CV-teksten, og sjekken står i `docs/testplan.md` (AD-17, SM-2)
-**Og** en test sjekker at `cv_kilde.txt` for D er lik den for A, siden D bare brukes i evalueringen og har samme CV (AD-6)
+**Og** en test sjekker at `cv_kilde.txt` og `fakta_i_cv` for D er like de for A, siden D bare brukes i evalueringen og har samme CV (AD-6, issue #29)
 
 ### Story 2.2: Laste opp CV og se teksten
 

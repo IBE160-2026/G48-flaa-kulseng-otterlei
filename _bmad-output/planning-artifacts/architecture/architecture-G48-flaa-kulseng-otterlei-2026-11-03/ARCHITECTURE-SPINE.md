@@ -340,7 +340,9 @@ erDiagram
   - Avsenderopplysningene og den redigerte teksten sendes med `POST` og lagres aldri (FR-23, AD-10).
 - **Begrunnelse:** `pdfplumber` leser tekst med posisjon, og det gir best mulighet for CV-er i to kolonner (eksempel C). `fpdf2` er ren Python, så sensor slipper systembiblioteker (NFR-1). En kontrollør testet at fpdf2s innebygde fonter krasjer på «–», «’» og «•».
 - **Valgt bort:** PyMuPDF (AGPL-lisens), WeasyPrint (krever Pango og andre systembiblioteker, se `technology.md`) og ReportLab (tyngre enn nødvendig).
-- **Krav før P2:** `pdfplumber` må vises å gi alle `fakta_i_cv` fra fasiten for CV A, B og C. Klarer den ikke det, byttes den med `pypdf` (reserve), og denne AD-en oppdateres.
+- **Krav før P2:** `pdfplumber` må vises å gi alle ordene i `cv_kilde.txt` i riktig rekkefølge for CV A og C, med hver kolonne for seg i C (story 2.1). `fakta_i_cv` er omskrevet og kan ikke søkes etter ordrett, så den sjekkes for hånd etter `docs/testplan.md`. Klarer `pdfplumber` det ikke, byttes den med `pypdf` (reserve), og denne AD-en oppdateres. Endret 2026-11-20, issue #29.
+  - **Forhåndssjekk 2026-11-20 (Henrik, issue #29):** Alle ordene i `cv_kilde.txt` ble funnet: A 174 av 174, C 135 av 135 og D 174 av 174.
+  - **PDF-ene blir ikke like byte for byte** på tvers av maskiner, selv med de samme versjonene av `fpdf2` og `fonttools`. Komprimeringen avhenger av zlib-versjonen Python er bygget med, og den kan ikke låses. Teksten er lik, så hashen i AD-6 påvirkes ikke. Ingen test sammenligner `cv.pdf` byte for byte.
   - **Prøvd 2026-11-12 (Haakon):** Med standardinnstillinger blander `extract_text()` de to kolonnene i CV C linje for linje. Når den loddrette stripen uten tekst mellom kolonnene finnes først, og hver kolonne leses for seg med `page.crop()`, kommer teksten ut i riktig rekkefølge, og CV A påvirkes ikke. `pdfplumber` beholdes, men `les_cv` må finne kolonnene selv.
 
 ### AD-14 — Konfigurasjon, hemmeligheter og modus
@@ -529,6 +531,7 @@ Versjonene er sjekket på PyPI 2026-11-12 (Django 6.1.3 og anthropic 2.8.0 etter
 | cryptography (Fernet) | 50.0.2 |
 | pdfplumber | 0.11.10 |
 | fpdf2 | 2.9.0 |
+| fonttools (brukes av fpdf2 til fonten) | 4.68.0 |
 | DejaVu Sans (font) | 2.37 |
 | pydantic | 2.14.3 |
 | python-dotenv | 1.2.4 |

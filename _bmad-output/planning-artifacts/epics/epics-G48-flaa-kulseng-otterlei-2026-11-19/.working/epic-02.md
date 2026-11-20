@@ -44,7 +44,7 @@ slik at analysen bygger på det som faktisk står i CV-en.
 **Gitt** `fakta_i_cv` i fasiten, som er omskrevet og ikke kopiert fra CV-en
 **Når** CV-ene til A, B og C sjekkes manuelt
 **Så** finnes hvert punkt i CV-teksten, og sjekken står i `docs/testplan.md` (AD-17, SM-2)
-**Og** en test sjekker at `cv_kilde.txt` for D er lik den for A, siden D bare brukes i evalueringen og har samme CV (AD-6)
+**Og** en test sjekker at `cv_kilde.txt` og `fakta_i_cv` for D er like de for A, siden D bare brukes i evalueringen og har samme CV (AD-6, issue #29)
 
 ### Story 2.2: Laste opp CV og se teksten
 
