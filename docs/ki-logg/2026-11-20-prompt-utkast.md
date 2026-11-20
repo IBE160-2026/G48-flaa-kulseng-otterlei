@@ -33,7 +33,7 @@ Lage utkast til promptene for KI-laget (AD-3, AD-5) mens Haakon lager epics og s
 
 - `app/ki/prompter/` med fire prompter og README. AD-5, beslutningsloggen og README i rotmappen er oppdatert.
 - **Ikke prøvd mot API-et.** Det krever kreditt i Claude Console (issue #16).
-- **Gjenstår:** prøve promptene på eksempelparene, prompten for vurderingen i evalueringen (`vurdering.md`, etter PR #33), og å rette feltnavnene når `ki/modeller.py` lages i Epic 0.
+- **Gjenstår:** prøve promptene på eksempelparene og å rette feltnavnene når `ki/modeller.py` lages i Epic 0.
 
 ## Rettelser etter gjennomgangen av PR #35 (2026-11-20)
 
