@@ -51,6 +51,7 @@ Henrik spurte hva neste steg er. Deretter ba han om å få de to logg-commitene 
 - Foreslo neste steg i denne rekkefølgen: (1) PR for loggene og invitasjonen i Claude Console, (2) sprint planning, (3) Epic 0 med Haakon (#17, #29), (4) ting som venter på andre.
 - [PR #40](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/40) for `aeedf1e` og `16ce40c`. `git merge-tree` viste ingen konflikt med `main`. Loggene er ikke skrevet om i ettertid. PR-beskrivelsen sier hvilke punkter som er løst siden.
 - Status på punktene fra forrige seksjon: PR #33 og #35 er flettet, og issue #16 og #36 er lukket. PR #34 er avgjort: Ole valgte alternativ A i `0486320`. PR #33 ble flettet uten setningen om den manuelle kontrollen i 5.2 og uten Haakons presisering (issue #42).
+- Kommentar på PR #40: «Gjenstår» i KI-logginnlegget nevnte fortsatt PR #35 og issue #16 som åpne. Den som så over PR-en, mente det ikke trengte å rettes, med henvisning til PR-beskrivelsen. Claude pekte på at begge var avgjort allerede da linjen ble skrevet, og Henrik valgte å rette den (`f2dd7f5`). Svar lagt inn på PR #40.
 
 ### Åpne punkter
 - Issue #42: KI-logginnlegget for PR #33 mangler setningen om den manuelle kontrollen og Haakons presisering.
