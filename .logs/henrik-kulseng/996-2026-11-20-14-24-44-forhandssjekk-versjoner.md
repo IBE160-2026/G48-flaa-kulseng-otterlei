@@ -36,3 +36,24 @@ Haakon lager epics og stories. I mellomtiden ville Henrik sjekke på forhånd at
 - Fordelingen i Epic 5 (Ole 5.1–5.2, Henrik 5.3–5.8) føres inn i issue #36 når Ole har sagt ja.
 - PR #34: Gruppa velger A eller B for hvordan brevet starter og slutter. Ole svarer på forslaget om linjeskift.
 - Issue #29: akseptkriteriene for Epic 0 bør teste tekst og ikke bytes. Tekstene om fonttools i `lag_cv_pdf.py` og i issuet bør rettes.
+
+## 2026-11-20 kl. 15:43 — Henrik Kulseng
+
+### Oppgave
+Henrik spurte hva neste steg er. Deretter ba han om å få de to logg-commitene på `docs/forhandssjekk-versjoner` inn i en ny PR. De kom til etter at PR #37 var flettet.
+
+### Plan
+- Sjekke åpne PR-er, issues, sesjonslogger og hvor langt planleggingen har kommet, og foreslå neste steg.
+- Kontrollere at branchen kan flettes uten konflikt, og lage en PR med malen.
+- Sjekke om de åpne punktene i loggen fortsatt gjelder.
+
+### Resultat
+- Foreslo neste steg i denne rekkefølgen: (1) PR for loggene og invitasjonen i Claude Console, (2) sprint planning, (3) Epic 0 med Haakon (#17, #29), (4) ting som venter på andre.
+- [PR #40](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/40) for `aeedf1e` og `16ce40c`. `git merge-tree` viste ingen konflikt med `main`. Loggene er ikke skrevet om i ettertid. PR-beskrivelsen sier hvilke punkter som er løst siden.
+- Status på punktene fra forrige seksjon: PR #33 og #35 er flettet, og issue #16 og #36 er lukket. PR #34 er avgjort: Ole valgte alternativ A i `0486320`. PR #33 ble flettet uten setningen om den manuelle kontrollen i 5.2 og uten Haakons presisering (issue #42).
+
+### Åpne punkter
+- Issue #42: KI-logginnlegget for PR #33 mangler setningen om den manuelle kontrollen og Haakons presisering.
+- Issue #43: Sprint planning før Epic 0. Henrik og Haakon fordeler storyene i Epic 0 først.
+- Henrik takker ja til invitasjonen til organisasjonen i Claude Console (personlig, ingen issue).
+- Issue #17 og #29 gjelder fortsatt (Epic 0).
