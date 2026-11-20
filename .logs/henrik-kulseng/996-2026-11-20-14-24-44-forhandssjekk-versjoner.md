@@ -23,11 +23,14 @@ Haakon lager epics og stories. I mellomtiden ville Henrik sjekke på forhånd at
   - Epic 5: Ole tar 5.1–5.2 og Henrik 5.3–5.7. 5.7 venter på #16. 5.3 bør deles, og «Jobber …» flyttes.
   - Epic 7: fpdf2 logger tegn som mangler i fonten, med tegn fra brevteksten (strider mot AD-10), og Markdown-eksporten bør aldri ha avsender. Henrik godtar filnavnene og meldingen om utklippstavlen.
 - **PR #34 (Oles prompter):** [Kommentar](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/34#issuecomment-7041672423) om `brev.md`, sett fra steg 4 og eksporten. Henrik er enig i at flosklene fra fasiten ikke skal stå i promptene. Prompten sier at appen legger til underskrift og kontaktinformasjon, men det gjør den bare i PDF-en (7.4). Gruppa må velge mellom A («Med vennlig hilsen» og navnet fra CV-en) og B (ingen hilsen). Linjeskift inne i et punkt kan bli to punkter i eksporten (7.2).
+- **PR #35 godkjent** av Henrik etter at Claude sjekket at alle rettelsene står i 1d70108 og 5667df9, også i `.working/`. Henrik godtok at 5.3 er delt i motsatt rekkefølge (5.3 Vise søknaden, 5.4 Be om søknad), slik at hver del kan testes alene.
+- **PR #33 (Oles avviste evalueringsforslag):** Henrik står bak gruppas begrunnelse. [Kommentar](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/33) med forslag om å skrive i KI-loggen at svakheten «Jeg kan SQL og ønsker å lære mer» fanges opp av den manuelle kontrollen i 5.2. Ikke godkjent ennå.
 - Test av 7.3 med fpdf2 2.9.0 og DejaVu: spesialtegn er OK, 30 000 tegn gir 9 sider, og en emoji fonten mangler, faller bort uten krasj.
 - Ingen kode eller planleggingsdokumenter er endret.
 
 ### Åpne punkter
 - Issue #17: lukkes når første story i Epic 0 har kjørt en test mot Django 6.1. Gruppa avgjør.
-- PR #35: Haakon og Ole svarer på forslagene, og Ole bekrefter fordelingen i Epic 5.
+- PR #33: Ole legger inn setningen om den manuelle kontrollen og løser konflikten. Henrik godkjenner etterpå.
+- Fordelingen i Epic 5 (Ole 5.1–5.2, Henrik 5.3–5.8) føres inn i issue #36 når Ole har sagt ja.
 - PR #34: Gruppa velger A eller B for hvordan brevet starter og slutter. Ole svarer på forslaget om linjeskift.
 - Issue #29: akseptkriteriene for Epic 0 bør teste tekst og ikke bytes. Tekstene om fonttools i `lag_cv_pdf.py` og i issuet bør rettes.
