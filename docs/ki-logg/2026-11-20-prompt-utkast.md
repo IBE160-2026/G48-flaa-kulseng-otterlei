@@ -47,3 +47,15 @@ Claude sammenlignet promptene med storyene for KI-laget i PR #35 (epics og stori
 | `mangler` het «krav som mangler i gap-analysen», men lages med `samle_mangler()`, som også tar med nøkkelord som mangler | 5.1 | Overskriften i brev og CV-forbedring og regel 3 i alle fire promptene sier nå «krav og nøkkelord som mangler» |
 
 README for mappen viser nå at feltnavnene er sjekket mot #35, og at `svarform` i `Brev` forutsettes satt av koden.
+
+## Etter Henriks gjennomgang av `brev.md` (2026-11-20)
+
+**Prompts:** «ok la oss gå gjennom alle åpne PR og kommentere på de»
+
+Henrik fant to ting i `brev.md` (kommentar på PR #34):
+- Prompten sa at appen legger til underskrift og kontaktinformasjon, men det gjør den bare øverst i PDF-en (story 7.4). Kopiert tekst og Markdown ville stått uten navn. Henrik ga to alternativer: **A** hilsen og navn i brevet, eller **B** ingen hilsen, og steg 4 ber brukeren legge den til.
+- Et linjeskift inne i et punkt blir til to punkter i eksporten (story 7.2).
+
+**Oles valg:** A, og en regel i prompten mot linjeskift (ikke i koden).
+
+**Hva Claude gjorde:** La inn hilsenen («Hei,» / «Dear Hiring Manager,») og avslutningen («Med vennlig hilsen» / «Kind regards» og navnet fra CV-en) i første og siste avsnitt, og regelen om linjeskift. Claude la først hilsenen og avslutningen som egne avsnitt, men flyttet dem inn i første og siste avsnitt, fordi FR-6 krever at hvert avsnitt viser til et krav eller et faktum fra CV-en. Formuleringene av hilsenen er Claudes forslag.
