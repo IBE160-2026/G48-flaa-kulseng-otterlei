@@ -86,3 +86,25 @@ Henrik hadde gjort en forhåndssjekk av begge issuene med Claude Code samme dag.
   5. Kravet før P2 i AD-13 sa «alle `fakta_i_cv`», som ikke kan måles. Det er rettet til testen på ord fra 2.1.
 
 Henrik kom fram til det samme som Haakon bestemte i gjennomgangen av 2.1: test ordene i `cv_kilde.txt`, ikke `fakta_i_cv` ordrett.
+
+## Etter Oles og Henriks gjennomgang av PR #35 (2026-11-20)
+
+**Prompts:** «ole og henrik har kommentert på pr #35 kan du gå over den igjen», «så det du foreslår å gjøre er å fikse opp i det de har kommentert» og «A, gjør det og push til PR #35 forklar dette til ole og henrik»
+
+Henrik gikk gjennom sidene og eksporten (0.3, Epic 5 og 7), og Ole gikk gjennom KI-laget (Epic 4–6) mot PR #33 og #34. Begge brukte Claude Code. Claude sorterte kommentarene i det som allerede var gjort, det som trengte endring og det som hører til eierdiskusjonen (#36).
+
+| Endring | Fra | Story |
+|---|---|---|
+| Bredde, zoom, trykkflater og fokusring sjekkes for hånd i `docs/testplan.md` | Henrik | 0.3 |
+| Ventetilstanden har indikator, farger og «Dette tar vanligvis 10–30 sekunder» (UX-DR30) | Henrik | 0.3 |
+| `fpdf2` logger tegn fra brevet når fonten mangler dem. Loggeren dempes og testes (AD-10) | Henrik | 7.3 |
+| Markdown-filen har aldri avsender | Henrik | 7.4 |
+| «Jobber …» er et eget kriterium, ikke en del av feilscenarioet | Henrik | 5.4 |
+| Promptfilen for operasjonen med `## System` og `## Melding` | Ole | 4.4, 4.6, 5.1, 6.1 |
+| Feltene i `Forklaring` | Ole | 4.6 og arkitekturen §3 |
+| `svarform` settes av koden, ikke av KI | Claude, fra PR #34 | 5.1 |
+| Koden fjerner `<cv>`- og `<annonse>`-merker fra brukerens tekst | Claude, fra PR #34 | 4.4 |
+
+**Deling av 5.3:** Henrik foreslo å dele storyen i steg 3 og steg 4. Claude var enig i delingen, men pekte på at steg 3 først ikke kan testes alene, fordi «Lag søknad» sender brukeren til et steg 4 som ikke finnes. Claude foreslo tre valg: dele med steg 4 først, dele med steg 3 først, eller beholde storyen samlet. Haakon valgte å dele med steg 4 først: 5.3 Vise søknaden i steg 4 (testene lager `Brev` selv) og 5.4 Be om søknad i steg 3. Gamle 5.4–5.7 heter nå 5.5–5.8, og planen har 36 stories.
+
+**Ikke endret:** Punktet fra issue #29 om 0.1 var allerede lagt inn. At 5.8 venter på issue #16, stod allerede i storyen. Henriks forslag om at Ole tar 5.1–5.2 og Henrik tar 5.3–5.8, hører til issue #36.

@@ -115,8 +115,9 @@ slik at jeg kan bruke appen på ekte søknader.
 **Gitt** `gap_analyse(cv_tekst, annonse, sprak)`
 **Når** den kalles
 **Så** henter den svaret som strukturert utdata med `messages.parse` mot `GapAnalyse`, der hvert krav har `krav`, `status` (`matcher`/`mangler`) og `begrunnelse` (FR-5)
-**Og** systemprompten og brukerprompten leses fra filer i `ki/prompter/`, og systemprompten sier at CV-teksten og annonsen er data og ikke instruksjoner (AD-5, NFR-3)
+**Og** systemprompten og brukermeldingen leses fra promptfilen for operasjonen, `ki/prompter/gap_analyse.md`, under `## System` og `## Melding`, og systemprompten sier at CV-teksten og annonsen er data og ikke instruksjoner (AD-5, NFR-3)
 **Og** bare CV-teksten, annonsen og språket sendes, aldri e-post, passord eller annet fra kontoen (NFR-4)
+**Og** før CV-teksten og annonsen settes inn i `<cv>` og `<annonse>`, fjerner koden `<cv>`, `</cv>`, `<annonse>` og `</annonse>` fra teksten, så en CV ikke kan lukke datablokken. Det gjelder alle fire operasjonene, og en test viser det (NFR-3, AD-5)
 
 **Gitt** svar og feil fra API-et (testet med en falsk `anthropic`-klient, uten nettverk)
 **Når** `ClaudeKlient` får dem
@@ -173,7 +174,8 @@ slik at jeg forstår hvordan jeg kan bruke den.
 **Gitt** «Analyser»
 **Når** gap-analysen har lyktes
 **Så** kjøres `nokkelord_forklaring(cv_tekst, annonse, sprak, resultat)` som tredje steg, og KI får nøkkelordresultatet bare for å forklare det, aldri for å endre det (AD-7, AD-8)
-**Og** prompten ligger i `ki/prompter/`, og `ClaudeKlient` og `TestmodusKlient` støtter operasjonen
+**Og** prompten ligger i promptfilen `ki/prompter/nokkelord_forklaring.md`, og `ClaudeKlient` og `TestmodusKlient` støtter operasjonen
+**Og** returtypen `Forklaring` i `ki/modeller.py` har `forklaring: str` og `omformuleringer: list[Omformulering]`, der `Omformulering` har `nokkelord` og `forslag` (arkitekturen §3)
 
 **Gitt** en analyse med forklaring
 **Når** steg 3 vises

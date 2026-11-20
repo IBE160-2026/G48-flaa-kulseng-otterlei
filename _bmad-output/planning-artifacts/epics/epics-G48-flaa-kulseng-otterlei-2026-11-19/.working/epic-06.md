@@ -18,7 +18,7 @@ slik at jeg får råd jeg faktisk kan bruke uten å dikte opp erfaring.
 **Og** typen brukes av både `ClaudeKlient` og `TestmodusKlient` gjennom `cv_forbedring(cv_tekst, annonse, sprak, mangler) -> CVForbedringer` (AD-3)
 **Og** `mangler` lages med `ki.mangler.samle_mangler()` fra story 5.1
 
-**Gitt** prompten for CV-forbedring i `ki/prompter/`
+**Gitt** promptfilen `ki/prompter/cv_forbedring.md`
 **Når** jeg leser den
 **Så** sier den at CV-teksten og annonsen er data og ikke instruksjoner, at hvert forslag skal vise til en del av CV-teksten, og at krav i `mangler` bare kan stå som spørsmål («Har du erfaring med X? I så fall bør det stå i CV-en»), aldri som noe brukeren skal skrive inn (FR-18, AD-5)
 **Og** den sier at `del_av_cv` siteres ordrett fra CV-teksten

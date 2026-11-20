@@ -82,7 +82,7 @@ Som bruker
 vil jeg at alle sidene har samme ramme, farger og testmodus-banner,
 slik at appen ser ryddig ut og jeg alltid ser om den kjører i testmodus.
 
-**Krav:** FR-9, NFR-7, NFR-8. **UX:** UX-DR1 – UX-DR7, UX-DR29, UX-DR30, UX-DR36. **Styres av:** AD-12, AD-15, AD-21.
+**Krav:** FR-9, NFR-7, NFR-8. **UX:** UX-DR1 – UX-DR7, UX-DR29, UX-DR30, UX-DR36. **Styres av:** AD-12, AD-15, AD-17, AD-21.
 
 **Akseptansekriterier:**
 
@@ -117,10 +117,12 @@ slik at appen ser ryddig ut og jeg alltid ser om den kjører i testmodus.
 **Gitt** en KI-knapp i et skjema og `static/js/skjema.js`
 **Når** knappen trykkes
 **Så** får den `aria-disabled="true"`, viser «Jobber …» og stopper nye trykk, og teksten skrives i et `aria-live`-område som finnes fra start (UX-DR30, AD-12)
+**Og** knappen viser en indikator og beholder fargene sine, og under den står «Dette tar vanligvis 10–30 sekunder» (UX-DR30)
 
 **Gitt** en enkel startside
 **Når** jeg åpner den på 320 px bredde og med 200 % zoom
 **Så** er det ingen vannrett rulling, alle trykkflater er minst 44 × 44 px, og fokusringen synes (UX-DR5, UX-DR6, UX-DR36)
+**Og** dette sjekkes for hånd i nettleseren og føres i `docs/testplan.md`, fordi pytest ikke kan måle bredde, zoom og fokusring (AD-17)
 **Og** en test sjekker at alle maldelene kan vises uten feil for en bruker som ikke er logget inn. Lenkene til «Min konto», «Logg ut» og steget brukeren står i, vises bare for innloggede brukere og kommer i Epic 1 og 2
 
 ### Story 0.4: Felles kjerne og KI-grensesnitt

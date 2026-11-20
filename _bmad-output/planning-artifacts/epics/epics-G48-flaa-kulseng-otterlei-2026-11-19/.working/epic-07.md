@@ -1,6 +1,6 @@
 ## Epic 7: Ta med søknaden ut (P8)
 
-Brukeren kan kopiere søknadsbrevet eller brevforslagene og laste dem ned som Markdown eller PDF. Koden ligger i `eksport/` (`markdown.py`, `pdf.py` og fontene som allerede finnes i `app/eksport/fonter/`), i `static/js/` og i steg 4 (`analyse/`). Den redigerte teksten fra steg 4 lagres aldri (AD-10, AD-22). Brevoppsettet i PDF-en er siste story, fordi det er første kutt i nødplanen (PRD §8.1). Kuttes det, eksporteres brevet som vanlig PDF. Epicet bruker tekstfeltet fra story 5.4. Kuttes 5.4, må kopieringen og eksporten bruke teksten i `Brev` i stedet, og det forklares i `docs/endringer/`.
+Brukeren kan kopiere søknadsbrevet eller brevforslagene og laste dem ned som Markdown eller PDF. Koden ligger i `eksport/` (`markdown.py`, `pdf.py` og fontene som allerede finnes i `app/eksport/fonter/`), i `static/js/` og i steg 4 (`analyse/`). Den redigerte teksten fra steg 4 lagres aldri (AD-10, AD-22). Brevoppsettet i PDF-en er siste story, fordi det er første kutt i nødplanen (PRD §8.1). Kuttes det, eksporteres brevet som vanlig PDF. Epicet bruker tekstfeltet fra story 5.5. Kuttes 5.5, må kopieringen og eksporten bruke teksten i `Brev` i stedet, og det forklares i `docs/endringer/`.
 
 ### Story 7.1: Kopiere teksten
 
@@ -99,6 +99,7 @@ slik at jeg har en ferdig fil jeg kan lese gjennom eller skrive ut.
 **Gitt** en tekst med æ, ø, å, tankestrek «–», typografiske anførselstegn og kulepunkter «•»
 **Når** den eksporteres til PDF
 **Så** krasjer ikke eksporten, og en test som leser PDF-en med `pdfplumber` finner hele teksten med riktige tegn (FR-23, SM-7, AD-13)
+**Og** loggeren `fpdf.output` er dempet, fordi `fpdf2` ellers logger tegn fonten mangler, og det er tegn fra brevteksten. En test viser at eksporten ikke logger noe (AD-10)
 **Og** en tekst nær `BREV_MAKS` gir flere sider med hele teksten
 **Og** en tekst med en emoji gir en PDF uten krasj. Tegn fonten mangler, kan falle bort, men resten av teksten er med
 
@@ -133,6 +134,7 @@ Storyen er første kutt i nødplanen (PRD §8.1). Uten den virker eksporten fra 
 **Når** jeg trykker «Last ned PDF»
 **Så** vises steg 4 på nytt med feiloppsummeringen og feilen ved feltet, og teksten i brevfeltet og det jeg har skrevet i avsenderfeltene, står fortsatt der (UX-DR29, AD-20)
 **Og** «Last ned Markdown» virker uten navn, og knappen har `formnovalidate`, så `required` på Navn ikke stopper den i nettleseren
+**Og** Markdown-filen har aldri avsender, selv om avsenderfeltene sendes med i det samme skjemaet, og en test viser det (AD-10)
 
 **Gitt** en eksport med avsender
 **Når** den er ferdig

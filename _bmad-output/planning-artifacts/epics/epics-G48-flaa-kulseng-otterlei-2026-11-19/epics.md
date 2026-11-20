@@ -367,7 +367,7 @@ Som bruker
 vil jeg at alle sidene har samme ramme, farger og testmodus-banner,
 slik at appen ser ryddig ut og jeg alltid ser om den kjører i testmodus.
 
-**Krav:** FR-9, NFR-7, NFR-8. **UX:** UX-DR1 – UX-DR7, UX-DR29, UX-DR30, UX-DR36. **Styres av:** AD-12, AD-15, AD-21.
+**Krav:** FR-9, NFR-7, NFR-8. **UX:** UX-DR1 – UX-DR7, UX-DR29, UX-DR30, UX-DR36. **Styres av:** AD-12, AD-15, AD-17, AD-21.
 
 **Akseptansekriterier:**
 
@@ -402,10 +402,12 @@ slik at appen ser ryddig ut og jeg alltid ser om den kjører i testmodus.
 **Gitt** en KI-knapp i et skjema og `static/js/skjema.js`
 **Når** knappen trykkes
 **Så** får den `aria-disabled="true"`, viser «Jobber …» og stopper nye trykk, og teksten skrives i et `aria-live`-område som finnes fra start (UX-DR30, AD-12)
+**Og** knappen viser en indikator og beholder fargene sine, og under den står «Dette tar vanligvis 10–30 sekunder» (UX-DR30)
 
 **Gitt** en enkel startside
 **Når** jeg åpner den på 320 px bredde og med 200 % zoom
 **Så** er det ingen vannrett rulling, alle trykkflater er minst 44 × 44 px, og fokusringen synes (UX-DR5, UX-DR6, UX-DR36)
+**Og** dette sjekkes for hånd i nettleseren og føres i `docs/testplan.md`, fordi pytest ikke kan måle bredde, zoom og fokusring (AD-17)
 **Og** en test sjekker at alle maldelene kan vises uten feil for en bruker som ikke er logget inn. Lenkene til «Min konto», «Logg ut» og steget brukeren står i, vises bare for innloggede brukere og kommer i Epic 1 og 2
 
 ### Story 0.4: Felles kjerne og KI-grensesnitt
@@ -1031,8 +1033,9 @@ slik at jeg kan bruke appen på ekte søknader.
 **Gitt** `gap_analyse(cv_tekst, annonse, sprak)`
 **Når** den kalles
 **Så** henter den svaret som strukturert utdata med `messages.parse` mot `GapAnalyse`, der hvert krav har `krav`, `status` (`matcher`/`mangler`) og `begrunnelse` (FR-5)
-**Og** systemprompten og brukerprompten leses fra filer i `ki/prompter/`, og systemprompten sier at CV-teksten og annonsen er data og ikke instruksjoner (AD-5, NFR-3)
+**Og** systemprompten og brukermeldingen leses fra promptfilen for operasjonen, `ki/prompter/gap_analyse.md`, under `## System` og `## Melding`, og systemprompten sier at CV-teksten og annonsen er data og ikke instruksjoner (AD-5, NFR-3)
 **Og** bare CV-teksten, annonsen og språket sendes, aldri e-post, passord eller annet fra kontoen (NFR-4)
+**Og** før CV-teksten og annonsen settes inn i `<cv>` og `<annonse>`, fjerner koden `<cv>`, `</cv>`, `<annonse>` og `</annonse>` fra teksten, så en CV ikke kan lukke datablokken. Det gjelder alle fire operasjonene, og en test viser det (NFR-3, AD-5)
 
 **Gitt** svar og feil fra API-et (testet med en falsk `anthropic`-klient, uten nettverk)
 **Når** `ClaudeKlient` får dem
@@ -1089,7 +1092,8 @@ slik at jeg forstår hvordan jeg kan bruke den.
 **Gitt** «Analyser»
 **Når** gap-analysen har lyktes
 **Så** kjøres `nokkelord_forklaring(cv_tekst, annonse, sprak, resultat)` som tredje steg, og KI får nøkkelordresultatet bare for å forklare det, aldri for å endre det (AD-7, AD-8)
-**Og** prompten ligger i `ki/prompter/`, og `ClaudeKlient` og `TestmodusKlient` støtter operasjonen
+**Og** prompten ligger i promptfilen `ki/prompter/nokkelord_forklaring.md`, og `ClaudeKlient` og `TestmodusKlient` støtter operasjonen
+**Og** returtypen `Forklaring` i `ki/modeller.py` har `forklaring: str` og `omformuleringer: list[Omformulering]`, der `Omformulering` har `nokkelord` og `forslag` (arkitekturen §3)
 
 **Gitt** en analyse med forklaring
 **Når** steg 3 vises
@@ -1112,7 +1116,7 @@ slik at jeg forstår hvordan jeg kan bruke den.
 
 ## Epic 5: Søknadsbrev (steg 4)
 
-Brukeren velger tone og svarform nederst i steg 3, får et søknadsbrev eller brevforslag uten oppdiktede påstander i steg 4, kan rette teksten, lage et nytt brev og starte en ny søknad. Når epicet er ferdig, kan SM-1 kjøres i testmodus. KI-operasjonen `brev`, promptene og `samle_mangler()` ligger i `ki/`, `Brev` og tjenestene i `analyse/` (AD-2, AD-8). Kopiering og nedlasting kommer i Epic 7, så steg 4 viser brevet uten de knappene til da. Story 5.4 og 5.5 og animasjonen i 5.3 står på kuttlisten i UX-en og kan kuttes uten at resten slutter å virke.
+Brukeren velger tone og svarform nederst i steg 3, får et søknadsbrev eller brevforslag uten oppdiktede påstander i steg 4, kan rette teksten, lage et nytt brev og starte en ny søknad. Når epicet er ferdig, kan SM-1 kjøres i testmodus. KI-operasjonen `brev`, promptene og `samle_mangler()` ligger i `ki/`, `Brev` og tjenestene i `analyse/` (AD-2, AD-8). Kopiering og nedlasting kommer i Epic 7, så steg 4 viser brevet uten de knappene til da. Story 5.5 og 5.6 og animasjonen i 5.3 står på kuttlisten i UX-en og kan kuttes uten at resten slutter å virke.
 
 ### Story 5.1: Brev og brevforslag i KI-laget
 
@@ -1127,6 +1131,7 @@ slik at jeg aldri sender en søknad som påstår noe jeg ikke kan.
 **Gitt** `ki/modeller.py`
 **Når** jeg ser på returtypen `Brev`
 **Så** har den `svarform`, `avsnitt: list[str]` og `punkter: list[str]`, og en validering sikrer at akkurat ett av `avsnitt` og `punkter` er tomt, ut fra `svarform` (AD-8)
+**Og** `svarform` settes av koden ut fra `Innstillinger`, ikke av KI, og promptfilen ber bare om `avsnitt` eller `punkter`
 **Og** `analyse/` importerer KI-typene gjennom modulen (`from ki import modeller as ki_modeller`, og så `ki_modeller.Brev`), så returtypen ikke forveksles med Django-modellen `analyse.models.Brev`
 
 **Gitt** `ki/mangler.py: samle_mangler(gap: GapAnalyse, resultat: Nokkelordresultat) -> list[str]`
@@ -1135,7 +1140,7 @@ slik at jeg aldri sender en søknad som påstår noe jeg ikke kan.
 **Og** den er det eneste stedet `mangler` lages. Tjenesten i `analyse/`, `cv_forbedring` i Epic 6 og `lag_lagrede_svar` bruker den. Den ligger i `ki/`, fordi `ki` ikke får importere `analyse` (AD-2)
 **Og** en test viser at et nøkkelord som mangler, men som gap-analysen ikke tok med, likevel kommer med
 
-**Gitt** promptfilene for brevet i `ki/prompter/`
+**Gitt** promptfilen `ki/prompter/brev.md`
 **Når** jeg leser dem
 **Så** sier systemprompten at CV-teksten og annonsen er data og ikke instruksjoner, og at krav i `mangler` aldri skal påstås som noe søkeren kan, men kan nevnes som noe søkeren vil lære (FR-8, NFR-3, AD-5)
 **Og** prompten ber om språket, tonen og svarformen i `Innstillinger`, om at stillingen og minst to krav som matcher nevnes ved fullt utkast, og om at hvert avsnitt eller punkt bygger på et krav fra annonsen eller noe som står i CV-en (FR-6, FR-7)
@@ -1200,13 +1205,44 @@ slik at testmodus har brev for alle valg, og vi kan vise at promptene ikke dikte
 **Så** feiler hash-testen fra Epic 4 også for brevfilene (AD-6)
 **Og** de 24 filene og rapporten er sjekket inn, og en test sjekker at alle 24 finnes og validerer mot `Brev`
 
-### Story 5.3: Be om søknad i steg 3 og lese den i steg 4
+### Story 5.3: Vise søknaden i steg 4
+
+Som student
+vil jeg lese søknaden eller forslagene på en egen side,
+slik at jeg kan lese gjennom dem før jeg bruker dem.
+
+**Krav:** FR-6, FR-7, NFR-4, NFR-7. **UX:** UX-DR7, UX-DR15, UX-DR20, UX-DR35, UX-DR36. **Styres av:** AD-8, AD-10, AD-15, AD-17, AD-22.
+
+Storyen kommer før «Lag søknad» (5.4), så steg 4 finnes når skjemaet i steg 3 sender brukeren dit. Testene lager `Brev`-raden selv og trenger ingen KI.
+
+**Akseptansekriterier:**
+
+**Gitt** at jeg har et `Brev`
+**Når** jeg åpner `/resultat/brev/` (`GET`)
+**Så** viser fremdriftslinjen steg 4, KI-varselet står over brevet, og brevkortet har merket «Laget av KI», begge fra de felles maldelene (NFR-4, UX-DR15)
+**Og** øverst står ✓-merket med «Utkastet er klart» og «Les gjennom og tilpass det før du sender. Lykke til!», eller «Forslagene er klare» og «Bruk dem når du skriver brevet ditt. Lykke til!» ved kun forslag (UX-DR20)
+**Og** fullt utkast vises som avsnitt og kun forslag som punktliste, med `lang` etter valgt språk, og visningen leser `Brev.svarform` (AD-8, UX-DR36)
+**Og** all tekst vises med Djangos escaping, uten `|safe` (AD-15)
+
+**Gitt** at jeg ikke har noe `Brev`
+**Når** jeg åpner `/resultat/brev/`
+**Så** sendes jeg til det siste steget jeg kan nå (`siste_steg`, AD-22, UX-DR35)
+
+**Gitt** at et nytt brev nettopp er laget
+**Når** steg 4 vises
+**Så** skaleres ✓-merket inn én gang på cirka 300 ms, og står stille ved `prefers-reduced-motion` (UX-DR20; kan kuttes, UX-kuttliste punkt 1)
+
+**Gitt** testene for storyen
+**Når** de kjøres
+**Så** lager de `Brev`-rader for begge svarformene direkte i databasen og sjekker visningen, tekstene og viderekoblingen uten `Brev` (AD-17, AD-22)
+
+### Story 5.4: Be om søknad i steg 3
 
 Som student
 vil jeg velge hvordan søknaden skal være, og få den på neste side,
 slik at jeg selv bestemmer hvor mye KI skal skrive.
 
-**Krav:** FR-4, FR-6, FR-7, FR-11, NFR-4, NFR-5, NFR-6. **UX:** UX-DR7, UX-DR15, UX-DR19, UX-DR20, UX-DR29 – UX-DR32, UX-DR35, UX-DR36. **Styres av:** AD-3, AD-8, AD-9, AD-10, AD-12, AD-20, AD-22.
+**Krav:** FR-4, FR-6, FR-7, FR-11, NFR-5, NFR-6. **UX:** UX-DR19, UX-DR29 – UX-DR32, UX-DR35. **Styres av:** AD-3, AD-8, AD-9, AD-12, AD-17, AD-20, AD-22.
 
 **Akseptansekriterier:**
 
@@ -1217,36 +1253,29 @@ slik at jeg selv bestemmer hvor mye KI skal skrive.
 **Og** med egen CV i testmodus vises ikke kortet, fordi steg 3 da har «Prøv eksempel A» fra story 4.3 i stedet (FR-11, UX-DR32)
 
 **Gitt** at jeg trykker «Lag søknad»
+**Når** KI-kallet pågår
+**Så** viser knappen «Jobber …» med den felles ventetilstanden fra `skjema.js`, og et nytt trykk gir ikke et nytt kall (NFR-6, UX-DR30)
+
+**Gitt** at jeg trykker «Lag søknad»
 **Når** skjemaet sender `POST` til `/resultat/brev/` og `analyse.tjenester.lag_brev(bruker, tone, svarform)` kjører
 **Så** kaller den `brev` gjennom `ki.hent_klient()` inne i `ki_las`, utenfor en databasetransaksjon, med `mangler` fra `ki.mangler.samle_mangler()` (AD-3, AD-12)
 **Og** lagrer `Brev` med `svarform`, `tone`, `avsnitt` og `punkter` i krypterte felt, og erstatter et tidligere `Brev` (AD-8, AD-9)
-**Og** sender meg til `/resultat/brev/` (Post/Redirect/Get, UX-DR35)
+**Og** sender meg til steg 4 fra story 5.3 (Post/Redirect/Get, UX-DR35)
 
 **Gitt** at KI-tjenesten svarer med en feil
 **Når** jeg trykker «Lag søknad»
 **Så** vises steg 3 på nytt med feiloppsummeringen og meldingen fra `kjerne/meldinger.py`, og ingenting er overskrevet (NFR-5, UX-DR31, AD-20)
 **Og** valgene for tone og svarform står som jeg valgte dem, og en test viser det
-**Og** mens jeg venter, viser knappen «Jobber …» (NFR-6, UX-DR30)
 
 **Gitt** egen CV i testmodus
 **Når** noen sender `POST` direkte til `/resultat/brev/`
 **Så** oversetter tjenesten `IkkeITestmodus` til `BrukerFeil` med FR-11-meldingen fra `kjerne/meldinger.py`, og ingenting lagres (FR-11, AD-20)
 
-**Gitt** at jeg har et `Brev`
-**Når** jeg åpner steg 4
-**Så** viser fremdriftslinjen steg 4, KI-varselet står over brevet, og brevkortet har merket «Laget av KI», begge fra de felles maldelene (NFR-4, UX-DR15)
-**Og** øverst står ✓-merket med «Utkastet er klart» og «Les gjennom og tilpass det før du sender. Lykke til!», eller «Forslagene er klare» og «Bruk dem når du skriver brevet ditt. Lykke til!» ved kun forslag (UX-DR20)
-**Og** fullt utkast vises som avsnitt og kun forslag som punktliste, med `lang` etter valgt språk, og visningen leser `Brev.svarform` (AD-8, UX-DR36)
-
-**Gitt** at et nytt brev nettopp er laget
-**Når** steg 4 vises
-**Så** skaleres ✓-merket inn én gang på cirka 300 ms, og står stille ved `prefers-reduced-motion` (UX-DR20; kan kuttes, UX-kuttliste punkt 1)
-
 **Gitt** testene for storyen
 **Når** de kjøres med `falsk_ki`
-**Så** dekker de begge svarformene, forhåndsvalgene, at feil ikke overskriver et tidligere brev, og at brukeren uten `Analyse` sendes til siste steg hen kan nå (AD-22)
+**Så** dekker de begge svarformene, forhåndsvalgene, at feil ikke overskriver et tidligere brev, og at et nytt brev sendes til steg 4 (AD-17)
 
-### Story 5.4: Rette brevet i steg 4
+### Story 5.5: Rette brevet i steg 4
 
 Som student
 vil jeg rette brevet før jeg tar det med meg,
@@ -1272,7 +1301,7 @@ slik at det blir mitt eget.
 **Så** er `Brev` i databasen uendret, og den redigerte teksten finnes verken i økten, i logger eller i noen modell (FR-6, FR-7, AD-10, AD-22)
 **Og** feltet har et fast `name`, slik at kopieringen og eksporten i Epic 7 kan bruke det
 
-### Story 5.5: Lage nytt brev med annen tone eller svarform
+### Story 5.6: Lage nytt brev med annen tone eller svarform
 
 Som student
 vil jeg be om et nytt utkast med en annen tone eller svarform,
@@ -1297,7 +1326,7 @@ slik at jeg får et brev som passer meg, uten å kjøre analysen på nytt.
 **Så** vises steg 4 på nytt med meldingen i feiloppsummeringen, det gamle brevet står, og valgene mine beholdes (NFR-5, AD-20)
 **Og** skjemaet har et skjult felt som sier om det kom fra steg 3 eller steg 4, viewet godtar bare de to verdiene, og en test dekker feil fra begge stegene
 
-### Story 5.6: Start ny søknad
+### Story 5.7: Start ny søknad
 
 Som student
 vil jeg starte en ny søknad med samme CV,
@@ -1321,7 +1350,7 @@ slik at jeg kan søke på en ny stilling uten rester fra den forrige.
 **Når** jeg kommer tilbake til steg 4
 **Så** er ingenting slettet
 
-### Story 5.7: Kjerneflyten fra start til slutt i testmodus
+### Story 5.8: Kjerneflyten fra start til slutt i testmodus
 
 Som sensor
 vil jeg kunne gå gjennom hele kjerneflyten med eksempel A uten nøkkel,
@@ -1363,7 +1392,7 @@ slik at jeg får råd jeg faktisk kan bruke uten å dikte opp erfaring.
 **Og** typen brukes av både `ClaudeKlient` og `TestmodusKlient` gjennom `cv_forbedring(cv_tekst, annonse, sprak, mangler) -> CVForbedringer` (AD-3)
 **Og** `mangler` lages med `ki.mangler.samle_mangler()` fra story 5.1
 
-**Gitt** prompten for CV-forbedring i `ki/prompter/`
+**Gitt** promptfilen `ki/prompter/cv_forbedring.md`
 **Når** jeg leser den
 **Så** sier den at CV-teksten og annonsen er data og ikke instruksjoner, at hvert forslag skal vise til en del av CV-teksten, og at krav i `mangler` bare kan stå som spørsmål («Har du erfaring med X? I så fall bør det stå i CV-en»), aldri som noe brukeren skal skrive inn (FR-18, AD-5)
 **Og** den sier at `del_av_cv` siteres ordrett fra CV-teksten
@@ -1437,7 +1466,7 @@ slik at jeg kan tilpasse CV-en til stillingen før jeg søker.
 
 ## Epic 7: Ta med søknaden ut (P8)
 
-Brukeren kan kopiere søknadsbrevet eller brevforslagene og laste dem ned som Markdown eller PDF. Koden ligger i `eksport/` (`markdown.py`, `pdf.py` og fontene som allerede finnes i `app/eksport/fonter/`), i `static/js/` og i steg 4 (`analyse/`). Den redigerte teksten fra steg 4 lagres aldri (AD-10, AD-22). Brevoppsettet i PDF-en er siste story, fordi det er første kutt i nødplanen (PRD §8.1). Kuttes det, eksporteres brevet som vanlig PDF. Epicet bruker tekstfeltet fra story 5.4. Kuttes 5.4, må kopieringen og eksporten bruke teksten i `Brev` i stedet, og det forklares i `docs/endringer/`.
+Brukeren kan kopiere søknadsbrevet eller brevforslagene og laste dem ned som Markdown eller PDF. Koden ligger i `eksport/` (`markdown.py`, `pdf.py` og fontene som allerede finnes i `app/eksport/fonter/`), i `static/js/` og i steg 4 (`analyse/`). Den redigerte teksten fra steg 4 lagres aldri (AD-10, AD-22). Brevoppsettet i PDF-en er siste story, fordi det er første kutt i nødplanen (PRD §8.1). Kuttes det, eksporteres brevet som vanlig PDF. Epicet bruker tekstfeltet fra story 5.5. Kuttes 5.5, må kopieringen og eksporten bruke teksten i `Brev` i stedet, og det forklares i `docs/endringer/`.
 
 ### Story 7.1: Kopiere teksten
 
@@ -1536,6 +1565,7 @@ slik at jeg har en ferdig fil jeg kan lese gjennom eller skrive ut.
 **Gitt** en tekst med æ, ø, å, tankestrek «–», typografiske anførselstegn og kulepunkter «•»
 **Når** den eksporteres til PDF
 **Så** krasjer ikke eksporten, og en test som leser PDF-en med `pdfplumber` finner hele teksten med riktige tegn (FR-23, SM-7, AD-13)
+**Og** loggeren `fpdf.output` er dempet, fordi `fpdf2` ellers logger tegn fonten mangler, og det er tegn fra brevteksten. En test viser at eksporten ikke logger noe (AD-10)
 **Og** en tekst nær `BREV_MAKS` gir flere sider med hele teksten
 **Og** en tekst med en emoji gir en PDF uten krasj. Tegn fonten mangler, kan falle bort, men resten av teksten er med
 
@@ -1570,6 +1600,7 @@ Storyen er første kutt i nødplanen (PRD §8.1). Uten den virker eksporten fra 
 **Når** jeg trykker «Last ned PDF»
 **Så** vises steg 4 på nytt med feiloppsummeringen og feilen ved feltet, og teksten i brevfeltet og det jeg har skrevet i avsenderfeltene, står fortsatt der (UX-DR29, AD-20)
 **Og** «Last ned Markdown» virker uten navn, og knappen har `formnovalidate`, så `required` på Navn ikke stopper den i nettleseren
+**Og** Markdown-filen har aldri avsender, selv om avsenderfeltene sendes med i det samme skjemaet, og en test viser det (AD-10)
 
 **Gitt** en eksport med avsender
 **Når** den er ferdig
