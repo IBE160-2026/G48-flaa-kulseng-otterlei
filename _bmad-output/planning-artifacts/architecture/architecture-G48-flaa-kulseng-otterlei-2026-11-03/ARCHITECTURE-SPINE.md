@@ -167,6 +167,7 @@ flowchart LR
 - **Hindrer:** spredte prompter, at personopplysninger utover CV-teksten sendes, at instruksjoner i en annonse styrer modellen, og at varslene til brukeren blir glemt
 - **Regel:**
   - Prompter ligger bare som filer i `ki/prompter/` og versjoneres i git.
+    - Én fil per operasjon i AD-3. Teksten under `## System` er systemprompten, og teksten under `## Melding` er brukermeldingen. `{{navn}}` byttes ut med vanlig strengerstatning. CV-teksten og annonsen står inne i `<cv>` og `<annonse>`. Formatet og plassholderne står i `ki/prompter/README.md` (2026-11-20).
   - Til KI sendes bare parameterne i AD-3. Kontoens e-post og passord, og avsenderopplysningene fra PDF-eksporten (navn, e-post og telefon, FR-23), sendes aldri.
   - CV-teksten sendes slik den står etter steg 1, også navn og kontaktinformasjon som står i CV-en. Appen fjerner ikke noe selv. Brukeren får vite det i steg 2 og i «Min konto», og kan fjerne det når hen retter CV-teksten (FR-2).
   - Systemprompten sier at CV-tekst og annonse er data og ikke instruksjoner, og at krav i `mangler` aldri skal påstås som noe søkeren kan.
