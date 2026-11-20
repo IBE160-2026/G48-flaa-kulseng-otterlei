@@ -68,7 +68,6 @@ Dele kravene i PRD-en, arkitekturen og UX-en opp i epics og stories som kan bygg
 - **Gjenstår:**
   - Ole og Henrik ser over pull requesten.
   - Sprint-planlegging (`bmad-sprint-planning`).
-  - Hvem som eier hvilke epics, er ikke bestemt. `epics.md` har bare Claudes forslag.
   - Teksten står nå både i `epics.md` og i `.working/epic-NN.md`. Endres en story, må den endres begge steder.
 
 ## Etter gjennomgangen av issue #17 og #29 (2026-11-20)
@@ -108,3 +107,10 @@ Henrik gikk gjennom sidene og eksporten (0.3, Epic 5 og 7), og Ole gikk gjennom 
 **Deling av 5.3:** Henrik foreslo å dele storyen i steg 3 og steg 4. Claude var enig i delingen, men pekte på at steg 3 først ikke kan testes alene, fordi «Lag søknad» sender brukeren til et steg 4 som ikke finnes. Claude foreslo tre valg: dele med steg 4 først, dele med steg 3 først, eller beholde storyen samlet. Haakon valgte å dele med steg 4 først: 5.3 Vise søknaden i steg 4 (testene lager `Brev` selv) og 5.4 Be om søknad i steg 3. Gamle 5.4–5.7 heter nå 5.5–5.8, og planen har 36 stories.
 
 **Ikke endret:** Punktet fra issue #29 om 0.1 var allerede lagt inn. At 5.8 venter på issue #16, stod allerede i storyen. Henriks forslag om at Ole tar 5.1–5.2 og Henrik tar 5.3–5.8, hører til issue #36.
+
+## Eierne av epicene (2026-11-20)
+
+**Prompts:** «hvor har henrik kommentert på eierene?» og «ja, eg bekrefter epic 1–3, før inn eierne»
+
+Claude viste hvor hver av dem hadde svart: Ole i issue #36 (Epic 4, 6 og 5.1–5.2), Henrik i kommentaren sin på PR #35 (Epic 0, 7 og resten av Epic 5) og Haakon i økten (Epic 1–3). Claude pekte også på at Ole og Henrik skrev «5.3–5.7» før 5.3 ble delt. Henriks del heter nå 5.3–5.8. Eierne er ført inn i `epics.md` og i en ny tabell i `docs/arbeidsfordeling.md`.
+

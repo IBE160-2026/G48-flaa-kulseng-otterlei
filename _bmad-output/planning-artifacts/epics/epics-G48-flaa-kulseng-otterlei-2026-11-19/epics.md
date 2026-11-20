@@ -238,39 +238,39 @@ NFR-1 – NFR-3 legges i Epic 0 og gjelder videre i alle epics. NFR-4 – NFR-9 
 
 ## Oversikt over epicene
 
-Godkjent av Haakon 2026-11-19. Hver story og hvert epic ble deretter gjennomgått og godkjent én om gangen 2026-11-19 og 2026-11-20 (se [gjennomgang.md](gjennomgang.md)). Rekkefølgen er byggerekkefølgen. Epic 0–5 er kjerneflyten (P1–P5) og skal være ferdige til sjekkpunktet 2. desember (PRD §8.1). Eierne er Claudes forslag, og gruppa bestemmer dem.
+Godkjent av Haakon 2026-11-19. Hver story og hvert epic ble deretter gjennomgått og godkjent én om gangen 2026-11-19 og 2026-11-20 (se [gjennomgang.md](gjennomgang.md)). Rekkefølgen er byggerekkefølgen. Epic 0–5 er kjerneflyten (P1–P5) og skal være ferdige til sjekkpunktet 2. desember (PRD §8.1). Eierne startet som Claudes forslag og ble bestemt av gruppa 2026-11-20 (issue #36 og PR #35). Å eie et epic betyr å ha ansvaret for at det blir ferdig, ikke å gjøre alt alene (`docs/arbeidsfordeling.md`).
 
 **Epic 0: Appen kan startes og testes**
 Sensor kloner repoet, følger README og starter appen i testmodus uten nøkkel, og testene kjører med én kommando. Epic 0 lager også fellesmappene som alle snittene bygger på (AD-21).
-**Krav:** FR-9, FR-15 (felttyper), NFR-1, NFR-2, NFR-3, issue #17 og #29, UX-DR1 – UX-DR6. **Forslag til eier:** Henrik og Haakon.
+**Krav:** FR-9, FR-15 (felttyper), NFR-1, NFR-2, NFR-3, issue #17 og #29, UX-DR1 – UX-DR6. **Eier:** Henrik og Haakon.
 
 **Epic 1: Konto og innlogging**
 Brukeren kan registrere seg med avkrysning for personvern, logge inn og ut, lese i Min konto hva som lagres og sendes, og slette kontoen.
-**Krav:** FR-12, FR-13, FR-14 (innlogging kreves), FR-17, NFR-4 (Min konto), UX-DR26 – UX-DR28, UX-DR34. **Forslag til eier:** Haakon.
+**Krav:** FR-12, FR-13, FR-14 (innlogging kreves), FR-17, NFR-4 (Min konto), UX-DR26 – UX-DR28, UX-DR34. **Eier:** Haakon.
 
 **Epic 2: CV-en (steg 1)**
 Brukeren kan laste opp CV-en som PDF eller TXT, se og rette teksten, prøve eksempel A, B eller C i testmodus, og slette dokumentene sine.
-**Krav:** FR-1, FR-2, FR-10 (eksempelknapper), FR-14 (to brukere), FR-15 (i databasen), FR-16 (slett dokumenter), UX-DR7 – UX-DR11. **Forslag til eier:** Haakon.
+**Krav:** FR-1, FR-2, FR-10 (eksempelknapper), FR-14 (to brukere), FR-15 (i databasen), FR-16 (slett dokumenter), UX-DR7 – UX-DR11. **Eier:** Haakon.
 
 **Epic 3: Annonse og nøkkelordanalyse (steg 2 og 3)**
 Brukeren kan lime inn annonsen, velge språk og egne nøkkelord, trykke «Analyser» og se hvilke nøkkelord som finnes og mangler. Virker uten KI, også med egen CV i testmodus.
-**Krav:** FR-3, FR-4 (språk og nøkkelord), FR-19, FR-20, FR-11 (nøkkelorddelen), UX-DR12 – UX-DR14, UX-DR17. **Forslag til eier:** Haakon.
+**Krav:** FR-3, FR-4 (språk og nøkkelord), FR-19, FR-20, FR-11 (nøkkelorddelen), UX-DR12 – UX-DR14, UX-DR17. **Eier:** Haakon.
 
 **Epic 4: Gap-analyse med KI**
 Brukeren får gap-analysen med begrunnelser, i testmodus med lagrede svar og i KI-modus med Claude. KI-forklaringen av nøkkelordene kommer sist, fordi den kan kuttes.
-**Krav:** FR-5, FR-9 – FR-11, FR-21, NFR-5, NFR-6, NFR-9, NFR-11 (gap-delen), UX-DR15, UX-DR16, UX-DR29 – UX-DR32. **Forslag til eier:** Ole.
+**Krav:** FR-5, FR-9 – FR-11, FR-21, NFR-5, NFR-6, NFR-9, NFR-11 (gap-delen), UX-DR15, UX-DR16, UX-DR29 – UX-DR32. **Eier:** Ole.
 
 **Epic 5: Søknadsbrev (steg 4)**
 Brukeren velger tone og svarform, får søknadsbrev eller brevforslag uten oppdiktede påstander, kan rette teksten, lage et nytt brev og starte en ny søknad. SM-1 kan kjøres når epicet er ferdig.
-**Krav:** FR-4 (tone og svarform), FR-6, FR-7, FR-8, FR-16 («Start ny søknad»), NFR-11 (brevdelen, par D, issue #28), UX-DR19 – UX-DR21, UX-DR24, UX-DR25. **Forslag til eier:** Ole og Henrik.
+**Krav:** FR-4 (tone og svarform), FR-6, FR-7, FR-8, FR-16 («Start ny søknad»), NFR-11 (brevdelen, par D, issue #28), UX-DR19 – UX-DR21, UX-DR24, UX-DR25. **Eier:** Ole (5.1 og 5.2, KI-laget og evalueringen) og Henrik (5.3–5.8, sidene og kjerneflyten).
 
 **Epic 6: CV-forbedringsforslag (P6)**
 Brukeren får forslag til CV-en som viser til CV-teksten, og krav som mangler, står som spørsmål.
-**Krav:** FR-18, NFR-11 (CV-delen), UX-DR18. **Forslag til eier:** Ole.
+**Krav:** FR-18, NFR-11 (CV-delen), UX-DR18. **Eier:** Ole.
 
 **Epic 7: Ta med søknaden ut (P8)**
 Brukeren kan kopiere brevet og laste det ned som Markdown eller PDF med brevoppsett.
-**Krav:** FR-22, FR-23, UX-DR22, UX-DR23. **Forslag til eier:** Henrik.
+**Krav:** FR-22, FR-23, UX-DR22, UX-DR23. **Eier:** Henrik.
 
 ## Slik bygges storyene
 
