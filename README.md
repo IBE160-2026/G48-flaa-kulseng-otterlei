@@ -51,6 +51,9 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
   - [DESIGN.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/DESIGN.md) — hvordan appen ser ut: farger, typografi og komponenter
   - [EXPERIENCE.md](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/EXPERIENCE.md) — hvordan appen fungerer: veiviser i fire steg, tilstander, tilgjengelighet og brukerreiser
   - [Mockups](_bmad-output/planning-artifacts/ux-designs/ux-G48-flaa-kulseng-otterlei-2026-11-12/mockups/) — nøkkelskjermene i HTML
+- [Epics og stories](_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/epics.md) — 8 epics og 36 stories med akseptansekriterier, i byggerekkefølge
+  - [Gjennomgang](_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/gjennomgang.md) — godkjenningen av hver story og hvert epic, med endringene
+  - [Én fil per epic](_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/.working/) — de samme storyene delt opp, og briefen til KI-skriverne
 
 ## Eksempeldata med fasit
 

@@ -62,6 +62,21 @@ Hver person eier et område av appen, med både planlegging, kode og tester. Å 
 - **Små commits** med beskrivende meldinger, helst hver arbeidsdag.
 - **Refleksjonsrapporten** skrives sammen i uke 5, med hver sin personlige refleksjon.
 
+### Eiere av epicene
+
+**Avgjort 2026-11-20** (issue #36 og PR #35). Claude Code foreslo eierne ut fra ansvarsområdene over. Ole bekreftet i issue #36, Henrik i PR #35 og Haakon i Claude-økten. Storyene står i [epics.md](../_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/epics.md).
+
+| Epic | Eier |
+|---|---|
+| 0 Appen kan startes og testes | Henrik og Haakon |
+| 1 Konto og innlogging | Haakon |
+| 2 CV-en (steg 1) | Haakon |
+| 3 Annonse og nøkkelordanalyse (steg 2 og 3) | Haakon |
+| 4 Gap-analyse med KI | Ole |
+| 5 Søknadsbrev (steg 4) | Ole (5.1–5.2: KI-laget og evalueringen) og Henrik (5.3–5.8: sidene og kjerneflyten) |
+| 6 CV-forbedringsforslag (P6) | Ole |
+| 7 Ta med søknaden ut (P8) | Henrik |
+
 ## 3. Ukeplan
 
 | Uke | Mål | Ferdig når |
