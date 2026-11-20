@@ -7,7 +7,7 @@ paradigm: 'Lagdelt Django-monolitt (views → tjenester → porter/rene moduler)
 scope: 'Hele v1 (P1–P8, FR-1 – FR-23, NFR-1 – NFR-11)'
 status: final
 created: '2026-11-03'
-updated: '2026-11-12'
+updated: '2026-11-19'
 binds: [FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, FR-7, FR-8, FR-9, FR-10, FR-11, FR-12, FR-13, FR-14, FR-15, FR-16, FR-17, FR-18, FR-19, FR-20, FR-21, FR-22, FR-23, NFR-1, NFR-2, NFR-3, NFR-4, NFR-5, NFR-6, NFR-7, NFR-8, NFR-9, NFR-10, NFR-11]
 sources:
   - ../../prd/prd.md
@@ -73,6 +73,7 @@ flowchart LR
     dokumenter --> kjerne
     analyse --> kjerne
     ki --> nokkelord
+    ki -->|bare pdf_innlesing| dokumenter
 ```
 
 ## 2. Beslutninger og regler
@@ -95,6 +96,7 @@ flowchart LR
   - Mellom appene går avhengighetene bare i retningen i diagrammet i §1. `kontoer` importerer ingen av de andre appene.
   - `nokkelord/` er en vanlig Python-pakke, ikke en Django-app. Den importerer ikke Django.
   - `ki/` er en Django-app bare fordi den har management-kommandoen i AD-6. Den har ingen modeller og importerer ikke modeller fra andre apper.
+  - `ki.eksempelpar` bruker `dokumenter.pdf_innlesing.les_cv` for å lage referanseteksten til eksempelparene (AD-6). Det er den eneste importen fra `ki` til `dokumenter`. `dokumenter` importerer aldri `ki`, så eksempelknappen (`/eksempel/<A|B|C>/`) ligger i `analyse/`, som får bruke både `ki` og `dokumenter`. Lagt til 2026-11-19 (story 2.4).
   - Alt `ki/` og `nokkelord/` tar inn og gir fra seg, er strenger eller pydantic-modeller.
   - Registrering og innlogging bruker Djangos egne skjemaer og views. Det er det eneste unntaket fra regelen om at skriving går gjennom `tjenester.py`.
 - **Begrunnelse:** Gjør nøkkelordanalysen og KI-laget enkle å enhetsteste (NFR-2), og gir sensor en struktur som kan kontrolleres (kriterium 5). Gruppa godkjente lagdelingen 2026-11-03. Regelen om eierskap kom fra kontrollørenes gjennomgang.
@@ -183,11 +185,11 @@ flowchart LR
 - **Regel:**
   - **`ki/eksempelpar.py`** er det eneste stedet som vet hvordan eksempelparene ser ut. Alle andre bruker funksjonene her:
     - `hent_eksempelpar(par)` gir CV-fil, annonse og `Fasit`.
-    - `normaliser(tekst)` gjør Unicode NFC, `\r\n` og `\r` til `\n`, fjerner mellomrom på slutten av linjene, slår sammen tre eller flere linjeskift til to, og fjerner mellomrom først og sist.
+    - Funksjonene bruker `kjerne/tekst.py: normaliser(tekst)`. Den ligger i `kjerne/`, fordi `dokumenter` også trenger den (AD-8) og ikke får importere `ki` (AD-2). `normaliser` gjør Unicode NFC, `\r\n` og `\r` til `\n`, fjerner mellomrom på slutten av linjene, slår sammen tre eller flere linjeskift til to, og fjerner mellomrom først og sist.
     - `eksempel_hash(cv_tekst, annonse)` er `sha256(normaliser(cv_tekst) + "\n\x1e\n" + normaliser(annonse))`.
     - `finn_eksempelpar(cv_tekst) -> par | None` sammenligner `normaliser(cv_tekst)` med referanseteksten til par A, B og C, og gir paret som er likt, eller `None`. Den brukes i steg 2, der annonsen ikke finnes ennå (AD-22). Par D er ikke med, fordi det har samme CV som A og bare brukes i evalueringen.
     - `svarfil(par, operasjon, **innstillinger)` gir filnavnet i `testdata/eksempler/<par>/svar/`.
-  - **Referanseteksten** for et par er alltid `les_cv()` (AD-13) på parets CV-fil og `annonse.txt`. Hashene regnes ut når appen starter, og lagres ikke. «Prøv med eksempel» og `TestmodusKlient` bruker de samme funksjonene. En test sjekker at teksten skjemaet fyller inn, gir treff når den sendes tilbake med `\r\n`.
+  - **Referanseteksten** for et par er alltid `les_cv()` (AD-13) på parets CV-fil og `annonse.txt`. Hashene regnes ut første gang de trengs, huskes med `functools.cache` og lagres ikke på disk. Eksemplene ligger i `settings.EKSEMPLER_DIR` (`testdata/eksempler/`), så testene kan bytte mappen. «Prøv med eksempel» og `TestmodusKlient` bruker de samme funksjonene. En test sjekker at teksten skjemaet fyller inn, gir treff når den sendes tilbake med `\r\n`.
   - Treffer hashen ikke et par, kaster `TestmodusKlient` unntaket `IkkeITestmodus`.
   - **Filnavn** følger mønsteret `<operasjon>__<sprak>[__<tone>__<svarform>].json`, for eksempel `brev__nb__formell__fullt_utkast.json` og `gap_analyse__en.json`. Hver fil inneholder `{"meta": {...}, "svar": ...}`:
     - `svar` er resultatet av `model_dump(mode="json")` på returtypen.
@@ -247,7 +249,7 @@ flowchart LR
     - `CVForbedring` inneholder forbedringsforslagene.
   - **Ny CV eller endret CV-tekst** går alltid gjennom `dokumenter.tjenester`:
     - `lagre_cv` sletter den gamle `CV`-raden og lager en ny.
-    - `lagre_cv_tekst` sletter `Analyse` når teksten er endret etter `normaliser()`.
+    - `lagre_cv_tekst` sletter `Analyse` når teksten er endret etter `kjerne.tekst.normaliser()`.
     - Kjeden sletter så resten.
   - **Ny analyse** sletter den gamle `Analyse`-raden, og dermed også `Brev` og `CVForbedring`.
   - **Tone og svarform** finnes bare på `Brev`. Brevskjemaet bruker standardverdiene fra FR-4 første gang og deretter verdiene fra det siste `Brev`. Alt som viser eller eksporterer et brev, leser `Brev.svarform`.
@@ -319,7 +321,7 @@ erDiagram
   - KI-kall gjøres synkront i en vanlig `POST`, og alltid **utenfor** en databasetransaksjon. Resultatet lagres etterpå i en kort `transaction.atomic`. `ATOMIC_REQUESTS` er av.
   - Ingenting overskrives før KI-kallet har lyktes, bortsett fra de delvise analysene i AD-8. CV, annonse og innstillinger beholdes i skjemaet.
   - Ett felles JavaScript (`static/js/skjema.js`) deaktiverer knappen og viser «Jobber …» med `aria-live` ved innsending.
-  - Alle fire KI-operasjonene kjøres inne i `kjerne/las.py: ki_las(bruker_id)`. Det er en lås i minnet per bruker, som slippes når kallet er ferdig. Er låsen opptatt, kastes `BrukerFeil` med meldingen «En KI-forespørsel kjører allerede».
+  - Alle fire KI-operasjonene kjøres inne i `kjerne/las.py: ki_las(bruker_id)`. Det er en lås i minnet per bruker, som slippes når kallet er ferdig. Er låsen opptatt, kastes `BrukerFeil` med meldingen fra UX-en: «Du har allerede en forespørsel som jobber. Vent til den er ferdig.»
 - **Begrunnelse:** Ett kall varer høyst 60 sekunder (AD-4). Det er greit med synkrone kall når appen kjøres lokalt med én prosess (AD-18). En lås i minnet blir aldri stående etter et krasj.
 - **Valgt bort:** Bakgrunnsjobber (Celery og Redis), strømming av svaret og en sperre lagret i databasen. Alle er mer komplekse enn appen trenger.
 
@@ -373,6 +375,7 @@ erDiagram
 - **Hindrer:** at noen tar inn et JS-rammeverk eller laster ressurser fra nettet, at KI-tekst vises som HTML, og at sidene blir ulike i tilgjengelighet og grenser
 - **Regel:**
   - Sidene lages med Django-maler i `templates/<app>/<side>.html`, som arver fra `templates/base.html`. `base.html` har `lang="nb"` og en `viewport`-metatag.
+  - Maldeler som brukes av flere apper (for eksempel topplinje, testmodus-banner, fremdriftslinje, feiloppsummering, KI-varsel og bekreftelsesside), ligger i `templates/felles/` og tas inn med `{% include %}`. De kopieres aldri inn i en app. Designtokenene fra DESIGN.md ligger i `static/css/tokens.css`, og felles komponenter i `static/css/komponenter.css`. Lagt til 2026-11-19 etter Haakons føring om vertikale snitt med felles komponenter (epics).
   - All tekst fra brukeren og fra KI vises med Djangos automatiske escaping. `|safe` og `mark_safe` er ikke lov på slik tekst.
   - JavaScript er vanlig JavaScript i `static/js/`, uten byggesteg og uten CDN.
   - All tekst i grensesnittet er på norsk.
@@ -387,6 +390,7 @@ erDiagram
     | `CV_TEKST_MAKS` | 30 000 |
     | `ONSKEDE_NOKKELORD_MAKS` | 20 |
     | `BREV_MAKS` | 30 000 (redigert brevtekst ved eksport, AD-22) |
+    | `AVSENDER_MAKS` | 100 (navn, e-post og telefon i brevoppsettet, AD-13) |
 
   - **Tilgjengelighet (NFR-7):**
     - Skjemafelt vises med `<label>`.
@@ -426,6 +430,7 @@ erDiagram
     - `sprak_og_tone` er `{alle, nb, en, formell, uformell, fullt_utkast, kun_forslag}`, hver en `list[str]` med kjennetegn. Et brev sjekkes mot `alle` og de tre listene som hører til språket, tonen og svarformen. Da passer fasiten for alle åtte variantene per par som `lag_lagrede_svar` lager.
   - Testene skal minst dekke FR-1, FR-14 – FR-17, FR-20, at eksempelparene gir treff (AD-6), og at hashen av promptene stemmer med de lagrede svarene (AD-6).
   - SM-9 testes ved å søke etter e-posten som bytes i databasefilen etter sletting.
+  - Det som ikke testes automatisk, for eksempel SM-1 i KI-modus, står i den skriftlige testplanen `docs/testplan.md`, med dato, hvem som kjørte og resultat (PRD §9). Lagt til 2026-11-19.
 - **Begrunnelse:** Én kommando fungerer uten nettverk og uten nøkkel. pytest er lettere å lese enn Djangos egen testløper.
 - **Valgt bort:** Djangos innebygde `manage.py test` (fungerer, men gir mer kode per test) og ende-til-ende-tester med Playwright (krever nettlesere å installere, så det utsettes).
 - **Risiko:** `pytest-django` 4.14.0 støtter offisielt Django 6.0, men ennå ikke 6.1. Første story i Epic 0 kjører en test mot Django 6.1. Feiler den, brukes `manage.py test` til en ny versjon kommer, og denne AD-en oppdateres.
@@ -438,6 +443,7 @@ erDiagram
   - Appen kjører bare lokalt, med `python manage.py runserver` og én prosess, på Python 3.12 eller nyere.
   - Avhengighetene står med låste versjoner i `app/requirements.txt` og installeres med `pip` i et virtuelt miljø (`venv`).
   - README beskriver nøyaktig disse stegene: `venv`, `pip install`, `lag_env.py`, `migrate`, `runserver`, og `pytest` for testene.
+  - Testene kjøres også automatisk med GitHub Actions (`.github/workflows/`) for hver pull request mot `main`, med Python 3.12, uten hemmeligheter og uten API-nøkkel. Jobben følger de samme stegene som README. Lagt til 2026-11-19 (Epic 0).
 - **Begrunnelse:** `pip` og `venv` følger med Python, så sensor slipper å installere noe mer.
 - **Valgt bort:** `uv` (raskere, men et ekstra verktøy for sensor), Docker (bryter med NFR-1 på maskiner uten Docker) og hosting. Ingenting i PRD-en krever at appen ligger på nett.
 
@@ -470,9 +476,9 @@ erDiagram
 - **Gjelder:** alle stories, AD-8, AD-11
 - **Hindrer:** at to branches lager migreringer som kolliderer, og at to stories lager hver sin `base.html`
 - **Regel:**
-  - Den første storyen (Epic 0) lager prosjektet og flettes før noe annet. Den inneholder:
+  - Epic 0 lager prosjektet og fellesmappene, og hele epicet flettes før noen andre epics startes. Epic 0 er delt i fire stories (se epics-dokumentet), og inneholder til sammen:
     - `kontoer.Bruker` og tomme skjeletter av modellene i AD-8, med første migrering
-    - `kjerne/` med kryptering, felttyper, feil, meldinger, grenser, valg, testmodus og lås
+    - `kjerne/` med kryptering, felttyper, feil, meldinger, grenser, valg, testmodus, lås og `normaliser`
     - `ki/port.py` og `ki/modeller.py`
     - `templates/base.html`, `static/js/skjema.js` og `conftest.py`
     - `requirements.txt`, `.env.example`, `lag_env.py` og `.gitignore`-linjene
@@ -502,9 +508,9 @@ erDiagram
 | Område | Konvensjon |
 |---|---|
 | Navn | Se AD-16 |
-| URL-er | Norske stier uten ID-er, med navnerom (AD-21): `/registrer/`, `/logg-inn/`, `/logg-ut/` (POST), `/cv/`, `/analyse/`, `/resultat/`, `/resultat/brev/`, `/resultat/cv-forbedring/`, `/resultat/brev/eksport/` (POST), `/ny-soknad/` (GET bekreftelse, POST sletter analysen), `/min-konto/`, `/min-konto/slett-dokumenter/` (POST), `/min-konto/slett-konto/` (POST), `/eksempel/<A\|B\|C>/` (POST, bare i testmodus) |
+| URL-er | Norske stier uten ID-er, med navnerom (AD-21): `/` (i `analyse/`: sender innloggede brukere til steget `siste_steg` gir og besøkende til Logg inn, AD-22), `/registrer/`, `/logg-inn/`, `/logg-ut/` (POST), `/personvern/` (åpen side med personvernforklaringen, lenket fra registreringen), `/cv/`, `/analyse/`, `/resultat/`, `/resultat/brev/` (GET viser steg 4, POST lager brevet), `/resultat/forklaring/` (POST, kjører bare KI-forklaringen av nøkkelordene på nytt), `/resultat/cv-forbedring/`, `/resultat/brev/eksport/` (POST), `/ny-soknad/` (GET bekreftelse, POST sletter analysen), `/min-konto/`, `/min-konto/slett-dokumenter/` og `/min-konto/slett-konto/` (GET bekreftelse, POST sletter), `/eksempel/<A\|B\|C>/` (POST, bare i testmodus, i `analyse/`) |
 | Innstillinger | `kjerne/valg.py` (`TextChoices`) og `ki.modeller.Innstillinger`, med verdiene `nb`/`en`, `formell`/`uformell` og `fullt_utkast`/`kun_forslag` |
-| KI-svar | Pydantic-modeller i `ki/modeller.py`. Gap-analysen er en liste med krav, der hvert krav har `krav`, `status` (`matcher`/`mangler`) og `begrunnelse`. Brevet er beskrevet i AD-8 |
+| KI-svar | Pydantic-modeller i `ki/modeller.py`. Gap-analysen er en liste med krav, der hvert krav har `krav`, `status` (`matcher`/`mangler`) og `begrunnelse`. Brevet er beskrevet i AD-8. `CVForbedringer` er en liste forslag, der hvert forslag har `del_av_cv` (teksten i CV-en forslaget gjelder) og `forslag`. Krav som mangler, står som spørsmål i `forslag` |
 | Feil | AD-20. KI-feil er underklasser av `KIFeil`, og feil ved innlesing er underklasser av `InnlesingFeil`. `Dekrypteringsfeil` fanges av en mellomvare (AD-9) |
 | Datoer | Lagres i UTC og vises i `Europe/Oslo` |
 | Logging | Djangos standardlogging. Bare hendelser og feiltyper logges, aldri dokumentinnhold, avsenderopplysninger eller nøkler (AD-10) |
@@ -544,7 +550,7 @@ app/                         # Django-prosjektet; alle kommandoer kjøres herfra
   pytest.ini
   conftest.py                # falsk_ki-fikstur (AD-17)
   config/                    # settings.py, urls.py
-  kjerne/                    # kryptering, felt, feil, meldinger, grenser, valg, testmodus, las, mellomvare
+  kjerne/                    # kryptering, felt, feil, meldinger, grenser, valg, testmodus, las, tekst, mellomvare
   kontoer/                   # Bruker, registrering, innlogging, Min konto, sletting av konto (FR-12 – FR-14, FR-17)
   dokumenter/                # CV-modell, opplasting, retting, pdf_innlesing.py, slett_cv (FR-1, FR-2, FR-16)
   analyse/                   # Analyse, Brev, CVForbedring, tjenester.py (FR-3 – FR-8, FR-11, FR-18, FR-21)
@@ -552,8 +558,8 @@ app/                         # Django-prosjektet; alle kommandoer kjøres herfra
   ki/                        # port.py, modeller.py, eksempelpar.py, claude_klient.py, testmodus_klient.py, prompter/
     management/commands/lag_lagrede_svar.py
   eksport/                   # markdown.py, pdf.py, fonter/ (FR-22, FR-23)
-  templates/                 # base.html + én mappe per app
-  static/                    # css/, js/
+  templates/                 # base.html, felles/ (maldeler som deles, AD-15) + én mappe per app
+  static/                    # css/ (tokens.css, komponenter.css), js/
   testdata/lag_cv_pdf.py       # lager cv.pdf fra cv_kilde.txt (fpdf2)
   testdata/eksempler/A|B|C|D/  # CV-fil (cv.pdf og cv_kilde.txt, eller cv.txt), annonse.txt, fasit.json, svar/*.json
 docs/evaluering/             # rapporter fra lag_lagrede_svar (AD-6)
