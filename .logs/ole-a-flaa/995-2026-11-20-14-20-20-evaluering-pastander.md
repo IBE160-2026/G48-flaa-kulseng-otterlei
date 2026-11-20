@@ -17,3 +17,20 @@ Finne hva Ole kan gjøre mens Haakon lager epics og stories, og deretter løse i
 
 ### Åpne punkter
 - Haakon og Henrik må godta valget i PR #33. Det følges opp i PR-en.
+
+## 2026-11-20 kl. 14:43 — Ole A. Flaa
+
+### Oppgave
+Gruppa valgte regelen i story 5.2 (PR #35) for issue #28. PR #33 skulle gjøres om til en logg over det avviste forslaget, og `vurdering.md` fjernes fra det som gjenstår i PR #34.
+
+### Plan
+- Satte `ARCHITECTURE-SPINE.md` tilbake til `origin/main` på `docs/evaluering-pastander`.
+- Skrev gruppas valg og begrunnelse (fra Ole: ingen ekstra API-kall, enklere å kode, samme svar hver gang) i beslutningsloggen og KI-logginnlegget.
+- Endret tittel og beskrivelse i PR #33, og fjernet «Closes #28».
+
+### Resultat
+- PR #33 inneholder nå bare KI-logginnlegget, beslutningsloggen og sesjonsloggen.
+- Issue #28 står åpen til story 5.2 er ferdig.
+
+### Åpne punkter
+- Ingen.
