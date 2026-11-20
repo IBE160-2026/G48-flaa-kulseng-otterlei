@@ -19,6 +19,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-11-12 | [Eksempelpar A–D med fasit](2026-11-12-eksempelpar.md) | Haakon |
 | 2026-11-12 – 2026-11-13 | [Gjennomgang av PR #26 og #30, og presisering av AD-5](2026-11-13-ad5-kontaktinfo.md) | Ole |
 | 2026-11-16 | [Ordliste for nøkkelordanalysen](2026-11-16-ordliste.md) | Haakon |
+| 2026-11-19 – 2026-11-20 | [Epics og stories med bmad-create-epics-and-stories](2026-11-19-epics-og-stories.md) | Haakon |
 
 ## Slik skriver du et innlegg
 
