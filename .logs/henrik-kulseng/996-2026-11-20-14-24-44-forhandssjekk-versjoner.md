@@ -25,12 +25,14 @@ Haakon lager epics og stories. I mellomtiden ville Henrik sjekke på forhånd at
 - **PR #34 (Oles prompter):** [Kommentar](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/34#issuecomment-7041672423) om `brev.md`, sett fra steg 4 og eksporten. Henrik er enig i at flosklene fra fasiten ikke skal stå i promptene. Prompten sier at appen legger til underskrift og kontaktinformasjon, men det gjør den bare i PDF-en (7.4). Gruppa må velge mellom A («Med vennlig hilsen» og navnet fra CV-en) og B (ingen hilsen). Linjeskift inne i et punkt kan bli to punkter i eksporten (7.2).
 - **PR #35 godkjent** av Henrik etter at Claude sjekket at alle rettelsene står i 1d70108 og 5667df9, også i `.working/`. Henrik godtok at 5.3 er delt i motsatt rekkefølge (5.3 Vise søknaden, 5.4 Be om søknad), slik at hver del kan testes alene.
 - **PR #33 (Oles avviste evalueringsforslag):** Henrik står bak gruppas begrunnelse. [Kommentar](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/33) med forslag om å skrive i KI-loggen at svakheten «Jeg kan SQL og ønsker å lære mer» fanges opp av den manuelle kontrollen i 5.2. Ikke godkjent ennå.
+- **PR #38 (Oles API-konto, issue #16 lukket):** [Kommentar](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/38#issuecomment-7042064098) med et grovt kostnadsanslag: rundt 45 kall i `lag_lagrede_svar`, og med prisene for `claude-opus-5-5` ($4 / $20 per million tokens) omtrent 1–5 USD per full kjøring, fordi tankene betales som utdata. Grensen på 5 USD i måneden kan derfor bli for liten. Forslag: les tokenbruken i den første rapporten, lag bare på nytt det som er endret, og vurder batch-API-et.
 - Test av 7.3 med fpdf2 2.9.0 og DejaVu: spesialtegn er OK, 30 000 tegn gir 9 sider, og en emoji fonten mangler, faller bort uten krasj.
 - Ingen kode eller planleggingsdokumenter er endret.
 
 ### Åpne punkter
 - Issue #17: lukkes når første story i Epic 0 har kjørt en test mot Django 6.1. Gruppa avgjør.
 - PR #33: Ole legger inn setningen om den manuelle kontrollen og løser konflikten. Henrik godkjenner etterpå.
+- Henrik takker ja til invitasjonen til organisasjonen i Claude Console (gjøres i nettleseren).
 - Fordelingen i Epic 5 (Ole 5.1–5.2, Henrik 5.3–5.8) føres inn i issue #36 når Ole har sagt ja.
 - PR #34: Gruppa velger A eller B for hvordan brevet starter og slutter. Ole svarer på forslaget om linjeskift.
 - Issue #29: akseptkriteriene for Epic 0 bør teste tekst og ikke bytes. Tekstene om fonttools i `lag_cv_pdf.py` og i issuet bør rettes.
