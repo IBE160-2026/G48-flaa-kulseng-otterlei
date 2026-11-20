@@ -114,3 +114,15 @@ Henrik gikk gjennom sidene og eksporten (0.3, Epic 5 og 7), og Ole gikk gjennom 
 
 Claude viste hvor hver av dem hadde svart: Ole i issue #36 (Epic 4, 6 og 5.1–5.2), Henrik i kommentaren sin på PR #35 (Epic 0, 7 og resten av Epic 5) og Haakon i økten (Epic 1–3). Claude pekte også på at Ole og Henrik skrev «5.3–5.7» før 5.3 ble delt. Henriks del heter nå 5.3–5.8. Eierne er ført inn i `epics.md` og i en ny tabell i `docs/arbeidsfordeling.md`.
 
+## Etter flettingen av PR #35 (2026-11-20)
+
+**Prompts:** «du kan flette inn #35», «er det noen issues eller PR eg skal kommentere på?», «sysnest du det ser bra ut og alt stemmer med hverandre?» og «ja, rett punkt 1 og 2 på en egen branch»
+
+- **Fletting:** Henriks PR #37 kom inn i `main` like før, så tabellen i `docs/ki-logg/README.md` hadde en konflikt. Claude flettet `main` inn i branchen, beholdt begge linjene og flettet PR #35 etter at Ole og Henrik hadde godkjent, på Haakons beskjed.
+- **Kommentarer:** Claude skrev kommentarer i Haakons navn på PR #38 (API-kontoen) og PR #33 (det avviste forslaget til evalueringsregel), merket «Skrevet med Claude Code». Haakon ba Claude ikke kommentere at kreditten er liten, fordi gruppa fikser det etter hvert. På #33 ba Haakon om at det skal stå at Claude foreslo regelen i 5.2, og at Haakon godkjente den.
+- **Kontroll av `main`:**
+  - Ingen brutte lenker i de 239 Markdown-filene.
+  - `epics.md` er lik filene per epic.
+  - Alle henvisninger til stories, AD-er, URL-er og grenser finnes.
+  - To ting var utdatert og er rettet i en egen pull request: statuslinja i `CLAUDE.md` og `.working/BRIEF.md`, som nå er merket som historisk.
+
