@@ -34,6 +34,6 @@ Haakon lager epics og stories. I mellomtiden ville Henrik finne noe nyttig å gj
 - Forslagene i issuene og på PR #34 og #35 er ikke vedtatt. Gruppa må svare på dem.
 
 ## Resultat
-- Ingen kode eller planleggingsdokumenter er endret. Funnene står i [#17](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/issues/17#issuecomment-7040666585), [#29](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/issues/29#issuecomment-7040667017) [PR #34](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/34#issuecomment-7041672423) og [PR #35](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/35#issuecomment-7041179298).
+- Ingen kode eller planleggingsdokumenter er endret. Funnene står i [#17](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/issues/17#issuecomment-7040666585), [#29](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/issues/29#issuecomment-7040667017), [PR #34](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/34#issuecomment-7041672423) og [PR #35](https://github.com/IBE160-2026/G48-flaa-kulseng-otterlei/pull/35#issuecomment-7041179298).
 - Sesjonslogg: `.logs/henrik-kulseng/996-2026-11-20-14-24-44-forhandssjekk-versjoner.md`.
 - Gjenstår: Gruppa svarer på forslagene i PR #34 og #35, velger A eller B for hvordan brevet starter og slutter, og avgjør issue #16 (API-kontoen), som story 5.7 venter på.
