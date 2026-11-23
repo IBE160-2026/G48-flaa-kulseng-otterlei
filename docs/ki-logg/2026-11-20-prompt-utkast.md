@@ -58,4 +58,6 @@ Henrik fant to ting i `brev.md` (kommentar på PR #34):
 
 **Oles valg:** A, og en regel i prompten mot linjeskift (ikke i koden).
 
+**Bekreftet av gruppa 2026-11-23:** Ole meldte at gruppa velger A. Prompten trengte ingen endring. Se [innlegget fra 2026-11-23](2026-11-23-gjennomgang-og-brevhilsen.md).
+
 **Hva Claude gjorde:** La inn hilsenen («Hei,» / «Dear Hiring Manager,») og avslutningen («Med vennlig hilsen» / «Kind regards» og navnet fra CV-en) i første og siste avsnitt, og regelen om linjeskift. Claude la først hilsenen og avslutningen som egne avsnitt, men flyttet dem inn i første og siste avsnitt, fordi FR-6 krever at hvert avsnitt viser til et krav eller et faktum fra CV-en. Formuleringene av hilsenen er Claudes forslag.
