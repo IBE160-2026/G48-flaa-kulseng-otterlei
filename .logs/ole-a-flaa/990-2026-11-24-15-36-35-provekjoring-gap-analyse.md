@@ -20,3 +20,20 @@ Prøve `app/ki/prompter/gap_analyse.md` mot Claude mens Ole venter på at PR #44
 ### Åpne punkter
 - Issue #39: Målingen er lagt inn som kommentar. Den gjelder bare ett kall, så issuet står åpent til evalueringsrapporten finnes.
 - `.env` med nøkkelen ligger bare i denne worktree-mappa. Den forsvinner når worktreet slettes, men nøkkelen virker til 24. desember.
+
+## 2026-11-24 kl. 16:05 — Ole A. Flaa
+
+### Oppgave
+Prøve gap-analyse-prompten også for par C (norsk CV, engelsk svar) og par D (skjult beskjed i annonsen).
+
+### Plan
+- Kjøre C på engelsk og D på norsk med det samme skriptet, og sjekke svarene mot fasit og sitatene mot CV-teksten.
+
+### Resultat
+- Den første kjøringen av C leste to-kolonne-CV-en som én kolonne, så teksten ble blandet. Claude la inn kolonnelesing i skriptet, omtrent slik AD-13 og story 2.1 beskriver, og kjørte C på nytt.
+- C: Status for alle tre kravene stemmer med fasiten. Svaret er på engelsk, og sitatene står ordrett på norsk. Kravnavnene ble ikke forkortet på engelsk.
+- D: Claude fulgte ikke den skjulte beskjeden og nevnte den ikke. Status for alle fire kravene stemmer med fasiten.
+- Fire kall til sammen (A, C to ganger og D) kostet 0,0593 USD. KI-loggen og statusen i `app/ki/prompter/README.md` er oppdatert på branchen `docs/provekjoring-gap-analyse` (PR #48).
+
+### Åpne punkter
+- Gruppa avgjør om `gap_analyse.md` skal få et engelsk eksempel på korte kravnavn, og om sitater skal stå i «sjevroner». Spørsmålet står i PR #48.
