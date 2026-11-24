@@ -37,3 +37,19 @@ Prøve gap-analyse-prompten også for par C (norsk CV, engelsk svar) og par D (s
 
 ### Åpne punkter
 - Gruppa avgjør om `gap_analyse.md` skal få et engelsk eksempel på korte kravnavn, og om sitater skal stå i «sjevroner». Spørsmålet står i PR #48.
+
+## 2026-11-24 kl. 16:25 — Ole A. Flaa
+
+### Oppgave
+Legge inn et engelsk eksempel på korte kravnavn i `gap_analyse.md`, etter forslaget fra kjøringen av par C.
+
+### Plan
+- Legge inn eksempler som ikke står i noen av annonsene, og kjøre par C én gang til for å sjekke.
+
+### Resultat
+- Claude brukte først eksempler fra annonsen til par C, men byttet dem ut før kjøringen. Nå står «Experience with Java» → «Java» og «Good written and spoken German» → «German».
+- Ny kjøring av C (0,0136 USD): «Fluent English, written and spoken» ble til «English». Bachelorkravet ble ikke forkortet. Status stemmer fortsatt med fasiten.
+- Committet på branchen `docs/provekjoring-gap-analyse` (PR #48), sammen med KI-loggen.
+
+### Åpne punkter
+- Kravnavnene på engelsk er bare delvis korte. Det følges opp i evalueringsrapporten (story 4.5), ikke med flere justeringer ut fra ett kall.
