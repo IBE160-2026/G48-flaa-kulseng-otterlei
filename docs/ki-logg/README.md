@@ -24,6 +24,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-11-20 | [Utkast til promptene](2026-11-20-prompt-utkast.md) | Ole |
 | 2026-11-20 | [Kreditt og forbruksgrense for API-kontoen](2026-11-20-api-konto.md) | Ole |
 | 2026-11-20 | [Forslag til evalueringsregel for issue #28 (avvist)](2026-11-20-evaluering-pastander.md) | Ole |
+| 2026-11-23 – 2026-11-24 | [Prøvekjøring av gap-analyse-prompten mot Claude](2026-11-24-provekjoring-gap-analyse.md) | Ole |
 
 ## Slik skriver du et innlegg
 
