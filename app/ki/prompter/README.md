@@ -9,7 +9,7 @@ Promptene som KI-laget sender til Claude (AD-5). Det er én fil per operasjon i 
 | [`cv_forbedring.md`](cv_forbedring.md) | `cv_forbedring(cv_tekst, annonse, sprak, mangler)` | FR-18 |
 | [`nokkelord_forklaring.md`](nokkelord_forklaring.md) | `nokkelord_forklaring(cv_tekst, annonse, sprak, resultat)` | FR-21 |
 
-**Status: utkast.** De justeres etter evalueringsrapporten (AD-6, NFR-11). Bare `gap_analyse.md` er prøvd mot API-et, med ett kall for par A på norsk 2026-11-24. Svaret stemte med fasiten. Se [KI-loggen](../../../docs/ki-logg/2026-11-24-provekjoring-gap-analyse.md).
+**Status: utkast.** De justeres etter evalueringsrapporten (AD-6, NFR-11). Bare `gap_analyse.md` er prøvd mot API-et, med ett kall hver for par A og D på norsk og par C på engelsk 2026-11-24. Status for alle kravene stemte med fasiten. Se [KI-loggen](../../../docs/ki-logg/2026-11-24-provekjoring-gap-analyse.md).
 
 ## Format
 
