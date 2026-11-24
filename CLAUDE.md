@@ -6,7 +6,7 @@ Felles instruksjoner for Claude Code i G48-prosjektet. Alle tre i gruppa bruker 
 
 - **Emne:** IBE160 Programmering med KI, Høgskolen i Molde, høst 2026. Gruppe G48 «Gutta krutt»: Ole A. Flaa, Henrik O. Kulseng, Haakon Remen Otterlei.
 - **App:** AI CV & Job Application Assistant — se `_bmad-output/planning-artifacts/product-brief.md`.
-- **Status:** Planlegging. Product brief (versjon 2), PRD, arkitektur og UX er ferdige. Epics og stories (8 epics, 36 stories) er godkjent og flettet (PR #35), og eierne står i `docs/arbeidsfordeling.md`. Sprint-planleggingen pågår (Ole). Deretter starter Epic 0. Ingen kode ennå. Fristen er 15. desember 2026.
+- **Status:** Planlegging. Product brief (versjon 2), PRD, arkitektur og UX er ferdige. Epics og stories (8 epics, 36 stories) er godkjent og flettet (PR #35), og eierne står i `docs/arbeidsfordeling.md`. Sprintstatusen ligger i `_bmad-output/implementation-artifacts/sprint-status.yaml`. Neste steg er Epic 0 (Henrik og Haakon). Ingen kode ennå. Fristen er 15. desember 2026.
 - **Språk:** Skriv dokumentasjon, commit-meldinger og pull requests på norsk bokmål. Svar brukeren på norsk.
 
 Les `README.md` og `docs/ki-logg/README.md` før du gjør endringer, så du kjenner strukturen og hva som er gjort.
@@ -38,6 +38,7 @@ Skriv bare det som faktisk skjedde. Gruppens vurderinger og begrunnelser skal ko
 ## Mappestruktur
 
 - `_bmad-output/planning-artifacts/` — planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics, stories)
+- `_bmad-output/implementation-artifacts/` — sprintstatus (`sprint-status.yaml`) og story-filer under byggingen
 - `docs/tilbakemeldinger/` — tilbakemeldinger fra faglærer
 - `docs/endringer/` — forklaring av større endringer i planleggingsdokumentene
 - `docs/ki-logg/` — KI-logg

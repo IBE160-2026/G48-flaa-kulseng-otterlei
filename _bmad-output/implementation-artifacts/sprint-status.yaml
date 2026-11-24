@@ -1,0 +1,96 @@
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when its first story starts (via build's sprint sync)
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates the next story after the previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; the status view surfaces open ones
+generated: 11-20-2026 15:42
+last_updated: 11-20-2026 15:42
+project: G48-flaa-kulseng-otterlei
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+development_status:
+  epic-0: backlog
+  0-1-appen-starter-i-testmodus-etter-readme: backlog
+  0-2-testene-kjører-automatisk-på-github: backlog
+  0-3-felles-sideramme-og-designtokens: backlog
+  0-4-felles-kjerne-og-ki-grensesnitt: backlog
+  epic-0-retrospective: optional
+
+  epic-1: backlog
+  1-1-registrere-konto: backlog
+  1-2-logge-inn-og-ut: backlog
+  1-3-min-konto-med-personverninformasjon: backlog
+  1-4-slette-konto: backlog
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-lese-cv-teksten-fra-pdf-og-txt: backlog
+  2-2-laste-opp-cv-og-se-teksten: backlog
+  2-3-rette-cv-teksten-og-bruke-en-lagret-cv: backlog
+  2-4-prøve-med-eksempel-a-b-eller-c: backlog
+  2-5-slette-dokumentene-mine: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-finne-og-matche-nøkkelord-i-kode: backlog
+  3-2-lime-inn-annonsen-og-velge-språk-og-nøkkelord-steg-2: backlog
+  3-3-kjøre-analyser-og-se-nøkkelordanalysen-steg-3: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-testmodus-klient-med-lagrede-svar: backlog
+  4-2-gap-analyse-i-steg-3-med-lagrede-svar: backlog
+  4-3-egen-cv-i-testmodus: backlog
+  4-4-claude-klient-og-prompt-for-gap-analysen: backlog
+  4-5-lagrede-svar-og-evalueringsrapport-for-gap-analysen: backlog
+  4-6-ki-forklaring-av-nøkkelordanalysen: backlog
+  epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-brev-og-brevforslag-i-ki-laget: backlog
+  5-2-lagrede-brev-og-evaluering-av-brevene: backlog
+  5-3-vise-søknaden-i-steg-4: backlog
+  5-4-be-om-søknad-i-steg-3: backlog
+  5-5-rette-brevet-i-steg-4: backlog
+  5-6-lage-nytt-brev-med-annen-tone-eller-svarform: backlog
+  5-7-start-ny-søknad: backlog
+  5-8-kjerneflyten-fra-start-til-slutt-i-testmodus: backlog
+  epic-5-retrospective: optional
+
+  epic-6: backlog
+  6-1-ki-operasjonen-for-cv-forbedringsforslag-med-lagrede-svar: backlog
+  6-2-vise-cv-forslagene-i-steg-3: backlog
+  epic-6-retrospective: optional
+
+  epic-7: backlog
+  7-1-kopiere-teksten: backlog
+  7-2-laste-ned-som-markdown: backlog
+  7-3-laste-ned-som-pdf: backlog
+  7-4-brevoppsett-med-dato-og-avsender-i-pdf-en: backlog
+  epic-7-retrospective: optional

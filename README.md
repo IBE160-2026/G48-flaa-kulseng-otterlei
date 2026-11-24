@@ -16,10 +16,12 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 .
 ├── _bmad/                         BMAD-rammeverket (planleggingsverktøy)
 ├── _bmad-output/
-│   └── planning-artifacts/        Planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics)
-│       ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
-│       ├── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
-│       └── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
+│   ├── planning-artifacts/        Planleggingsdokumenter fra BMAD (brief, PRD, arkitektur, epics)
+│   │   ├── prd/                   PRD med addendum, beslutningslogg og faglærers tilbakemelding
+│   │   ├── architecture/          Arkitektur med beslutningslogg og KI-gjennomganger
+│   │   ├── ux-designs/            UX: DESIGN.md, EXPERIENCE.md, mockups og KI-gjennomganger
+│   │   └── epics/                 Epics og stories med gjennomgangen av hver story
+│   └── implementation-artifacts/  Sprintstatus og story-filer under byggingen
 ├── app/                           Django-appen (kommer i Epic 0)
 │   ├── eksport/fonter/            Fonten DejaVu Sans for PDF med æ, ø og å (AD-13)
 │   ├── ki/prompter/               Utkast til promptene KI-laget sender til Claude, én fil per operasjon (AD-5)
@@ -55,6 +57,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 - [Epics og stories](_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/epics.md) — 8 epics og 36 stories med akseptansekriterier, i byggerekkefølge
   - [Gjennomgang](_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/gjennomgang.md) — godkjenningen av hver story og hvert epic, med endringene
   - [Én fil per epic](_bmad-output/planning-artifacts/epics/epics-G48-flaa-kulseng-otterlei-2026-11-19/.working/) — de samme storyene delt opp, og briefen til KI-skriverne
+- [Sprintstatus](_bmad-output/implementation-artifacts/sprint-status.yaml) — status for hver story og hvert epic under byggingen (laget med `bmad-sprint-planning`)
 
 ## Eksempeldata med fasit
 
