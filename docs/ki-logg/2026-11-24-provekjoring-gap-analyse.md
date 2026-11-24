@@ -88,10 +88,25 @@ Samlet kostnad for de fire kallene (A, C to ganger og D): 0,0593 USD.
 - Ole valgte prøvekjøringen blant de tre alternativene.
 - Planen i [innlegget om API-kontoen](2026-11-20-api-konto.md) var å lage API-nøkkelen først når `app/.env` finnes i Epic 0. Ole lagde den nå, til denne prøven. Nøkkelen er knyttet til Default-arbeidsområdet, uten tilgang til Admin API, og utløper etter 30 dager (24. desember 2026). Til Epic 4 og evalueringen lages en ny nøkkel.
 - Console spurte hvor koden kjører. Ole valgte «Et annet sted» (API-nøkkel), som Claude anbefalte, fordi appen og sensor skal bruke en nøkkel i `.env`, ikke innloggingsverktøyet `ant`.
+- Ole ba Claude legge inn et engelsk eksempel på korte kravnavn i `gap_analyse.md` (se under).
+
+## Engelsk eksempel på korte kravnavn
+
+**Prompt:** «Ja, legg det inn»
+
+- Claude la først inn «Experience with SAP» og «Fluent English, written and spoken» som eksempler. Begge står i annonsen til par C. Claude rettet det selv før kjøringen, fordi `README.md` for promptene sier at promptene ikke skal bruke tekst fra testdataene. Ellers ville prøven bare vist at modellen kopierer eksempelet.
+- Eksemplene som står i prompten nå, er «Experience with Java» → «Java» og «Good written and spoken German» → «German». Ingen av dem står i annonsene for A–D.
+- Ny kjøring av C på engelsk: 3,2 s, 2 258 tokens inn og 229 ut, 0,0136 USD. Status for alle kravene stemmer fortsatt med fasiten.
+  - «Fluent English, written and spoken» ble til «English».
+  - «Bachelor's degree in logistics, economics or a related field» ble **ikke** forkortet.
+- Dette er bare ett kall. Claude justerte ikke prompten mer ut fra det, fordi den da ville blitt tilpasset ett enkelt svar. Evalueringsrapporten (story 4.5) viser om navnene er korte nok på tvers av parene.
+
+Samlet kostnad for alle fem kallene: 0,0729 USD.
 
 ## Resultat
 
 - `app/ki/prompter/README.md`: Statusen sier nå at `gap_analyse.md` er prøvd for par A, C og D.
+- `app/ki/prompter/gap_analyse.md`: Engelsk eksempel på korte kravnavn.
 - Gjenstår:
-  - Gruppa avgjør om prompten skal få et engelsk eksempel på korte kravnavn, og om den skal be om «sjevroner».
+  - Gruppa avgjør om prompten skal be om «sjevroner» i sitatene.
   - Prøve par B og de tre andre promptene.
