@@ -125,6 +125,7 @@ _Laget med `bmad-create-epics-and-stories` 2026-11-19. Claude Code hentet ut kra
 - **#29:** `requirements.txt` i Epic 0 må ha `fpdf2` 2.9.0, `pdfplumber` 0.11.10 og `fonttools` 4.68.0, og `lag_cv_pdf.py` skal kjøre uten ekstra installasjon. PDF-ene blir ikke like byte for byte på tvers av maskiner, så ingen test sammenligner dem slik (Henriks forhåndssjekk 2026-11-20).
 - **#17:** Henrik sjekket 2026-11-20 at `pytest-django` 4.14.0 virker med Django 6.1.3. Testen i story 0.1 kjøres likevel.
 - **#28:** Evalueringen i `lag_lagrede_svar` må skille mellom å nevne og å påstå et krav («Jeg vil gjerne lære SQL» er riktig for par A), og må virke når CV-en er på norsk og brevet på engelsk (par C). Story 5.2 løser det med en fast liste med uttrykk for «vil lære» og manuell bekreftelse av mulige påstander, og issuen lukkes med den storyen.
+- **#39:** En full kjøring av `lag_lagrede_svar` (rundt 44 kall) er anslått til omtrent 1 USD ut fra seks prøvekall 2026-11-24 og 2026-11-25, med en forbruksgrense på 5 USD i måneden. Story 4.5 lar rapporten regne ut kostnaden i USD og lar kommandoen kjøre én operasjon om gangen. Batch-API-et brukes ikke nå (Oles valg 2026-11-25). Issuen lukkes når den første rapporten viser den faktiske kostnaden.
 - **#16:** API-kontoen finnes og eies av Ole. Forbruksgrensen må settes før Claude-klienten bygges. Dette er en oppgave for gruppa, ikke kode.
 
 **Fra arbeidsfordelingen og PRD-en**
@@ -1061,10 +1062,12 @@ slik at testmodus bruker ekte svar og vi ser om promptene holder.
 **Når** jeg kjører `python manage.py lag_lagrede_svar`
 **Så** lages `gap_analyse__nb.json` og `gap_analyse__en.json` for A, B og C (6 filer) med `{"meta": {...}, "svar": ...}`, der `meta` har modell-ID og en hash av promptfilen (AD-6)
 **Og** kommandoen har en liste over operasjoner, så brev, CV-forbedring og forklaring kan legges til uten å skrive den om
+**Og** med `--operasjon <navn>` (for eksempel `--operasjon brev`) lager kommandoen bare svarene og rapportdelen for den operasjonen, så en endret prompt ikke krever alle de rundt 44 kallene. Uten valget kjøres alt, og før innlevering kjøres alltid alt (NFR-11, issue #39)
 
 **Gitt** samme kjøring
 **Når** den er ferdig
 **Så** skrives en rapport til `docs/evaluering/<dato>.md` som per par og språk viser krav som mangler, men er merket som matcher (må være 0), krav som matcher, men er merket som mangler, krav i fasiten som ikke står i svaret, svartid og tokenbruk (NFR-11, SM-3)
+**Og** rapporten regner ut kostnaden i USD per kall, per operasjon og for hele kjøringen, ut fra tokenbruken og prisen per million tokens inn og ut. Prisene står som konstanter med datoen de ble sjekket, og tenkingen regnes med i tokens ut (NFR-9, issue #39)
 **Og** et fasitkrav er funnet når `krav` eller et av `alias` står i `krav`-feltet til ett av kravene i svaret, uansett store og små bokstaver. Statusen hentes fra det kravet, og begrunnelsene søkes ikke i (AD-17)
 **Og** kommandoen nekter å kjøre i testmodus, med en melding om hvorfor
 
