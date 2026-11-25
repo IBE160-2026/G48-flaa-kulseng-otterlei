@@ -1181,6 +1181,7 @@ slik at testmodus har brev for alle valg, og vi kan vise at promptene ikke dikte
 - antall mulige påstander om krav fra `krav_mangler` (med `alias`), med en liste der gruppa merker hver av dem for hånd. Antall bekreftede påstander må være 0 (FR-8, SM-4)
 - antall floskler fra `floskler` for brevets språk (må være 0, FR-6)
 - hvert avsnitt eller punkt med en avkrysning for «bygger på annonsen eller CV-en», som gruppa fyller ut for hånd, fordi `fakta_i_cv` er omskrevet og ikke kan søkes etter (FR-6, FR-7)
+- for hvert avsnitt eller punkt også en avkrysning for «ingen slutning som ikke står i CV-en eller annonsen», for eksempel en dato, et tall eller en ferdigdato som brevet regner ut selv. Prøvekjøringen 2026-11-25 viste et eksempel: Brev C sa at søkeren blir ferdig «in time for the programme start in August 2027», mens CV-en bare sier at bacheloren går 2024–2027 (issue #28, FR-8)
 - om fullt utkast er et sammenhengende brev og kun forslag en punktliste (SM-5)
 - svartid og tokenbruk per kall
 
