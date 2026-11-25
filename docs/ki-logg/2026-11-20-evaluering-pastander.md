@@ -31,7 +31,8 @@ Bestemme hvordan evalueringskjøringen (AD-6, NFR-11) skal telle påstander i br
 ## Våre vurderinger og korrigeringer
 
 - Ole ba Claude velge den løsningen som passer best for oppgaven. Løsningen var derfor Claudes valg.
-- **Gruppa avviste forslaget** etter at Haakon hadde skrevet en annen regel i story 5.2 (PR #35): en fast liste med uttrykk som «lære», «ønsker å» og «eager to». En setning med et slikt uttrykk regnes som «vil lære», og ellers som en mulig påstand som gruppa sjekker for hånd. Fakta-sjekken merkes som manuell når brevet er på et annet språk enn fasiten. Claude sammenlignet de to reglene for Ole og pekte på at «Jeg kan SQL og ønsker å lære mer» ikke blir telt som en påstand med listen.
+- **Gruppa avviste forslaget** etter at Haakon hadde godkjent en annen regel i story 5.2, som Claude foreslo i gjennomgangen av storyene (PR #35): en fast liste med uttrykk som «lære», «ønsker å» og «eager to». En setning med et slikt uttrykk regnes som «vil lære», og ellers som en mulig påstand som gruppa sjekker for hånd. Fakta-sjekken merkes som manuell når brevet er på et annet språk enn fasiten. Claude sammenlignet de to reglene for Ole og pekte på at «Jeg kan SQL og ønsker å lære mer» ikke blir telt som en påstand med listen.
+- **Svakheten fanges opp likevel** av den manuelle kontrollen i story 5.2, der alle setninger som nevner et krav som mangler, listes i rapporten, også de som har et «vil lære»-uttrykk. Henrik og Haakon ba om at dette står her, så det ikke ser ut som om gruppa godtok hullet (kommentarer på PR #33, issue #42).
 - **Begrunnelsen til gruppa:** regelen i 5.2 gir ingen ekstra API-kall, er enklere å kode, og gir samme svar hver gang.
 
 ## Resultat
