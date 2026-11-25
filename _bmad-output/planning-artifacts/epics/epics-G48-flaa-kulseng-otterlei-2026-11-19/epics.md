@@ -1601,11 +1601,12 @@ Storyen er første kutt i nødplanen (PRD §8.1). Uten den virker eksporten fra 
 **Så** vises steg 4 på nytt med feiloppsummeringen og feilen ved feltet, og teksten i brevfeltet og det jeg har skrevet i avsenderfeltene, står fortsatt der (UX-DR29, AD-20)
 **Og** «Last ned Markdown» virker uten navn, og knappen har `formnovalidate`, så `required` på Navn ikke stopper den i nettleseren
 **Og** Markdown-filen har aldri avsender, selv om avsenderfeltene sendes med i det samme skjemaet, og en test viser det (AD-10)
+**Og** brevteksten kan slutte med navnet fra CV-en, fordi brevprompten skriver det under avslutningen (`app/ki/prompter/brev.md`). Det er en del av brevet og ikke avsenderen. Testene fyller derfor avsenderfeltene med et navn, en e-post og et telefonnummer som verken står i CV-en eller i brevteksten, og sjekker at akkurat disse verdiene mangler
 
 **Gitt** en eksport med avsender
 **Når** den er ferdig
 **Så** er navn, e-post og telefon verken lagret, lagt i økten, logget eller sendt til KI-tjenesten (FR-23, AD-5, AD-10)
-**Og** en test sjekker at avsenderen ikke finnes i databasen etter eksporten
+**Og** en test sjekker at avsenderen ikke finnes i databasen etter eksporten, med de samme egne testverdiene, siden navnet fra CV-en allerede står i CV-en og i `Brev`
 
 **Gitt** testene for storyen
 **Når** de kjøres
