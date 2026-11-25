@@ -24,7 +24,7 @@ Tone:
 Svarform:
 - Ingen linjeskift inne i et avsnitt eller et punkt, med unntakene for hilsenen og avslutningen under. Appen deler teksten i avsnitt og punkter, og et linjeskift ville gitt et ekstra punkt.
 - Fullt utkast: Fyll ut `avsnitt` og la `punkter` være tom. Skriv 3–5 avsnitt, til sammen omtrent 250–400 ord.
-  - Første avsnitt starter med hilsenen på egen linje: «Hei,» på norsk eller «Dear Hiring Manager,» på engelsk. Deretter nevner avsnittet stillingen og arbeidsgiveren.
+  - Første avsnitt starter med hilsenen på egen linje: «Hei,» på norsk eller «Dear Hiring Manager,» på engelsk. Linjen etter hilsenen starter med stor bokstav. Deretter nevner avsnittet stillingen og arbeidsgiveren.
   - Hvert avsnitt inneholder minst ett krav fra annonsen eller ett konkret faktum fra CV-en. Brevet nevner minst to krav som søkeren oppfyller.
   - Siste avsnitt avslutter brevet og slutter med «Med vennlig hilsen» på norsk eller «Kind regards» på engelsk på egen linje, og navnet slik det står i CV-en på linjen under. Står det ikke noe navn i CV-en, skriver du bare avslutningen.
   - Ikke skriv dato, adresser eller kontaktinformasjon. PDF-en får dato og avsender øverst.
