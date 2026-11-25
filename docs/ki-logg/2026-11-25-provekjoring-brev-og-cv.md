@@ -55,7 +55,7 @@ Samlet: 0,1569 USD. Alle kallene endte med `stop_reason: end_turn`.
 
 ## Ting gruppa bør se på
 
-Dette er Claudes funn. Gruppa har ikke vurdert dem ennå.
+Dette er Claudes funn. Vurderingene står i neste seksjon.
 
 1. **Stor eller liten forbokstav etter «Hei,».** I brev A starter linjen etter hilsenen med «jeg», i brev D med «Jeg». Prompten sier ikke hva som er riktig. Hilsenen er det PR #47 handler om, så det kan avgjøres der.
 2. **En slutning om dato i brev C.** Brevet sier at søkeren blir ferdig «in time for the programme start in August 2027». CV-en sier bare at bacheloren går 2024–2027. Det er en antakelse, og regel 2 sier at datoer ikke skal diktes opp. Det er lite, men evalueringen bør fange det opp.
@@ -64,11 +64,16 @@ Dette er Claudes funn. Gruppa har ikke vurdert dem ennå.
 
 ## Våre vurderinger og korrigeringer
 
-*Fylles inn av gruppa: hva dere godtar, endrer eller avviser av funnene over, og hvorfor.*
+Ole vurderte de fire funnene 2026-11-25. Claude foreslo et alternativ for hvert funn, og Ole valgte mellom dem. Henrik og Haakon bekrefter eller endrer vurderingene i PR #50.
+
+1. **Forbokstav etter «Hei,»: endret.** Linjen etter hilsenen skal starte med stor bokstav, slik det er vanlig i norske brev når hilsenen står på egen linje. Det er lagt til i `brev.md`, så det ikke er tilfeldig fra kall til kall.
+2. **Slutningen om dato i brev C: godtatt i prompten, tas i evalueringen.** Prompten endres ikke nå. Slutningen er lagt som eksempel i issue #28, slik at evalueringen i story 5.2 kan flagge slutninger som ikke står i CV-en.
+3. **«Sammenstiller» i CV-forslaget: godtatt.** Å lese inn data fra CSV-filer og lage diagram er en form for sammenstilling. Prompten tillater ord fra annonsen når CV-en dekker dem, og det gjør den her.
+4. **Råd om avslutningen i kun forslag: godtatt.** Regelen «ingen hilsen og ingen avslutning» betyr at punktene ikke selv skal være en hilsen eller en avslutning. Et råd om hvordan søkeren kan avslutte brevet, er nyttig og bryter ikke regelen.
 
 ## Resultat
 
-- Dette innlegget. Promptene er ikke endret.
+- Dette innlegget, og én ny setning i `app/ki/prompter/brev.md` om stor forbokstav etter hilsenen (funn 1). Den er ikke prøvekjørt på nytt.
 - Statuslinjen i `app/ki/prompter/README.md` oppdateres når PR #48 er flettet, fordi #48 endrer den samme linjen.
 
 <details>
