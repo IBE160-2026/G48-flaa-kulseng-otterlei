@@ -25,6 +25,7 @@ Her dokumenterer vi hvordan vi bruker KI (Claude Code og BMAD) i prosjektet. Hve
 | 2026-11-20 | [Kreditt og forbruksgrense for API-kontoen](2026-11-20-api-konto.md) | Ole |
 | 2026-11-20 | [Forslag til evalueringsregel for issue #28 (avvist)](2026-11-20-evaluering-pastander.md) | Ole |
 | 2026-11-20 | [Sprint-planlegging og sjekk av at planen er klar](2026-11-20-sprint-planlegging.md) | Ole |
+| 2026-11-20 – 2026-11-23 | [Gjennomgang av PR #40 og #41, og hilsenen i brevet](2026-11-23-gjennomgang-og-brevhilsen.md) | Ole |
 
 ## Slik skriver du et innlegg
 
