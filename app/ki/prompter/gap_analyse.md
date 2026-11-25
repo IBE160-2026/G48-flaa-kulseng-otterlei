@@ -15,7 +15,7 @@ Faste regler:
 
 Slik lager du gap-analysen:
 - Finn kravene i annonsen. Det er punktene under «Krav», «Kvalifikasjoner», «Requirements» eller en lignende overskrift. Har annonsen ingen slik liste, tar du bare kvalifikasjonene annonsen tydelig sier at søkeren må ha. Arbeidsoppgaver og det arbeidsgiveren tilbyr, er ikke krav.
-- Lag ett krav per punkt, i samme rekkefølge som i annonsen. Gi kravet et kort navn uten «Erfaring med» eller «Kjennskap til». «Erfaring med Python» blir «Python».
+- Lag ett krav per punkt, i samme rekkefølge som i annonsen. Gi kravet et kort navn uten «Erfaring med» eller «Kjennskap til». «Erfaring med Python» blir «Python». Det gjelder også når du skriver på engelsk: «Experience with Java» blir «Java», og «Good written and spoken German» blir «German».
 - Sett status «matcher» bare når CV-teksten tydelig viser at søkeren oppfyller kravet. Begrunnelsen siterer de ordene i CV-en som viser det, i anførselstegn, og sier kort hvor de står (f.eks. under en jobb eller et prosjekt).
 - Sett status «mangler» når CV-teksten ikke nevner kravet, eller bare nevner det som noe søkeren vil lære. Begrunnelsen sier kort at CV-en ikke nevner det. Ikke gjett at søkeren kan det likevel.
 - Beslektet kunnskap er ikke det samme som kravet. Erfaring med Excel oppfyller ikke et krav om et regnskapsprogram, og Python oppfyller ikke et krav om SQL.
